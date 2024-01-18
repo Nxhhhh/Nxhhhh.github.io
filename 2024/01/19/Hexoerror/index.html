@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Fairmot代码复现问题记录（已解决） | Myblog</title>
+  <title>Hexo本地预览与部署不同的解决方法 | Myblog</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -376,21 +376,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        Fairmot代码复现问题记录（已解决）
+        Hexo本地预览与部署不同的解决方法
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> Published in：2023-11-29 |
+          <i class="fas fa-calendar"></i> Published in：2024-01-19 |
         </span>
       
 
@@ -398,8 +398,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> category：
           
-            <a href="/categories/R-D/" class="post-detail-header_category">
-              R&D
+            <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="post-detail-header_category">
+              问题记录
             </a>
           
         </span>
@@ -408,11 +408,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 588 |
+            <i class="fas fa-file-text-o"></i> Words: 318 |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> Reading time: 2min |
+            <i class="fas fa-clock"></i> Reading time: 1min |
           </span>
   
           
@@ -439,34 +439,25 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>最近在学习多目标跟踪的经典文章，顺便记录一下自己复现Fairmot代码时的问题以及解决方案。<br>贴一下原作的<a href="https://github.com/ifzhang/FairMOT/tree/master">代码</a></p>
-<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><h3 id="创建环境以及依赖项的安装："><a href="#创建环境以及依赖项的安装：" class="headerlink" title="创建环境以及依赖项的安装："></a>创建环境以及依赖项的安装：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">conda create -n FairMOT</span><br><span class="line">conda activate FairMOT</span><br><span class="line">conda install pytorch==<span class="number">1.7</span><span class="number">.0</span> torchvision==<span class="number">0.8</span><span class="number">.0</span> cudatoolkit=<span class="number">10.2</span> -c pytorch</span><br><span class="line">cd $&#123;FAIRMOT_ROOT&#125;</span><br><span class="line">pip install cython</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
-<p>这里一定要注意自己的cuda版本和pytorch版本的对应<br>我的cuda版本是10.2，安装的pytorch版本是1.7.0</p>
-<h3 id="DNCv2的安装"><a href="#DNCv2的安装" class="headerlink" title="DNCv2的安装"></a>DNCv2的安装</h3><p>刚开始的时候我是直接按照原作者给的链接进行安装：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone -b pytorch_1.7 https://github.com/ifzhang/DCNv2.git</span><br><span class="line">cd DCNv2</span><br><span class="line">./make.sh</span><br></pre></td></tr></table></figure>
-<p>但是在编译时会出现gcc版本不能大于8的提示，在安装了低于版本8的gcc后又会提示找不到gcc：）<br>以防有人需要还是贴一下如何安装低版本gcc的<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wuyun--wy/p/16977352.html">链接</a><br>其实作者提供了pytorch1.7对应的DCNv2的<a href="https://github.com/ifzhang/DCNv2/tree/pytorch_1.7">链接</a><br>下载好按照步骤完成编译并没有提示gcc版本的问题</p>
-<h2 id="demo运行"><a href="#demo运行" class="headerlink" title="demo运行"></a>demo运行</h2><p>然后就是下载对应的预训练权重文件根据作者给的指示跑一跑demo：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd src</span><br><span class="line">python demo.py mot --load_model ../models/fairmot_dla34.pth --conf_thres 0.4</span><br></pre></td></tr></table></figure>
-<p>然而<br>我下载了这么多的权重文件，其实能用的只有一个<br><img src="http://tva1.sinaimg.cn/large/b7bb9b55ly1hlwhev1i63j20ai03kq3x.jpg" class="lazyload placeholder" data-srcset="http://tva1.sinaimg.cn/large/b7bb9b55ly1hlwhev1i63j20ai03kq3x.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="预训练文件"></p>
-<p>可能是代码更新了，不管使用哪个文件都会报错，而且不少文件的链接已经失效了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Fix size testing.</span><br><span class="line">training chunk_sizes: [3, 3]</span><br><span class="line">The output will be saved to  /home/vip/anaconda3/envs/NXH/FairMOT-master/src/lib/../../exp/mot/default</span><br><span class="line">heads &#123;&#x27;hm&#x27;: 1, &#x27;wh&#x27;: 4, &#x27;id&#x27;: 128, &#x27;reg&#x27;: 2&#125;</span><br><span class="line">2023-11-23 11:12:12 [INFO]: Starting tracking...</span><br><span class="line">Lenth of the video: 1500 frames</span><br><span class="line">Creating model...</span><br><span class="line">=&gt; loading pretrained model ../models/hrnetv2_w18_imagenet_pretrained.pth</span><br><span class="line">loaded ../models/all_hrnet_v2_w18.pth, epoch 60</span><br><span class="line">Drop parameter last_layer.0.weight.If you see this, your model does not fully load the pre-trained weight. Please make sure you have correctly specified --arch xxx or set the correct --num_classes for your own dataset.</span><br><span class="line">Drop parameter last_layer.0.bias.If you see this, your model does not fully load the pre-trained weight. Please make sure you have correctly specified --arch xxx or set the correct --num_classes for your own dataset.</span><br></pre></td></tr></table></figure>
-<p>上网查了一下，也有人遇到了这个问题，原作者回复了一个新的<a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1K0dvpphfLaLHMyAbeVARENgjPtH75wX6/view?usp=sharing">权重文件</a><br>我下载试了一下，没问题，可以跑了，效果非常不错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python demo.py mot --load_model ../models/fairmot_hrnet_w18.pth --arch hrnet_18 --reid_dim 128 --conf_thres 0.4</span><br></pre></td></tr></table></figure>
-<p><img src="http://tva1.sinaimg.cn/large/b7bb9b55ly1hlwhfuipw8j21hc0u0dqw.jpg" class="lazyload placeholder" data-srcset="http://tva1.sinaimg.cn/large/b7bb9b55ly1hlwhfuipw8j21hc0u0dqw.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="demo"><br>ok下一步的学习计划就是试一试训练。</p>
+        <p>最近一直在忙考试的事情，最近打开博客时出现了一个问题：我的样式全乱了，尝试了重新发布，本地查看的时候还是正常的，部署之后依旧是乱的。<br><img src="https://tva1.sinaimg.cn/large/b7bb9b55ly1hly99nomsoj20uo02ndg8.jpg" class="lazyload placeholder" data-srcset="https://tva1.sinaimg.cn/large/b7bb9b55ly1hly99nomsoj20uo02ndg8.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="如图"> </p>
+<h2 id="于是在这里贴一下我尝试过的解决方法。"><a href="#于是在这里贴一下我尝试过的解决方法。" class="headerlink" title="于是在这里贴一下我尝试过的解决方法。"></a>于是在这里贴一下我尝试过的解决方法。</h2><h2 id="1-重新配置URL"><a href="#1-重新配置URL" class="headerlink" title="1 重新配置URL"></a>1 重新配置URL</h2><p>在博客根目录中的config.yml文件中修改URL的配置：<br>url是你生成的page页网址，root是你的根目录<br><img src="https://tva1.sinaimg.cn/large/b7bb9b55ly1hly8blia20j20uo02ndg8.jpg" class="lazyload placeholder" data-srcset="https://tva1.sinaimg.cn/large/b7bb9b55ly1hly8blia20j20uo02ndg8.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="如图"></p>
+<h2 id="2-如果使用图床图片，则需要修改以下内容"><a href="#2-如果使用图床图片，则需要修改以下内容" class="headerlink" title="2 如果使用图床图片，则需要修改以下内容"></a>2 如果使用图床图片，则需要修改以下内容</h2><p>①找到index.ejs文件，路径为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">└──hexo-theme-yourtheme (当前使用的主题文件夹)</span><br><span class="line">   └──layout</span><br><span class="line">      └──index.ejs</span><br></pre></td></tr></table></figure>
+<p>②在inddex.ejs的头部中加入：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=<span class="string">&quot;referrer&quot;</span> content=<span class="string">&quot;no-referrer&quot;</span> /&gt;</span><br><span class="line">&lt;meta http-equiv=<span class="string">&quot;Content-Security-Policy&quot;</span> ontent=<span class="string">&quot;upgrade-insecure-requests&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-更改部署的分支"><a href="#3-更改部署的分支" class="headerlink" title="3 更改部署的分支"></a>3 更改部署的分支</h2><p>在仓库中新建一个分支，不要在master分支上部署pages。<br>我没有尝试新建分支，只是把分支从main改为了master，不确定是否真的有用。</p>
+<h2 id="4-浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。"><a href="#4-浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。" class="headerlink" title="4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。"></a>4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。</h2><p><img src="https://tva1.sinaimg.cn/large/b7bb9b55ly1hly8p3t5ksj21hc0n71fn.jpg" class="lazyload placeholder" data-srcset="https://tva1.sinaimg.cn/large/b7bb9b55ly1hly8p3t5ksj21hc0n71fn.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="问题解决皆大欢喜"></p>
 <hr>
-<p>Fairmot学习</p>
+<p>这些方法我都按顺序尝试过，不是很确定是哪个解决了问题，大家可以都尝试一下。</p>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/MOT/" class="">
-              MOT
-            </a>
-          
-            <a href="/tags/python/" class="">
-              python
+            <a href="/tags/Hexo/" class="">
+              Hexo
             </a>
           
         </div>
@@ -480,7 +471,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
-    <a href="/2023/11/29/fairmot/" target="_blank" title="Fairmot代码复现问题记录（已解决）">https://github.com/Nxhhhh/Nxhhhh.github.io/2023/11/29/fairmot/</a>
+    <a href="/2024/01/19/Hexoerror/" target="_blank" title="Hexo本地预览与部署不同的解决方法">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/01/19/Hexoerror/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright notice:   </strong>
@@ -498,25 +489,25 @@
 
 
 
+
+
   
-  <div class="post-nav-prev post-nav-item">
+  <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/2024/01/19/Hexoerror/" class="post-nav-link">
+    <a href="/2023/11/29/fairmot/" class="post-nav-link">
       <div class="title">
-        <i class="fas fa-angle-left"></i> Prev:
-        <div class="title-text">Hexo本地预览与部署不同的解决方法</div>
+        Next: <i class="fas fa-angle-right"></i>
+        <div class="title-text">Fairmot代码复现问题记录（已解决）</div>
       </div>
-      
       <!-- <div class="content">
-        最近一直在忙考试的事情，最近打开博客时出现了一个问题：我的样式全乱了，尝试了重新发布，本地查看的时候还是正常的，部署之后
+        最近在学习多目标跟踪的经典文章，顺便记录一下自己复现Fairmot代码时的问题以及解决方案。贴一下原作的代码
+前期准备创
       </div> -->
     </a>
   </div>
-
-
 
 </div>
 
@@ -648,7 +639,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="toc-text">前期准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%8E%AF%E5%A2%83%E4%BB%A5%E5%8F%8A%E4%BE%9D%E8%B5%96%E9%A1%B9%E7%9A%84%E5%AE%89%E8%A3%85%EF%BC%9A"><span class="toc-text">创建环境以及依赖项的安装：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNCv2%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-text">DNCv2的安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#demo%E8%BF%90%E8%A1%8C"><span class="toc-text">demo运行</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8E%E6%98%AF%E5%9C%A8%E8%BF%99%E9%87%8C%E8%B4%B4%E4%B8%80%E4%B8%8B%E6%88%91%E5%B0%9D%E8%AF%95%E8%BF%87%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E3%80%82"><span class="toc-text">于是在这里贴一下我尝试过的解决方法。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%87%8D%E6%96%B0%E9%85%8D%E7%BD%AEURL"><span class="toc-text">1 重新配置URL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%A6%82%E6%9E%9C%E4%BD%BF%E7%94%A8%E5%9B%BE%E5%BA%8A%E5%9B%BE%E7%89%87%EF%BC%8C%E5%88%99%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9%E4%BB%A5%E4%B8%8B%E5%86%85%E5%AE%B9"><span class="toc-text">2 如果使用图床图片，则需要修改以下内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9B%B4%E6%94%B9%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%86%E6%94%AF"><span class="toc-text">3 更改部署的分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BF%9D%E5%AD%98%E4%BA%86%E4%B9%8B%E5%89%8D%E9%83%A8%E7%BD%B2%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%B8%85%E9%99%A4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E5%90%8E%E9%87%8D%E5%90%AF%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%8C%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%82"><span class="toc-text">4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
