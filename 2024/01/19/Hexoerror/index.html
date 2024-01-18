@@ -408,7 +408,7 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 318 |
+            <i class="fas fa-file-text-o"></i> Words: 336 |
           </span>
   
           <span class="min2read">
@@ -439,13 +439,13 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>最近一直在忙考试的事情，最近打开博客时出现了一个问题：我的样式全乱了，尝试了重新发布，本地查看的时候还是正常的，部署之后依旧是乱的。<br><img src="https://tva1.sinaimg.cn/large/b7bb9b55ly1hly99nomsoj20uo02ndg8.jpg" class="lazyload placeholder" data-srcset="https://tva1.sinaimg.cn/large/b7bb9b55ly1hly99nomsoj20uo02ndg8.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="如图"> </p>
+        <p>最近一直在忙考试的事情，最近打开博客时出现了一个问题：我的样式全乱了，尝试了重新发布，本地查看的时候还是正常的，部署之后依旧是乱的。<br><img src="https://tva1.sinaimg.cn/large/b7bb9b55ly1hly9d9x6tmj21e50irjyh.jpg" class="lazyload placeholder" data-srcset="https://tva1.sinaimg.cn/large/b7bb9b55ly1hly9d9x6tmj21e50irjyh.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="如图"> </p>
 <h2 id="于是在这里贴一下我尝试过的解决方法。"><a href="#于是在这里贴一下我尝试过的解决方法。" class="headerlink" title="于是在这里贴一下我尝试过的解决方法。"></a>于是在这里贴一下我尝试过的解决方法。</h2><h2 id="1-重新配置URL"><a href="#1-重新配置URL" class="headerlink" title="1 重新配置URL"></a>1 重新配置URL</h2><p>在博客根目录中的config.yml文件中修改URL的配置：<br>url是你生成的page页网址，root是你的根目录<br><img src="https://tva1.sinaimg.cn/large/b7bb9b55ly1hly8blia20j20uo02ndg8.jpg" class="lazyload placeholder" data-srcset="https://tva1.sinaimg.cn/large/b7bb9b55ly1hly8blia20j20uo02ndg8.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="如图"></p>
 <h2 id="2-如果使用图床图片，则需要修改以下内容"><a href="#2-如果使用图床图片，则需要修改以下内容" class="headerlink" title="2 如果使用图床图片，则需要修改以下内容"></a>2 如果使用图床图片，则需要修改以下内容</h2><p>①找到index.ejs文件，路径为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">└──hexo-theme-yourtheme (当前使用的主题文件夹)</span><br><span class="line">   └──layout</span><br><span class="line">      └──index.ejs</span><br></pre></td></tr></table></figure>
 <p>②在inddex.ejs的头部中加入：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=<span class="string">&quot;referrer&quot;</span> content=<span class="string">&quot;no-referrer&quot;</span> /&gt;</span><br><span class="line">&lt;meta http-equiv=<span class="string">&quot;Content-Security-Policy&quot;</span> ontent=<span class="string">&quot;upgrade-insecure-requests&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
-
+<p>但是亲身试验会使图床的图挂掉，谨慎使用</p>
 <h2 id="3-更改部署的分支"><a href="#3-更改部署的分支" class="headerlink" title="3 更改部署的分支"></a>3 更改部署的分支</h2><p>在仓库中新建一个分支，不要在master分支上部署pages。<br>我没有尝试新建分支，只是把分支从main改为了master，不确定是否真的有用。</p>
 <h2 id="4-浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。"><a href="#4-浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。" class="headerlink" title="4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。"></a>4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。</h2><p><img src="https://tva1.sinaimg.cn/large/b7bb9b55ly1hly8p3t5ksj21hc0n71fn.jpg" class="lazyload placeholder" data-srcset="https://tva1.sinaimg.cn/large/b7bb9b55ly1hly8p3t5ksj21hc0n71fn.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="问题解决皆大欢喜"></p>
 <hr>
