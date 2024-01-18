@@ -1044,7 +1044,7 @@
         :data="listData"
         :class-option="classOption"
         class="warp"
-        style="height: 30px"
+        style="height: 60px"
       >
         <ul class="index-notice-content__ul">
           
@@ -1065,6 +1065,23 @@
                 
               
             </li>
+          
+            <li>
+              
+                <div class="index-notice-content__title">
+                  
+                    <span title="#图片带CSDN水印是因为使用了CSDN图床" style="color:red">
+                      #图片带CSDN水印是因为使用了CSDN图床
+                    </span>
+                  
+                </div>
+                
+                  <div class="index-notice-content__date" style="color:red">
+                    2024-01-18
+                  </div>
+                
+              
+            </li>
            
         </ul>
       </vue-seamless-scroll>
@@ -1079,7 +1096,7 @@
 <script>
   var seamless = JSON.parse('false');
   seamless = seamless ? 0 : 30;
-  var listData = '[object Object]' || '';
+  var listData = '[object Object],[object Object]' || '';
   listData = listData.split(',');
   var vm = new Vue({
     el: '#appIndexNotice',
