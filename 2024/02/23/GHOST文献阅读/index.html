@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Fairmot代码复现问题记录（已解决） | 小牛学习日记</title>
+  <title>文献《Simple Cues Lead to a Strong Multi-Object Tracker》总结 | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -376,21 +376,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        Fairmot代码复现问题记录（已解决）
+        文献《Simple Cues Lead to a Strong Multi-Object Tracker》总结
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> Published in：2023-11-29 |
+          <i class="fas fa-calendar"></i> Published in：2024-02-23 |
         </span>
       
 
@@ -408,11 +408,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 588 |
+            <i class="fas fa-file-text-o"></i> Words: 1.7k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> Reading time: 2min |
+            <i class="fas fa-clock"></i> Reading time: 5min |
           </span>
   
           
@@ -439,22 +439,28 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>最近在学习多目标跟踪的经典文章，顺便记录一下自己复现Fairmot代码时的问题以及解决方案。<br>贴一下原作的<a href="https://github.com/ifzhang/FairMOT/tree/master">代码</a></p>
-<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><h3 id="创建环境以及依赖项的安装："><a href="#创建环境以及依赖项的安装：" class="headerlink" title="创建环境以及依赖项的安装："></a>创建环境以及依赖项的安装：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">conda create -n FairMOT</span><br><span class="line">conda activate FairMOT</span><br><span class="line">conda install pytorch==<span class="number">1.7</span><span class="number">.0</span> torchvision==<span class="number">0.8</span><span class="number">.0</span> cudatoolkit=<span class="number">10.2</span> -c pytorch</span><br><span class="line">cd $&#123;FAIRMOT_ROOT&#125;</span><br><span class="line">pip install cython</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
-<p>这里一定要注意自己的cuda版本和pytorch版本的对应<br>我的cuda版本是10.2，安装的pytorch版本是1.7.0</p>
-<h3 id="DNCv2的安装"><a href="#DNCv2的安装" class="headerlink" title="DNCv2的安装"></a>DNCv2的安装</h3><p>刚开始的时候我是直接按照原作者给的链接进行安装：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone -b pytorch_1.7 https://github.com/ifzhang/DCNv2.git</span><br><span class="line">cd DCNv2</span><br><span class="line">./make.sh</span><br></pre></td></tr></table></figure>
-<p>但是在编译时会出现gcc版本不能大于8的提示，在安装了低于版本8的gcc后又会提示找不到gcc：）<br>以防有人需要还是贴一下如何安装低版本gcc的<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wuyun--wy/p/16977352.html">链接</a><br>其实作者提供了pytorch1.7对应的DCNv2的<a href="https://github.com/ifzhang/DCNv2/tree/pytorch_1.7">链接</a><br>下载好按照步骤完成编译并没有提示gcc版本的问题</p>
-<h2 id="demo运行"><a href="#demo运行" class="headerlink" title="demo运行"></a>demo运行</h2><p>然后就是下载对应的预训练权重文件根据作者给的指示跑一跑demo：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd src</span><br><span class="line">python demo.py mot --load_model ../models/fairmot_dla34.pth --conf_thres 0.4</span><br></pre></td></tr></table></figure>
-<p>然而<br>我下载了这么多的权重文件，其实能用的只有一个<br><img src="https://img-blog.csdnimg.cn/direct/0e024450a5e34b288d76237299cf7fc3.png#pic_center" class="lazyload placeholder" data-srcset="https://img-blog.csdnimg.cn/direct/0e024450a5e34b288d76237299cf7fc3.png#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="预训练文件"></p>
-<p>可能是代码更新了，不管使用哪个文件都会报错，而且不少文件的链接已经失效了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Fix size testing.</span><br><span class="line">training chunk_sizes: [3, 3]</span><br><span class="line">The output will be saved to  /home/vip/anaconda3/envs/NXH/FairMOT-master/src/lib/../../exp/mot/default</span><br><span class="line">heads &#123;&#x27;hm&#x27;: 1, &#x27;wh&#x27;: 4, &#x27;id&#x27;: 128, &#x27;reg&#x27;: 2&#125;</span><br><span class="line">2023-11-23 11:12:12 [INFO]: Starting tracking...</span><br><span class="line">Lenth of the video: 1500 frames</span><br><span class="line">Creating model...</span><br><span class="line">=&gt; loading pretrained model ../models/hrnetv2_w18_imagenet_pretrained.pth</span><br><span class="line">loaded ../models/all_hrnet_v2_w18.pth, epoch 60</span><br><span class="line">Drop parameter last_layer.0.weight.If you see this, your model does not fully load the pre-trained weight. Please make sure you have correctly specified --arch xxx or set the correct --num_classes for your own dataset.</span><br><span class="line">Drop parameter last_layer.0.bias.If you see this, your model does not fully load the pre-trained weight. Please make sure you have correctly specified --arch xxx or set the correct --num_classes for your own dataset.</span><br></pre></td></tr></table></figure>
-<p>上网查了一下，也有人遇到了这个问题，原作者回复了一个新的<a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1K0dvpphfLaLHMyAbeVARENgjPtH75wX6/view?usp=sharing">权重文件</a><br>我下载试了一下，没问题，可以跑了，效果非常不错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python demo.py mot --load_model ../models/fairmot_hrnet_w18.pth --arch hrnet_18 --reid_dim 128 --conf_thres 0.4</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/direct/80f673e3fe78444c89ee34a5d9b4bf70.jpeg#pic_center" class="lazyload placeholder" data-srcset="https://img-blog.csdnimg.cn/direct/80f673e3fe78444c89ee34a5d9b4bf70.jpeg#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="demo"><br>ok下一步的学习计划就是试一试训练。</p>
+        <p>这篇文章收录于CVPR2023<br>贴一下<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2206.04656">原文链接</a></p>
+<h3 id="一、Introduction"><a href="#一、Introduction" class="headerlink" title="一、Introduction"></a>一、Introduction</h3><p>作者提出在MOT工作中，TbD（Tracking by Detection）是最常见的范式，即现在视频帧中检测出目标，然后进行关联。大多数的关联模型都是基于运动和外观线索，近年来基于注意力机制的方式十分火热，作者希望通过传统的TbD也可以达到端对端模型的性能。，于是提出两个关键设计——on-the-fly域适应，以及对于活跃与不活跃轨迹的不同处理。</p>
+<h4 id="reID在MOT任务重性能不佳的两个原因："><a href="#reID在MOT任务重性能不佳的两个原因：" class="headerlink" title="reID在MOT任务重性能不佳的两个原因："></a>reID在MOT任务重性能不佳的两个原因：</h4><p>①reID模型在相邻帧中外观变化小，但是在时间间隔较长的情况下，特别是在遮挡情况下外观特征变化剧烈。</p>
+<p>②在不同数据集上训练的reID模型无法通用，即鲁棒性较差。<br>为了解决上述问题，作者使用加权的方式将reID和简单的线性运动模型相结合，面对不同的数据集可以赋予不同的权重。<br>作者提出的模型在四个数据集上达到了SOTA。</p>
+<h3 id="二、Related-Work"><a href="#二、Related-Work" class="headerlink" title="二、Related Work"></a>二、Related Work</h3><p><strong>Graph-Based Approches：</strong> 在TbD中的常见形式是将每个检测视为图中的节点，将节点相连形成轨迹，GHOST可以不使用复杂的图模型获得强大的跟踪器。</p>
+<p><strong>Motion-Based Association：</strong> 使用运动和位置新西进行逐帧关联，跟踪器利用两个相邻帧之间的空间相邻性进行匹配，最典型的就是卡尔曼滤波。最新的工作引入了基于注意力机制的跟踪范式，使用了复杂的运动模型，需要复杂的训练策略。GHOST表明简单的直线运动模型足以在大多数情况下对短期关联进行建模。</p>
+<p><strong>Appearance-Based Association：</strong> 为了长期关联场景，许多方法使用额外的基于外观的再识别网络，但是这种只使用外观线索而不使用运动线索的方法使用十分复杂的关联方案，也很难得出正确的结论。相比GHOST不依赖复杂的过程，只在一个简单的TbD跟踪器上结合轻量级的运动和外观线索，只需要很少的训练数据。</p>
+<p><strong>Person Re-Identification and Domain Adaptation：</strong> Person re-ID是根据外观线索，从给定的图库中查询相同行人的边界框。但对领域外的数据集进行评估时，re-ID模型的性能往往会显著的降低，在应用中可以使用跨数据集评估方式将模型在给定目标中训练。GHOST使用简单的动态域适应方法增强了外观模型，使其更适应MOT任务。</p>
+<h3 id="三、-Methodology"><a href="#三、-Methodology" class="headerlink" title="三、 Methodology"></a>三、 Methodology</h3><h4 id="3-1-跟踪器"><a href="#3-1-跟踪器" class="headerlink" title="3.1 跟踪器"></a>3.1 跟踪器</h4><p>在跟踪中，在每个时间t中使用线性运动模型产生轨迹对应的预测位置，检测被分配给轨迹，若轨迹未与检测匹配则定义为不活跃，否则活跃，使用内存库来保存不活跃轨迹，将检测与实况轨迹进行匹配。</p>
+<p>通过匈牙利算法利用二分匹配将连续镇上的现有检测关联起来。该分配由成本矩阵驱动，该成本矩阵由外观和运动特征的加权和填充，最后利用匹配阈值筛选匹配后的轨迹检测对。</p>
+<h4 id="3-2-外观模型"><a href="#3-2-外观模型" class="headerlink" title="3.2 外观模型"></a>3.2 外观模型</h4><p>外观模型基于ResNet50设计，在末端增加了一个全连接层进行下采样，并在普通人reID数据集上进行训练（没有在MOT数据集上进行训练）。</p>
+<p>提出两种设计提升外观模型：</p>
+<p>（1）对于活跃与不活跃轨迹的不同处理；<br>（2）on-the-fly域适应<br><img src="https://img-blog.csdnimg.cn/direct/e10a8e8ad95341ed8a08f5ecb9c32ed5.png#pic_center" class="lazyload placeholder" data-srcset="https://img-blog.csdnimg.cn/direct/e10a8e8ad95341ed8a08f5ecb9c32ed5.png#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="MOT序列中检测和跟踪的距离"><br>图（a）：外观特征距离直方图，分析了最新检测与活跃或非活跃轨迹之间外观特征的距离直方图，深色表示了轨迹与相同身份（正样本）的距离直方图，浅色表示了轨迹与不同身份（负样本）的距离直方图。</p>
+<p>图（b）：外观特征的代理距离直方图，分析了最新检测与活跃或非活跃轨迹之间外观特征的代理距离直方图，深色表示了轨迹与相同身份（正样本）的距离直方图，浅色表示了轨迹与不同身份（负样本）的距离直方图。</p>
+<p>图（c）：采用IoU度量的活跃非活跃轨迹运动距离直方图</p>
+<p><strong>对活跃非活跃轨迹的不同处理：</strong> 对于活跃轨迹，利用在t-1帧分配给轨道j的检测外观特征来计算t帧检测i的距离。<br>对于非活跃轨迹，计算非活动轨迹k中所有Nk检测的外观特征向量与新的检测i间的距离，然后利用这些距离的平均值作为代理距离，即：<br><img src="https://img-blog.csdnimg.cn/direct/01938c2a18254109b5b7dc8b4682077f.png#pic_center" class="lazyload placeholder" data-srcset="https://img-blog.csdnimg.cn/direct/01938c2a18254109b5b7dc8b4682077f.png#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"><br> 从Figure 2可以看出活跃与非活跃轨迹距离直方图的显著差异，因此对于活跃轨迹与非活跃轨迹在二分匹配时需要采取不同的处理方式，使用阈值确定允许匹配的成本，不同阈值确定了距离直方图中深色与浅色的划分，对于活跃和不活跃轨迹使用两种不同阈值，比起级联匹配，GHOST的赋值可以避免每帧多次运用二分匹配。</p>
+<p><strong>动态域适应：</strong> 前面提到过将动态域适应技术应用于reID领域可以防止reID模型应用于不同MOT序列时的性能下降。</p>
+<p>最近，有一些reID的工作引入了DA的思想来实现跨数据集泛化的方法，将归一化层适用于Instance Batch、Meta Batch或Camera - Batch Normalization层。与上述方法相反，我们在架构的BN层中使用当前批次特征的均值和方差，该特征对应于测试时间内的一帧检测：<br><img src="https://img-blog.csdnimg.cn/direct/b36cb74ff12449e39f7a67ec70261b85.png#pic_center" class="lazyload placeholder" data-srcset="https://img-blog.csdnimg.cn/direct/b36cb74ff12449e39f7a67ec70261b85.png#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"><br>其中x<sub>i</sub>是样本i的特征，μ<sub>b</sub>和σ<sub>b</sub>是当前批次的均值和方差，γ和β在训练时被学习。由于一个序列之间的图像都具有高度相似的底层分布，因此不需要多个BN层就可以很好的近似序列的统计信息，并且可以定义一个适合于所有序列的匹配阈值τ<sub>i</sub>，就可以很有效的分离所有直方图。</p>
+<p>将这些应用于外观模型，使对遮挡更适应，更适合不同序列。</p>
 <hr>
-<p>Fairmot学习</p>
+<p>由于没有看代码，实验部分也就没仔细看，留到开始看代码了认真看实验</p>
+<hr>
 
       </div>
       <div class="post-tags-categories">
@@ -480,7 +486,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
-    <a href="/2023/11/29/fairmot/" target="_blank" title="Fairmot代码复现问题记录（已解决）">https://github.com/Nxhhhh/Nxhhhh.github.io/2023/11/29/fairmot/</a>
+    <a href="/2024/02/23/GHOST文献阅读/" target="_blank" title="文献《Simple Cues Lead to a Strong Multi-Object Tracker》总结">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/02/23/GHOST文献阅读/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright notice:   </strong>
@@ -498,18 +504,19 @@
 
 
 
+
+
   
-  <div class="post-nav-prev post-nav-item">
+  <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
     <a href="/2024/01/19/Hexoerror/" class="post-nav-link">
       <div class="title">
-        <i class="fas fa-angle-left"></i> Prev:
+        Next: <i class="fas fa-angle-right"></i>
         <div class="title-text">Hexo本地预览与部署不同的解决方法</div>
       </div>
-      
       <!-- <div class="content">
         
 
@@ -517,8 +524,6 @@
       </div> -->
     </a>
   </div>
-
-
 
 </div>
 
@@ -650,7 +655,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="toc-text">前期准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%8E%AF%E5%A2%83%E4%BB%A5%E5%8F%8A%E4%BE%9D%E8%B5%96%E9%A1%B9%E7%9A%84%E5%AE%89%E8%A3%85%EF%BC%9A"><span class="toc-text">创建环境以及依赖项的安装：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNCv2%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-text">DNCv2的安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#demo%E8%BF%90%E8%A1%8C"><span class="toc-text">demo运行</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81Introduction"><span class="toc-text">一、Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#reID%E5%9C%A8MOT%E4%BB%BB%E5%8A%A1%E9%87%8D%E6%80%A7%E8%83%BD%E4%B8%8D%E4%BD%B3%E7%9A%84%E4%B8%A4%E4%B8%AA%E5%8E%9F%E5%9B%A0%EF%BC%9A"><span class="toc-text">reID在MOT任务重性能不佳的两个原因：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Related-Work"><span class="toc-text">二、Related Work</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81-Methodology"><span class="toc-text">三、 Methodology</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E8%B7%9F%E8%B8%AA%E5%99%A8"><span class="toc-text">3.1 跟踪器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%9E%8B"><span class="toc-text">3.2 外观模型</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
