@@ -440,7 +440,7 @@
     <article class="post post-detail">
       <div class="post-content">
         <p>这篇文章收录于CVPR2023<br>贴一下<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2206.04656">原文链接</a></p>
-<h3 id="一、Introduction"><a href="#一、Introduction" class="headerlink" title="一、Introduction"></a>一、Introduction</h3><p>作者提出在MOT工作中，TbD（Tracking by Detection）是最常见的范式，即现在视频帧中检测出目标，然后进行关联。大多数的关联模型都是基于运动和外观线索，近年来基于注意力机制的方式十分火热，作者希望通过传统的TbD也可以达到端对端模型的性能。，于是提出两个关键设计——on-the-fly域适应，以及对于活跃与不活跃轨迹的不同处理。</p>
+<h3 id="一、Introduction"><a href="#一、Introduction" class="headerlink" title="一、Introduction"></a>一、Introduction</h3><p>作者提出在MOT工作中，TbD（Tracking by Detection）是最常见的范式，即先在视频帧中检测出目标，然后进行关联。大多数的关联模型都是基于运动和外观线索，近年来基于注意力机制的方式十分火热，作者希望通过传统的TbD也可以达到端对端模型的性能。于是提出两个关键设计——on-the-fly域适应，以及对于活跃与不活跃轨迹的不同处理。</p>
 <h4 id="reID在MOT任务重性能不佳的两个原因："><a href="#reID在MOT任务重性能不佳的两个原因：" class="headerlink" title="reID在MOT任务重性能不佳的两个原因："></a>reID在MOT任务重性能不佳的两个原因：</h4><p>①reID模型在相邻帧中外观变化小，但是在时间间隔较长的情况下，特别是在遮挡情况下外观特征变化剧烈。</p>
 <p>②在不同数据集上训练的reID模型无法通用，即鲁棒性较差。<br>为了解决上述问题，作者使用加权的方式将reID和简单的线性运动模型相结合，面对不同的数据集可以赋予不同的权重。<br>作者提出的模型在四个数据集上达到了SOTA。</p>
 <h3 id="二、Related-Work"><a href="#二、Related-Work" class="headerlink" title="二、Related Work"></a>二、Related Work</h3><p><strong>Graph-Based Approches：</strong> 在TbD中的常见形式是将每个检测视为图中的节点，将节点相连形成轨迹，GHOST可以不使用复杂的图模型获得强大的跟踪器。</p>
