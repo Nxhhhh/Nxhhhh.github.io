@@ -198,7 +198,7 @@
   </transition>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <img class="drawer-box-head_logo" src="/medias/logo.png" alt="logo">
       <h3 class="drawer-box-head_title">小牛学习日记</h3>
       <h5 class="drawer-box-head_desc"></h5>
     </div>
@@ -268,7 +268,7 @@
     <div class="blog-title" id="author-avatar">
       
         <div class="avatar">
-          <img src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+          <img src="/medias/logo.png" alt="logo">
         </div>
       
       <a href="/" class="logo">小牛学习日记</a>
@@ -442,10 +442,10 @@
       <div class="post-content">
         <meta name="referrer" content="no-referrer">
 
-<p>最近一直在忙考试的事情，终于有时间打开博客了，但出现了一个问题：我的样式全乱了，尝试了重新发布，本地查看的时候还是正常的，部署之后依旧是乱的。<br><img src="https://img-blog.csdnimg.cn/direct/c503a46585be408a8f26b6ea148a1f4a.png#pic_center" class="lazyload placeholder" data-srcset="https://img-blog.csdnimg.cn/direct/c503a46585be408a8f26b6ea148a1f4a.png#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="如图"> 于是在这里贴一下我尝试过的解决方法。</p>
+<p>最近一直在忙考试的事情，终于有时间打开博客了，但出现了一个问题：我的样式全乱了，尝试了重新发布，本地查看的时候还是正常的，部署之后依旧是乱的。<br><img src="https://img-blog.csdnimg.cn/direct/c503a46585be408a8f26b6ea148a1f4a.png#pic_center" alt="如图"> 于是在这里贴一下我尝试过的解决方法。</p>
 <hr>
 <h2 id="1-重新配置URL"><a href="#1-重新配置URL" class="headerlink" title="1 重新配置URL"></a>1 重新配置URL</h2><p>在博客根目录中的config.yml文件中修改URL的配置：<br>url是你生成的page页网址，root是你的根目录</p>
-<p><img src="https://img-blog.csdnimg.cn/direct/34679d6d51534bcc97481124de2480c8.png#pic_center" class="lazyload placeholder" data-srcset="https://img-blog.csdnimg.cn/direct/34679d6d51534bcc97481124de2480c8.png#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="URL"></p>
+<p><img src="https://img-blog.csdnimg.cn/direct/34679d6d51534bcc97481124de2480c8.png#pic_center" alt="URL"></p>
 <h2 id="2-如果使用图床图片，则需要修改以下内容"><a href="#2-如果使用图床图片，则需要修改以下内容" class="headerlink" title="2 如果使用图床图片，则需要修改以下内容"></a>2 如果使用图床图片，则需要修改以下内容</h2><p>①找到index.ejs文件，路径为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">└──hexo-theme-yourtheme (当前使用的主题文件夹)</span><br><span class="line">   └──layout</span><br><span class="line">      └──index.ejs</span><br></pre></td></tr></table></figure>
 <p>②在inddex.ejs的头部中加入：</p>
@@ -454,7 +454,7 @@
 
 
 <h2 id="3-更改部署的分支"><a href="#3-更改部署的分支" class="headerlink" title="3 更改部署的分支"></a>3 更改部署的分支</h2><p>在仓库中新建一个分支，不要在master分支上部署pages。<br>我没有尝试新建分支，只是把分支从main改为了master，不确定是否真的有用。</p>
-<h2 id="4-浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。"><a href="#4-浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。" class="headerlink" title="4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。"></a>4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。</h2><p><img src="https://img-blog.csdnimg.cn/direct/7a2d5a400ad544c1a718006e69e26879.png#pic_center" class="lazyload placeholder" data-srcset="https://img-blog.csdnimg.cn/direct/7a2d5a400ad544c1a718006e69e26879.png#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="完美解决"></p>
+<h2 id="4-浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。"><a href="#4-浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。" class="headerlink" title="4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。"></a>4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。</h2><p><img src="https://img-blog.csdnimg.cn/direct/7a2d5a400ad544c1a718006e69e26879.png#pic_center" alt="完美解决"></p>
 <hr>
 <p>这些方法我都按顺序尝试过，不是很确定是哪个解决了问题，大家可以都尝试一下。</p>
 
@@ -500,9 +500,9 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" alt="">
     </div>
-    <a href="/2024/02/23/GHOST%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/" class="post-nav-link">
+    <a href="/2024/02/23/GHOST-reading/" class="post-nav-link">
       <div class="title">
         <i class="fas fa-angle-left"></i> Prev:
         <div class="title-text">文献《Simple Cues Lead to a Strong Multi-Object Tracker》总结</div>
@@ -521,7 +521,7 @@
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" src="" alt="">
     </div>
     <a href="/2023/11/29/fairmot/" class="post-nav-link">
       <div class="title">
@@ -700,7 +700,7 @@
             <div class="post-img-box">
               <a href="/2024/02/28/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -721,7 +721,7 @@
             <div class="post-img-box">
               <a href="/2024/02/24/%E6%B2%99%E6%BC%A0%E9%9D%A2%E7%A7%AF/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -740,9 +740,9 @@
             
 
             <div class="post-img-box">
-              <a href="/2024/02/23/GHOST%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/" class="post-img " style="background-size: cover; 
+              <a href="/2024/02/23/GHOST-reading/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -751,7 +751,7 @@
                   <span class="post-date">02-23</span>
                 
               </div>
-              <a class="post-title" href="/2024/02/23/GHOST%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/">文献《Simple Cues Lead to a Strong Multi-Object Tracker》总结</a>
+              <a class="post-title" href="/2024/02/23/GHOST-reading/">文献《Simple Cues Lead to a Strong Multi-Object Tracker》总结</a>
             </div>
           </div>
         
@@ -763,7 +763,7 @@
             <div class="post-img-box">
               <a href="/2024/01/19/Hexoerror/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -784,7 +784,7 @@
             <div class="post-img-box">
               <a href="/2023/11/29/fairmot/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">

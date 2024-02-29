@@ -198,7 +198,7 @@
   </transition>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <img class="drawer-box-head_logo" src="/medias/logo.png" alt="logo">
       <h3 class="drawer-box-head_title">小牛学习日记</h3>
       <h5 class="drawer-box-head_desc"></h5>
     </div>
@@ -268,7 +268,7 @@
     <div class="blog-title" id="author-avatar">
       
         <div class="avatar">
-          <img src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+          <img src="/medias/logo.png" alt="logo">
         </div>
       
       <a href="/" class="logo">小牛学习日记</a>
@@ -448,12 +448,12 @@
 <p>但是在编译时会出现gcc版本不能大于8的提示，在安装了低于版本8的gcc后又会提示找不到gcc：）<br>以防有人需要还是贴一下如何安装低版本gcc的<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wuyun--wy/p/16977352.html">链接</a><br>其实作者提供了pytorch1.7对应的DCNv2的<a href="https://github.com/ifzhang/DCNv2/tree/pytorch_1.7">链接</a><br>下载好按照步骤完成编译并没有提示gcc版本的问题</p>
 <h2 id="demo运行"><a href="#demo运行" class="headerlink" title="demo运行"></a>demo运行</h2><p>然后就是下载对应的预训练权重文件根据作者给的指示跑一跑demo：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd src</span><br><span class="line">python demo.py mot --load_model ../models/fairmot_dla34.pth --conf_thres 0.4</span><br></pre></td></tr></table></figure>
-<p>然而<br>我下载了这么多的权重文件，其实能用的只有一个<br><img src="https://img-blog.csdnimg.cn/direct/0e024450a5e34b288d76237299cf7fc3.png#pic_center" class="lazyload placeholder" data-srcset="https://img-blog.csdnimg.cn/direct/0e024450a5e34b288d76237299cf7fc3.png#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="预训练文件"></p>
+<p>然而<br>我下载了这么多的权重文件，其实能用的只有一个<br><img src="https://img-blog.csdnimg.cn/direct/0e024450a5e34b288d76237299cf7fc3.png#pic_center" alt="预训练文件"></p>
 <p>可能是代码更新了，不管使用哪个文件都会报错，而且不少文件的链接已经失效了</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Fix size testing.</span><br><span class="line">training chunk_sizes: [3, 3]</span><br><span class="line">The output will be saved to  /home/vip/anaconda3/envs/NXH/FairMOT-master/src/lib/../../exp/mot/default</span><br><span class="line">heads &#123;&#x27;hm&#x27;: 1, &#x27;wh&#x27;: 4, &#x27;id&#x27;: 128, &#x27;reg&#x27;: 2&#125;</span><br><span class="line">2023-11-23 11:12:12 [INFO]: Starting tracking...</span><br><span class="line">Lenth of the video: 1500 frames</span><br><span class="line">Creating model...</span><br><span class="line">=&gt; loading pretrained model ../models/hrnetv2_w18_imagenet_pretrained.pth</span><br><span class="line">loaded ../models/all_hrnet_v2_w18.pth, epoch 60</span><br><span class="line">Drop parameter last_layer.0.weight.If you see this, your model does not fully load the pre-trained weight. Please make sure you have correctly specified --arch xxx or set the correct --num_classes for your own dataset.</span><br><span class="line">Drop parameter last_layer.0.bias.If you see this, your model does not fully load the pre-trained weight. Please make sure you have correctly specified --arch xxx or set the correct --num_classes for your own dataset.</span><br></pre></td></tr></table></figure>
 <p>上网查了一下，也有人遇到了这个问题，原作者回复了一个新的<a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1K0dvpphfLaLHMyAbeVARENgjPtH75wX6/view?usp=sharing">权重文件</a><br>我下载试了一下，没问题，可以跑了，效果非常不错</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python demo.py mot --load_model ../models/fairmot_hrnet_w18.pth --arch hrnet_18 --reid_dim 128 --conf_thres 0.4</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/direct/80f673e3fe78444c89ee34a5d9b4bf70.jpeg#pic_center" class="lazyload placeholder" data-srcset="https://img-blog.csdnimg.cn/direct/80f673e3fe78444c89ee34a5d9b4bf70.jpeg#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="demo"><br>ok下一步的学习计划就是试一试训练。</p>
+<p><img src="https://img-blog.csdnimg.cn/direct/80f673e3fe78444c89ee34a5d9b4bf70.jpeg#pic_center" alt="demo"><br>ok下一步的学习计划就是试一试训练。</p>
 <hr>
 <p>Fairmot学习</p>
 
@@ -503,7 +503,7 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" alt="">
     </div>
     <a href="/2024/01/19/Hexoerror/" class="post-nav-link">
       <div class="title">
@@ -686,7 +686,7 @@
             <div class="post-img-box">
               <a href="/2024/02/28/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -707,7 +707,7 @@
             <div class="post-img-box">
               <a href="/2024/02/24/%E6%B2%99%E6%BC%A0%E9%9D%A2%E7%A7%AF/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -726,9 +726,9 @@
             
 
             <div class="post-img-box">
-              <a href="/2024/02/23/GHOST%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/" class="post-img " style="background-size: cover; 
+              <a href="/2024/02/23/GHOST-reading/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -737,7 +737,7 @@
                   <span class="post-date">02-23</span>
                 
               </div>
-              <a class="post-title" href="/2024/02/23/GHOST%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/">文献《Simple Cues Lead to a Strong Multi-Object Tracker》总结</a>
+              <a class="post-title" href="/2024/02/23/GHOST-reading/">文献《Simple Cues Lead to a Strong Multi-Object Tracker》总结</a>
             </div>
           </div>
         
@@ -749,7 +749,7 @@
             <div class="post-img-box">
               <a href="/2024/01/19/Hexoerror/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -770,7 +770,7 @@
             <div class="post-img-box">
               <a href="/2023/11/29/fairmot/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">

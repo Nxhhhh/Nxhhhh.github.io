@@ -198,7 +198,7 @@
   </transition>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <img class="drawer-box-head_logo" src="/medias/logo.png" alt="logo">
       <h3 class="drawer-box-head_title">小牛学习日记</h3>
       <h5 class="drawer-box-head_desc"></h5>
     </div>
@@ -268,7 +268,7 @@
     <div class="blog-title" id="author-avatar">
       
         <div class="avatar">
-          <img src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+          <img src="/medias/logo.png" alt="logo">
         </div>
       
       <a href="/" class="logo">小牛学习日记</a>
@@ -441,7 +441,7 @@
     <article class="post post-detail">
       <div class="post-content">
         <h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p>我们获得了一幅陆地和水域情况的卫星照片，照片可以看成是一个 n 行 m 列的矩形，矩形中的每个格子要么是陆地（用半角点号 . 表示），要么是水域（用井号 #表示）。</p>
-<p>虽然卫星照片可以清楚的辨别出陆地和水域，但陆地的具体类型却并不明确。现在我们了解到，对于一块是水域的方格，它向上、下、左、右四个方向 k 步之内可达的陆地格子，均会形成沙滩。例如，下图展示了 k&#x3D;2 的情况，蓝色的格子代表水域，标为黄色的陆地格子是沙滩。<br><img src="https://img-blog.csdnimg.cn/direct/15afb398e4a441768c22a56adb677c83.png#pic_center" class="lazyload placeholder" data-srcset="https://img-blog.csdnimg.cn/direct/15afb398e4a441768c22a56adb677c83.png#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"><br>你的任务是根据卫星照片计算出属于“沙滩”格子的数量。注意：卫星照片只拍摄了包含水域的部分，水域附近的沙滩可能出现在卫星照片边界之外。你可以假设卫星照片之外不存在任何水域。<br>输入<br>输入的第一行是空格分隔的三个整数 n,m 和<br>k，代表拍摄的卫星照片共有 n 行 m 列，以及形成沙滩的范围k。</p>
+<p>虽然卫星照片可以清楚的辨别出陆地和水域，但陆地的具体类型却并不明确。现在我们了解到，对于一块是水域的方格，它向上、下、左、右四个方向 k 步之内可达的陆地格子，均会形成沙滩。例如，下图展示了 k&#x3D;2 的情况，蓝色的格子代表水域，标为黄色的陆地格子是沙滩。<br><img src="1.png"><br>你的任务是根据卫星照片计算出属于“沙滩”格子的数量。注意：卫星照片只拍摄了包含水域的部分，水域附近的沙滩可能出现在卫星照片边界之外。你可以假设卫星照片之外不存在任何水域。<br>输入<br>输入的第一行是空格分隔的三个整数 n,m 和<br>k，代表拍摄的卫星照片共有 n 行 m 列，以及形成沙滩的范围k。</p>
 <p>接下来 n 行，每行一个字符串。字符串的长度恰好是m，代表卫星照片的一行，其中：</p>
 <p>井号#表示一片水域；<br>半角点号.表示一片陆地。</p>
 <p><strong>输出</strong></p>
@@ -518,7 +518,7 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
     </div>
     <a href="/2024/02/28/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/" class="post-nav-link">
       <div class="title">
@@ -529,7 +529,7 @@
       <!-- <div class="content">
         解决图片在Markdown编辑器中正常显示，但是部署后网页无法加载的问题 
 
-首先确认根目录_config.yml文件中
+首先确认根目录_config.yml文件将
       </div> -->
     </a>
   </div>
@@ -540,9 +540,9 @@
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" src="" alt="">
     </div>
-    <a href="/2024/02/23/GHOST%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/" class="post-nav-link">
+    <a href="/2024/02/23/GHOST-reading/" class="post-nav-link">
       <div class="title">
         Next: <i class="fas fa-angle-right"></i>
         <div class="title-text">文献《Simple Cues Lead to a Strong Multi-Object Tracker》总结</div>
@@ -719,7 +719,7 @@
             <div class="post-img-box">
               <a href="/2024/02/28/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -740,7 +740,7 @@
             <div class="post-img-box">
               <a href="/2024/02/24/%E6%B2%99%E6%BC%A0%E9%9D%A2%E7%A7%AF/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -759,9 +759,9 @@
             
 
             <div class="post-img-box">
-              <a href="/2024/02/23/GHOST%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/" class="post-img " style="background-size: cover; 
+              <a href="/2024/02/23/GHOST-reading/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -770,7 +770,7 @@
                   <span class="post-date">02-23</span>
                 
               </div>
-              <a class="post-title" href="/2024/02/23/GHOST%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/">文献《Simple Cues Lead to a Strong Multi-Object Tracker》总结</a>
+              <a class="post-title" href="/2024/02/23/GHOST-reading/">文献《Simple Cues Lead to a Strong Multi-Object Tracker》总结</a>
             </div>
           </div>
         
@@ -782,7 +782,7 @@
             <div class="post-img-box">
               <a href="/2024/01/19/Hexoerror/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -803,7 +803,7 @@
             <div class="post-img-box">
               <a href="/2023/11/29/fairmot/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
