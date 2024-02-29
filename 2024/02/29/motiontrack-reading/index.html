@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Tag: MOT | 小牛学习日记</title>
+  <title>文献《MotionTrack:Learning Robust Short-term and Long-term Motions for Multi-Object Tracking》总结 | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -364,223 +364,639 @@
 </header>
         <!-- 内容区域 -->
         
+ <!-- prismjs 代码高亮 -->
+ 
 
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
-<div class="bg-light-floor-tagDetail" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
 
-<div class="tag-header" style="background-image: url('https://pic1.zhimg.com/80/v2-604a15cef201cf177943af2d915eb2e7_1440w.jpg?source=1940ef5c');">
-  <div class="tag-header-title">
-    tag
-  </div>
-  <div class="tag-header-desc">
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
-    <span class="title" id="tag-header-desc"></span>
-    <script>
-  function typedFn() {
-    const el = '#tag-header-desc';
-    const type = 'tagDetail';
-    let desc = '越努力越幸运'
-    var typed = new Typed(el, {
-      strings: [desc],
-      startDelay: 100,
-      typeSpeed: 100,
-      loop: true,
-      backSpeed: 50,
-      showCursor: true
-    });
-  }
-  typedFn();
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        文献《MotionTrack:Learning Robust Short-term and Long-term Motions for Multi-Object Tracking》总结
+      </span>
+    </div>
+    
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> Published in：2024-02-29 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> category：
+          
+            <a href="/categories/R-D/" class="post-detail-header_category">
+              R&D
+            </a>
+          
+        </span>
+      
+
+      
+        <div class="post-detail-header_wordcount">
+          <span class="totalcount">
+            <i class="fas fa-file-text-o"></i> Words: 1.7k |
+          </span>
+  
+          <span class="min2read">
+            <i class="fas fa-clock"></i> Reading time: 6min |
+          </span>
+  
+          
+            <span class="reading">
+              <i class="fas fa-eye"></i> reading：<span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+        </div>
+      
+    
+  </div>
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <hr>
+<p>贴一下<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2303.10404.pdf">原文链接</a></p>
+<p>以及<a href="https://github.com/qwomeng/MotionTrack">代码链接</a></p>
+<hr>
+<h3 id="1-Abstract"><a href="#1-Abstract" class="headerlink" title="1.Abstract"></a>1.Abstract</h3><p>作者认为多目标跟踪的主要挑战在于为每一个目标保持一条连续的轨迹。现有的方法往往通过运动特征与外观信息进行进行匹配，但是这两种特征容易受到密集人群和极端遮挡的影响。因此作者提出一个跟踪器名为Motion Track，在统一的框架中学习鲁棒的长期和短期轨迹。构建了新的交互模块与重寻模块，并在MOT指标中达到了SOTA。</p>
+<h3 id="2-Introduction"><a href="#2-Introduction" class="headerlink" title="2.Introduction"></a>2.Introduction</h3><p>现有的MOT方法主要遵循两种范式：TbD与TbR。<br>TbD（Tracking by Detection）：首先在每个视频帧中检测目标，然后在相邻帧之间进行关联检测。<br>TbR（Tracking by Regression）：目标检测器不仅提供逐帧检测，而且将数据关联替换为每个轨迹点对新位置的连续回归。<br>但是这两种方法都要面对短期轨迹与长期轨迹的关联问题。即如何在短时间内将活跃的轨迹与检测进行关联，以及如何将长时间后即将丢失的轨迹片段与检测进行重新识别。<br><img src="1.png" alt></p>
+<p><strong>对于短期关联：</strong> 通常会学习具有判别性的运动特征和外观特征进行相邻帧之间的数据关联。但是密集人群中很难学习到具有判别性的特征。一是因为bbox太小，无法通过外观区分；二是人群会改变运动轨迹以避免碰撞，使得运动特征十分复杂。<br><strong>对于长期关联：</strong> 通常会学习具有判别性的外观特征对丢失的目标进行重新识别，但是低光照、低分辨率、不同姿态会对这一特征产生巨大的影响。为了缓解这一问题，使用了内存技术存储每个目标的不同特征，以多查询的方式匹配不同的目标。但是存储模块和多查询机制占用大量内存和时间，不利于实时跟踪。<br>因此作者提出了<strong>Motion Track</strong>，对于短期关联，学习目标之间的交互作用，用于预测密集人群下的复杂运动，对于长期关联，通过相关计算和误差补偿两个步骤，对丢失的轨迹和未匹配的检测进行相关性计算，之后进一步采取误差补偿对遮挡轨迹进行修正。</p>
+<h3 id="3-Method"><a href="#3-Method" class="headerlink" title="3.Method"></a>3.Method</h3><p><img src="2.png" alt="模型整体框架"></p>
+<h4 id="3-1-1-短期关联"><a href="#3-1-1-短期关联" class="headerlink" title="3.1.1 短期关联"></a>3.1.1 短期关联</h4><p>给定的视频帧t，首先获得检测结果D<sub>t</sub>，截止至t-1帧共有M个轨迹T的集合，其中有S个丢失的轨迹T<sup>lost</sup>。计算迭代偏移O<sub>t</sub> $\in$ R<sup><em>M $\times$ 4</em></sup>，其中每一行包含t-2帧到t-1帧的中心坐标与宽高的偏移量。将绝对坐标与偏移量串联得到<strong>I</strong><sup>t</sup> $\in$ R<sup><em>M $\times$ 8</em></sup>作为交互模块的输入。</p>
+<h4 id="3-1-2-交互模块"><a href="#3-1-2-交互模块" class="headerlink" title="3.1.2 交互模块"></a>3.1.2 交互模块</h4><p><img src="3.png" alt="交互模块"></p>
+<p>利用自注意力机制得到注意矩阵<strong>A</strong><sup>atte</sup>，用于测量每对轨迹之间的交互幅度：<br><img src="4.png" alt><br>其中$\phi$（·，·）表示线性变换，<strong>E</strong><sup>t</sup>是由<strong>I</strong><sup>t</sup>映射出的高维嵌入。<strong>Q</strong><sup>t</sup> $\in$ R<sup><em>M $\times$ D</em></sup>和<strong>K</strong><sup>t</sup> $\in$ R<sup><em>M $\times$ D</em></sup>是自我关注机制的查询和密钥。<strong>W</strong><sup>E</sup>，<strong>W</strong><sup>Q</sup>，<strong>W</strong><sup>K</sup>是线性变换的权重。$\sqrt{d}$和$\sqrt{D}$ 是缩放因子。注意力矩阵<strong>A</strong><sup>atte</sup>中的 <em>(i,j)</em> -th 用于表示轨迹i对轨迹j的影响。<br>为了更好的表示群体行为，作者通过非对称卷积模拟一群轨迹对单个轨迹的影响：<br><img src="5.png" alt><br>最后只保留<strong>A</strong><sup>adjc</sup>中大于 $\xi$ 的元素：<br><img src="6.png" alt></p>
+<p>其中 <em>sgn</em> 是符号函数，$\delta$表示PReLU，⊙表示哈达玛积，即逐元素乘积。最后将<strong>A</strong><sup>adjc</sup>所有非零元素进行归一化。<br>提取轨迹之间的交互作用后，使用图卷积对每个轨迹的交互进行融合，然后使用多层感知器（MLP）进行预测：<br><img src="7.png" alt><br>其中<strong>W</strong><sup>G</sup>是线性变换的权重。预测值<strong>P</strong><sup>offs</sup> $\in$ R<sup><em>S $\times$ U</em></sup>将与D<sub>t</sub>一起用于IoU的关联。</p>
+<h4 id="3-2-1-长期关联"><a href="#3-2-1-长期关联" class="headerlink" title="3.2.1 长期关联"></a>3.2.1 长期关联</h4><p>假设短期关联后有S个丢失的轨迹和U个未匹配的检测。作者根据轨迹的空间分布和速度-时间关系，计算S个丢失的轨迹和U个未匹配的检测之间的相关性，得到相关性矩阵<strong>I</strong><sup>corre</sup> $\in$ R[0，1]<sup><em>S $\times$ U</em></sup>。然后保留高度相关的轨迹-检测对，并利用误差补偿来完善轨迹。</p>
+<h4 id="3-2-2-重寻模块"><a href="#3-2-2-重寻模块" class="headerlink" title="3.2.2 重寻模块"></a>3.2.2 重寻模块</h4><p><img src="8.png" alt="重寻模块"><br>将预测的轨迹的位置与检测进行IoU匹配，如果匹配结束还有S个丢失的轨迹和U个未匹配的检测则进入重寻模块。<br>剩余的检测集合记为D<sup>rest</sup> $\in$ R<sup><em>U $\times$ 5</em></sup>，其中五个元素分别是（t，x，y，w，h），保留30帧的历史轨迹的信息，于是仍未匹配的轨迹记为T<sup>lost</sup> $\in$ R<sup><em>S $\times$ 30 $\times$ 5</em></sup>。首先在最后一个维度上对D<sup>rest</sup>和T<sup>lost</sup>进行规范化，然后分别从中提取特征。作者分别在第二和第三维对T<sup>lost</sup>进行非对称卷积，然后将它们汇集成特征向量<strong>F</strong><sup>traj</sup> $\in$ R<sup><em>S $\times$ D</em></sup>：<br><img src="9.png" alt><br>对于计算的结果，计算与最后存活的位置的差值，并与检测结果联合起来，得到 $\hat{D}$ <sup>rest</sup> $\in$ R<sup><em>U $\times$ 10</em></sup>，然后将其映射到高维特征<strong>F</strong><sup>dete</sup> $\in$ R<sup><em>U $\times$ D</em></sup>：<br><img src="10.png" alt><br>其中<strong>W</strong><sup>D</sup>是线性变换的权重。<br>随后将<strong>F</strong><sup>traj</sup>和<strong>F</strong><sup>dete</sup>结合在一起形成<strong>F</strong> $\in$ R<sup>（<em>S  $\times$ U） $\times$ 2D</em></sup>，应用一个全连接层和sigmoid函数，就可以得到轨迹和检测之间的相似度得分<strong>C</strong><sup>corr</sup> $\in$ R<sup><em>S $\times$ U</em></sup>，最后，作者使用贪心算法挑选出相关度高的匹配对，并将剩余的不匹配检测初始化为新的轨迹。</p>
+<p>在用匹配检测重新识别丢失的轨迹后，作者使用误差补偿修正了预测的轨迹：<br><img src="11.png" alt></p>
+<h3 id="4-Training"><a href="#4-Training" class="headerlink" title="4.Training"></a>4.Training</h3><p>对交互模块，根据偏移量的预测计算出绝对坐标，使用IoU损失的形式：<br><img src="12.png" alt><br>取了连续三帧作为一个sample，前两帧是网络的输入，最后一帧作为监督<strong>P</strong><sup>gt</sup>。<br>对于重寻模块，在一段完整视频中提取所有的帧，将他们随机配对作为训练集，对于每个训练集，我们对轨迹和检测进行采样，并根据它们是否来自相同的轨迹标记为正或负。然后，我们用一个二元交叉熵损失函数来监督Refind模块中的相关计算:<br><img src="13.png" alt><br>最终效果：<br><img src="14.png" alt></p>
+
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/MOT/" class="">
+              MOT
+            </a>
+          
+            <a href="/tags/python/" class="">
+              python
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>author:  </strong>Xinhang Niu</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>link:  </strong>
+    <a href="/2024/02/29/motiontrack-reading/" target="_blank" title="文献《MotionTrack:Learning Robust Short-term and Long-term Motions for Multi-Object Tracking》总结">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/02/29/motiontrack-reading/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright notice:   </strong>
+      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      reprint policy. If reproduced, please indicate source!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" src="" alt="">
+    </div>
+    <a href="/2024/02/28/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/" class="post-nav-link">
+      <div class="title">
+        Next: <i class="fas fa-angle-right"></i>
+        <div class="title-text">解决Hexo部署博客时图片无法加载的问题</div>
+      </div>
+      <!-- <div class="content">
+        解决图片在Markdown编辑器中正常显示，但是部署后网页无法加载的问题 
+
+首先确认根目录_config.yml文件将
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script src="/js/shareJs/social-share.min.js"></script>
 </script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+      <div id="gitment-container"></div>
+
     
   </div>
-  <div class="mask-box"></div>
-</div>
+
+<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
 
 
-
-<div class="tag">
-  <div class="tag-name">
-    <div class="name" style="background-color: #FFF;">MOT category</div>
   </div>
-  <!-- 每一篇文章卡片 -->
-  <!-- hash算法 -->
 
-<section class="posts">
+  <!-- 目录 -->
+  <aside id='l_side'>
   
     
-    <article class="post reveal" style="flex-direction: row-reverse;   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2024-02-29</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2024/02/29/motiontrack-reading/">文献《MotionTrack:Learning Robust Short-term and Long-term Motions for Multi-Object Tracking》总结</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MOT/" rel="tag">MOT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/R-D/">R&D</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2024/02/29/motiontrack-reading/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            
-贴一下原文链接
-以及代码链接
-
-1.Abstract作者认为多目标跟踪的主要挑战在于为每一个目标保持一条连续的轨迹。现有的方法往往通过运动特征与外观信息进行进行匹配，但是这两种特征容易受到密集人群和极端遮挡的影响。因此作者提出一个跟踪器名
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2024/02/29/motiontrack-reading/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2024/02/29/motiontrack-reading/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
+      <section class="widget side_blogger">
+  <div class='content'>
     
-    <article class="post reveal" style="   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2024-02-23</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2024/02/23/GHOST-reading/">文献《Simple Cues Lead to a Strong Multi-Object Tracker》总结</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MOT/" rel="tag">MOT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/R-D/">R&D</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2024/02/23/GHOST-reading/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            这篇文章收录于CVPR2023贴一下原文链接
-一、Introduction作者提出在MOT工作中，TbD（Tracking by Detection）是最常见的范式，即先在视频帧中检测出目标，然后进行关联。大多数的关联模型都是基于运动和外观
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2024/02/23/GHOST-reading/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2024/02/23/GHOST-reading/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" alt="">
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img src='https://pic2.zhimg.com/80/v2-42b72d5ebee4b8d8aa70d9687effe87b_1440w.webp'/>
         </a>
-      </div>
-    </article>
-  
+      
     
-    <article class="post reveal" style="flex-direction: row-reverse;   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2023-11-29</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2023/11/29/fairmot/">Fairmot代码复现问题记录（已解决）</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
+    
+      <div class='text'>
+        
+          <h2>小牛的学习日记</h2>
+        
+        
+          <p>好好学习 天天向上</p>
 
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MOT/" rel="tag">MOT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/R-D/">R&D</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2023/11/29/fairmot/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="https://github.com/Nxhhhh/Nxhhhh.github.io"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
             </a>
-          </div>
-          <div class="post-content">
-            最近在学习多目标跟踪的经典文章，顺便记录一下自己复现Fairmot代码时的问题以及解决方案。贴一下原作的代码
-前期准备创建环境以及依赖项的安装：123456conda create -n FairMOTconda activate Fair
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2023/11/29/fairmot/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
-          </a>
-        </div>
+          
+        
+          
+            <a href="/1224317198@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/Nxhhhh/Nxhhhh.github.io"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=1224317198"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
       </div>
-      <div class="post-img">
-        <a href="/2023/11/29/fairmot/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
+    
+  </div>
 </section>
+
+    
+  
+  
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Abstract"><span class="toc-text">1.Abstract</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Introduction"><span class="toc-text">2.Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Method"><span class="toc-text">3.Method</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-1-%E7%9F%AD%E6%9C%9F%E5%85%B3%E8%81%94"><span class="toc-text">3.1.1 短期关联</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2-%E4%BA%A4%E4%BA%92%E6%A8%A1%E5%9D%97"><span class="toc-text">3.1.2 交互模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1-%E9%95%BF%E6%9C%9F%E5%85%B3%E8%81%94"><span class="toc-text">3.2.1 长期关联</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2-%E9%87%8D%E5%AF%BB%E6%A8%A1%E5%9D%97"><span class="toc-text">3.2.2 重寻模块</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Training"><span class="toc-text">4.Training</span></a></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
 </div>
 
-<div class="w-70">
-  
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/02/29/motiontrack-reading/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">02-29</span>
+                
+              </div>
+              <a class="post-title" href="/2024/02/29/motiontrack-reading/">文献《MotionTrack:Learning Robust Short-term and Long-term Motions for Multi-Object Tracking》总结</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/02/28/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">02-28</span>
+                
+              </div>
+              <a class="post-title" href="/2024/02/28/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/">解决Hexo部署博客时图片无法加载的问题</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/02/24/%E6%B2%99%E6%BC%A0%E9%9D%A2%E7%A7%AF/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">02-24</span>
+                
+              </div>
+              <a class="post-title" href="/2024/02/24/%E6%B2%99%E6%BC%A0%E9%9D%A2%E7%A7%AF/">每日一题——沙漠面积</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/02/23/GHOST-reading/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">02-23</span>
+                
+              </div>
+              <a class="post-title" href="/2024/02/23/GHOST-reading/">文献《Simple Cues Lead to a Strong Multi-Object Tracker》总结</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/01/19/Hexoerror/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">01-19</span>
+                
+              </div>
+              <a class="post-title" href="/2024/01/19/Hexoerror/">Hexo本地预览与部署不同的解决方法</a>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+    
+  </div>
+</aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script src="/js/wrapImage.js"></script>
 </div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || '';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
 
       </main>
     </div>
