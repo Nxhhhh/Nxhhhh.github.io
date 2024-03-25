@@ -463,7 +463,7 @@
 <p>置信度的代价计算公式如下：</p>
 <p><img src="5.png" alt></p>
 <h4 id="Height-Modulated-IoU"><a href="#Height-Modulated-IoU" class="headerlink" title="Height Modulated IoU"></a>Height Modulated IoU</h4><p>高度状态在两个方面增强了关联。首先，物体的高度在一定程度上反映了深度信息。对于DanceTrack这样的数据集，检测框的高度主要取决于物体与相机之间的距离。这使得高度状态成为区分高度重叠对象的有效线索。其次，高度状态对不同姿态具有较强的鲁棒性，是一种准确估计的状态，是物体的高质量表征。</p>
-<p>两个方框分别定义为（x^1_1, y^1_1, x^1_2, x^1_2）,（x^2_1, y^2_1, x^_2, x^3_2）</p>
+<p>两个方框分别定义为（x<sup>1</sup><sub>1</sub>, y<sup>1</sup><sub>1</sub>, x<sup>1</sup><sub>2</sub>, y<sup>1</sup><sub>2</sub>）,（x<sup>2</sup><sub>1</sub>, y<sup>2</sup><sub>1</sub>, x<sup>2</sup><sub>2</sub>, y<sup>2</sup><sub>2</sub>）</p>
 <p>则可以通过基于高度度量计算IoU来生成高度IoU (HIoU)，如下图所示：</p>
 <p><img src="6.png" alt></p>
 <p><img src="7.png" alt></p>
@@ -527,18 +527,18 @@
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" src="" alt="">
+      <img class="lazyload" src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" src="" alt="">
     </div>
-    <a href="/2024/03/25/Hybridsort%E6%80%BB%E7%BB%93/Hybrid-SORT%E6%80%BB%E7%BB%93/" class="post-nav-link">
+    <a href="/2024/03/11/ByteTrack-Demo/" class="post-nav-link">
       <div class="title">
         Next: <i class="fas fa-angle-right"></i>
-        <div class="title-text">Hybrid-SORT总结</div>
+        <div class="title-text">【代码复现】ByteTrack_Demo</div>
       </div>
       <!-- <div class="content">
-        惯例贴一下原文链接
-阅读这篇文章建议先去读一读他的baseline，OC-SORT
+        
+记录一下重装系统后的第一个代码复现贴一下源代码的链接
 
-AbstractMOT的目标是在帧
+环境配置1. 首先安装ByteTrack创建虚拟环境后执行下面
       </div> -->
     </a>
   </div>
@@ -821,27 +821,6 @@ AbstractMOT的目标是在帧
             
 
             <div class="post-img-box">
-              <a href="/2024/03/25/Hybridsort%E6%80%BB%E7%BB%93/Hybrid-SORT%E6%80%BB%E7%BB%93/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">03-25</span>
-                
-              </div>
-              <a class="post-title" href="/2024/03/25/Hybridsort%E6%80%BB%E7%BB%93/Hybrid-SORT%E6%80%BB%E7%BB%93/">Hybrid-SORT总结</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
               <a href="/2024/03/11/ByteTrack-Demo/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" alt="">
@@ -896,6 +875,27 @@ AbstractMOT的目标是在帧
                 
               </div>
               <a class="post-title" href="/2024/02/29/motiontrack-reading/">文献《MotionTrack:Learning Robust Short-term and Long-term Motions for Multi-Object Tracking》总结</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/02/28/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">02-28</span>
+                
+              </div>
+              <a class="post-title" href="/2024/02/28/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/">解决Hexo部署博客时图片无法加载的问题</a>
             </div>
           </div>
         
