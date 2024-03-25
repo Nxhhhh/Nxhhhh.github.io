@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Hexo本地预览与部署不同的解决方法 | 小牛学习日记</title>
+  <title>Hybrid-SORT总结 | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -381,21 +381,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        Hexo本地预览与部署不同的解决方法
+        Hybrid-SORT总结
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> Published in：2024-01-19 |
+          <i class="fas fa-calendar"></i> Published in：2024-03-25 |
         </span>
       
 
@@ -403,8 +403,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> category：
           
-            <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="post-detail-header_category">
-              问题记录
+            <a href="/categories/%E5%B0%8F%E4%B9%A6%E5%8C%A0-%E6%97%A5%E8%AE%B0-2024-03/" class="post-detail-header_category">
+              /小书匠/日记/2024-03
             </a>
           
         </span>
@@ -413,11 +413,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 322 |
+            <i class="fas fa-file-text-o"></i> Words: 1.3k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> Reading time: 1min |
+            <i class="fas fa-clock"></i> Reading time: 4min |
           </span>
   
           
@@ -444,25 +444,48 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <meta name="referrer" content="no-referrer">
-
-<p>最近一直在忙考试的事情，终于有时间打开博客了，但出现了一个问题：我的样式全乱了，尝试了重新发布，本地查看的时候还是正常的，部署之后依旧是乱的。<br><img src="https://img-blog.csdnimg.cn/direct/c503a46585be408a8f26b6ea148a1f4a.png#pic_center" alt="如图"> 于是在这里贴一下我尝试过的解决方法。</p>
+        <p>惯例贴一下<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2308.00783">原文链接</a></p>
+<p>阅读这篇文章建议先去读一读他的baseline，OC-SORT</p>
 <hr>
-<h2 id="1-重新配置URL"><a href="#1-重新配置URL" class="headerlink" title="1 重新配置URL"></a>1 重新配置URL</h2><p>在博客根目录中的config.yml文件中修改URL的配置：<br>url是你生成的page页网址，root是你的根目录</p>
-<p><img src="https://img-blog.csdnimg.cn/direct/34679d6d51534bcc97481124de2480c8.png#pic_center" alt="URL"></p>
-<h2 id="2-如果使用图床图片，则需要修改以下内容"><a href="#2-如果使用图床图片，则需要修改以下内容" class="headerlink" title="2 如果使用图床图片，则需要修改以下内容"></a>2 如果使用图床图片，则需要修改以下内容</h2><p>①找到index.ejs文件，路径为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">└──hexo-theme-yourtheme (当前使用的主题文件夹)</span><br><span class="line">   └──layout</span><br><span class="line">      └──index.ejs</span><br></pre></td></tr></table></figure><br>②在inddex.ejs的头部中加入：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=<span class="string">&quot;referrer&quot;</span> content=<span class="string">&quot;no-referrer&quot;</span> /&gt;</span><br><span class="line">&lt;meta http-equiv=<span class="string">&quot;Content-Security-Policy&quot;</span> ontent=<span class="string">&quot;upgrade-insecure-requests&quot;</span>&gt;</span><br></pre></td></tr></table></figure></p>
-<h2 id="3-更改部署的分支"><a href="#3-更改部署的分支" class="headerlink" title="3 更改部署的分支"></a>3 更改部署的分支</h2><p>在仓库中新建一个分支，不要在master分支上部署pages。<br>我没有尝试新建分支，只是把分支从main改为了master，不确定是否真的有用。</p>
-<h2 id="4-浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。"><a href="#4-浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。" class="headerlink" title="4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。"></a>4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。</h2><p><img src="https://img-blog.csdnimg.cn/direct/7a2d5a400ad544c1a718006e69e26879.png#pic_center" alt="完美解决"></p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>MOT的目标是在帧之间检测和关联所有目标。大多数的方法都是使用强线索（空间信息或者外观信息）完成任务，这些强线索在没有发生遮挡和聚类的时候是十分有用的，一旦发生遮挡和聚类，由于物体高度重叠，空间和外观信息会变得模糊。文章提出了可以用弱线索（高度、检测框置信度、速度方向）作为强线索的补充。</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>MOT中流行的范例习惯将问题分为两个子任务。首先检测每个帧中的对象，其次将他们在不同的框架中联系起来。关联的任务主要通过强线索完成。但是常用的强线索在遇到遮挡和聚类的问题时就会出现退化。如图一所示：</p>
+<p><img src="./images/1.png" alt="图一"></p>
+<p>图中展示了强弱线索的辨别能力。绿色实线箭头表示对一对对象的可靠判别，红色虚线表示不可靠的判别，箭头的值越高，表示鉴别越可靠。</p>
+<p>可以看出大部分情况下强线索可以分辨出检测框之间的区别，但是红色和橙色框出现了大面积重叠，仅靠交并比和外观线索的判别并不可靠，在这种情况下依靠检测框置信度可以得到更好的区分效果。</p>
+<p>作者为了保持SORT简单、在线和实时的特点，使用以下策略利用上述的弱线索：<strong>Tracklet置信度建模(TCM)和高度调制IoU (HMIoU)。</strong></p>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="Weak-Cues-Modeling"><a href="#Weak-Cues-Modeling" class="headerlink" title="Weak Cues Modeling"></a>Weak Cues Modeling</h3><h4 id="Tracklet-Confidence-Modeling"><a href="#Tracklet-Confidence-Modeling" class="headerlink" title="Tracklet Confidence Modeling"></a>Tracklet Confidence Modeling</h4><p>作者改进了传统SORT广泛使用的标准卡尔曼滤波器，增加了两个额外的状态：轨迹置信度c以及其速度分量\dot{c}:</p>
+<p><img src="./images/2_1.png" alt></p>
+<p>对于轨迹置信度，作者使用线性预测进行估计。在遮挡发生时，物体的置信度会迅速降低，但是卡尔曼滤波的预测具有滞后性，如图三所示：</p>
+<p><img src="./images/3.png" alt></p>
+<p>因此，作者使用简单的线性预测来估计轨迹的置信状态。线性建模公式如下：</p>
+<p><img src="./images/4.png" alt="线性建模"></p>
+<p>其中c<sub>trk</sub>表示保存在Tracklet Memory中的Tracklet置信度。</p>
+<p>置信度的代价计算公式如下：</p>
+<p><img src="./images/5.png" alt></p>
+<h4 id="Height-Modulated-IoU"><a href="#Height-Modulated-IoU" class="headerlink" title="Height Modulated IoU"></a>Height Modulated IoU</h4><p>高度状态在两个方面增强了关联。首先，物体的高度在一定程度上反映了深度信息。对于DanceTrack这样的数据集，检测框的高度主要取决于物体与相机之间的距离。这使得高度状态成为区分高度重叠对象的有效线索。其次，高度状态对不同姿态具有较强的鲁棒性，是一种准确估计的状态，是物体的高质量表征。</p>
+<p>两个方框分别定义为（x^1_1, y^1_1, x^1_2, x^1_2）,（x^2_1, y^2_1, x^_2, x^3_2）</p>
+<p>则可以通过基于高度度量计算IoU来生成高度IoU (HIoU)，如下图所示：</p>
+<p><img src="./images/6.png" alt></p>
+<p><img src="./images/7.png" alt></p>
+<h3 id="Hybrid-SORT"><a href="#Hybrid-SORT" class="headerlink" title="Hybrid-SORT"></a>Hybrid-SORT</h3><h4 id="Robust-Observation-Centric-Momentum"><a href="#Robust-Observation-Centric-Momentum" class="headerlink" title="Robust Observation-Centric Momentum"></a>Robust Observation-Centric Momentum</h4><p>在OC-SORT中，OCM考虑目标中心的速度方向。使用的成本度量是轨迹速度方向θ<sub>t</sub>与轨迹到探测速度方向θ<sub>d</sub>之间的绝对差值，以弧度形式表示为∆θ = |θ<sub>t</sub> - θ<sub>d</sub>|。轨迹波速度方向由轨迹波中两个时间间隔∆t的盒中心获得，轨迹波到检测的速度方向由轨迹波历史盒和新检测盒的中心获得。给定两个点(u1, v1)和(u2, v2)，速度方向按下图所示公式计算。然而，原始OCM的建模容易受到固定时间间隔和稀疏点(即只有目标中心)引起的噪声的影响。</p>
+<p><img src="./images/8.png" alt></p>
+<p>作者通过引入更加鲁棒的速度方向来改进OCM，称之为ROCM，修改包括两个方面。首先，将3帧的固定时间间隔扩展为1 ~ 3的多个时间间隔的叠加；其次，我们用物体的四个角代替它的中心点来计算速度方向。对于多个时间区间和点，ROCM的计算公式如下式所示。</p>
+<p><img src="./images/9.png" alt></p>
+<p>从Figure4可以看出，对于运动复杂的物体，拐角的速度方向保持高度相似，而中心的速度方向几乎相反。</p>
+<p><img src="./images/10.png" alt="Figure4"></p>
+<h4 id="Appearance-Modeling"><a href="#Appearance-Modeling" class="headerlink" title="Appearance Modeling"></a>Appearance Modeling</h4><p>ReID模型遵循BoT-SORT，首先检测对象，然后将结果裁剪的补丁提供给ReID模型。我们使用指数移动平均(EMA)对轨迹图外观信息建模，并利用余弦距离作为度量来计算轨迹图和检测外观特征之间的成本C<sub>Appr</sub>。</p>
+<h4 id="Algorithm-Framework"><a href="#Algorithm-Framework" class="headerlink" title="Algorithm Framework"></a>Algorithm Framework</h4><p>关联阶段主要包括三个阶段:第一阶段是高置信度对象的关联阶段，第二阶段是低置信度对象的关联阶段(ByteTrack中的BYTE)，第三阶段是用最后一次检测恢复丢失的轨迹(OC-SORT中的OCR)。</p>
+<p>考虑到所有的强弱线索，最终的成本矩阵为：</p>
+<p><img src="./images/11.png" alt></p>
 <hr>
-<p>这些方法我都按顺序尝试过，不是很确定是哪个解决了问题，大家可以都尝试一下。</p>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/Hexo/" class="">
-              Hexo
+            <a href="/tags/%E6%96%B0%E5%BB%BA-%E6%A8%A1%E6%9D%BF-%E5%B0%8F%E4%B9%A6%E5%8C%A0/" class="">
+              新建,模板,小书匠
             </a>
           
         </div>
@@ -476,7 +499,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
-    <a href="/2024/01/19/Hexoerror/" target="_blank" title="Hexo本地预览与部署不同的解决方法">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/01/19/Hexoerror/</a>
+    <a href="/2024/03/25/Hybridsort总结/Hybrid-SORT总结/" target="_blank" title="Hybrid-SORT总结">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/03/25/Hybridsort总结/Hybrid-SORT总结/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright notice:   </strong>
@@ -498,17 +521,19 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" alt="">
+      <img class="lazyload" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" alt="">
     </div>
-    <a href="/2024/02/23/GHOST-reading/" class="post-nav-link">
+    <a href="/2024/03/25/Hybridsort%E6%80%BB%E7%BB%93/" class="post-nav-link">
       <div class="title">
         <i class="fas fa-angle-left"></i> Prev:
-        <div class="title-text">文献《Simple Cues Lead to a Strong Multi-Object Tracker》总结</div>
+        <div class="title-text">Hybridsort总结</div>
       </div>
       
       <!-- <div class="content">
-        这篇文章收录于CVPR2023贴一下原文链接
-一、Introduction作者提出在MOT工作中，TbD（Trackin
+        惯例贴一下原文链接
+阅读这篇文章建议先去读一读他的baseline，OC-SORT
+
+AbstractMOT的目标是在帧
       </div> -->
     </a>
   </div>
@@ -519,16 +544,18 @@
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" src="" alt="">
+      <img class="lazyload" src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" src="" alt="">
     </div>
-    <a href="/2023/11/29/fairmot/" class="post-nav-link">
+    <a href="/2024/03/11/ByteTrack-Demo/" class="post-nav-link">
       <div class="title">
         Next: <i class="fas fa-angle-right"></i>
-        <div class="title-text">Fairmot代码复现问题记录（已解决）</div>
+        <div class="title-text">【代码复现】ByteTrack_Demo</div>
       </div>
       <!-- <div class="content">
-        最近在学习多目标跟踪的经典文章，顺便记录一下自己复现Fairmot代码时的问题以及解决方案。贴一下原作的代码
-前期准备创
+        
+记录一下重装系统后的第一个代码复现贴一下源代码的链接
+
+环境配置1. 首先安装ByteTrack创建虚拟环境后执行下面
       </div> -->
     </a>
   </div>
@@ -757,7 +784,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%87%8D%E6%96%B0%E9%85%8D%E7%BD%AEURL"><span class="toc-text">1 重新配置URL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%A6%82%E6%9E%9C%E4%BD%BF%E7%94%A8%E5%9B%BE%E5%BA%8A%E5%9B%BE%E7%89%87%EF%BC%8C%E5%88%99%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9%E4%BB%A5%E4%B8%8B%E5%86%85%E5%AE%B9"><span class="toc-text">2 如果使用图床图片，则需要修改以下内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9B%B4%E6%94%B9%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%86%E6%94%AF"><span class="toc-text">3 更改部署的分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BF%9D%E5%AD%98%E4%BA%86%E4%B9%8B%E5%89%8D%E9%83%A8%E7%BD%B2%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%B8%85%E9%99%A4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E5%90%8E%E9%87%8D%E5%90%AF%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%8C%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%82"><span class="toc-text">4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Weak-Cues-Modeling"><span class="toc-text">Weak Cues Modeling</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Tracklet-Confidence-Modeling"><span class="toc-text">Tracklet Confidence Modeling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Height-Modulated-IoU"><span class="toc-text">Height Modulated IoU</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hybrid-SORT"><span class="toc-text">Hybrid-SORT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Robust-Observation-Centric-Momentum"><span class="toc-text">Robust Observation-Centric Momentum</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Appearance-Modeling"><span class="toc-text">Appearance Modeling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Algorithm-Framework"><span class="toc-text">Algorithm Framework</span></a></li></ol></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
