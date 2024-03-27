@@ -453,8 +453,8 @@
 <p>图中展示了强弱线索的辨别能力。绿色实线箭头表示对一对对象的可靠判别，红色虚线表示不可靠的判别，箭头的值越高，表示鉴别越可靠。</p>
 <p>可以看出大部分情况下强线索可以分辨出检测框之间的区别，但是红色和橙色框出现了大面积重叠，仅靠交并比和外观线索的判别并不可靠，在这种情况下依靠检测框置信度可以得到更好的区分效果。</p>
 <p>作者为了保持SORT简单、在线和实时的特点，使用以下策略利用上述的弱线索：<strong>Tracklet置信度建模(TCM)和高度调制IoU (HMIoU)。</strong></p>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="Weak-Cues-Modeling"><a href="#Weak-Cues-Modeling" class="headerlink" title="Weak Cues Modeling"></a>Weak Cues Modeling</h3><h4 id="Tracklet-Confidence-Modeling"><a href="#Tracklet-Confidence-Modeling" class="headerlink" title="Tracklet Confidence Modeling"></a>Tracklet Confidence Modeling</h4><p>作者改进了传统SORT广泛使用的标准卡尔曼滤波器，增加了两个额外的状态：轨迹置信度c以及其速度分量\dot{c}:</p>
-<p><img src="2_1.png" alt></p>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="Weak-Cues-Modeling"><a href="#Weak-Cues-Modeling" class="headerlink" title="Weak Cues Modeling"></a>Weak Cues Modeling</h3><h4 id="Tracklet-Confidence-Modeling"><a href="#Tracklet-Confidence-Modeling" class="headerlink" title="Tracklet Confidence Modeling"></a>Tracklet Confidence Modeling</h4><p>作者改进了传统SORT广泛使用的标准卡尔曼滤波器，增加了两个额外的状态：轨迹置信度c以及其速度分量 $\dot{c}$ :</p>
+<p><img src="2.png" alt></p>
 <p>对于轨迹置信度，作者使用线性预测进行估计。在遮挡发生时，物体的置信度会迅速降低，但是卡尔曼滤波的预测具有滞后性，如图三所示：</p>
 <p><img src="3.png" alt></p>
 <p>因此，作者使用简单的线性预测来估计轨迹的置信状态。线性建模公式如下：</p>
