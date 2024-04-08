@@ -456,7 +456,7 @@
 <h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="Weak-Cues-Modeling"><a href="#Weak-Cues-Modeling" class="headerlink" title="Weak Cues Modeling"></a>Weak Cues Modeling</h3><h4 id="Tracklet-Confidence-Modeling"><a href="#Tracklet-Confidence-Modeling" class="headerlink" title="Tracklet Confidence Modeling"></a>Tracklet Confidence Modeling</h4><p>作者改进了传统SORT广泛使用的标准卡尔曼滤波器，增加了两个额外的状态：轨迹置信度c以及其速度分量 $\dot{c}$ :</p>
 <p><img src="2.png" alt></p>
 <p>对于轨迹置信度，作者使用线性预测进行估计。在遮挡发生时，物体的置信度会迅速降低，但是卡尔曼滤波的预测具有滞后性，如图三所示：</p>
-<p><img src="3.png" alt></p>
+<p><img src="3.png" alt="图三"></p>
 <p>因此，作者使用简单的线性预测来估计轨迹的置信状态。线性建模公式如下：</p>
 <p><img src="4.png" alt="线性建模"></p>
 <p>其中c<sub>trk</sub>表示保存在Tracklet Memory中的Tracklet置信度。</p>
@@ -520,6 +520,27 @@
 <div class="post-nav">
 
 
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" alt="">
+    </div>
+    <a href="/2024/04/08/%E6%80%BB%E7%BB%93/" class="post-nav-link">
+      <div class="title">
+        <i class="fas fa-angle-left"></i> Prev:
+        <div class="title-text">Hybrid-SORT总结</div>
+      </div>
+      
+      <!-- <div class="content">
+        贴一个原文链接
+很可惜这篇文章的代码没有开源
+
+Abstract在多目标跟踪中，准确的数据关联十分重要，但是现有的方法大
+      </div> -->
+    </a>
+  </div>
 
 
 
@@ -797,6 +818,48 @@
             
 
             <div class="post-img-box">
+              <a href="/2024/04/08/DeconfuseTrack%E6%80%BB%E7%BB%93/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">04-08</span>
+                
+              </div>
+              <a class="post-title" href="/2024/04/08/DeconfuseTrack%E6%80%BB%E7%BB%93/">Deconfuse Track总结</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/04/08/%E6%80%BB%E7%BB%93/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">04-08</span>
+                
+              </div>
+              <a class="post-title" href="/2024/04/08/%E6%80%BB%E7%BB%93/">Hybrid-SORT总结</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
               <a href="/2024/03/25/Hybridsort%E6%80%BB%E7%BB%93/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" alt="">
@@ -851,48 +914,6 @@
                 
               </div>
               <a class="post-title" href="/2024/03/11/ByteTrack-Demo/">【代码复现】ByteTrack_Demo</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/03/05/C++/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">03-05</span>
-                
-              </div>
-              <a class="post-title" href="/2024/03/05/C++/">【转载】C++讲义</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/02/29/motiontrack-reading/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">02-29</span>
-                
-              </div>
-              <a class="post-title" href="/2024/02/29/motiontrack-reading/">文献《MotionTrack:Learning Robust Short-term and Long-term Motions for Multi-Object Tracking》总结</a>
             </div>
           </div>
         
