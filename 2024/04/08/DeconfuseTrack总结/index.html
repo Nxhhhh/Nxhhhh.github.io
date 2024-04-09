@@ -462,11 +462,11 @@ LocSim ( d_i , \cal{T}_j ) = \mathit{IoU} ( d_i , T_j ) .
 \end{aligned}</script><p>代价公式如下：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-C_{ij} =1- LocSim ( d_i , \cal{T}_j ) , d_i \in D_{first}^t, \cal{T}_i \in \Bbb T.
+C_{ij} =1- LocSim ( d_i , \cal{T}_j ) , d_i \in \mathit{D}_{first}^t, \cal{T}_i \in \Bbb T.
 \end{aligned}</script><p>最后利用匈牙利算法求解 $C$，得到分配结果</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
- P = \lbrace{(d, \cal{T}) | d \in D_{matched}^t, \cal{T} \in \Bbb T_{matched}}\rbrace. 
+ P = \lbrace{(d, \cal{T}) | d \in \mathit{D}_{matched}^t, \cal{T} \in \Bbb T_{matched}}\rbrace. 
 \end{aligned}</script><p>以往的方法会直接输出匹配的结果，但是这种全局的关联过于模糊粗糙，因此需要细化 $P$ ，实现更加细粒度的分配。</p>
 <h4 id="Detection-Disambiguation-Module-DDM"><a href="#Detection-Disambiguation-Module-DDM" class="headerlink" title="Detection Disambiguation Module (DDM)"></a>Detection Disambiguation Module (DDM)</h4><p>DDM旨在解决多个检测与单一轨迹之间的混淆问题。</p>
 <p>将低置信度中与 $\cal{T}_j$ 匹配度更高的 $d_i$ 定义为 $D_{blur}$ ，表示可能该轨迹存在更适合的低置信度检测。</p>
@@ -494,7 +494,7 @@ T_{best}^j = \mathop{argmin}\limits_{\cal{T} \in \Bbb{T}_{blur}^j} CostDist(f_d,
 \end{aligned}</script><p>其中 $CostDist(\cdot{})$ 表示余弦距离，最后得到轨迹消歧后的新分配关系:</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-P_{tdm} = \lbrace (d_j , \cal{T}_{best}^j) | d_j \in D_{matched}^t \rbrace. 
+P_{tdm} = \lbrace (d_j , \cal{T}_{best}^j) | d_j \in \mathit{D}_{matched}^t \rbrace. 
 \end{aligned}</script><h4 id="Association-Disambiguation-Module-ADM"><a href="#Association-Disambiguation-Module-ADM" class="headerlink" title="Association Disambiguation Module (ADM)"></a>Association Disambiguation Module (ADM)</h4><p>在这个模块处理多个轨迹和多个检测关联的混淆问题。<br>可以分为多个二对二的的问题解决。<br>对于配对中任意两个不同的任务，使用变异系数来量化他们之间的混淆：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
