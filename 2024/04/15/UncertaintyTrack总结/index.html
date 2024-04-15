@@ -468,7 +468,7 @@ ES = \frac{1}{N}(\frac{1}{M}\sum^M_{j=1}||z_{n,j}, z_n||)-\frac{1}{2M-1}\sum^{M-
 \begin{aligned}
 Sample - IoU = \frac{1}{N}\sum^M_{n=1}\left(\frac{1}{M}\sum^M_{j=1}IoU(z_{n,j}^*, z_n^*)-\frac{1}{2M-1}\sum^{M-1}_{j=1}IoU(z_{n,j}^*, z_{n,j+1}^*)\right)
 \end{aligned}</script><p>其中 $z_n$ 是gt的边界框，从 $N(\hat{\mu}(x_n,\omega),\hat{\sum}(x_n,\omega))$ 这一概率分布中独立同分布地抽取了M个样本， $z_{n,j}$ 表示第n个gt边界框对应的第j个抽取样本。</p>
-<p>其中 $z_n^<em>$ 是解码后的gt的边界框，从<br> $N(\hat{\mu}(x_n,\omega),\hat{\sum}(x_n,\omega))$<br> 这一概率分布中独立同分布地抽取了M个解码样本， $z_{n,j}^</em>$ 表示第n个gt边界框对应的第j个解码样本。</p>
+<p>其中 $z_n^{<em>}$ 是解码后的gt的边界框，从<br> $N(\hat{\mu}(x_n,\omega),\hat{\sum}(x_n,\omega))$<br> 这一概率分布中独立同分布地抽取了M个解码样本， $z_{n,j}^{</em>}$ 表示第n个gt边界框对应的第j个解码样本。</p>
 <h3 id="Extending-Existing-Trackers-To-Leverage-Uncertainty"><a href="#Extending-Existing-Trackers-To-Leverage-Uncertainty" class="headerlink" title="Extending Existing Trackers To Leverage Uncertainty"></a>Extending Existing Trackers To Leverage Uncertainty</h3><p>提出四种可能方法来扩展现有的跟踪器。</p>
 <h4 id="Detection-Uncertainty-Aware-Kalman-Filter"><a href="#Detection-Uncertainty-Aware-Kalman-Filter" class="headerlink" title="Detection Uncertainty-Aware Kalman Filter"></a>Detection Uncertainty-Aware Kalman Filter</h4><p>将物体的状态建模为：</p>
 <script type="math/tex; mode=display">
