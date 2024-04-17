@@ -468,7 +468,7 @@ ES = \frac{1}{N}(\frac{1}{M}\sum^M_{j=1}||z_{n,j}, z_n||)-\frac{1}{2M-1}\sum^{M-
 \begin{aligned}
 Sample - IoU = \frac{1}{N}\sum^M_{n=1}\left(\frac{1}{M}\sum^M_{j=1}IoU(z_{n,j}^*, z_n^*)-\frac{1}{2M-1}\sum^{M-1}_{j=1}IoU(z_{n,j}^*, z_{n,j+1}^*)\right)
 \end{aligned}</script><p>其中 $z_n$ 是gt的边界框，从 $N(\hat{\mu}(x_n,\omega),\hat{\sum}(x_n,\omega))$ 这一概率分布中独立同分布地抽取了M个样本， $z_{n,j}$ 表示第n个gt边界框对应的第j个抽取样本。</p>
-<p>其中 $z_n^{<em>}$ 是解码后的gt的边界框，从<br> $N(\hat{\mu}(x_n,\omega),\hat{\sum}(x_n,\omega))$<br> 这一概率分布中独立同分布地抽取了M个解码样本， $z_{n,j}^{</em>}$ 表示第n个gt边界框对应的第j个解码样本。</p>
+<p>其中 $z_n^{\ast}$ 是解码后的gt的边界框，从 $N(\hat{\mu}(x_n,\omega),\hat{\sum}(x_n,\omega))$ ，这一概率分布中独立同分布地抽取了M个解码样本， $z_{n,j}^{\ast}$  表示第n个gt边界框对应的第j个解码样本。</p>
 <h3 id="Extending-Existing-Trackers-To-Leverage-Uncertainty"><a href="#Extending-Existing-Trackers-To-Leverage-Uncertainty" class="headerlink" title="Extending Existing Trackers To Leverage Uncertainty"></a>Extending Existing Trackers To Leverage Uncertainty</h3><p>提出四种可能方法来扩展现有的跟踪器。</p>
 <h4 id="Detection-Uncertainty-Aware-Kalman-Filter"><a href="#Detection-Uncertainty-Aware-Kalman-Filter" class="headerlink" title="Detection Uncertainty-Aware Kalman Filter"></a>Detection Uncertainty-Aware Kalman Filter</h4><p>将物体的状态建模为：</p>
 <script type="math/tex; mode=display">
@@ -478,10 +478,8 @@ Sample - IoU = \frac{1}{N}\sum^M_{n=1}\left(\frac{1}{M}\sum^M_{j=1}IoU(z_{n,j}^*
 <h4 id="Confidence-Ellipse-Filtering"><a href="#Confidence-Ellipse-Filtering" class="headerlink" title="Confidence Ellipse Filtering"></a>Confidence Ellipse Filtering</h4><p>（这一部分单看文章不是很懂，还是需要结合代码）</p>
 <p>作者建议放弃空间不确定性高于预定阈值的检测。首先，根据95%置信区间为每个边界框的左上角和右下角定义误差椭圆。然后，我们计算它们的轴长和框尺寸之间的比率，并将其与百分比阈值进行比较。数学上，如果箱体宽度为$w_{box}$，高度为 $h_{box}$ ，左上角和右下角误差椭圆的长、短轴长度分别由 $a_{tl}$、$b_{tl}$、$a_{br}$ 和 $b_{br}$ 给出，则只保留满足以下条件的误差椭圆检测：</p>
 <script type="math/tex; mode=display">
-max(a_{tl},a_{br})\le {\tau_{(i)} \times w_{box}}
- \\\\
-\& 
-\\\\
+max(a_{tl},a_{br})\le {\tau_{(i)} \times w_{box}}</script><script type="math/tex; mode=display">
+\&</script><script type="math/tex; mode=display">
   max(b_{tl},b_{br})\le {\tau_{(i)} \times h_{box}}</script><p>其中 $\tau_{(i)}$ 是预先定义的百分比阈值。</p>
 <h4 id="Bounding-Box-Relaxation"><a href="#Bounding-Box-Relaxation" class="headerlink" title="Bounding Box Relaxation"></a>Bounding Box Relaxation</h4><p>在与边界框一起绘制误差椭圆后，作者发现许多ID切换是由检测和轨迹之间的交集不足引起的。有趣的是，其中一些案例的误差椭圆与最后观测到的轨迹重叠。因此，作者建议在最后的匹配步骤中加入根据误差椭圆的极值放大的边界框。更具体地说，计算左上角误差椭圆的 $(x_{min}, y_{min})$ 和右下角误差椭圆的 $(x_{max}, y_{max})$ 。然后用 $[x_{min}, y_{min}x_{max}, y_{max}]$ 定义放大后的边界框。</p>
 <p>作者将这种基于不确定性的放大应用于前一步的新检测和跟踪检测，并使用GIoU距离度量对它们进行匹配。此外，为了限制放大量，作者在最后的匹配步骤之前第二次应用椭圆滤波器。</p>
@@ -492,7 +490,6 @@ max(a_{tl},a_{br})\le {\tau_{(i)} \times w_{box}}
 <p><img src="4.png" alt></p>
 <p><img src="5.png" alt></p>
 <p><img src="6.png" alt></p>
-<hr>
 <hr>
 
       </div>
@@ -536,6 +533,27 @@ max(a_{tl},a_{br})\le {\tau_{(i)} \times w_{box}}
 <div class="post-nav">
 
 
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload" src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" alt="">
+    </div>
+    <a href="/2024/04/17/Long-tail/" class="post-nav-link">
+      <div class="title">
+        <i class="fas fa-angle-left"></i> Prev:
+        <div class="title-text">Delving into the Trajectory Long-tail Distribution for Muti-object Tracking 总结</div>
+      </div>
+      
+      <!-- <div class="content">
+        贴一个原文链接
+代码链接
+
+Abstract多目标跟踪一直以来都集中于跟踪算法的的发展和后处理技术的增强，没有对跟踪数据
+      </div> -->
+    </a>
+  </div>
 
 
 
@@ -816,6 +834,27 @@ Abstract在多目标跟踪中，准确的数据关联十分重要，但是现有
             
 
             <div class="post-img-box">
+              <a href="/2024/04/17/Long-tail/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">04-17</span>
+                
+              </div>
+              <a class="post-title" href="/2024/04/17/Long-tail/">Delving into the Trajectory Long-tail Distribution for Muti-object Tracking 总结</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
               <a href="/2024/04/15/UncertaintyTrack%E6%80%BB%E7%BB%93/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" alt="">
@@ -891,27 +930,6 @@ Abstract在多目标跟踪中，准确的数据关联十分重要，但是现有
                 
               </div>
               <a class="post-title" href="/2024/03/15/OC-SORT%E6%80%BB%E7%BB%93/">OC-SORT总结</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/03/11/ByteTrack-Demo/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">03-11</span>
-                
-              </div>
-              <a class="post-title" href="/2024/03/11/ByteTrack-Demo/">【代码复现】ByteTrack_Demo</a>
             </div>
           </div>
         

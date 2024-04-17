@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>archives | 小牛学习日记</title>
+  <title>Delving into the Trajectory Long-tail Distribution for Muti-object Tracking 总结 | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -367,162 +367,767 @@
   
 </header>
         <!-- 内容区域 -->
-        <div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
-<div class="bg-light-floor-archive" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
-<div class="archive-header" style="background-image:url('https://pic1.zhimg.com/80/v2-1414b3a4b205e19060db18a20d08723a_1440w.jpg?source=1940ef5c')">
-  <div class="archive-header-title">
-    archive
-  </div>
-  <div class="archive-header-desc">
-  
-  <span class="title" id="archive-header-desc"></span>
-  <script>
-  function typedFn() {
-    const el = '#archive-header-desc';
-    const type = 'archive';
-    let desc = '越努力越幸运'
-    var typed = new Typed(el, {
-      strings: [desc],
-      startDelay: 100,
-      typeSpeed: 100,
-      loop: true,
-      backSpeed: 50,
-      showCursor: true
-    });
-  }
-  typedFn();
-</script>
-  
-  </div>
-  <div class="mask-box"></div>
-</div>
+        
+ <!-- prismjs 代码高亮 -->
+ 
 
-<div class="archive-video">
-  <video class="full-video" autoplay loop muted>
-      <source style="width: 100%;height: 100vh;" src="/">
-  </video>
-  <div class="video-header-title">
-    archive
-  </div>
-  <div class="video-header-desc">
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
-      <span class="title" id="archive-video-header-desc"></span>
-      <script>
-  function typedFn() {
-    const el = '#archive-video-header-desc';
-    const type = 'archive';
-    let desc = '越努力越幸运'
-    var typed = new Typed(el, {
-      strings: [desc],
-      startDelay: 100,
-      typeSpeed: 100,
-      loop: true,
-      backSpeed: 50,
-      showCursor: true
-    });
-  }
-  typedFn();
-</script>
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        Delving into the Trajectory Long-tail Distribution for Muti-object Tracking 总结
+      </span>
+    </div>
+    
+    
       
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> Published in：2024-04-17 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> category：
+          
+            <a href="/categories/R-D/" class="post-detail-header_category">
+              R&D
+            </a>
+          
+        </span>
+      
+
+      
+        <div class="post-detail-header_wordcount">
+          <span class="totalcount">
+            <i class="fas fa-file-text-o"></i> Words: 3k |
+          </span>
+  
+          <span class="min2read">
+            <i class="fas fa-clock"></i> Reading time: 11min |
+          </span>
+  
+          
+            <span class="reading">
+              <i class="fas fa-eye"></i> reading：<span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+        </div>
+      
+    
   </div>
-  <div class="mask-box"></div>
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
+  
 </div>
 
-<!-- hash算法 -->
 
 
-<div class="archive-main">
-  <section class="archive">
-    <div class="archive-content">
-      <ul class="post-archive">
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <p>贴一个<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2403.04700">原文链接</a></p>
+<p>代码<a href="https://github.com/chen-si-jia/Trajectory-Long-tail-Distribution-for-MOT">链接</a></p>
+<hr>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>多目标跟踪一直以来都集中于跟踪算法的的发展和后处理技术的增强，没有对跟踪数据本身的性质进行探索，作者对跟踪数据的分布模式进行探索，发现现有的MOT数据集存在显著的长尾分布问题。作者根据这一发现引入了数据增强策略略————包括静止相机视图数据增强(SVA)和动态相机视图数据增强(DVA)，这两种策略分别针对视点状态和组Softmax (GS)模块设计用于Re-ID。</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>作者进行了一项分析实验，对MOTChallenge数据集中不同身份的行人帧数进行统计。如图1所示，作者观察到不同行人身份的帧数差异很大。由于长尾分布的特征是头类具有大量实例而尾类只有少量实例，因此作者得出行人身份的数量服从长尾分布的结论。<br><img src="1.png" alt="图一"></p>
+<p>长尾分布数据有一个共同的问题：在长尾分布数据上训练的网络通常会导致偏向于学习与流行的头类相关的特征，而忽略了那些较少代表性的尾类。</p>
+<p>对于目前多目标跟踪器的Re-ID分支，大多将Re-ID作为分类问题，使用softmax模块计算分类概率。但是softmax模块有一个巨大的缺陷:权值大的类的权值变大，权值小的类的权值变小，这将加剧长尾分布数据上的长尾分布效应。</p>
+<p>针对这一问题，作者从信息增强和模块改进两个方向提出解决方案。</p>
+<p>对于信息增强，作者根据相机运动状态将摄像机数据分为静态摄像机视图和动态摄像机视图。对于静止摄像机视图，作者提出了静态摄像机视图数据增强(SVA)策略，该策略包括回溯延拓和预测延拓两种技术。对训练序列数据中间帧的尾类行人进行回溯延拓，对训练序列数据最后帧的尾类行人进行预测延拓。该策略可以促进网络对尾类行人轨迹的学习。针对动态摄像机视图数据，提出了动态摄像机视图数据增强(DVA)策略。该策略利用扩散模型对场景背景进行风格转换，提高了网络对行人区域特征的关注。</p>
+<p>在模块增强方面，作者设计了Group Softmax (GS)模块。GS将训练样本数量相近的行人分组在一起，然后分别计算每组的softmax和交叉熵损失，避免了头部类权重对尾部类的显著抑制，提高了网络提取尾部类外观特征的能力。</p>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>作者选择JDE范式，整体流程图如下所示：<br><img src="2.png" alt="流程图"></p>
+<h3 id="Camera-View-Data-Augmentation"><a href="#Camera-View-Data-Augmentation" class="headerlink" title="Camera View Data Augmentation"></a>Camera View Data Augmentation</h3><p>作者将相机数据分为静态相机数据和动态相机数据，分别采用了不同的数据增强方法。</p>
+<p>定义了如下所示的类别划分公式，采用该公式将行人类别划分为头部和尾部。</p>
+<script type="math/tex; mode=display">
+C_i = 
+\begin{cases}
+C_i^{tail},  & {\frac{1}{R_i} \ge T_j} \\\\
+C_i^{head}, & {\frac{1}{R_i} \lt T_j}
+\end{cases}</script><p>其中 $C_i$ 表示类别i所属的类别， $R_i$ 表示类别 $i$ 的数量与 $j$ 序列中所有类别的数量之比， $T_j$ 表示 $j$ 序列中判断类别是否为尾的类别阈值。</p>
+<h4 id="Stationary-Camera-View-Data-Augmentation"><a href="#Stationary-Camera-View-Data-Augmentation" class="headerlink" title="Stationary Camera View Data Augmentation"></a>Stationary Camera View Data Augmentation</h4><p>专门针对尾部类别的行人进行数量增强。<br>SVA包括回溯延拓和预测延拓，如图三所示。回溯延续是在原轨迹结束后的后续帧中加入反向的原轨迹，应用于训练序列数据中间帧的尾部类行人。预测延拓是在原轨迹开始的前一帧中加入利用原轨迹位置信息预测的未来轨迹，用于训练序列数据的最后一帧中尾类行人。<br><img src="3.png" alt="图三"></p>
+<h5 id="Backtracking-continuation（回溯延拓）"><a href="#Backtracking-continuation（回溯延拓）" class="headerlink" title="Backtracking continuation（回溯延拓）"></a>Backtracking continuation（回溯延拓）</h5><p>对于一个共有 $F_{total}$ 帧的训练视频，如果尾部类别的行人轨迹在第 $m$ 帧出现，在第 $n$ 帧消失，且满足 $n \lt F_{total}$ 的条件，则使用Segment Anything Model (SAM)算法对第 $m$ 到 $n$ 帧出现的行人图像区域进行分割，然后将这些图像区域以相反的顺序叠加到第 $n$ 帧之后的帧上。回溯延拓可表示为：</p>
+<script type="math/tex; mode=display">
+BP_j^k = P_i^k(m \le i \le n, n+1 \le j \le BF_{end})</script><p>其中，$BP_k^j$ 表示训练数据中第 $k$ 个行人在第 $j$ 帧的回溯图像位置， $P_i^k$ 表示训练数据中第 $k$ 个行人在第 $i$ 帧的图像位置， $BF_{end}$ 为训练数据中回溯延拓的截止帧，其值为 $F_{total}$ 和 $(2n−m)$ 的最小值。</p>
+<h5 id="Prediction-continuation（预测延拓）"><a href="#Prediction-continuation（预测延拓）" class="headerlink" title="Prediction continuation（预测延拓）"></a>Prediction continuation（预测延拓）</h5><p>对于总共有 $F_{total}$ 帧的训练视频，如果尾类的行人轨迹出现在最后一帧，我们将从第 $m$ 帧到第 $F_{total}$ 帧出现的行人的 $x$ 和 $y$ 图像坐标输入到卡尔曼滤波器中，以预测行人后续的 $x$ 和 $y$ 图像坐标，同时确保预测的图像坐标落在图像大小范围内。在该行人轨迹中，我们随机选择能见度不小于能见度阈值 $T_v$ 的行人，其中 $0 \le T_v \le 1$ ，使用SAM算法对行人进行分割。根据从预测图像坐标中随机选择的预测 $x$ 和 $y$ 图像坐标，将分割后的图像区域叠加在行人轨迹出现前的帧上。预测延拓可表示为:</p>
+<script type="math/tex; mode=display">
+KP_j^k = R(KF \big (P_i^k\big)) (m \le i \le F_{total}, KF_{start} \le j \le m)</script><p>其中，$KP_j^k$ 表示卡尔曼滤波预测训练数据中第 $k$ 个行人在第 $j$ 帧的图像位置， $R()$ 表示随机选择图像位置的函数，$KF \big (P_i^k\big)$ 表示卡尔曼滤波利用训练数据中第 $i$ 个行人从第 $m$ 帧到 $F_{total}$ 的图像坐标预测的图像位置， $P_i^k$ 表示训练数据中第 $k$ 个行人在第 $i$ 帧的图像位置。 $KF_{start}$ 为训练数据中预测延拓的起始帧，其值为1和 $(2n−m)$ 的最大值。</p>
+<h4 id="Dynamic-Camera-View-Data-Augmentation"><a href="#Dynamic-Camera-View-Data-Augmentation" class="headerlink" title="Dynamic Camera View Data Augmentation"></a>Dynamic Camera View Data Augmentation</h4><p>动态相机捕获的数据具有场景和主体尺寸变化明显的特点，为了解决这个问题，我们提出了动态摄像机视图数据增强(DVA)策略，如图4所示。该策略包括四个主要步骤:图像分割、图像修复、图像扩散和图像合并。首先使用图像分割算法SAM对序列导出的输入图像中的行人进行分离，得到不包含行人的图像、带有行人遮挡的图像和仅包含行人区域的图像。接下来，使用图像补绘算法Navier-Stokes对去除了行人的图像进行修复，得到修复后的图像。然后，使用稳定扩散对修复后的图像进行处理，得到扩散图像。最后，将前一步分割得到的带有行人遮挡的图像和仅包含行人区域的图像与扩散后的图像合并，生成输出图像。<br><img src="4.png" alt="图四"></p>
+<h5 id="图像分割"><a href="#图像分割" class="headerlink" title="图像分割"></a>图像分割</h5><p>SAM是Segment Anything Model的缩写，是Meta迄今为止发布的最大的细分模型。该模型通过将提示和图像作为输入来分割对象。考虑到多目标跟踪数据集提供了边界框注释，但缺乏行人的掩码标签，我们利用图像及其相应的行人边界框标签作为SAM的输入来分割图像中的行人。</p>
+<h5 id="图像修复"><a href="#图像修复" class="headerlink" title="图像修复"></a>图像修复</h5><p>在本文中，用于图像绘制的算法是基于Navier-Stokes方程。</p>
+<p>该算法从待修补区域的边缘开始对图像进行修复，沿轮廓线传播图像的平滑度，待所有信息传播完毕后得到修复后的图像。</p>
+<h5 id="图像扩散"><a href="#图像扩散" class="headerlink" title="图像扩散"></a>图像扩散</h5><p>稳定扩散是潜扩散模型(Latent Diffusion Model, LDM)的一种，潜扩散模型是一类能够生成新图像的去噪扩散概率模型。</p>
+<p>原则上，稳定扩散可以模拟条件分布。这可以通过输入文本、语义映射或其他图像到图像转换任务信息来控制条件去噪自动编码器来实现。在本文中，作者利用输入图像通过调整提示系数和增强系数来生成新图像。</p>
+<h5 id="图像合并"><a href="#图像合并" class="headerlink" title="图像合并"></a>图像合并</h5><p>我们对带有行人掩模的图像与扩散图像进行位与运算，有效地将扩散图像中与原始行人区域对应的像素值设置为0，而保持行人区域外区域的像素值不变。这就产生了后处理的扩散图像。然后，我们在后处理的扩散图像和仅包含行人的图像之间执行位或操作。实际上，该操作涉及将扩散图像中与原始行人区域对应的像素值设置为仅包含行人的图像的相应像素值，从而得到输出图像。</p>
+<p>在使用扩散模型生成的增强数据训练模型时，常常存在过度强调伪特征的风险。为了解决这一问题，常见的解决方案是为原始数据和增强数据分配不同的采样概率，以此来管理数据的不平衡性。我们采用了类似的方法来平衡原始图像和由DVA（动态相机视角数据增强）生成的增强图像。从数学角度，这一方法可以表述为：</p>
+<script type="math/tex; mode=display">
+I_i^n = 
+\begin{cases}
+I_i,  & {P_i^n \le T_s} \\\\
+\tilde{I_i}, & {P_i^n \gt T_s}
+\end{cases}</script><p>其中 $I_i^n$ 表示第 $n$ 个训练周期中索引为 $i$ 的图像,  $I_i$ 表示索引为 $i$ 的原始图像， $ \tilde{I_i}$ 表示索引为 $i$ 的增强图像。 $P_i^n$ 表示在第 $n$ 个训练周期中索引为 $i$ 的图像被采选为原始图像的概率。 $T_s$ 表示每次图像选择时调用原始图像的阈值。给定索引 $i$ ，将原始图像  $I_i$ 以概率 $T_s$ 加到第 $n$ 个训练周期中，否则将其增广图像 $ \tilde{I_i}$ 加到第 $n$ 个训练周期中。</p>
+<h3 id="Group-Softmax-Module"><a href="#Group-Softmax-Module" class="headerlink" title="Group Softmax Module"></a>Group Softmax Module</h3><p>Re-ID对不同数量的行人类别有不同程度的特征学习，对于数量较多的类别(头部类)，它往往表现得更好，而对于数量较少的类别(尾部类)，它的效率较低，这可能会对Re-ID的性能产生负面影响。为了解决这个问题，作者提出了Group Softmax (GS)模块。</p>
+<p>GS将行人类别划分为若干不相交的组，并对每组分别进行softmax操作。这样，数量相近的行人类别就可以在同一组中竞争。因此，GS可以隔离数量差异显著的类别，防止尾部类别的权重受到头部类别的严重抑制。</p>
+<p>具体来说，作者将训练数据集中 $M$ 类行人根据其在训练数据集中的数量分成 $K$ 个不同的组，划分规则为： $T_j^l \le N(i) \le T_j^h i \in (1,M), j \in (1,K)$ ，$N(i)$ 为训练数据集中第 $i$ 类行人的数量， $T_j^l$ 为第 $j$ 组的最低数量阈值， $T_j^h$ 为第 $j$ 组的最高数量阈值。<br>为了保证每类行人只分配给一个组，指定 $T_{j+1}^l = T_j^h+1$。</p>
+<script type="math/tex; mode=display">
+T_j^h = \frac{j}{K}max(N(i))(1 \le i \le M, 1 \le j \le K)</script><p>此外，对每个组分别做softmax处理，并利用交叉熵损失计算组损失，并将组损失的均值记为Re-ID损失：</p>
+<script type="math/tex; mode=display">
+Loss_{Re-ID} = -\frac{1}{K} \sum_{j=1}^K \sum_{i \in G_j }y_ilog(p_i)</script><p>其中 $G_j$ 表示第 $j$ 组，$y_j$ 表示 $G_j$ 中的标签， $p_j$ 表示 $G_j$ 中的概率。</p>
+<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><p><img src="5.png" alt><br><img src="6.png" alt><br><img src="7.png" alt><br><img src="8.png" alt><br><img src="9.png" alt></p>
+<hr>
+
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/MOT/" class="">
+              MOT
+            </a>
+          
+            <a href="/tags/python/" class="">
+              python
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>author:  </strong>Xinhang Niu</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>link:  </strong>
+    <a href="/2024/04/17/Long-tail/" target="_blank" title="Delving into the Trajectory Long-tail Distribution for Muti-object Tracking 总结">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/04/17/Long-tail/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright notice:   </strong>
+      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      reprint policy. If reproduced, please indicate source!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" src="" alt="">
+    </div>
+    <a href="/2024/04/15/UncertaintyTrack%E6%80%BB%E7%BB%93/" class="post-nav-link">
+      <div class="title">
+        Next: <i class="fas fa-angle-right"></i>
+        <div class="title-text">UncertaintyTrack Exploiting Detection and Localization Uncertainty in Multi-Object Tracking</div>
+      </div>
+      <!-- <div class="content">
+        贴一个原文链接这篇文章的代码依旧没有开源
+
+Abstract近年来，大多数多目标跟踪都遵循TbD范式，盲目的相信检测器的
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+      
+<section id="comments" style="padding: 1em;"
+	class="animated bounceInUp">
+	<div id="vcomment" class="comment"></div>
+</section>
+<style>
+	#comments {
+		background: rgba(255,255,255,0.9);
+	}
+	#veditor {
+		background-image: url('https://img.zcool.cn/community/01a253594c71cfa8012193a329a77f.gif');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: right;
+		background-color: rgba(255, 255, 255, 0);
+		resize: vertical;
+	}
+	#veditor:focus{
+		background-position-y: 200px;
+		transition: all 0.2s ease-in-out 0s;
+	}
+	#vcomment .vcards .vcard .vh .vhead .vtag.vvisitor {
+		background-color: #42b983;
+	}
+	.v[data-class=v] .vbtn:active, .v[data-class=v] .vbtn:hover {
+		color: #42b983;
+		border-color: #42b983;
+	}
+	#vcomment .vcards .vcard .vhead .vsys i {
+		display: none;
+	}
+	/* 底部valine链接 */
+	#vcomment .vpower {
+		display: none;
+	}
+	
+	/* 底下注释是修改 名称和邮箱和网址输入框的样式 */
+	/* #vcomment .vheader {
+		display: flex;
+		justify-content: space-around;
+	}
+	
+	#vcomment .vheader .vnick {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	}
+
+	#vcomment .vheader .vmail {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	}
+
+	#vcomment .vheader .vlink {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	} */
+
+	img.vimg {
+		transition: all 1s;
+		/* 头像旋转时间为 1s */
+	}
+
+	img.vimg:hover {
+		transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+	}
+
+	#vcomment .vcards .vcard {
+		padding: 15px 20px 0 20px;
+		border-radius: 10px;
+		margin-bottom: 15px;
+		box-shadow: 0 0 4px 1px rgba(0, 0, 0, .12);
+		transition: all .3s
+	}
+
+	#vcomment .vcards .vcard:hover {
+		box-shadow: 0 0 8px 3px rgba(0, 0, 0, .12)
+	}
+
+	#vcomment .vcards .vcard .vh .vcard {
+		border: none;
+		box-shadow: none;
+	}
+</style>
+    
+  </div>
+
+<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  <aside id='l_side'>
+  
+    
+      <section class="widget side_blogger">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img src='https://pic2.zhimg.com/80/v2-42b72d5ebee4b8d8aa70d9687effe87b_1440w.webp'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>小牛的学习日记</h2>
         
         
+          <p>好好学习 天天向上</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
           
-            
-            <div class="year" data-aos="zoom-in-up">
-                <div class="bullet"></div>
-                <a href="/archives/2024">2024</a>
-            </div>
+            <a href="https://github.com/Nxhhhh/Nxhhhh.github.io"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
           
-          <li class="post-item" data-aos="fade-left">
+        
+          
+            <a href="/1224317198@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/Nxhhhh/Nxhhhh.github.io"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=1224317198"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+    
+  
+  
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Camera-View-Data-Augmentation"><span class="toc-text">Camera View Data Augmentation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Stationary-Camera-View-Data-Augmentation"><span class="toc-text">Stationary Camera View Data Augmentation</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Backtracking-continuation%EF%BC%88%E5%9B%9E%E6%BA%AF%E5%BB%B6%E6%8B%93%EF%BC%89"><span class="toc-text">Backtracking continuation（回溯延拓）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Prediction-continuation%EF%BC%88%E9%A2%84%E6%B5%8B%E5%BB%B6%E6%8B%93%EF%BC%89"><span class="toc-text">Prediction continuation（预测延拓）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Dynamic-Camera-View-Data-Augmentation"><span class="toc-text">Dynamic Camera View Data Augmentation</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2"><span class="toc-text">图像分割</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E4%BF%AE%E5%A4%8D"><span class="toc-text">图像修复</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E6%89%A9%E6%95%A3"><span class="toc-text">图像扩散</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E5%90%88%E5%B9%B6"><span class="toc-text">图像合并</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Group-Softmax-Module"><span class="toc-text">Group Softmax Module</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Experiment"><span class="toc-text">Experiment</span></a></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
+</div>
+
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
             
+            
+            
+
             <div class="post-img-box">
-              <a href="/2024/02/23/GHOST-reading/" class="post-img " style="background-size: cover; 
+              <a href="/2024/04/17/Long-tail/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
               <div>
-                <span class="post-date">02-23</span>
+                
+                  <span class="post-date">04-17</span>
+                
               </div>
-              <a class="post-title" href="/2024/02/23/GHOST-reading/">文献《Simple Cues Lead to a Strong Multi-Object Tracker》总结</a>
+              <a class="post-title" href="/2024/04/17/Long-tail/">Delving into the Trajectory Long-tail Distribution for Muti-object Tracking 总结</a>
             </div>
-          </li>
+          </div>
         
-          
-          <li class="post-item" data-aos="fade-left">
+          <div class="aside-list-item">
             
+            
+            
+
             <div class="post-img-box">
-              <a href="/2024/01/19/Hexoerror/" class="post-img " style="background-size: cover; 
+              <a href="/2024/04/15/UncertaintyTrack%E6%80%BB%E7%BB%93/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" alt="">
               </a>
             </div>
             <div class="post-date-title">
               <div>
-                <span class="post-date">01-19</span>
+                
+                  <span class="post-date">04-15</span>
+                
               </div>
-              <a class="post-title" href="/2024/01/19/Hexoerror/">Hexo本地预览与部署不同的解决方法</a>
+              <a class="post-title" href="/2024/04/15/UncertaintyTrack%E6%80%BB%E7%BB%93/">UncertaintyTrack Exploiting Detection and Localization Uncertainty in Multi-Object Tracking</a>
             </div>
-          </li>
+          </div>
         
-          
+          <div class="aside-list-item">
             
-            <div class="year" data-aos="zoom-in-up">
-                <div class="bullet"></div>
-                <a href="/archives/2023">2023</a>
-            </div>
-          
-          <li class="post-item" data-aos="fade-left">
             
+            
+
             <div class="post-img-box">
-              <a href="/2023/11/29/fairmot/" class="post-img " style="background-size: cover; 
+              <a href="/2024/04/08/DeconfuseTrack%E6%80%BB%E7%BB%93/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
               <div>
-                <span class="post-date">11-29</span>
+                
+                  <span class="post-date">04-08</span>
+                
               </div>
-              <a class="post-title" href="/2023/11/29/fairmot/">Fairmot代码复现问题记录（已解决）</a>
+              <a class="post-title" href="/2024/04/08/DeconfuseTrack%E6%80%BB%E7%BB%93/">Deconfuse Track总结</a>
             </div>
-          </li>
+          </div>
         
-      </ul>
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/03/25/Hybridsort%E6%80%BB%E7%BB%93/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-25</span>
+                
+              </div>
+              <a class="post-title" href="/2024/03/25/Hybridsort%E6%80%BB%E7%BB%93/">Hybridsort总结</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/03/15/OC-SORT%E6%80%BB%E7%BB%93/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-15</span>
+                
+              </div>
+              <a class="post-title" href="/2024/03/15/OC-SORT%E6%80%BB%E7%BB%93/">OC-SORT总结</a>
+            </div>
+          </div>
+        
+      </div>
     </div>
   </section>
-  <div class="w-70">
-    
-  <!-- <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/archives/">Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-  </nav> -->
-  <div class="page-nav">
-    
-      <a href="/archives/"
-         class="page-nav-pre">
-         <i class="fas fa-angle-left"></i><span class="ml-5">Prev</span>
-      </a>
-    
-    <div class="page-info">
-        <div class="page-info-text">2 / 2</div>
-    </div>
-    
-  </div>
 
+    
   </div>
+</aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script src="/js/wrapImage.js"></script>
 </div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || '';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
 
       </main>
     </div>

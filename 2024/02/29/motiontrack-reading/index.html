@@ -460,6 +460,7 @@
 <h4 id="3-2-2-重寻模块"><a href="#3-2-2-重寻模块" class="headerlink" title="3.2.2 重寻模块"></a>3.2.2 重寻模块</h4><p><img src="8.png" alt="重寻模块"><br>将预测的轨迹的位置与检测进行IoU匹配，如果匹配结束还有S个丢失的轨迹和U个未匹配的检测则进入重寻模块。<br>剩余的检测集合记为D<sup>rest</sup> $\in$ R<sup><em>U $\times$ 5</em></sup>，其中五个元素分别是（t，x，y，w，h），保留30帧的历史轨迹的信息，于是仍未匹配的轨迹记为T<sup>lost</sup> $\in$ R<sup><em>S $\times$ 30 $\times$ 5</em></sup>。首先在最后一个维度上对D<sup>rest</sup>和T<sup>lost</sup>进行规范化，然后分别从中提取特征。作者分别在第二和第三维对T<sup>lost</sup>进行非对称卷积，然后将它们汇集成特征向量<strong>F</strong><sup>traj</sup> $\in$ R<sup><em>S $\times$ D</em></sup>：<br><img src="9.png" alt><br>对于计算的结果，计算与最后存活的位置的差值，并与检测结果联合起来，得到 $\hat{D}$ <sup>rest</sup> $\in$ R<sup><em>U $\times$ 10</em></sup>，然后将其映射到高维特征<strong>F</strong><sup>dete</sup> $\in$ R<sup><em>U $\times$ D</em></sup>：<br><img src="10.png" alt><br>其中<strong>W</strong><sup>D</sup>是线性变换的权重。<br>随后将<strong>F</strong><sup>traj</sup>和<strong>F</strong><sup>dete</sup>结合在一起形成<strong>F</strong> $\in$ R<sup>（<em>S  $\times$ U） $\times$ 2D</em></sup>，应用一个全连接层和sigmoid函数，就可以得到轨迹和检测之间的相似度得分<strong>C</strong><sup>corr</sup> $\in$ R<sup><em>S $\times$ U</em></sup>，最后，作者使用贪心算法挑选出相关度高的匹配对，并将剩余的不匹配检测初始化为新的轨迹。</p>
 <p>在用匹配检测重新识别丢失的轨迹后，作者使用误差补偿修正了预测的轨迹：<br><img src="11.png" alt></p>
 <h3 id="4-Training"><a href="#4-Training" class="headerlink" title="4.Training"></a>4.Training</h3><p>对交互模块，根据偏移量的预测计算出绝对坐标，使用IoU损失的形式：<br><img src="12.png" alt><br>取了连续三帧作为一个sample，前两帧是网络的输入，最后一帧作为监督<strong>P</strong><sup>gt</sup>。<br>对于重寻模块，在一段完整视频中提取所有的帧，将他们随机配对作为训练集，对于每个训练集，我们对轨迹和检测进行采样，并根据它们是否来自相同的轨迹标记为正或负。然后，我们用一个二元交叉熵损失函数来监督Refind模块中的相关计算:<br><img src="13.png" alt><br>最终效果：<br><img src="14.png" alt></p>
+<hr>
 
       </div>
       <div class="post-tags-categories">
@@ -803,6 +804,27 @@
             
 
             <div class="post-img-box">
+              <a href="/2024/04/17/Long-tail/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">04-17</span>
+                
+              </div>
+              <a class="post-title" href="/2024/04/17/Long-tail/">Delving into the Trajectory Long-tail Distribution for Muti-object Tracking 总结</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
               <a href="/2024/04/15/UncertaintyTrack%E6%80%BB%E7%BB%93/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" alt="">
@@ -878,27 +900,6 @@
                 
               </div>
               <a class="post-title" href="/2024/03/15/OC-SORT%E6%80%BB%E7%BB%93/">OC-SORT总结</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/03/11/ByteTrack-Demo/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">03-11</span>
-                
-              </div>
-              <a class="post-title" href="/2024/03/11/ByteTrack-Demo/">【代码复现】ByteTrack_Demo</a>
             </div>
           </div>
         
