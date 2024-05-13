@@ -496,18 +496,18 @@ T_{best}^j = \mathop{argmin}\limits_{\cal{T} \in \Bbb{T}_{blur}^j} CostDist(f_d,
 <script type="math/tex; mode=display">
 \begin{aligned}
 P_{tdm} = \lbrace (d_j , \cal{T}_{best}^j) | d_j \in \mathit{D}_{matched}^t \rbrace. 
-\end{aligned}</script><h4 id="Association-Disambiguation-Module-ADM"><a href="#Association-Disambiguation-Module-ADM" class="headerlink" title="Association Disambiguation Module (ADM)"></a>Association Disambiguation Module (ADM)</h4><p>在这个模块处理多个轨迹和多个检测关联的混淆问题。<br>可以分为多个二对二的的问题解决。<br>对于配对中任意两个不同的任务，使用变异系数来量化他们之间的混淆：</p>
+\end{aligned}</script><h4 id="Association-Disambiguation-Module-ADM"><a href="#Association-Disambiguation-Module-ADM" class="headerlink" title="Association Disambiguation Module (ADM)"></a>Association Disambiguation Module (ADM)</h4><p>在这个模块处理多个轨迹和多个检测关联的混淆问题。<br>可以分为多个二对二的问题解决。<br>对于配对中任意两个不同的任务，使用变异系数来量化他们之间的混淆：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 Cv(i,j) =  \frac{Std(\lbrace LocSim(d_{k_1}, \cal{T}_{k_2}|k_1,k_2 \in \lbrace i,j \rbrace \rbrace) )}{Mean(\lbrace LocSim(d_{k_1}, \cal{T}_{k_2}|k_1,k_2 \in \lbrace i,j \rbrace \rbrace) )}, \\ d_i,d_j \in D_{matched}^t, \cal{T}_i,\cal{T}_j \in \Bbb T_{matched} ,i \neq j .
 \end{aligned}</script><p>变异系数较小时，说明分配对之间的位置线索差异不大。接下来，我们识别所有表现出强烈混淆的配对:</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-P_{blur} = \lbrace (d_i , \cal{T}_i), (d_j , \cal{T}_j) | Cv(i,j) < \kappa. 
+P_{blur} = \lbrace (d_i , \cal{T}_i), (d_j , \cal{T}_j) | Cv(i,j) < \kappa. \rbrace
 \end{aligned}</script><p>接下来，类似于TDM，我们利用外观线索来解决Pblur中的位置混淆，并找到更合适的分配关系:</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-P_{new} = &\lbrace (d_i , \cal{T}_j), (d_j , \cal{T}_i) | \mathit{CostDist}(f_{d_i}, f_{\cal{T}_j})\\+&\mathit{CostDist}(f_{d_j}, f_{\cal{T}_i}) < \mathit{CostDist}(f_{d_i}, f_{\cal{T}_i})\\+&\mathit{CostDist}(f_{d_j}, f_{\cal{T}_j}), (d_i,\cal T_i), (d_j,\cal T_j)\in \mathit{P}_{blur}. 
+P_{new} = &\lbrace (d_i , \cal{T}_j), (d_j , \cal{T}_i) | \mathit{CostDist}(f_{d_i}, f_{\cal{T}_j})\\+&\mathit{CostDist}(f_{d_j}, f_{\cal{T}_i}) < \mathit{CostDist}(f_{d_i}, f_{\cal{T}_i})\\+&\mathit{CostDist}(f_{d_j}, f_{\cal{T}_j}), (d_i,\cal T_i), (d_j,\cal T_j)\in \mathit{P}_{blur}. \rbrace
 \end{aligned}</script><p>在涉及多个检测和轨迹交叉关联的复杂匹配过程中，可能会产生冲突。为了解决这些冲突，我们再次使用外观线索执行匈牙利匹配算法来消除 $P_{new}$ 中的冲突。最后，将修正后的赋值关系 $P_{new}$ 与原集合 $P$ 结合，得到关联消歧后的新匹配关系 $P_{adm}$ 。</p>
 <h4 id="Module-Combination"><a href="#Module-Combination" class="headerlink" title="Module Combination"></a>Module Combination</h4><p> 三个模型可以串行组合，得到完整的DDA。所有三个模块共用参数 $\kappa$ ,当 $\kappa$ 增加时，我们在TDM和ADM中考虑更多的混淆，而在DDM中考虑更少的不可靠检测。因此， $\kappa$ 值越大表明对位置线索的依赖程度越低，而 $\kappa$ 值越小表明对运动线索的依赖程度越高。 $\kappa$ 的值可以根据数据集中摄像机和被跟踪对象的运动特征灵活调整。</p>
 <h3 id="Occlusion-aware-NMS-ONMS"><a href="#Occlusion-aware-NMS-ONMS" class="headerlink" title="Occlusion-aware NMS (ONMS)"></a>Occlusion-aware NMS (ONMS)</h3><p>该模块用于提高检测的质量。<br>$u^t$ 表示置信度大于 $d_i$ 的检测中IoU最大的检测:</p>
