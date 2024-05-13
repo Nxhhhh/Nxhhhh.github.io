@@ -476,11 +476,12 @@ D_{blur}^j = \lbrace d_i | LocSim ( d_i , \cal{T}_j ) - \mathit{LocSim} ( d_j , 
 \end{aligned}</script><p>接下来定义 $P_{new}$ :</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-P_{new} =  \lbrace (d_i, cal{T}_j) | d = \mathop{argmax}\limits_{d_i \in D_{blur}^t}LocSim(d_i, \cal{T}_j) \\  if  D_{blur}^t \neq \emptyset , d_j \in D_{matched}^t, \cal{T} \in \Bbb T_{matched} \rbrace .
+P_{new} =  \lbrace (d_i, \cal{T}_j) | d = \mathop{argmax}\limits_{d_i \in D_{blur}^t}LocSim(d_i, \cal{T}_j) \\  if  D_{blur}^t \neq \emptyset , d_j \in D_{matched}^t, \cal{T} \in \Bbb T_{matched} \rbrace .
 \end{aligned}</script><p>将与轨迹匹配的低置信度检测移到 $D_{first}$ 里面，并在 $D_{second}$ 里将其删除。</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-D_{first}{'} =  D_{first}^{t}  \cup \lbrace (d, \cal{T}) \in \mathit{P_{new}}  \rbrace \\ D_{second}{'} =  D_{second}^{t} - \lbrace (d, \cal{T}) \in \mathit{P_{new}} \rbrace .
+D^{t}_{first}{'} =  D_{first}^{t}  \cup \lbrace (d, \cal{T}) \in \mathit{P_{new}}  \rbrace 
+\\ D^{t}_{second}{'} =  D_{second}^{t} - \lbrace (d, \cal{T}) \in \mathit{P_{new}} \rbrace .
 \end{aligned}</script><p>获得 $P_{new}$ 后，释放 $P$ 中的一些可靠检测，因为它们虽然被更合适的不可靠检测所取代，但这些不匹配的可靠检测仍然有可能与不匹配的轨迹相关联。因此，在最后一步，在保证 $P_{new}$ 中赋值关系有效性的前提下，首先对 $T$ 和 $D_t$ 进行重新赋值，得到检测消歧后新的分配关系 $P_{ddm}$ 。</p>
 <h4 id="Trajectory-Disambiguation-Module-TDM"><a href="#Trajectory-Disambiguation-Module-TDM" class="headerlink" title="Trajectory Disambiguation Module (TDM)"></a>Trajectory Disambiguation Module (TDM)</h4><p>这个模块将多个轨迹与单一检测进行匹配。</p>
 <p>首先 $\Bbb T_{lost}$ = $\Bbb T - \Bbb T_{matched} $</p>
