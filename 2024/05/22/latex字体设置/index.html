@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Hybridsort总结 | 小牛学习日记</title>
+  <title>Hexo使用Mathjax时常用的字体设置 | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -381,21 +381,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg')">
+  background-position: center center;position: relative;background-image:url('https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        Hybridsort总结
+        Hexo使用Mathjax时常用的字体设置
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> Published in：2024-03-25 |
+          <i class="fas fa-calendar"></i> Published in：2024-05-22 |
         </span>
       
 
@@ -403,8 +403,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> category：
           
-            <a href="/categories/R-D/" class="post-detail-header_category">
-              R&D
+            <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="post-detail-header_category">
+              问题记录
             </a>
           
         </span>
@@ -413,11 +413,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 1.3k |
+            <i class="fas fa-file-text-o"></i> Words: 620 |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> Reading time: 4min |
+            <i class="fas fa-clock"></i> Reading time: 2min |
           </span>
   
           
@@ -444,52 +444,25 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>惯例贴一下<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2308.00783">原文链接</a></p>
-<p>阅读这篇文章建议先去读一读他的baseline，OC-SORT</p>
+        <p>本文主要介绍 LATEX，MathJax 语法的字体美化，包括<strong>字体种类，字体大小，字体特效，字体颜色等</strong>。</p>
 <hr>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>MOT的目标是在帧之间检测和关联所有目标。大多数的方法都是使用强线索（空间信息或者外观信息）完成任务，这些强线索在没有发生遮挡和聚类的时候是十分有用的，一旦发生遮挡和聚类，由于物体高度重叠，空间和外观信息会变得模糊。文章提出了可以用弱线索（高度、检测框置信度、速度方向）作为强线索的补充。</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>MOT中流行的范例习惯将问题分为两个子任务。首先检测每个帧中的对象，其次将他们在不同的框架中联系起来。关联的任务主要通过强线索完成。但是常用的强线索在遇到遮挡和聚类的问题时就会出现退化。如图一所示：</p>
-<p><img src="1.png" alt="图一"></p>
-<p>图中展示了强弱线索的辨别能力。绿色实线箭头表示对一对对象的可靠判别，红色虚线表示不可靠的判别，箭头的值越高，表示鉴别越可靠。</p>
-<p>可以看出大部分情况下强线索可以分辨出检测框之间的区别，但是红色和橙色框出现了大面积重叠，仅靠交并比和外观线索的判别并不可靠，在这种情况下依靠检测框置信度可以得到更好的区分效果。</p>
-<p>作者为了保持SORT简单、在线和实时的特点，使用以下策略利用上述的弱线索：<strong>Tracklet置信度建模(TCM)和高度调制IoU (HMIoU)。</strong></p>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="Weak-Cues-Modeling"><a href="#Weak-Cues-Modeling" class="headerlink" title="Weak Cues Modeling"></a>Weak Cues Modeling</h3><h4 id="Tracklet-Confidence-Modeling"><a href="#Tracklet-Confidence-Modeling" class="headerlink" title="Tracklet Confidence Modeling"></a>Tracklet Confidence Modeling</h4><p>作者改进了传统SORT广泛使用的标准卡尔曼滤波器，增加了两个额外的状态：轨迹置信度c以及其速度分量 $\dot{c}$ :</p>
-<p><img src="2.png" alt></p>
-<p>对于轨迹置信度，作者使用线性预测进行估计。在遮挡发生时，物体的置信度会迅速降低，但是卡尔曼滤波的预测具有滞后性，如图三所示：</p>
-<p><img src="3.png" alt="图三"></p>
-<p>因此，作者使用简单的线性预测来估计轨迹的置信状态。线性建模公式如下：</p>
-<p><img src="4.png" alt="线性建模"></p>
-<p>其中c<sub>trk</sub>表示保存在Tracklet Memory中的Tracklet置信度。</p>
-<p>置信度的代价计算公式如下：</p>
-<p><img src="5.png" alt></p>
-<h4 id="Height-Modulated-IoU"><a href="#Height-Modulated-IoU" class="headerlink" title="Height Modulated IoU"></a>Height Modulated IoU</h4><p>高度状态在两个方面增强了关联。首先，物体的高度在一定程度上反映了深度信息。对于DanceTrack这样的数据集，检测框的高度主要取决于物体与相机之间的距离。这使得高度状态成为区分高度重叠对象的有效线索。其次，高度状态对不同姿态具有较强的鲁棒性，是一种准确估计的状态，是物体的高质量表征。</p>
-<p>两个方框分别定义为（x<sup>1</sup><sub>1</sub>, y<sup>1</sup><sub>1</sub>, x<sup>1</sup><sub>2</sub>, y<sup>1</sup><sub>2</sub>）,（x<sup>2</sup><sub>1</sub>, y<sup>2</sup><sub>1</sub>, x<sup>2</sup><sub>2</sub>, y<sup>2</sup><sub>2</sub>）</p>
-<p>则可以通过基于高度度量计算IoU来生成高度IoU (HIoU)，如下图所示：</p>
-<p><img src="6.png" alt></p>
-<p><img src="7.png" alt></p>
-<h3 id="Hybrid-SORT"><a href="#Hybrid-SORT" class="headerlink" title="Hybrid-SORT"></a>Hybrid-SORT</h3><h4 id="Robust-Observation-Centric-Momentum"><a href="#Robust-Observation-Centric-Momentum" class="headerlink" title="Robust Observation-Centric Momentum"></a>Robust Observation-Centric Momentum</h4><p>在OC-SORT中，OCM考虑目标中心的速度方向。使用的成本度量是轨迹速度方向θ<sub>t</sub>与轨迹到探测速度方向θ<sub>d</sub>之间的绝对差值，以弧度形式表示为∆θ = |θ<sub>t</sub> - θ<sub>d</sub>|。轨迹波速度方向由轨迹波中两个时间间隔∆t的盒中心获得，轨迹波到检测的速度方向由轨迹波历史盒和新检测盒的中心获得。给定两个点(u1, v1)和(u2, v2)，速度方向按下图所示公式计算。然而，原始OCM的建模容易受到固定时间间隔和稀疏点(即只有目标中心)引起的噪声的影响。</p>
-<p><img src="8.png" alt></p>
-<p>作者通过引入更加鲁棒的速度方向来改进OCM，称之为ROCM，修改包括两个方面。首先，将3帧的固定时间间隔扩展为1 ~ 3的多个时间间隔的叠加；其次，我们用物体的四个角代替它的中心点来计算速度方向。对于多个时间区间和点，ROCM的计算公式如下式所示。</p>
-<p><img src="9.png" alt></p>
-<p>从Figure4可以看出，对于运动复杂的物体，拐角的速度方向保持高度相似，而中心的速度方向几乎相反。</p>
-<p><img src="10.png" alt="Figure4"></p>
-<h4 id="Appearance-Modeling"><a href="#Appearance-Modeling" class="headerlink" title="Appearance Modeling"></a>Appearance Modeling</h4><p>ReID模型遵循BoT-SORT，首先检测对象，然后将结果裁剪的补丁提供给ReID模型。我们使用指数移动平均(EMA)对轨迹图外观信息建模，并利用余弦距离作为度量来计算轨迹图和检测外观特征之间的成本C<sub>Appr</sub>。</p>
-<h4 id="Algorithm-Framework"><a href="#Algorithm-Framework" class="headerlink" title="Algorithm Framework"></a>Algorithm Framework</h4><p>关联阶段主要包括三个阶段:第一阶段是高置信度对象的关联阶段，第二阶段是低置信度对象的关联阶段(ByteTrack中的BYTE)，第三阶段是用最后一次检测恢复丢失的轨迹(OC-SORT中的OCR)。</p>
-<p>考虑到所有的强弱线索，最终的成本矩阵为：</p>
-<p><img src="11.png" alt></p>
+<h2 id="字体种类设置"><a href="#字体种类设置" class="headerlink" title="字体种类设置"></a>字体种类设置</h2><p>\字体种类{文本}<br>| 字体种类                         | 表示方法                         | 预览                             |<br>| ———————————————— | ———————————————— | ———————————————— |<br>| 默认字体                         | ABCDEFGHIJKLMNOPQRSTUVWXYZ       | ABCDEFGHIJKLMNOPQRSTUVWXYZ       |<br>|                                 | abcdefghijklmnopqrstuvwxyz       | abcdefghijklmnopqrstuvwxyz       |<br>| 数学斜体                         | ${ABCDEFGHIJKLMNOPQRSTUVWXYZ}$| ${ABCDEFGHIJKLMNOPQRSTUVWXYZ}$|<br>|                                  | ${abcdefghijklmnopqrstuvwxyz}$ | ${abcdefghijklmnopqrstuvwxyz}$ |<br>| 意大利体                         | \it{ABCDEFGHIJKLMNOPQRSTUVWXYZ}  | $\it{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$     |<br>|                                  | \it{abcdefghijklmnopqrstuvwxyz}       | $ \it{abcdefghijklmnopqrstuvwxyz}$  |<br>| 罗马体                           | \rm{ABCDEFGHIJKLMNOPQRSTUVWXYZ}  | $\rm{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$      |<br>|                               | \rm{abcdefghijklmnopqrstuvwxyz }      | $\rm{abcdefghijklmnopqrstuvwxyz}$  |<br>| 花体                             | \cal{ABCDEFGHIJKLMNOPQRSTUVWXYZ} | $\cal{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$   |<br>|                                    | \cal{abcdefghijklmnopqrstuvwxyz}  | $\cal{abcdefghijklmnopqrstuvwxyz}$ |<br>| 打字机体                          | \tt{ABCDEFGHIJKLMNOPQRSTUVWXYZ}   | $\tt{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$       |<br>|                                  |  \tt{abcdefghijklmnopqrstuvwxyz}         | $\tt{abcdefghijklmnopqrstuvwxyz}$   |<br>| 粗体                              | \bf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}   | $\bf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$        |<br>|                                     | \bf{abcdefghijklmnopqrstuvwxyz}      | $\bf{abcdefghijklmnopqrstuvwxyz} $  |<br>| 黑板粗体                          | \Bbb{ABCDEFGHIJKLMNOPQRSTUVWXYZ}  | $\Bbb{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$     |<br>|                                       | \Bbb{abcdefghijklmnopqrstuvwxyz}     | $\Bbb{abcdefghijklmnopqrstuvwxyz}$ |<br>| 等线体                            | \sf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}   | $\sf{ABCDEFGHIJKLMNOPQRSTUVWXYZ } $      |<br>|                                    |\sf{abcdefghijklmnopqrstuvwxyz}    | $\sf{abcdefghijklmnopqrstuvwxyz} $  |<br>| 旧德式体                          | \frak{ABCDEFGHIJKLMNOPQRSTUVWXYZ} | $\frak{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$       |<br>|                                    | \frak{abcdefghijklmnopqrstuvwxyz}     | $\frak{abcdefghijklmnopqrstuvwxyz} $|<br>| 手写体                          | \scr{ABCDEFGHIJKLMNOPQRSTUVWXYZ} | $\frak{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$       |<br>|                                    | \scr{abcdefghijklmnopqrstuvwxyz}     | $\scr{abcdefghijklmnopqrstuvwxyz} $|</p>
+<h2 id="字体大小设置"><a href="#字体大小设置" class="headerlink" title="字体大小设置"></a>字体大小设置</h2><p>\字体大小{文本}<br>| 字体大小 | 字宽(pt)                        | 表示方法           | 预览  |<br>| ———— | ———————————————- | ————————— | ——- |<br>| 小初     | 36pts                         | \Huge{小初字体(36pts)} | $\Huge{小初字体(36pts)}$  |<br>| 一号    | 27.5pts                         | \huge{一号字体(27.5pts)} | $\huge{一号字体(27.5pts)}$  |<br>| 二号     | 21pts                         | \LARGE{二号字体(21pts)} | $\LARGE{二号字体(21pts)}$  |<br>| 三号     | 15.75pts                         | \Large{三号字体(15.75pts)} | $\Large{三号字体(15.75pts)}$  |<br>| 四号     | 13.75pts                         | \large{四号字体(13.75pts)} | $\large{四号字体(13.75pts)}$  |<br>| 小四     | 12pts                         | \normalsize{小四字体(12pts)} | $\normalsize{小四字体(12pts)}$  |<br>| 默认     | 12pts                         |默认字体(12pts) | 默认字体(12pts)|<br>| 五号     | 10.5pts                         | \small{五号字体(10.5pts)} | $\small{五号字体(10.5pts)}$  |<br>| 六号     | 7.875pts                         | \scriptsize{六号字体(7.875pts)} | $\scriptsize{六号字体(7.875pts)}$  |<br>| 七号     | 5.25pts                         | \tiny{七号字体(5.25pts)} | $\tiny{七号字体(5.25pts)}$  |</p>
+<h2 id="字体特效设置"><a href="#字体特效设置" class="headerlink" title="字体特效设置"></a>字体特效设置</h2><p>\color{颜色}{文本}<br>| 颜色           | 表示方法                              | 预览                                  |<br>| ——————— | ——————————————————- | ——————————————————- |<br>| 黑色(black)    | \color{black}{黑色(\text{black})}     | $\color{black}{黑色(\text{black})}  $   |<br>| 红色(red)      | \color{red}{红色(\text{red})}         | $\color{red}{红色(\text{red})}       $  |<br>| 黄色(yellow)   | \color{yellow}{黄色(\text{yellow})}   | $\color{yellow}{黄色(\text{yellow})}$   |<br>| 蓝色(blue)     | \color{blue}{蓝色(\text{blue})}       | $\color{blue}{蓝色(\text{blue})}   $    |<br>| 灰色(grey)     | \color{grey}{灰色(\text{grey})}       | $\color{grey}{灰色(\text{grey})}   $    |<br>| 白色(white)    | \color{white}{白色(\text{white})}     | $\color{white}{白色(\text{white})}$     |<br>| 绿色(green)    | \color{green}{绿色(\text{green})}     | $\color{green}{绿色(\text{green})}    $ |<br>| 紫色(green)    | \color{purple}{紫色(\text{purple})}   | $\color{purple}{紫色(\text{purple})} $  |<br>| 紫红色(maroon) | \color{maroon}{紫红色(\text{maroon})} | $\color{maroon}{紫红色(\text{maroon})} $|<br>| 橄榄绿(olive)  | \color{olive}{橄榄绿(\text{olive})}   | $\color{olive}{橄榄绿(\text{olive})}   $|<br>| 蓝绿色(teal)   | \color{teal}{蓝绿色(\text{teal})}     | $\color{teal}{蓝绿色(\text{teal})}    $ |<br>| 银色(silver)   | \color{silver}{银色(\text{silver})}   | $\color{silver}{银色(\text{silver})} $  |<br>| 浅绿色(lime)   | \color{lime}{浅绿色(\text{lime})}     | $\color{lime}{浅绿色(\text{lime})}  $   |<br>| 藏青色(navy)   | \color{navy}{藏青色(\text{navy})}     | $\color{navy}{藏青色(\text{navy})} $    |</p>
 <hr>
+<p>记录一下以后就不费劲找了</p>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/MOT/" class="">
-              MOT
+            <a href="/tags/Hexo/" class="">
+              Hexo
             </a>
           
-            <a href="/tags/python/" class="">
-              python
+            <a href="/tags/Latex/" class="">
+              Latex
             </a>
           
         </div>
@@ -503,7 +476,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
-    <a href="/2024/03/25/Hybridsort总结/" target="_blank" title="Hybridsort总结">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/03/25/Hybridsort总结/</a>
+    <a href="/2024/05/22/latex字体设置/" target="_blank" title="Hexo使用Mathjax时常用的字体设置">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/05/22/latex字体设置/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright notice:   </strong>
@@ -521,42 +494,25 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-    </div>
-    <a href="/2024/04/08/DeconfuseTrack%E6%80%BB%E7%BB%93/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> Prev:
-        <div class="title-text">Deconfuse Track总结</div>
-      </div>
-      
-      <!-- <div class="content">
-        贴一个原文链接
-很可惜这篇文章的代码没有开源
-
-Abstract在多目标跟踪中，准确的数据关联十分重要，但是现有的方法大
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload" src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" src="" alt="">
+      <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" src="" alt="">
     </div>
-    <a href="/2024/03/15/OC-SORT%E6%80%BB%E7%BB%93/" class="post-nav-link">
+    <a href="/2024/05/17/debug/" class="post-nav-link">
       <div class="title">
         Next: <i class="fas fa-angle-right"></i>
-        <div class="title-text">OC-SORT总结</div>
+        <div class="title-text">【转载】如何在终端进行debug调试</div>
       </div>
       <!-- <div class="content">
-        贴一下原文链接参考：https://blog.csdn.net/wjpwjpwjp0831/article/detail
+        
+参考这个方法
+
+进入Debug模式1python -m pdb xxx.py
+命令列表l —&gt; list 显示当
       </div> -->
     </a>
   </div>
@@ -785,7 +741,7 @@ Abstract在多目标跟踪中，准确的数据关联十分重要，但是现有
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Weak-Cues-Modeling"><span class="toc-text">Weak Cues Modeling</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Tracklet-Confidence-Modeling"><span class="toc-text">Tracklet Confidence Modeling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Height-Modulated-IoU"><span class="toc-text">Height Modulated IoU</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hybrid-SORT"><span class="toc-text">Hybrid-SORT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Robust-Observation-Centric-Momentum"><span class="toc-text">Robust Observation-Centric Momentum</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Appearance-Modeling"><span class="toc-text">Appearance Modeling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Algorithm-Framework"><span class="toc-text">Algorithm Framework</span></a></li></ol></li></ol></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E7%A7%8D%E7%B1%BB%E8%AE%BE%E7%BD%AE"><span class="toc-text">字体种类设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%BE%E7%BD%AE"><span class="toc-text">字体大小设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E7%89%B9%E6%95%88%E8%AE%BE%E7%BD%AE"><span class="toc-text">字体特效设置</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>

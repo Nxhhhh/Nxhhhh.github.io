@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Hybridsort总结 | 小牛学习日记</title>
+  <title>Tag: Latex | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -368,770 +368,111 @@
 </header>
         <!-- 内容区域 -->
         
- <!-- prismjs 代码高亮 -->
- 
 
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
+<div class="bg-light-floor-tagDetail" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
 
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-
-
-  <!-- 文章详情页顶部图片和标题 -->
-
-
-
-
-<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg')">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
-  
-  <div class="post-detail-header_info-box">
-    <div class="title-box">
-      <span class="title">
-        Hybridsort总结
-      </span>
-    </div>
-    
-    
-      
-        <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> Published in：2024-03-25 |
-        </span>
-      
-
-      
-        <span class="post-detail-header_categories">
-          <i class="iconfont iconbookmark1"></i> category：
-          
-            <a href="/categories/R-D/" class="post-detail-header_category">
-              R&D
-            </a>
-          
-        </span>
-      
-
-      
-        <div class="post-detail-header_wordcount">
-          <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 1.3k |
-          </span>
-  
-          <span class="min2read">
-            <i class="fas fa-clock"></i> Reading time: 4min |
-          </span>
-  
-          
-            <span class="reading">
-              <i class="fas fa-eye"></i> reading：<span id="busuanzi_value_page_pv"></span>
-            </span>
-          
-        </div>
-      
-    
+<div class="tag-header" style="background-image: url('https://pic1.zhimg.com/80/v2-604a15cef201cf177943af2d915eb2e7_1440w.jpg?source=1940ef5c');">
+  <div class="tag-header-title">
+    tag
   </div>
+  <div class="tag-header-desc">
   
-  
-    <script src="/js/bubble/bubble.js"></script>
-  
-</div>
-
-
-
-
-
-<div class="post-detail-content post-row" 
-  style="padding-top: 0px;">
-  <div class="main-content">
-    <article class="post post-detail">
-      <div class="post-content">
-        <p>惯例贴一下<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2308.00783">原文链接</a></p>
-<p>阅读这篇文章建议先去读一读他的baseline，OC-SORT</p>
-<hr>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>MOT的目标是在帧之间检测和关联所有目标。大多数的方法都是使用强线索（空间信息或者外观信息）完成任务，这些强线索在没有发生遮挡和聚类的时候是十分有用的，一旦发生遮挡和聚类，由于物体高度重叠，空间和外观信息会变得模糊。文章提出了可以用弱线索（高度、检测框置信度、速度方向）作为强线索的补充。</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>MOT中流行的范例习惯将问题分为两个子任务。首先检测每个帧中的对象，其次将他们在不同的框架中联系起来。关联的任务主要通过强线索完成。但是常用的强线索在遇到遮挡和聚类的问题时就会出现退化。如图一所示：</p>
-<p><img src="1.png" alt="图一"></p>
-<p>图中展示了强弱线索的辨别能力。绿色实线箭头表示对一对对象的可靠判别，红色虚线表示不可靠的判别，箭头的值越高，表示鉴别越可靠。</p>
-<p>可以看出大部分情况下强线索可以分辨出检测框之间的区别，但是红色和橙色框出现了大面积重叠，仅靠交并比和外观线索的判别并不可靠，在这种情况下依靠检测框置信度可以得到更好的区分效果。</p>
-<p>作者为了保持SORT简单、在线和实时的特点，使用以下策略利用上述的弱线索：<strong>Tracklet置信度建模(TCM)和高度调制IoU (HMIoU)。</strong></p>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="Weak-Cues-Modeling"><a href="#Weak-Cues-Modeling" class="headerlink" title="Weak Cues Modeling"></a>Weak Cues Modeling</h3><h4 id="Tracklet-Confidence-Modeling"><a href="#Tracklet-Confidence-Modeling" class="headerlink" title="Tracklet Confidence Modeling"></a>Tracklet Confidence Modeling</h4><p>作者改进了传统SORT广泛使用的标准卡尔曼滤波器，增加了两个额外的状态：轨迹置信度c以及其速度分量 $\dot{c}$ :</p>
-<p><img src="2.png" alt></p>
-<p>对于轨迹置信度，作者使用线性预测进行估计。在遮挡发生时，物体的置信度会迅速降低，但是卡尔曼滤波的预测具有滞后性，如图三所示：</p>
-<p><img src="3.png" alt="图三"></p>
-<p>因此，作者使用简单的线性预测来估计轨迹的置信状态。线性建模公式如下：</p>
-<p><img src="4.png" alt="线性建模"></p>
-<p>其中c<sub>trk</sub>表示保存在Tracklet Memory中的Tracklet置信度。</p>
-<p>置信度的代价计算公式如下：</p>
-<p><img src="5.png" alt></p>
-<h4 id="Height-Modulated-IoU"><a href="#Height-Modulated-IoU" class="headerlink" title="Height Modulated IoU"></a>Height Modulated IoU</h4><p>高度状态在两个方面增强了关联。首先，物体的高度在一定程度上反映了深度信息。对于DanceTrack这样的数据集，检测框的高度主要取决于物体与相机之间的距离。这使得高度状态成为区分高度重叠对象的有效线索。其次，高度状态对不同姿态具有较强的鲁棒性，是一种准确估计的状态，是物体的高质量表征。</p>
-<p>两个方框分别定义为（x<sup>1</sup><sub>1</sub>, y<sup>1</sup><sub>1</sub>, x<sup>1</sup><sub>2</sub>, y<sup>1</sup><sub>2</sub>）,（x<sup>2</sup><sub>1</sub>, y<sup>2</sup><sub>1</sub>, x<sup>2</sup><sub>2</sub>, y<sup>2</sup><sub>2</sub>）</p>
-<p>则可以通过基于高度度量计算IoU来生成高度IoU (HIoU)，如下图所示：</p>
-<p><img src="6.png" alt></p>
-<p><img src="7.png" alt></p>
-<h3 id="Hybrid-SORT"><a href="#Hybrid-SORT" class="headerlink" title="Hybrid-SORT"></a>Hybrid-SORT</h3><h4 id="Robust-Observation-Centric-Momentum"><a href="#Robust-Observation-Centric-Momentum" class="headerlink" title="Robust Observation-Centric Momentum"></a>Robust Observation-Centric Momentum</h4><p>在OC-SORT中，OCM考虑目标中心的速度方向。使用的成本度量是轨迹速度方向θ<sub>t</sub>与轨迹到探测速度方向θ<sub>d</sub>之间的绝对差值，以弧度形式表示为∆θ = |θ<sub>t</sub> - θ<sub>d</sub>|。轨迹波速度方向由轨迹波中两个时间间隔∆t的盒中心获得，轨迹波到检测的速度方向由轨迹波历史盒和新检测盒的中心获得。给定两个点(u1, v1)和(u2, v2)，速度方向按下图所示公式计算。然而，原始OCM的建模容易受到固定时间间隔和稀疏点(即只有目标中心)引起的噪声的影响。</p>
-<p><img src="8.png" alt></p>
-<p>作者通过引入更加鲁棒的速度方向来改进OCM，称之为ROCM，修改包括两个方面。首先，将3帧的固定时间间隔扩展为1 ~ 3的多个时间间隔的叠加；其次，我们用物体的四个角代替它的中心点来计算速度方向。对于多个时间区间和点，ROCM的计算公式如下式所示。</p>
-<p><img src="9.png" alt></p>
-<p>从Figure4可以看出，对于运动复杂的物体，拐角的速度方向保持高度相似，而中心的速度方向几乎相反。</p>
-<p><img src="10.png" alt="Figure4"></p>
-<h4 id="Appearance-Modeling"><a href="#Appearance-Modeling" class="headerlink" title="Appearance Modeling"></a>Appearance Modeling</h4><p>ReID模型遵循BoT-SORT，首先检测对象，然后将结果裁剪的补丁提供给ReID模型。我们使用指数移动平均(EMA)对轨迹图外观信息建模，并利用余弦距离作为度量来计算轨迹图和检测外观特征之间的成本C<sub>Appr</sub>。</p>
-<h4 id="Algorithm-Framework"><a href="#Algorithm-Framework" class="headerlink" title="Algorithm Framework"></a>Algorithm Framework</h4><p>关联阶段主要包括三个阶段:第一阶段是高置信度对象的关联阶段，第二阶段是低置信度对象的关联阶段(ByteTrack中的BYTE)，第三阶段是用最后一次检测恢复丢失的轨迹(OC-SORT中的OCR)。</p>
-<p>考虑到所有的强弱线索，最终的成本矩阵为：</p>
-<p><img src="11.png" alt></p>
-<hr>
-
-      </div>
-      <div class="post-tags-categories">
-        
-        <div class="tags">
-          
-            <a href="/tags/MOT/" class="">
-              MOT
-            </a>
-          
-            <a href="/tags/python/" class="">
-              python
-            </a>
-          
-        </div>
-        
-      </div>
-      
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>author:  </strong>Xinhang Niu</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>link:  </strong>
-    <a href="/2024/03/25/Hybridsort总结/" target="_blank" title="Hybridsort总结">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/03/25/Hybridsort总结/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>Copyright notice:   </strong>
-      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      reprint policy. If reproduced, please indicate source!
-    </li>
-  </ul>
-<div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
-    
-      <!-- 文章详情页的上一页和下一页 -->
-<div class="post-nav">
-
-
-
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-    </div>
-    <a href="/2024/04/08/DeconfuseTrack%E6%80%BB%E7%BB%93/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> Prev:
-        <div class="title-text">Deconfuse Track总结</div>
-      </div>
-      
-      <!-- <div class="content">
-        贴一个原文链接
-很可惜这篇文章的代码没有开源
-
-Abstract在多目标跟踪中，准确的数据关联十分重要，但是现有的方法大
-      </div> -->
-    </a>
-  </div>
-
-
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload" src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" src="" alt="">
-    </div>
-    <a href="/2024/03/15/OC-SORT%E6%80%BB%E7%BB%93/" class="post-nav-link">
-      <div class="title">
-        Next: <i class="fas fa-angle-right"></i>
-        <div class="title-text">OC-SORT总结</div>
-      </div>
-      <!-- <div class="content">
-        贴一下原文链接参考：https://blog.csdn.net/wjpwjpwjp0831/article/detail
-      </div> -->
-    </a>
-  </div>
-
-</div>
-
-    
-    
-
-    <!-- 打赏 -->
-    
-
-    <!-- 分享 -->
-    
-      <!-- https://github.com/overtrue/share.js -->
-<!-- 文章详情页的分享 -->
-<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-
-<script src="/js/shareJs/social-share.min.js"></script>
-</script>
-
-<style>
-  .social-share {
-    margin: 20px 0;
+    <span class="title" id="tag-header-desc"></span>
+    <script>
+  function typedFn() {
+    const el = '#tag-header-desc';
+    const type = 'tagDetail';
+    let desc = '越努力越幸运'
+    var typed = new Typed(el, {
+      strings: [desc],
+      startDelay: 100,
+      typeSpeed: 100,
+      loop: true,
+      backSpeed: 50,
+      showCursor: true
+    });
   }
-</style>
-
-
-    
-    
-    <!-- 评论 -->
-    <!-- 评论 -->
-
-  <div id="myComment">
-    
-      
-<section id="comments" style="padding: 1em;"
-	class="animated bounceInUp">
-	<div id="vcomment" class="comment"></div>
-</section>
-<style>
-	#comments {
-		background: rgba(255,255,255,0.9);
-	}
-	#veditor {
-		background-image: url('https://img.zcool.cn/community/01a253594c71cfa8012193a329a77f.gif');
-		background-size: contain;
-		background-repeat: no-repeat;
-		background-position: right;
-		background-color: rgba(255, 255, 255, 0);
-		resize: vertical;
-	}
-	#veditor:focus{
-		background-position-y: 200px;
-		transition: all 0.2s ease-in-out 0s;
-	}
-	#vcomment .vcards .vcard .vh .vhead .vtag.vvisitor {
-		background-color: #42b983;
-	}
-	.v[data-class=v] .vbtn:active, .v[data-class=v] .vbtn:hover {
-		color: #42b983;
-		border-color: #42b983;
-	}
-	#vcomment .vcards .vcard .vhead .vsys i {
-		display: none;
-	}
-	/* 底部valine链接 */
-	#vcomment .vpower {
-		display: none;
-	}
-	
-	/* 底下注释是修改 名称和邮箱和网址输入框的样式 */
-	/* #vcomment .vheader {
-		display: flex;
-		justify-content: space-around;
-	}
-	
-	#vcomment .vheader .vnick {
-		width: 31%;
-		border: 2px solid #dedede;
-		padding-left: 10px;
-		padding-right: 10px;
-		border-radius: 5px
-	}
-
-	#vcomment .vheader .vmail {
-		width: 31%;
-		border: 2px solid #dedede;
-		padding-left: 10px;
-		padding-right: 10px;
-		border-radius: 5px
-	}
-
-	#vcomment .vheader .vlink {
-		width: 31%;
-		border: 2px solid #dedede;
-		padding-left: 10px;
-		padding-right: 10px;
-		border-radius: 5px
-	} */
-
-	img.vimg {
-		transition: all 1s;
-		/* 头像旋转时间为 1s */
-	}
-
-	img.vimg:hover {
-		transform: rotate(360deg);
-		-webkit-transform: rotate(360deg);
-		-moz-transform: rotate(360deg);
-		-o-transform: rotate(360deg);
-		-ms-transform: rotate(360deg);
-	}
-
-	#vcomment .vcards .vcard {
-		padding: 15px 20px 0 20px;
-		border-radius: 10px;
-		margin-bottom: 15px;
-		box-shadow: 0 0 4px 1px rgba(0, 0, 0, .12);
-		transition: all .3s
-	}
-
-	#vcomment .vcards .vcard:hover {
-		box-shadow: 0 0 8px 3px rgba(0, 0, 0, .12)
-	}
-
-	#vcomment .vcards .vcard .vh .vcard {
-		border: none;
-		box-shadow: none;
-	}
-</style>
+  typedFn();
+</script>
     
   </div>
+  <div class="mask-box"></div>
+</div>
 
-<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
 
 
+<div class="tag">
+  <div class="tag-name">
+    <div class="name" style="background-color: #85C1E9;">Latex category</div>
   </div>
+  <!-- 每一篇文章卡片 -->
+  <!-- hash算法 -->
 
-  <!-- 目录 -->
-  <aside id='l_side'>
+<section class="posts">
   
     
-      <section class="widget side_blogger">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img src='https://pic2.zhimg.com/80/v2-42b72d5ebee4b8d8aa70d9687effe87b_1440w.webp'/>
+    <article class="post reveal" style="flex-direction: row-reverse;   ">
+      <div class="post-main">
+        <div class="post-info">
+          <div class="post-time">
+            <i class="fas fa-clock" aria-hidden="true"></i>
+            <span class="post-time">2024-05-22</span>
+          </div>
+          <div class="post-title">
+            <a class="post-title-link" href="/2024/05/22/latex%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE/">Hexo使用Mathjax时常用的字体设置</a>
+          </div>
+          <div class="post-meta">
+            <div class="post-tags">
+              <!-- 文章详情页的标签 -->
+
+    <i class="iconfont icontag"></i>
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Latex/" rel="tag">Latex</a></li></ul>
+
+            </div>
+            <div class="post-categories">
+              <!-- 文章详情页的分类 -->
+
+<div class="article-category">
+  <i class="iconfont iconbookmark1"></i>
+  <a class="article-category-link" href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">问题记录</a>
+</div>
+
+
+            </div>
+          </div>
+          <div class="post-img-mobile">
+            <a href="/2024/05/22/latex%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE/" style="background-size: cover; 
+              background-position: center center;">
+              <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
+            </a>
+          </div>
+          <div class="post-content">
+            本文主要介绍 LATEX，MathJax 语法的字体美化，包括字体种类，字体大小，字体特效，字体颜色等。
+
+字体种类设置\字体种类{文本}| 字体种类                         | 表示方法              
+          </div>
+        </div>
+        <div class="post-more">
+          <a href="/2024/05/22/latex%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE/">
+            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
+          </a>
+        </div>
+      </div>
+      <div class="post-img">
+        <a href="/2024/05/22/latex%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE/" style="background-size: cover; 
+          background-position: center center;">
+          <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
         </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>小牛的学习日记</h2>
-        
-        
-          <p>好好学习 天天向上</p>
-
-        
-        
       </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="https://github.com/Nxhhhh/Nxhhhh.github.io"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/1224317198@qq.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/Nxhhhh/Nxhhhh.github.io"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=1224317198"
-              class="social fab fa-qq flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
+    </article>
+  
 </section>
-
-    
-  
-  
-  
-
-  <div class="layout_sticky">    
-    
-      
-<section class="widget side_toc">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="toc-main">
-      <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Weak-Cues-Modeling"><span class="toc-text">Weak Cues Modeling</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Tracklet-Confidence-Modeling"><span class="toc-text">Tracklet Confidence Modeling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Height-Modulated-IoU"><span class="toc-text">Height Modulated IoU</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hybrid-SORT"><span class="toc-text">Hybrid-SORT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Robust-Observation-Centric-Momentum"><span class="toc-text">Robust Observation-Centric Momentum</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Appearance-Modeling"><span class="toc-text">Appearance Modeling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Algorithm-Framework"><span class="toc-text">Algorithm Framework</span></a></li></ol></li></ol></li></ol> -->
-        <div class="toc"></div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- 手机端目录按钮 -->
-<div id="toc-mobile-btn">
-  <i class="fas fa-list-ul" aria-hidden="true"></i>
 </div>
 
-      
-  <section class="widget side_recent_post">
-    
-  <header>
-    
-      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      
-      <!-- hash算法 -->
-      
-      <div class="aside-list">
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/05/22/latex%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-22</span>
-                
-              </div>
-              <a class="post-title" href="/2024/05/22/latex%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE/">Hexo使用Mathjax时常用的字体设置</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/05/17/debug/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-17</span>
-                
-              </div>
-              <a class="post-title" href="/2024/05/17/debug/">【转载】如何在终端进行debug调试</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/04/17/Long-tail/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">04-17</span>
-                
-              </div>
-              <a class="post-title" href="/2024/04/17/Long-tail/">Delving into the Trajectory Long-tail Distribution for Muti-object Tracking 总结</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/04/15/UncertaintyTrack%E6%80%BB%E7%BB%93/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">04-15</span>
-                
-              </div>
-              <a class="post-title" href="/2024/04/15/UncertaintyTrack%E6%80%BB%E7%BB%93/">UncertaintyTrack Exploiting Detection and Localization Uncertainty in Multi-Object Tracking</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/04/08/DeconfuseTrack%E6%80%BB%E7%BB%93/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">04-08</span>
-                
-              </div>
-              <a class="post-title" href="/2024/04/08/DeconfuseTrack%E6%80%BB%E7%BB%93/">Deconfuse Track总结</a>
-            </div>
-          </div>
-        
-      </div>
-    </div>
-  </section>
-
-    
-  </div>
-</aside>
-
-  <!-- 图片放大 Wrap images with fancybox support -->
-  <script src="/js/wrapImage.js"></script>
-</div>
-
-<!-- 文章详情页背景图 -->
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
-	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
-	<transition-group tag="ul" :name="names">
-		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-			<img :src="image" class="bg-swiper-img no-lazy">
-		</li>
-	</transition-group>
-</div>
-<script>
-	var vm = new Vue({
-		el: '#appBgSwiper',
-		data: {
-			names: '' || 'fade' || 'fade', // translate-fade fade
-			mark: 0,
-			img: [],
-			bgColor: '',
-			time: null
-		},
-		methods: {   //添加方法
-			change(i, m) {
-				if (i > m) {
-					// this.names = 'fade';
-				} else if (i < m) {
-					// this.names = 'fade';
-				} else {
-					return;
-				}
-				this.mark = i;
-			},
-			prev() {
-				// this.names = 'fade';
-				this.mark--;
-				if (this.mark === -1) {
-					this.mark = 3;
-					return
-				}
-			},
-			next() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			autoPlay() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			play() {
-				let bgImgDelay = '' || '180000'
-				let delay = parseInt(bgImgDelay) || 180000;
-				this.time = setInterval(this.autoPlay, delay);
-			},
-			enter() {
-				clearInterval(this.time);
-			},
-			leave() {
-				this.play();
-			}
-		},
-		created() {
-			this.play()
-		},
-		beforeDestroy() {
-			clearInterval(this.time);
-		},
-		mounted() {
-			let prop = '' || '';
-			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
-			if (isImg) {
-				let img = prop.split(',');
-				let configRoot = '/'
-				let arrImg = [];
-				img.forEach(el => {
-					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-					var objExp = new RegExp(Expression);
-
-					if (objExp.test(el)) {
-						// http or https
-						arrImg.push(el);
-					} else {
-						// 非http or https开头
-						// 本地文件
-						let firstStr = el.charAt(0);
-						if (firstStr == '/') {
-							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-						}
-						el = configRoot + el;
-						arrImg.push(el);
-					}
-				})
-				this.img = arrImg;
-			} else {
-				this.bgColor = prop;
-			}
-		}
-	})
-</script>
-
-<style>
-	.bg-swiper-box {
-		position: absolute;
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-
-	.bg-swiper-img {
-		object-fit: cover;
-		width: 100%;
-		height: 100%;
-	}
-</style>
-
-
-  <script>
-  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    // 文章章节标题不能为 “MathJax” ，否则会报错。
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-
-
-
-  <script>
-  function loadMermaid() {
-    if (document.getElementsByClassName('mermaid').length) {
-      if (window.mermaidJsLoad) mermaid.init()
-      else {
-        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
-          window.mermaidJsLoad = true
-          mermaid.initialize({
-            theme: 'default',
-          })
-          if ('true') {
-            mermaid.init();
-          }
-        })
-      }
-    }
-  };
-  document.addEventListener("DOMContentLoaded", function () {
-    loadMermaid();
-  })
-
-  document.addEventListener('pjax:complete', function () {
-    loadMermaid();
-  })
+<div class="w-70">
   
-</script>
-
+</div>
 
       </main>
     </div>
