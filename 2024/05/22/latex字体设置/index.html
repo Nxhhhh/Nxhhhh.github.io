@@ -413,7 +413,7 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 620 |
+            <i class="fas fa-file-text-o"></i> Words: 618 |
           </span>
   
           <span class="min2read">
@@ -444,11 +444,291 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>本文主要介绍 LATEX，MathJax 语法的字体美化，包括<strong>字体种类，字体大小，字体特效，字体颜色等</strong>。</p>
+        <p>主要介绍 LATEX，MathJax 语法的字体美化，包括<strong>字体种类，字体大小，字体特效，字体颜色等</strong>。</p>
 <hr>
-<h2 id="字体种类设置"><a href="#字体种类设置" class="headerlink" title="字体种类设置"></a>字体种类设置</h2><p>\字体种类{文本}<br>| 字体种类                         | 表示方法                         | 预览                             |<br>| ———————————————— | ———————————————— | ———————————————— |<br>| 默认字体                         | ABCDEFGHIJKLMNOPQRSTUVWXYZ       | ABCDEFGHIJKLMNOPQRSTUVWXYZ       |<br>|                                 | abcdefghijklmnopqrstuvwxyz       | abcdefghijklmnopqrstuvwxyz       |<br>| 数学斜体                         | ${ABCDEFGHIJKLMNOPQRSTUVWXYZ}$| ${ABCDEFGHIJKLMNOPQRSTUVWXYZ}$|<br>|                                  | ${abcdefghijklmnopqrstuvwxyz}$ | ${abcdefghijklmnopqrstuvwxyz}$ |<br>| 意大利体                         | \it{ABCDEFGHIJKLMNOPQRSTUVWXYZ}  | $\it{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$     |<br>|                                  | \it{abcdefghijklmnopqrstuvwxyz}       | $ \it{abcdefghijklmnopqrstuvwxyz}$  |<br>| 罗马体                           | \rm{ABCDEFGHIJKLMNOPQRSTUVWXYZ}  | $\rm{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$      |<br>|                               | \rm{abcdefghijklmnopqrstuvwxyz }      | $\rm{abcdefghijklmnopqrstuvwxyz}$  |<br>| 花体                             | \cal{ABCDEFGHIJKLMNOPQRSTUVWXYZ} | $\cal{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$   |<br>|                                    | \cal{abcdefghijklmnopqrstuvwxyz}  | $\cal{abcdefghijklmnopqrstuvwxyz}$ |<br>| 打字机体                          | \tt{ABCDEFGHIJKLMNOPQRSTUVWXYZ}   | $\tt{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$       |<br>|                                  |  \tt{abcdefghijklmnopqrstuvwxyz}         | $\tt{abcdefghijklmnopqrstuvwxyz}$   |<br>| 粗体                              | \bf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}   | $\bf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$        |<br>|                                     | \bf{abcdefghijklmnopqrstuvwxyz}      | $\bf{abcdefghijklmnopqrstuvwxyz} $  |<br>| 黑板粗体                          | \Bbb{ABCDEFGHIJKLMNOPQRSTUVWXYZ}  | $\Bbb{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$     |<br>|                                       | \Bbb{abcdefghijklmnopqrstuvwxyz}     | $\Bbb{abcdefghijklmnopqrstuvwxyz}$ |<br>| 等线体                            | \sf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}   | $\sf{ABCDEFGHIJKLMNOPQRSTUVWXYZ } $      |<br>|                                    |\sf{abcdefghijklmnopqrstuvwxyz}    | $\sf{abcdefghijklmnopqrstuvwxyz} $  |<br>| 旧德式体                          | \frak{ABCDEFGHIJKLMNOPQRSTUVWXYZ} | $\frak{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$       |<br>|                                    | \frak{abcdefghijklmnopqrstuvwxyz}     | $\frak{abcdefghijklmnopqrstuvwxyz} $|<br>| 手写体                          | \scr{ABCDEFGHIJKLMNOPQRSTUVWXYZ} | $\frak{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$       |<br>|                                    | \scr{abcdefghijklmnopqrstuvwxyz}     | $\scr{abcdefghijklmnopqrstuvwxyz} $|</p>
-<h2 id="字体大小设置"><a href="#字体大小设置" class="headerlink" title="字体大小设置"></a>字体大小设置</h2><p>\字体大小{文本}<br>| 字体大小 | 字宽(pt)                        | 表示方法           | 预览  |<br>| ———— | ———————————————- | ————————— | ——- |<br>| 小初     | 36pts                         | \Huge{小初字体(36pts)} | $\Huge{小初字体(36pts)}$  |<br>| 一号    | 27.5pts                         | \huge{一号字体(27.5pts)} | $\huge{一号字体(27.5pts)}$  |<br>| 二号     | 21pts                         | \LARGE{二号字体(21pts)} | $\LARGE{二号字体(21pts)}$  |<br>| 三号     | 15.75pts                         | \Large{三号字体(15.75pts)} | $\Large{三号字体(15.75pts)}$  |<br>| 四号     | 13.75pts                         | \large{四号字体(13.75pts)} | $\large{四号字体(13.75pts)}$  |<br>| 小四     | 12pts                         | \normalsize{小四字体(12pts)} | $\normalsize{小四字体(12pts)}$  |<br>| 默认     | 12pts                         |默认字体(12pts) | 默认字体(12pts)|<br>| 五号     | 10.5pts                         | \small{五号字体(10.5pts)} | $\small{五号字体(10.5pts)}$  |<br>| 六号     | 7.875pts                         | \scriptsize{六号字体(7.875pts)} | $\scriptsize{六号字体(7.875pts)}$  |<br>| 七号     | 5.25pts                         | \tiny{七号字体(5.25pts)} | $\tiny{七号字体(5.25pts)}$  |</p>
-<h2 id="字体特效设置"><a href="#字体特效设置" class="headerlink" title="字体特效设置"></a>字体特效设置</h2><p>\color{颜色}{文本}<br>| 颜色           | 表示方法                              | 预览                                  |<br>| ——————— | ——————————————————- | ——————————————————- |<br>| 黑色(black)    | \color{black}{黑色(\text{black})}     | $\color{black}{黑色(\text{black})}  $   |<br>| 红色(red)      | \color{red}{红色(\text{red})}         | $\color{red}{红色(\text{red})}       $  |<br>| 黄色(yellow)   | \color{yellow}{黄色(\text{yellow})}   | $\color{yellow}{黄色(\text{yellow})}$   |<br>| 蓝色(blue)     | \color{blue}{蓝色(\text{blue})}       | $\color{blue}{蓝色(\text{blue})}   $    |<br>| 灰色(grey)     | \color{grey}{灰色(\text{grey})}       | $\color{grey}{灰色(\text{grey})}   $    |<br>| 白色(white)    | \color{white}{白色(\text{white})}     | $\color{white}{白色(\text{white})}$     |<br>| 绿色(green)    | \color{green}{绿色(\text{green})}     | $\color{green}{绿色(\text{green})}    $ |<br>| 紫色(green)    | \color{purple}{紫色(\text{purple})}   | $\color{purple}{紫色(\text{purple})} $  |<br>| 紫红色(maroon) | \color{maroon}{紫红色(\text{maroon})} | $\color{maroon}{紫红色(\text{maroon})} $|<br>| 橄榄绿(olive)  | \color{olive}{橄榄绿(\text{olive})}   | $\color{olive}{橄榄绿(\text{olive})}   $|<br>| 蓝绿色(teal)   | \color{teal}{蓝绿色(\text{teal})}     | $\color{teal}{蓝绿色(\text{teal})}    $ |<br>| 银色(silver)   | \color{silver}{银色(\text{silver})}   | $\color{silver}{银色(\text{silver})} $  |<br>| 浅绿色(lime)   | \color{lime}{浅绿色(\text{lime})}     | $\color{lime}{浅绿色(\text{lime})}  $   |<br>| 藏青色(navy)   | \color{navy}{藏青色(\text{navy})}     | $\color{navy}{藏青色(\text{navy})} $    |</p>
+<h2 id="字体种类设置"><a href="#字体种类设置" class="headerlink" title="字体种类设置"></a>字体种类设置</h2><p>\字体种类{文本}</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>字体种类</th>
+<th>表示方法</th>
+<th>预览</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>默认字体</td>
+<td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+<td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+</tr>
+<tr>
+<td></td>
+<td>abcdefghijklmnopqrstuvwxyz</td>
+<td>abcdefghijklmnopqrstuvwxyz</td>
+</tr>
+<tr>
+<td>数学斜体</td>
+<td>${ABCDEFGHIJKLMNOPQRSTUVWXYZ}$</td>
+<td>${ABCDEFGHIJKLMNOPQRSTUVWXYZ}$</td>
+</tr>
+<tr>
+<td></td>
+<td>${abcdefghijklmnopqrstuvwxyz}$</td>
+<td>$ {abcdefghijklmnopqrstuvwxyz}$</td>
+</tr>
+<tr>
+<td>意大利体</td>
+<td>\it{ABCDEFGHIJKLMNOPQRSTUVWXYZ}</td>
+<td>$ \it{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$</td>
+</tr>
+<tr>
+<td></td>
+<td>\it{abcdefghijklmnopqrstuvwxyz}</td>
+<td>$ \it{abcdefghijklmnopqrstuvwxyz}$</td>
+</tr>
+<tr>
+<td>罗马体</td>
+<td>\rm{ABCDEFGHIJKLMNOPQRSTUVWXYZ}</td>
+<td>$\rm{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$</td>
+</tr>
+<tr>
+<td></td>
+<td>\rm{abcdefghijklmnopqrstuvwxyz }</td>
+<td>$\rm{abcdefghijklmnopqrstuvwxyz}$</td>
+</tr>
+<tr>
+<td>花体</td>
+<td>\cal{ABCDEFGHIJKLMNOPQRSTUVWXYZ}</td>
+<td>$\cal{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$</td>
+</tr>
+<tr>
+<td></td>
+<td>\cal{abcdefghijklmnopqrstuvwxyz}</td>
+<td>$\cal{abcdefghijklmnopqrstuvwxyz}$</td>
+</tr>
+<tr>
+<td>打字机体</td>
+<td>\tt{ABCDEFGHIJKLMNOPQRSTUVWXYZ}</td>
+<td>$\tt{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$</td>
+</tr>
+<tr>
+<td></td>
+<td>\tt{abcdefghijklmnopqrstuvwxyz}</td>
+<td>$\tt{abcdefghijklmnopqrstuvwxyz}$</td>
+</tr>
+<tr>
+<td>粗体</td>
+<td>\bf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}</td>
+<td>$\bf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$</td>
+</tr>
+<tr>
+<td></td>
+<td>\bf{abcdefghijklmnopqrstuvwxyz}</td>
+<td>$\bf{abcdefghijklmnopqrstuvwxyz} $</td>
+</tr>
+<tr>
+<td>黑板粗体</td>
+<td>\Bbb{ABCDEFGHIJKLMNOPQRSTUVWXYZ}</td>
+<td>$\Bbb{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$</td>
+</tr>
+<tr>
+<td></td>
+<td>\Bbb{abcdefghijklmnopqrstuvwxyz}</td>
+<td>$\Bbb{abcdefghijklmnopqrstuvwxyz}$</td>
+</tr>
+<tr>
+<td>等线体</td>
+<td>\sf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}</td>
+<td>$\sf{ABCDEFGHIJKLMNOPQRSTUVWXYZ } $</td>
+</tr>
+<tr>
+<td></td>
+<td>\sf{abcdefghijklmnopqrstuvwxyz}</td>
+<td>$\sf{abcdefghijklmnopqrstuvwxyz} $</td>
+</tr>
+<tr>
+<td>旧德式体</td>
+<td>\frak{ABCDEFGHIJKLMNOPQRSTUVWXYZ}</td>
+<td>$\frak{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$</td>
+</tr>
+<tr>
+<td></td>
+<td>\frak{abcdefghijklmnopqrstuvwxyz}</td>
+<td>$\frak{abcdefghijklmnopqrstuvwxyz} $</td>
+</tr>
+<tr>
+<td>手写体</td>
+<td>\scr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}</td>
+<td>$\frak{ABCDEFGHIJKLMNOPQRSTUVWXYZ }$</td>
+</tr>
+<tr>
+<td></td>
+<td>\scr{abcdefghijklmnopqrstuvwxyz}</td>
+<td>$\scr{abcdefghijklmnopqrstuvwxyz} $</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="字体大小设置"><a href="#字体大小设置" class="headerlink" title="字体大小设置"></a>字体大小设置</h2><p>\字体大小{文本}</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>字体大小</th>
+<th>字宽(pt)</th>
+<th>表示方法</th>
+<th>预览</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小初</td>
+<td>36pts</td>
+<td>\Huge{小初字体(36pts)}</td>
+<td>$\Huge{小初字体(36pts)}$</td>
+</tr>
+<tr>
+<td>一号</td>
+<td>27.5pts</td>
+<td>\huge{一号字体(27.5pts)}</td>
+<td>$\huge{一号字体(27.5pts)}$</td>
+</tr>
+<tr>
+<td>二号</td>
+<td>21pts</td>
+<td>\LARGE{二号字体(21pts)}</td>
+<td>$\LARGE{二号字体(21pts)}$</td>
+</tr>
+<tr>
+<td>三号</td>
+<td>15.75pts</td>
+<td>\Large{三号字体(15.75pts)}</td>
+<td>$\Large{三号字体(15.75pts)}$</td>
+</tr>
+<tr>
+<td>四号</td>
+<td>13.75pts</td>
+<td>\large{四号字体(13.75pts)}</td>
+<td>$\large{四号字体(13.75pts)}$</td>
+</tr>
+<tr>
+<td>小四</td>
+<td>12pts</td>
+<td>\normalsize{小四字体(12pts)}</td>
+<td>$\normalsize{小四字体(12pts)}$</td>
+</tr>
+<tr>
+<td>默认</td>
+<td>12pts</td>
+<td>默认字体(12pts)</td>
+<td>默认字体(12pts)</td>
+</tr>
+<tr>
+<td>五号</td>
+<td>10.5pts</td>
+<td>\small{五号字体(10.5pts)}</td>
+<td>$\small{五号字体(10.5pts)}$</td>
+</tr>
+<tr>
+<td>六号</td>
+<td>7.875pts</td>
+<td>\scriptsize{六号字体(7.875pts)}</td>
+<td>$\scriptsize{六号字体(7.875pts)}$</td>
+</tr>
+<tr>
+<td>七号</td>
+<td>5.25pts</td>
+<td>\tiny{七号字体(5.25pts)}</td>
+<td>$\tiny{七号字体(5.25pts)}$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="字体特效设置"><a href="#字体特效设置" class="headerlink" title="字体特效设置"></a>字体特效设置</h2><p>\color{颜色}{文本}</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>颜色</th>
+<th>表示方法</th>
+<th>预览</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>黑色(black)</td>
+<td>\color{black}{黑色(\text{black})}</td>
+<td>$\color{black}{黑色(\text{black})}  $</td>
+</tr>
+<tr>
+<td>红色(red)</td>
+<td>\color{red}{红色(\text{red})}</td>
+<td>$\color{red}{红色(\text{red})}       $</td>
+</tr>
+<tr>
+<td>黄色(yellow)</td>
+<td>\color{yellow}{黄色(\text{yellow})}</td>
+<td>$\color{yellow}{黄色(\text{yellow})}$</td>
+</tr>
+<tr>
+<td>蓝色(blue)</td>
+<td>\color{blue}{蓝色(\text{blue})}</td>
+<td>$\color{blue}{蓝色(\text{blue})}   $</td>
+</tr>
+<tr>
+<td>灰色(grey)</td>
+<td>\color{grey}{灰色(\text{grey})}</td>
+<td>$\color{grey}{灰色(\text{grey})}   $</td>
+</tr>
+<tr>
+<td>白色(white)</td>
+<td>\color{white}{白色(\text{white})}</td>
+<td>$\color{white}{白色(\text{white})}$</td>
+</tr>
+<tr>
+<td>绿色(green)</td>
+<td>\color{green}{绿色(\text{green})}</td>
+<td>$\color{green}{绿色(\text{green})}    $</td>
+</tr>
+<tr>
+<td>紫色(green)</td>
+<td>\color{purple}{紫色(\text{purple})}</td>
+<td>$\color{purple}{紫色(\text{purple})} $</td>
+</tr>
+<tr>
+<td>紫红色(maroon)</td>
+<td>\color{maroon}{紫红色(\text{maroon})}</td>
+<td>$\color{maroon}{紫红色(\text{maroon})} $</td>
+</tr>
+<tr>
+<td>橄榄绿(olive)</td>
+<td>\color{olive}{橄榄绿(\text{olive})}</td>
+<td>$\color{olive}{橄榄绿(\text{olive})}   $</td>
+</tr>
+<tr>
+<td>蓝绿色(teal)</td>
+<td>\color{teal}{蓝绿色(\text{teal})}</td>
+<td>$\color{teal}{蓝绿色(\text{teal})}    $</td>
+</tr>
+<tr>
+<td>银色(silver)</td>
+<td>\color{silver}{银色(\text{silver})}</td>
+<td>$\color{silver}{银色(\text{silver})} $</td>
+</tr>
+<tr>
+<td>浅绿色(lime)</td>
+<td>\color{lime}{浅绿色(\text{lime})}</td>
+<td>$\color{lime}{浅绿色(\text{lime})}  $</td>
+</tr>
+<tr>
+<td>藏青色(navy)</td>
+<td>\color{navy}{藏青色(\text{navy})}</td>
+<td>$\color{navy}{藏青色(\text{navy})} $</td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr>
 <p>记录一下以后就不费劲找了</p>
 
