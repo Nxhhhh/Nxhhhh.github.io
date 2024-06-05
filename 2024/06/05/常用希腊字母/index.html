@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>【代码复现】ByteTrack_Demo | 小牛学习日记</title>
+  <title>latex常用希腊字母 | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -381,21 +381,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        【代码复现】ByteTrack_Demo
+        latex常用希腊字母
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> Published in：2024-03-11 |
+          <i class="fas fa-calendar"></i> Published in：2024-06-05 |
         </span>
       
 
@@ -403,8 +403,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> category：
           
-            <a href="/categories/R-D/" class="post-detail-header_category">
-              R&D
+            <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="post-detail-header_category">
+              问题记录
             </a>
           
         </span>
@@ -413,11 +413,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 689 |
+            <i class="fas fa-file-text-o"></i> Words: 100 |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> Reading time: 2min |
+            <i class="fas fa-clock"></i> Reading time: 1min |
           </span>
   
           
@@ -444,57 +444,162 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <hr>
-<p>记录一下重装系统后的第一个代码复现<br>贴一下源代码的<a href="https://github.com/ifzhang/ByteTrack">链接</a></p>
-<hr>
-<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><h3 id="1-首先安装ByteTrack"><a href="#1-首先安装ByteTrack" class="headerlink" title="1. 首先安装ByteTrack"></a>1. 首先安装ByteTrack</h3><p>创建虚拟环境后执行下面语句：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ifzhang/ByteTrack.git</span><br><span class="line">cd ByteTrack</span><br></pre></td></tr></table></figure>
-<p>如果不使用国内的镜像源，在执行这一步的时候可能会有很多报错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
-<p>因此我使用镜像源安装：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install whatever gdown -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
-<p>然后执行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py develop</span><br></pre></td></tr></table></figure>
-<p>如果在这一步报错，编辑setup.py，将：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">with open(&quot;README.md&quot;, &quot;r&quot;) as f:</span><br></pre></td></tr></table></figure>
-<p>改为：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">with open(&quot;README.md&quot;, &quot;r&quot;, encoding=&#x27;utf_8&#x27;) as f:</span><br></pre></td></tr></table></figure>
-<h3 id="2-安装pycocotools"><a href="#2-安装pycocotools" class="headerlink" title="2.安装pycocotools."></a>2.安装pycocotools.</h3><p>如果直接执行这一步会报错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install cython; pip3 install &#x27;git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI&#x27;</span><br></pre></td></tr></table></figure>
-<p>需要换一种安装方式</p>
-<p>这一部分参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/hhh590_hh/article/details/126916833">https://blog.csdn.net/hhh590_hh/article/details/126916833</a></p>
-<p>1）首先安装cython:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install cython gdown -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
-<p>2）然后在<a href="https://github.com/pdollar/coco.git">https://github.com/pdollar/coco.git</a>下载源码压缩包，解压后放在虚拟环境的site-packages文件下，</p>
-<p>3）打开cocoapi-master\pythonAPI中的setup.py文件，删除下面的两个参数：<br><img src="1.png" alt><br><img src="2.png" alt></p>
-<p>4）在anaconda prompt中cd到刚才的cocoapi-master\pythonAPI文件夹下，输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python setup.py build_ext --inplace</span><br><span class="line">python setup.py build_ext install</span><br></pre></td></tr></table></figure>
-<p>如果第一步显示“已完成代码的生成”，第二步显示“Finished processing dependencies for pycocotools==2.0”则表示安装成功。</p>
-<h3 id="3-安装cython-bbox"><a href="#3-安装cython-bbox" class="headerlink" title="3.安装cython_bbox"></a>3.安装cython_bbox</h3><p>依旧是用国内镜像源：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install cython_bbox gdown -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
-<h2 id="运行Demo"><a href="#运行Demo" class="headerlink" title="运行Demo"></a>运行Demo</h2><h3 id="1-下载一个预训练模型，官网给出了很多个模型，在这里我使用的是："><a href="#1-下载一个预训练模型，官网给出了很多个模型，在这里我使用的是：" class="headerlink" title="1.下载一个预训练模型，官网给出了很多个模型，在这里我使用的是："></a>1.下载一个预训练模型，官网给出了很多个模型，在这里我使用的是：</h3><p><img src="3.png" alt><br>贴一下作者给的<a target="_blank" rel="noopener" href="https://pan.baidu.com/share/init?surl=OJKrcQa_JP9zofC6ZtGBpw">链接</a>，提取码图上有。</p>
-<p>将下载下来的文件放在pretrained文件夹下，如果没有这个文件夹就自己创建一个。</p>
-<h3 id="2-修改源码文件地址"><a href="#2-修改源码文件地址" class="headerlink" title="2.修改源码文件地址"></a>2.修改源码文件地址</h3><p>打开demo_track.py文件，修改第30行的输入文件地址，将其改为绝对地址：<br>如果想跑自己下载的视频也可以在这里改为自己的视频文件：<br><img src="4.png" alt></p>
-<h3 id="3-跑通Demo"><a href="#3-跑通Demo" class="headerlink" title="3.跑通Demo"></a>3.跑通Demo</h3><p>cd到项目文件夹，输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/demo_track.py video -f G:/pycharmprojects/pythonProject/ByteTrack-main/exps/example/mot/yolox_x_mix_det.py -c G:/pycharmprojects/pythonProject/ByteTrack-main/pretrained/bytetrack_x_mot17.pth.tar  --fuse --save_result</span><br></pre></td></tr></table></figure>
-<p><strong>注意，我在这里输入的都是文件的绝对地址，并且对比作者给出的demo运行方法，我删除了fp16。</strong></p>
-<p>fp16虽然可以使运行速度加快，但是加上fp16可能会导致结果没有检测框，<del>并且检测速度也并没有加快</del> 。</p>
-<p>等待运行结束后结果会保存在G:\pycharmprojects\pythonProject\ByteTrack-main\YOLOX_outputs\yolox_x_mix_det\track_vis下。<br><img src="5.png" alt><br><img src="6.png" alt></p>
-<p>至此，demo就运行完成了</p>
-<hr>
-<p>后续可能会继续记录训练的过程，也可能不会^ - ^。</p>
+        <p>latex列展示的是小写，如果需要大写只需要将首字母大写即可。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>小写</th>
+<th>大写</th>
+<th>latex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>α</td>
+<td>A</td>
+<td>\alpha</td>
+</tr>
+<tr>
+<td>β</td>
+<td>B</td>
+<td>\beta</td>
+</tr>
+<tr>
+<td>γ</td>
+<td>Γ</td>
+<td>\gamma</td>
+</tr>
+<tr>
+<td>δ</td>
+<td>Δ</td>
+<td>\delta</td>
+</tr>
+<tr>
+<td>ϵ</td>
+<td>E</td>
+<td>\epsilon                     </td>
+</tr>
+<tr>
+<td>ζ</td>
+<td>Z</td>
+<td>\zeta</td>
+</tr>
+<tr>
+<td>ν</td>
+<td>N</td>
+<td>\nu</td>
+</tr>
+<tr>
+<td>ξ</td>
+<td>Ξ</td>
+<td>\xi</td>
+</tr>
+<tr>
+<td>ο</td>
+<td>O</td>
+<td>\omicron</td>
+</tr>
+<tr>
+<td>π</td>
+<td>Π</td>
+<td>\pi</td>
+</tr>
+<tr>
+<td>ρ</td>
+<td>P</td>
+<td>\rho</td>
+</tr>
+<tr>
+<td>σ</td>
+<td>Σ</td>
+<td>\sigma</td>
+</tr>
+<tr>
+<td>η</td>
+<td>H</td>
+<td>\eta</td>
+</tr>
+<tr>
+<td>θ</td>
+<td>Θ</td>
+<td>\theta</td>
+</tr>
+<tr>
+<td>ι</td>
+<td>I</td>
+<td>\iota</td>
+</tr>
+<tr>
+<td>κ</td>
+<td>K</td>
+<td>\kappa</td>
+</tr>
+<tr>
+<td>λ</td>
+<td>Λ</td>
+<td>\lambda</td>
+</tr>
+<tr>
+<td>μ</td>
+<td>M</td>
+<td>\mu</td>
+</tr>
+<tr>
+<td>τ</td>
+<td>T</td>
+<td>\tau</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$\upsilon$</td>
+<td>$\Upsilon$</td>
+<td>\upsilon</td>
+</tr>
+<tr>
+<td>ϕ</td>
+<td>Φ</td>
+<td>\phi</td>
+</tr>
+<tr>
+<td>χ</td>
+<td>X</td>
+<td>\chi</td>
+</tr>
+<tr>
+<td>ψ</td>
+<td>Ψ</td>
+<td>\psi</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ω</td>
+<td>Ω</td>
+<td>\omega</td>
+</tr>
+</tbody>
+</table>
+</div>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/MOT/" class="">
-              MOT
+            <a href="/tags/Hexo/" class="">
+              Hexo
             </a>
           
-            <a href="/tags/python/" class="">
-              python
+            <a href="/tags/Latex/" class="">
+              Latex
             </a>
           
         </div>
@@ -508,7 +613,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
-    <a href="/2024/03/11/ByteTrack-Demo/" target="_blank" title="【代码复现】ByteTrack_Demo">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/03/11/ByteTrack-Demo/</a>
+    <a href="/2024/06/05/常用希腊字母/" target="_blank" title="latex常用希腊字母">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/06/05/常用希腊字母/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright notice:   </strong>
@@ -526,40 +631,22 @@
   
   
   
-    
-    <div class="post-nav-prev post-nav-item">
-      <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" alt="">
-      </div>
-      <a href="/2024/03/15/OC-SORT%E6%80%BB%E7%BB%93/" class="post-nav-link">
-        <div class="title">
-          <i class="fas fa-angle-left"></i> Next:
-          <div class="title-text">OC-SORT总结</div>
-        </div>
-        <!-- <div class="content">
-          贴一下原文链接参考：https://blog.csdn.net/wjpwjpwjp0831/article/detail
-        </div> -->
-      </a>
-    </div>
-  
   
   
     
     <div class="post-nav-next post-nav-item">
       <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
+        <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
       </div>
-      <a href="/2024/03/05/C++/" class="post-nav-link">
+      <a href="/2024/05/22/latex%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE/" class="post-nav-link">
         <div class="title">
           Prev: <i class="fas fa-angle-right"></i>
-          <div class="title-text">【转载】C++讲义</div>
+          <div class="title-text">Hexo使用Mathjax时常用的字体设置</div>
         </div>
         <!-- <div class="content">
-          C++基础入门1 C++初识1.1  第一个C++程序编写一个C++程序总共分为4个步骤
+          主要介绍 LATEX，MathJax 语法的字体美化，包括字体种类，字体大小，字体特效，字体颜色等。
 
-创建项目
-创建文件
-编写代码
+字体种类设置\字
         </div> -->
       </a>
     </div>
@@ -787,7 +874,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-text">环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%A6%96%E5%85%88%E5%AE%89%E8%A3%85ByteTrack"><span class="toc-text">1. 首先安装ByteTrack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85pycocotools"><span class="toc-text">2.安装pycocotools.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%AE%89%E8%A3%85cython-bbox"><span class="toc-text">3.安装cython_bbox</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8CDemo"><span class="toc-text">运行Demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%8B%E8%BD%BD%E4%B8%80%E4%B8%AA%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%AE%98%E7%BD%91%E7%BB%99%E5%87%BA%E4%BA%86%E5%BE%88%E5%A4%9A%E4%B8%AA%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%9C%A8%E8%BF%99%E9%87%8C%E6%88%91%E4%BD%BF%E7%94%A8%E7%9A%84%E6%98%AF%EF%BC%9A"><span class="toc-text">1.下载一个预训练模型，官网给出了很多个模型，在这里我使用的是：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BF%AE%E6%94%B9%E6%BA%90%E7%A0%81%E6%96%87%E4%BB%B6%E5%9C%B0%E5%9D%80"><span class="toc-text">2.修改源码文件地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%B7%91%E9%80%9ADemo"><span class="toc-text">3.跑通Demo</span></a></li></ol></li></ol> -->
+        <!--  -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1050,6 +1137,59 @@
 		height: 100%;
 	}
 </style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
 
 

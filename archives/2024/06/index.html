@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>【代码复现】ByteTrack_Demo | 小牛学习日记</title>
+  <title>archives: 2024/6 | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -367,720 +367,106 @@
   
 </header>
         <!-- 内容区域 -->
-        
- <!-- prismjs 代码高亮 -->
- 
-
-
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-
-
-  <!-- 文章详情页顶部图片和标题 -->
-
-
-
-
-<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp')">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
-  
-  <div class="post-detail-header_info-box">
-    <div class="title-box">
-      <span class="title">
-        【代码复现】ByteTrack_Demo
-      </span>
-    </div>
-    
-    
-      
-        <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> Published in：2024-03-11 |
-        </span>
-      
-
-      
-        <span class="post-detail-header_categories">
-          <i class="iconfont iconbookmark1"></i> category：
-          
-            <a href="/categories/R-D/" class="post-detail-header_category">
-              R&D
-            </a>
-          
-        </span>
-      
-
-      
-        <div class="post-detail-header_wordcount">
-          <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 689 |
-          </span>
-  
-          <span class="min2read">
-            <i class="fas fa-clock"></i> Reading time: 2min |
-          </span>
-  
-          
-            <span class="reading">
-              <i class="fas fa-eye"></i> reading：<span id="busuanzi_value_page_pv"></span>
-            </span>
-          
-        </div>
-      
-    
+        <div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
+<div class="bg-light-floor-archive" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
+<div class="archive-header" style="background-image:url('https://pic1.zhimg.com/80/v2-1414b3a4b205e19060db18a20d08723a_1440w.jpg?source=1940ef5c')">
+  <div class="archive-header-title">
+    archive
   </div>
+  <div class="archive-header-desc">
   
-  
-    <script src="/js/bubble/bubble.js"></script>
-  
-</div>
-
-
-
-
-
-<div class="post-detail-content post-row" 
-  style="padding-top: 0px;">
-  <div class="main-content">
-    <article class="post post-detail">
-      <div class="post-content">
-        <hr>
-<p>记录一下重装系统后的第一个代码复现<br>贴一下源代码的<a href="https://github.com/ifzhang/ByteTrack">链接</a></p>
-<hr>
-<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><h3 id="1-首先安装ByteTrack"><a href="#1-首先安装ByteTrack" class="headerlink" title="1. 首先安装ByteTrack"></a>1. 首先安装ByteTrack</h3><p>创建虚拟环境后执行下面语句：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ifzhang/ByteTrack.git</span><br><span class="line">cd ByteTrack</span><br></pre></td></tr></table></figure>
-<p>如果不使用国内的镜像源，在执行这一步的时候可能会有很多报错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
-<p>因此我使用镜像源安装：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install whatever gdown -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
-<p>然后执行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py develop</span><br></pre></td></tr></table></figure>
-<p>如果在这一步报错，编辑setup.py，将：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">with open(&quot;README.md&quot;, &quot;r&quot;) as f:</span><br></pre></td></tr></table></figure>
-<p>改为：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">with open(&quot;README.md&quot;, &quot;r&quot;, encoding=&#x27;utf_8&#x27;) as f:</span><br></pre></td></tr></table></figure>
-<h3 id="2-安装pycocotools"><a href="#2-安装pycocotools" class="headerlink" title="2.安装pycocotools."></a>2.安装pycocotools.</h3><p>如果直接执行这一步会报错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install cython; pip3 install &#x27;git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI&#x27;</span><br></pre></td></tr></table></figure>
-<p>需要换一种安装方式</p>
-<p>这一部分参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/hhh590_hh/article/details/126916833">https://blog.csdn.net/hhh590_hh/article/details/126916833</a></p>
-<p>1）首先安装cython:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install cython gdown -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
-<p>2）然后在<a href="https://github.com/pdollar/coco.git">https://github.com/pdollar/coco.git</a>下载源码压缩包，解压后放在虚拟环境的site-packages文件下，</p>
-<p>3）打开cocoapi-master\pythonAPI中的setup.py文件，删除下面的两个参数：<br><img src="1.png" alt><br><img src="2.png" alt></p>
-<p>4）在anaconda prompt中cd到刚才的cocoapi-master\pythonAPI文件夹下，输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python setup.py build_ext --inplace</span><br><span class="line">python setup.py build_ext install</span><br></pre></td></tr></table></figure>
-<p>如果第一步显示“已完成代码的生成”，第二步显示“Finished processing dependencies for pycocotools==2.0”则表示安装成功。</p>
-<h3 id="3-安装cython-bbox"><a href="#3-安装cython-bbox" class="headerlink" title="3.安装cython_bbox"></a>3.安装cython_bbox</h3><p>依旧是用国内镜像源：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install cython_bbox gdown -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
-<h2 id="运行Demo"><a href="#运行Demo" class="headerlink" title="运行Demo"></a>运行Demo</h2><h3 id="1-下载一个预训练模型，官网给出了很多个模型，在这里我使用的是："><a href="#1-下载一个预训练模型，官网给出了很多个模型，在这里我使用的是：" class="headerlink" title="1.下载一个预训练模型，官网给出了很多个模型，在这里我使用的是："></a>1.下载一个预训练模型，官网给出了很多个模型，在这里我使用的是：</h3><p><img src="3.png" alt><br>贴一下作者给的<a target="_blank" rel="noopener" href="https://pan.baidu.com/share/init?surl=OJKrcQa_JP9zofC6ZtGBpw">链接</a>，提取码图上有。</p>
-<p>将下载下来的文件放在pretrained文件夹下，如果没有这个文件夹就自己创建一个。</p>
-<h3 id="2-修改源码文件地址"><a href="#2-修改源码文件地址" class="headerlink" title="2.修改源码文件地址"></a>2.修改源码文件地址</h3><p>打开demo_track.py文件，修改第30行的输入文件地址，将其改为绝对地址：<br>如果想跑自己下载的视频也可以在这里改为自己的视频文件：<br><img src="4.png" alt></p>
-<h3 id="3-跑通Demo"><a href="#3-跑通Demo" class="headerlink" title="3.跑通Demo"></a>3.跑通Demo</h3><p>cd到项目文件夹，输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/demo_track.py video -f G:/pycharmprojects/pythonProject/ByteTrack-main/exps/example/mot/yolox_x_mix_det.py -c G:/pycharmprojects/pythonProject/ByteTrack-main/pretrained/bytetrack_x_mot17.pth.tar  --fuse --save_result</span><br></pre></td></tr></table></figure>
-<p><strong>注意，我在这里输入的都是文件的绝对地址，并且对比作者给出的demo运行方法，我删除了fp16。</strong></p>
-<p>fp16虽然可以使运行速度加快，但是加上fp16可能会导致结果没有检测框，<del>并且检测速度也并没有加快</del> 。</p>
-<p>等待运行结束后结果会保存在G:\pycharmprojects\pythonProject\ByteTrack-main\YOLOX_outputs\yolox_x_mix_det\track_vis下。<br><img src="5.png" alt><br><img src="6.png" alt></p>
-<p>至此，demo就运行完成了</p>
-<hr>
-<p>后续可能会继续记录训练的过程，也可能不会^ - ^。</p>
-
-      </div>
-      <div class="post-tags-categories">
-        
-        <div class="tags">
-          
-            <a href="/tags/MOT/" class="">
-              MOT
-            </a>
-          
-            <a href="/tags/python/" class="">
-              python
-            </a>
-          
-        </div>
-        
-      </div>
-      
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>author:  </strong>Xinhang Niu</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>link:  </strong>
-    <a href="/2024/03/11/ByteTrack-Demo/" target="_blank" title="【代码复现】ByteTrack_Demo">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/03/11/ByteTrack-Demo/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>Copyright notice:   </strong>
-      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      reprint policy. If reproduced, please indicate source!
-    </li>
-  </ul>
-<div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
-    
-      <!-- 文章详情页的上一页和下一页 -->
-<div class="post-nav">
-  
-  
-  
-    
-    <div class="post-nav-prev post-nav-item">
-      <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" alt="">
-      </div>
-      <a href="/2024/03/15/OC-SORT%E6%80%BB%E7%BB%93/" class="post-nav-link">
-        <div class="title">
-          <i class="fas fa-angle-left"></i> Next:
-          <div class="title-text">OC-SORT总结</div>
-        </div>
-        <!-- <div class="content">
-          贴一下原文链接参考：https://blog.csdn.net/wjpwjpwjp0831/article/detail
-        </div> -->
-      </a>
-    </div>
-  
-  
-  
-    
-    <div class="post-nav-next post-nav-item">
-      <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-      </div>
-      <a href="/2024/03/05/C++/" class="post-nav-link">
-        <div class="title">
-          Prev: <i class="fas fa-angle-right"></i>
-          <div class="title-text">【转载】C++讲义</div>
-        </div>
-        <!-- <div class="content">
-          C++基础入门1 C++初识1.1  第一个C++程序编写一个C++程序总共分为4个步骤
-
-创建项目
-创建文件
-编写代码
-        </div> -->
-      </a>
-    </div>
-  
-  </div>
-    
-    
-
-    <!-- 打赏 -->
-    
-
-    <!-- 分享 -->
-    
-      <!-- https://github.com/overtrue/share.js -->
-<!-- 文章详情页的分享 -->
-<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-
-<script src="/js/shareJs/social-share.min.js"></script>
-</script>
-
-<style>
-  .social-share {
-    margin: 20px 0;
+  <span class="title" id="archive-header-desc"></span>
+  <script>
+  function typedFn() {
+    const el = '#archive-header-desc';
+    const type = 'archive';
+    let desc = '越努力越幸运'
+    var typed = new Typed(el, {
+      strings: [desc],
+      startDelay: 100,
+      typeSpeed: 100,
+      loop: true,
+      backSpeed: 50,
+      showCursor: true
+    });
   }
-</style>
-
-
-    
-    
-    <!-- 评论 -->
-    <!-- 评论 -->
-
-  <div id="myComment">
-    
-      
-<section id="comments" style="padding: 1em;"
-	class="animated bounceInUp">
-	<div id="vcomment" class="comment"></div>
-</section>
-<style>
-	#comments {
-		background: rgba(255,255,255,0.9);
-	}
-	#veditor {
-		background-image: url('https://img.zcool.cn/community/01a253594c71cfa8012193a329a77f.gif');
-		background-size: contain;
-		background-repeat: no-repeat;
-		background-position: right;
-		background-color: rgba(255, 255, 255, 0);
-		resize: vertical;
-	}
-	#veditor:focus{
-		background-position-y: 200px;
-		transition: all 0.2s ease-in-out 0s;
-	}
-	#vcomment .vcards .vcard .vh .vhead .vtag.vvisitor {
-		background-color: #42b983;
-	}
-	.v[data-class=v] .vbtn:active, .v[data-class=v] .vbtn:hover {
-		color: #42b983;
-		border-color: #42b983;
-	}
-	#vcomment .vcards .vcard .vhead .vsys i {
-		display: none;
-	}
-	/* 底部valine链接 */
-	#vcomment .vpower {
-		display: none;
-	}
-	
-	/* 底下注释是修改 名称和邮箱和网址输入框的样式 */
-	/* #vcomment .vheader {
-		display: flex;
-		justify-content: space-around;
-	}
-	
-	#vcomment .vheader .vnick {
-		width: 31%;
-		border: 2px solid #dedede;
-		padding-left: 10px;
-		padding-right: 10px;
-		border-radius: 5px
-	}
-
-	#vcomment .vheader .vmail {
-		width: 31%;
-		border: 2px solid #dedede;
-		padding-left: 10px;
-		padding-right: 10px;
-		border-radius: 5px
-	}
-
-	#vcomment .vheader .vlink {
-		width: 31%;
-		border: 2px solid #dedede;
-		padding-left: 10px;
-		padding-right: 10px;
-		border-radius: 5px
-	} */
-
-	img.vimg {
-		transition: all 1s;
-		/* 头像旋转时间为 1s */
-	}
-
-	img.vimg:hover {
-		transform: rotate(360deg);
-		-webkit-transform: rotate(360deg);
-		-moz-transform: rotate(360deg);
-		-o-transform: rotate(360deg);
-		-ms-transform: rotate(360deg);
-	}
-
-	#vcomment .vcards .vcard {
-		padding: 15px 20px 0 20px;
-		border-radius: 10px;
-		margin-bottom: 15px;
-		box-shadow: 0 0 4px 1px rgba(0, 0, 0, .12);
-		transition: all .3s
-	}
-
-	#vcomment .vcards .vcard:hover {
-		box-shadow: 0 0 8px 3px rgba(0, 0, 0, .12)
-	}
-
-	#vcomment .vcards .vcard .vh .vcard {
-		border: none;
-		box-shadow: none;
-	}
-</style>
-    
+  typedFn();
+</script>
+  
   </div>
-
-<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
-
-
-  </div>
-
-  <!-- 目录 -->
-  <aside id='l_side'>
-  
-    
-      <section class="widget side_blogger">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img src='https://pic2.zhimg.com/80/v2-42b72d5ebee4b8d8aa70d9687effe87b_1440w.webp'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>小牛的学习日记</h2>
-        
-        
-          <p>好好学习 天天向上</p>
-
-        
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="https://github.com/Nxhhhh/Nxhhhh.github.io"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/1224317198@qq.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/Nxhhhh/Nxhhhh.github.io"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=1224317198"
-              class="social fab fa-qq flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-    
-  
-  
-  
-
-  <div class="layout_sticky">    
-    
-      
-<section class="widget side_toc">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="toc-main">
-      <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-text">环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%A6%96%E5%85%88%E5%AE%89%E8%A3%85ByteTrack"><span class="toc-text">1. 首先安装ByteTrack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85pycocotools"><span class="toc-text">2.安装pycocotools.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%AE%89%E8%A3%85cython-bbox"><span class="toc-text">3.安装cython_bbox</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8CDemo"><span class="toc-text">运行Demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%8B%E8%BD%BD%E4%B8%80%E4%B8%AA%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%AE%98%E7%BD%91%E7%BB%99%E5%87%BA%E4%BA%86%E5%BE%88%E5%A4%9A%E4%B8%AA%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%9C%A8%E8%BF%99%E9%87%8C%E6%88%91%E4%BD%BF%E7%94%A8%E7%9A%84%E6%98%AF%EF%BC%9A"><span class="toc-text">1.下载一个预训练模型，官网给出了很多个模型，在这里我使用的是：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BF%AE%E6%94%B9%E6%BA%90%E7%A0%81%E6%96%87%E4%BB%B6%E5%9C%B0%E5%9D%80"><span class="toc-text">2.修改源码文件地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%B7%91%E9%80%9ADemo"><span class="toc-text">3.跑通Demo</span></a></li></ol></li></ol> -->
-        <div class="toc"></div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- 手机端目录按钮 -->
-<div id="toc-mobile-btn">
-  <i class="fas fa-list-ul" aria-hidden="true"></i>
+  <div class="mask-box"></div>
 </div>
 
+<div class="archive-video">
+  <video class="full-video" autoplay loop muted>
+      <source style="width: 100%;height: 100vh;" src="/">
+  </video>
+  <div class="video-header-title">
+    archive
+  </div>
+  <div class="video-header-desc">
+  
+      <span class="title" id="archive-video-header-desc"></span>
+      <script>
+  function typedFn() {
+    const el = '#archive-video-header-desc';
+    const type = 'archive';
+    let desc = '越努力越幸运'
+    var typed = new Typed(el, {
+      strings: [desc],
+      startDelay: 100,
+      typeSpeed: 100,
+      loop: true,
+      backSpeed: 50,
+      showCursor: true
+    });
+  }
+  typedFn();
+</script>
       
-  <section class="widget side_recent_post">
-    
-  <header>
-    
-      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
-    
-  </header>
+  </div>
+  <div class="mask-box"></div>
+</div>
+
+<!-- hash算法 -->
 
 
-    <div class='content'>
-      
-      <!-- hash算法 -->
-      
-      <div class="aside-list">
+<div class="archive-main">
+  <section class="archive">
+    <div class="archive-content">
+      <ul class="post-archive">
         
-          <div class="aside-list-item">
+        
+          
             
+            <div class="year" data-aos="zoom-in-up">
+                <div class="bullet"></div>
+                <a href="/archives/2024">2024</a>
+            </div>
+          
+          <li class="post-item" data-aos="fade-left">
             
-            
-
             <div class="post-img-box">
               <a href="/2024/06/05/%E5%B8%B8%E7%94%A8%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
+                <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
               <div>
-                
-                  <span class="post-date">06-05</span>
-                
+                <span class="post-date">06-05</span>
               </div>
               <a class="post-title" href="/2024/06/05/%E5%B8%B8%E7%94%A8%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D/">latex常用希腊字母</a>
             </div>
-          </div>
+          </li>
         
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/05/22/latex%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-22</span>
-                
-              </div>
-              <a class="post-title" href="/2024/05/22/latex%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE/">Hexo使用Mathjax时常用的字体设置</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/05/17/debug/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-17</span>
-                
-              </div>
-              <a class="post-title" href="/2024/05/17/debug/">【转载】如何在终端进行debug调试</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/04/17/Long-tail/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">04-17</span>
-                
-              </div>
-              <a class="post-title" href="/2024/04/17/Long-tail/">Delving into the Trajectory Long-tail Distribution for Muti-object Tracking 总结</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/04/15/UncertaintyTrack%E6%80%BB%E7%BB%93/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">04-15</span>
-                
-              </div>
-              <a class="post-title" href="/2024/04/15/UncertaintyTrack%E6%80%BB%E7%BB%93/">UncertaintyTrack Exploiting Detection and Localization Uncertainty in Multi-Object Tracking</a>
-            </div>
-          </div>
-        
-      </div>
+      </ul>
     </div>
   </section>
-
+  <div class="w-70">
     
   </div>
-</aside>
-
-  <!-- 图片放大 Wrap images with fancybox support -->
-  <script src="/js/wrapImage.js"></script>
 </div>
-
-<!-- 文章详情页背景图 -->
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
-	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
-	<transition-group tag="ul" :name="names">
-		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-			<img :src="image" class="bg-swiper-img no-lazy">
-		</li>
-	</transition-group>
-</div>
-<script>
-	var vm = new Vue({
-		el: '#appBgSwiper',
-		data: {
-			names: '' || 'fade' || 'fade', // translate-fade fade
-			mark: 0,
-			img: [],
-			bgColor: '',
-			time: null
-		},
-		methods: {   //添加方法
-			change(i, m) {
-				if (i > m) {
-					// this.names = 'fade';
-				} else if (i < m) {
-					// this.names = 'fade';
-				} else {
-					return;
-				}
-				this.mark = i;
-			},
-			prev() {
-				// this.names = 'fade';
-				this.mark--;
-				if (this.mark === -1) {
-					this.mark = 3;
-					return
-				}
-			},
-			next() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			autoPlay() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			play() {
-				let bgImgDelay = '' || '180000'
-				let delay = parseInt(bgImgDelay) || 180000;
-				this.time = setInterval(this.autoPlay, delay);
-			},
-			enter() {
-				clearInterval(this.time);
-			},
-			leave() {
-				this.play();
-			}
-		},
-		created() {
-			this.play()
-		},
-		beforeDestroy() {
-			clearInterval(this.time);
-		},
-		mounted() {
-			let prop = '' || '';
-			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
-			if (isImg) {
-				let img = prop.split(',');
-				let configRoot = '/'
-				let arrImg = [];
-				img.forEach(el => {
-					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-					var objExp = new RegExp(Expression);
-
-					if (objExp.test(el)) {
-						// http or https
-						arrImg.push(el);
-					} else {
-						// 非http or https开头
-						// 本地文件
-						let firstStr = el.charAt(0);
-						if (firstStr == '/') {
-							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-						}
-						el = configRoot + el;
-						arrImg.push(el);
-					}
-				})
-				this.img = arrImg;
-			} else {
-				this.bgColor = prop;
-			}
-		}
-	})
-</script>
-
-<style>
-	.bg-swiper-box {
-		position: absolute;
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-
-	.bg-swiper-img {
-		object-fit: cover;
-		width: 100%;
-		height: 100%;
-	}
-</style>
-
-
-
-
-  <script>
-  function loadMermaid() {
-    if (document.getElementsByClassName('mermaid').length) {
-      if (window.mermaidJsLoad) mermaid.init()
-      else {
-        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
-          window.mermaidJsLoad = true
-          mermaid.initialize({
-            theme: 'default',
-          })
-          if ('true') {
-            mermaid.init();
-          }
-        })
-      }
-    }
-  };
-  document.addEventListener("DOMContentLoaded", function () {
-    loadMermaid();
-  })
-
-  document.addEventListener('pjax:complete', function () {
-    loadMermaid();
-  })
-  
-</script>
-
 
       </main>
     </div>
