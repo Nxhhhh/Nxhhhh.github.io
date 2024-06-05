@@ -400,11 +400,20 @@
       
 
       
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> category：
+          
+            <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="post-detail-header_category">
+              问题记录
+            </a>
+          
+        </span>
+      
 
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 0 |
+            <i class="fas fa-file-text-o"></i> Words: 14 |
           </span>
   
           <span class="min2read">
@@ -435,9 +444,69 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>latex</th>
+<th>显示效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\partial</td>
+<td>∂</td>
+</tr>
+<tr>
+<td>\nabla</td>
+<td>∇</td>
+</tr>
+<tr>
+<td>\infty</td>
+<td>∞</td>
+</tr>
+<tr>
+<td>\int</td>
+<td>∫</td>
+</tr>
+<tr>
+<td>\iint</td>
+<td>∬</td>
+</tr>
+<tr>
+<td>\iiint</td>
+<td>∭</td>
+</tr>
+<tr>
+<td>\iiiint</td>
+<td>∬∬</td>
+</tr>
+<tr>
+<td>\oint</td>
+<td>∮</td>
+</tr>
+<tr>
+<td>\triangle</td>
+<td>△</td>
+</tr>
+</tbody>
+</table>
+</div>
+
       </div>
       <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/Hexo/" class="">
+              Hexo
+            </a>
+          
+            <a href="/tags/Latex/" class="">
+              Latex
+            </a>
+          
+        </div>
         
       </div>
       
@@ -993,6 +1062,59 @@ latex
 		height: 100%;
 	}
 </style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
 
 
