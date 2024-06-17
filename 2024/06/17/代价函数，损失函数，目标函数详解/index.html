@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Hexo本地预览与部署不同的解决方法 | 小牛学习日记</title>
+  <title>代价函数，损失函数，目标函数详解 | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -381,21 +381,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        Hexo本地预览与部署不同的解决方法
+        代价函数，损失函数，目标函数详解
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> Published in：2024-01-19 |
+          <i class="fas fa-calendar"></i> Published in：2024-06-17 |
         </span>
       
 
@@ -403,8 +403,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> category：
           
-            <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="post-detail-header_category">
-              问题记录
+            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-detail-header_category">
+              机器学习
             </a>
           
         </span>
@@ -413,11 +413,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 322 |
+            <i class="fas fa-file-text-o"></i> Words: 1.5k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> Reading time: 1min |
+            <i class="fas fa-clock"></i> Reading time: 5min |
           </span>
   
           
@@ -444,25 +444,45 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <meta name="referrer" content="no-referrer">
-
-<p>最近一直在忙考试的事情，终于有时间打开博客了，但出现了一个问题：我的样式全乱了，尝试了重新发布，本地查看的时候还是正常的，部署之后依旧是乱的。<br><img src="https://img-blog.csdnimg.cn/direct/c503a46585be408a8f26b6ea148a1f4a.png#pic_center" alt="如图"> 于是在这里贴一下我尝试过的解决方法。</p>
-<hr>
-<h2 id="1-重新配置URL"><a href="#1-重新配置URL" class="headerlink" title="1 重新配置URL"></a>1 重新配置URL</h2><p>在博客根目录中的config.yml文件中修改URL的配置：<br>url是你生成的page页网址，root是你的根目录</p>
-<p><img src="https://img-blog.csdnimg.cn/direct/34679d6d51534bcc97481124de2480c8.png#pic_center" alt="URL"></p>
-<h2 id="2-如果使用图床图片，则需要修改以下内容"><a href="#2-如果使用图床图片，则需要修改以下内容" class="headerlink" title="2 如果使用图床图片，则需要修改以下内容"></a>2 如果使用图床图片，则需要修改以下内容</h2><p>①找到index.ejs文件，路径为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">└──hexo-theme-yourtheme (当前使用的主题文件夹)</span><br><span class="line">   └──layout</span><br><span class="line">      └──index.ejs</span><br></pre></td></tr></table></figure><br>②在inddex.ejs的头部中加入：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=<span class="string">&quot;referrer&quot;</span> content=<span class="string">&quot;no-referrer&quot;</span> /&gt;</span><br><span class="line">&lt;meta http-equiv=<span class="string">&quot;Content-Security-Policy&quot;</span> ontent=<span class="string">&quot;upgrade-insecure-requests&quot;</span>&gt;</span><br></pre></td></tr></table></figure></p>
-<h2 id="3-更改部署的分支"><a href="#3-更改部署的分支" class="headerlink" title="3 更改部署的分支"></a>3 更改部署的分支</h2><p>在仓库中新建一个分支，不要在master分支上部署pages。<br>我没有尝试新建分支，只是把分支从main改为了master，不确定是否真的有用。</p>
-<h2 id="4-浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。"><a href="#4-浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。" class="headerlink" title="4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。"></a>4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。</h2><p><img src="https://img-blog.csdnimg.cn/direct/7a2d5a400ad544c1a718006e69e26879.png#pic_center" alt="完美解决"></p>
-<hr>
-<p>这些方法我都按顺序尝试过，不是很确定是哪个解决了问题，大家可以都尝试一下。</p>
+        <p>总结一下机器学习中的代价函数、损失函数、目标函数的概念以及一些典型的函数。</p>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>代价函数：代价函数是用来衡量模型预测输出与实际标签之间差异的一个数学表达式。在机器学习中，它的目的是最小化模型的预测误差，以找到最佳的模型参数。</p>
+<p>损失函数：损失函数本质上与代价函数是同一个概念，也是用来度量模型预测错误的程度。可以用来表述单个样本的损失，也可以表征整个训练集的损失的平均。</p>
+<p>目标函数：目标函数是优化问题中想要最小化或最大化的函数，它定义了模型学习的目标。尤其是在监督学习任务中，我们的目标就是最小化模型的损失，即损失函数或代价函数。不过，目标函数的定义可以更宽泛，它也可以包含正则化项（如L1、L2正则化），用以防止模型过拟合，此时的目标函数就不仅仅是简单的损失函数了。</p>
+<h1 id="典型函数"><a href="#典型函数" class="headerlink" title="典型函数"></a>典型函数</h1><h2 id="均方差损失（Mean-Squared-Error-Loss）"><a href="#均方差损失（Mean-Squared-Error-Loss）" class="headerlink" title="均方差损失（Mean Squared Error Loss）"></a>均方差损失（Mean Squared Error Loss）</h2><p>均方差 Mean Squared Error (MSE) 损失是机器学习、深度学习回归任务中最常用的一种损失函数，也称为 L2 Loss。其基本形式如下：</p>
+<script type="math/tex; mode=display">
+J_{MSE}=\frac{1}{N} \sum^N_{i=1}(y_i-\hat{y}_i)^2</script><p>从直觉上理解均方差损失，这个损失函数的最小值为 0（当预测等于真实值时），最大值为无穷大。下图是对于真实值  ，不同的预测值  的均方差损失的变化图。横轴是不同的预测值，纵轴是均方差损失，可以看到随着预测与真实值绝对误差  的增加，均方差损失呈二次方地增加。<br><img src="1.jpeg" alt><br>在模型输出与真实值的误差服从高斯分布的假设下，在这个假设能被满足的场景中（比如回归），均方差损失是一个很好的损失函数选择；当这个假设没能被满足的场景中（比如分类），均方差损失不是一个好的选择。</p>
+<h2 id="平均绝对误差损失（Mean-Absolute-Error-Loss）"><a href="#平均绝对误差损失（Mean-Absolute-Error-Loss）" class="headerlink" title="平均绝对误差损失（Mean Absolute Error Loss）"></a>平均绝对误差损失（Mean Absolute Error Loss）</h2><p>平均绝对误差 Mean Absolute Error (MAE) 是另一类常用的损失函数，也称为 L1 Loss。其基本形式如下：</p>
+<script type="math/tex; mode=display">
+J_{MAE}=\frac{1}{N} \sum^N_{i=1}|y_i-\hat{y}_i|^2</script><p>对这个损失函数进行可视化如下图，MAE 损失的最小值为 0（当预测等于真实值时），最大值为无穷大。可以看到随着预测与真实值绝对误差  的增加，MAE 损失呈线性增长：<br><img src="2.jpeg" alt></p>
+<p>MSE损失收敛快但容易受outlier影响，MAE对outlier更加健壮但是收敛慢。</p>
+<h2 id="交叉熵损失（Cross-Entropy-Loss）"><a href="#交叉熵损失（Cross-Entropy-Loss）" class="headerlink" title="交叉熵损失（Cross-Entropy Loss）"></a>交叉熵损失（Cross-Entropy Loss）</h2><p>交叉熵损失常用于分类问题，特别是多分类问题中。它衡量的是两个概率分布之间的差异，一个是由模型预测得到的概率分布，另一个是真实标签的概率分布（通常是独热编码）。交叉熵损失的公式如下：</p>
+<script type="math/tex; mode=display">
+L_{CE}=-\sum_{i=1}^Cy_ilog(p_i)</script><p>其中， $𝑦_𝑖$ 表示第𝑖类的真是标签（0或1，如果是独热编码）， $𝑝_𝑖$ 是模型预测第𝑖类的概率。</p>
+<p>这个公式表达了真实标签下的对数似然的负值，目标是最大化似然，即最小化损失。</p>
+<h2 id="二元交叉熵损失（Binary-Cross-Entropy-Loss）"><a href="#二元交叉熵损失（Binary-Cross-Entropy-Loss）" class="headerlink" title="二元交叉熵损失（Binary Cross-Entropy Loss）"></a>二元交叉熵损失（Binary Cross-Entropy Loss）</h2><p>在二分类问题中，二元交叉熵损失被广泛应用，公式为：</p>
+<script type="math/tex; mode=display">
+L_{BCE}=-\sum_{i=1}^N[y_ilog(p_i)+(1-y_i)log(1-p_i)]</script><p>下图是对二分类的交叉熵损失函数的可视化，蓝线是目标值为 0 时输出不同输出的损失，黄线是目标值为 1 时的损失。可以看到约接近目标值损失越小，随着误差变差，损失呈指数增长。<br><img src="3.jpeg" alt></p>
+<h2 id="多元交叉熵损失（Multiclass-Cross-Entropy-Loss）"><a href="#多元交叉熵损失（Multiclass-Cross-Entropy-Loss）" class="headerlink" title="多元交叉熵损失（Multiclass Cross-Entropy Loss）"></a>多元交叉熵损失（Multiclass Cross-Entropy Loss）</h2><p>多元交叉熵损失（Multiclass Cross-Entropy Loss）是用于多分类问题的一种损失函数，特别适用于神经网络和其他机器学习模型的训练过程。公式如下：<br>L</p>
+<script type="math/tex; mode=display">
+L_{MCE}(\hat{y},y)=-\sum y_{j}log(\hat{y}_j)</script><p>其中$\hat{y}$为预测值，${y}$为监督值。</p>
+<h2 id="三元组损失（Triplet-Loss）"><a href="#三元组损失（Triplet-Loss）" class="headerlink" title="三元组损失（Triplet Loss）"></a>三元组损失（Triplet Loss）</h2><p>主要是用于训练差异性小的样本，比如人脸等。公式如下：</p>
+<script type="math/tex; mode=display">
+L_{T}=max(d_p-d_n+ \alpha, 0)</script><p>其中，$d_p$ $d_n$ 分别是正对（同一身份的两个实例）和负对（不同身份的实例对）之间的距离，𝛼是一个超参数，即边际。</p>
+<p>其中样本可以分为三类：</p>
+<p>easy triplets： $L=0$，即 $d_p+ \alpha &lt;d_n$ 这种情况不需要优化，如下图:<br><img src="4.png" alt></p>
+<p>hard triplets： $L&gt;𝛼$，即 $d_p &lt; d_n$ ，这种情况损失最大，需要优化，如下图:<br><img src="5.png" alt></p>
+<p>semi-hard triplets： $L&lt;𝛼$,即 $d_p &lt; d_n &lt; d_p+ \alpha $ ，这种情况存在损失，但损失比hard triplets要小，也需要优化，如下图：<br><img src="6.png" alt></p>
+<h2 id="中心损失（Center-Loss）"><a href="#中心损失（Center-Loss）" class="headerlink" title="中心损失（Center Loss）"></a>中心损失（Center Loss）</h2><p>中心损失的基本思想是为每个类别学习一个中心（或称为类别原型），然后在训练过程中，除了传统的分类损失（如交叉熵损失）外，还加入一个额外的惩罚项，以减小每个样本特征向量与对应类别中心之间的距离。这样做可以提升模型的识别能力，特别是在面对类别间相似度高或类别内差异大的情况时。<br>中心损失它仅仅用来减少类内（比如说同一表情）的差异，而不能有效增大类间（比如说不同表情）的差异性，公式如下：</p>
+<script type="math/tex; mode=display">
+L_{C}=\frac{1}{N}\sum_{i=1}^N ||f_i-C_{y_i}||^2</script><p>其中$N$是样本总数，$f_i$表示特征提取网络输出的特征向量, $C_{y_i}$表示对应的类别中心， $||·||$ 表示欧氏距离。</p>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/Hexo/" class="">
-              Hexo
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="">
+              机器学习
             </a>
           
         </div>
@@ -476,7 +496,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
-    <a href="/2024/01/19/Hexoerror/" target="_blank" title="Hexo本地预览与部署不同的解决方法">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/01/19/Hexoerror/</a>
+    <a href="/2024/06/17/代价函数，损失函数，目标函数详解/" target="_blank" title="代价函数，损失函数，目标函数详解">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/06/17/代价函数，损失函数，目标函数详解/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright notice:   </strong>
@@ -494,38 +514,43 @@
   
   
   
-    
-    <div class="post-nav-prev post-nav-item">
-      <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" alt="">
-      </div>
-      <a href="/2024/02/23/GHOST-reading/" class="post-nav-link">
-        <div class="title">
-          <i class="fas fa-angle-left"></i> Next:
-          <div class="title-text">文献《Simple Cues Lead to a Strong Multi-Object Tracker》总结</div>
-        </div>
-        <!-- <div class="content">
-          这篇文章收录于CVPR2023贴一下原文链接
-一、Introduction作者提出在MOT工作中，TbD（Trackin
-        </div> -->
-      </a>
-    </div>
-  
   
   
     
     <div class="post-nav-next post-nav-item">
       <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
+        <img class="lazyload" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
       </div>
-      <a href="/2023/11/29/fairmot/" class="post-nav-link">
+      <a href="/2024/06/05/latex%E5%B8%B8%E7%94%A8%E5%BE%AE%E7%A7%AF%E5%88%86%E8%BF%90%E7%AE%97%E7%AC%A6/" class="post-nav-link">
         <div class="title">
           Prev: <i class="fas fa-angle-right"></i>
-          <div class="title-text">Fairmot代码复现问题记录（已解决）</div>
+          <div class="title-text">latex常用微积分运算符</div>
         </div>
         <!-- <div class="content">
-          最近在学习多目标跟踪的经典文章，顺便记录一下自己复现Fairmot代码时的问题以及解决方案。贴一下原作的代码
-前期准备创
+          
+
+
+
+latex
+显示效果
+
+
+
+
+\partial
+∂
+
+
+\nabla
+∇
+
+
+\infty
+∞
+
+
+\int
+∫
         </div> -->
       </a>
     </div>
@@ -753,7 +778,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%87%8D%E6%96%B0%E9%85%8D%E7%BD%AEURL"><span class="toc-text">1 重新配置URL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%A6%82%E6%9E%9C%E4%BD%BF%E7%94%A8%E5%9B%BE%E5%BA%8A%E5%9B%BE%E7%89%87%EF%BC%8C%E5%88%99%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9%E4%BB%A5%E4%B8%8B%E5%86%85%E5%AE%B9"><span class="toc-text">2 如果使用图床图片，则需要修改以下内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9B%B4%E6%94%B9%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%86%E6%94%AF"><span class="toc-text">3 更改部署的分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BF%9D%E5%AD%98%E4%BA%86%E4%B9%8B%E5%89%8D%E9%83%A8%E7%BD%B2%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%B8%85%E9%99%A4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E5%90%8E%E9%87%8D%E5%90%AF%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%8C%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%82"><span class="toc-text">4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B8%E5%9E%8B%E5%87%BD%E6%95%B0"><span class="toc-text">典型函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%87%E6%96%B9%E5%B7%AE%E6%8D%9F%E5%A4%B1%EF%BC%88Mean-Squared-Error-Loss%EF%BC%89"><span class="toc-text">均方差损失（Mean Squared Error Loss）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E5%9D%87%E7%BB%9D%E5%AF%B9%E8%AF%AF%E5%B7%AE%E6%8D%9F%E5%A4%B1%EF%BC%88Mean-Absolute-Error-Loss%EF%BC%89"><span class="toc-text">平均绝对误差损失（Mean Absolute Error Loss）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E7%86%B5%E6%8D%9F%E5%A4%B1%EF%BC%88Cross-Entropy-Loss%EF%BC%89"><span class="toc-text">交叉熵损失（Cross-Entropy Loss）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%85%83%E4%BA%A4%E5%8F%89%E7%86%B5%E6%8D%9F%E5%A4%B1%EF%BC%88Binary-Cross-Entropy-Loss%EF%BC%89"><span class="toc-text">二元交叉熵损失（Binary Cross-Entropy Loss）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%85%83%E4%BA%A4%E5%8F%89%E7%86%B5%E6%8D%9F%E5%A4%B1%EF%BC%88Multiclass-Cross-Entropy-Loss%EF%BC%89"><span class="toc-text">多元交叉熵损失（Multiclass Cross-Entropy Loss）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E5%85%83%E7%BB%84%E6%8D%9F%E5%A4%B1%EF%BC%88Triplet-Loss%EF%BC%89"><span class="toc-text">三元组损失（Triplet Loss）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E5%BF%83%E6%8D%9F%E5%A4%B1%EF%BC%88Center-Loss%EF%BC%89"><span class="toc-text">中心损失（Center Loss）</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1016,6 +1041,59 @@
 		height: 100%;
 	}
 </style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
 
 
