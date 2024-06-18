@@ -462,7 +462,7 @@ L_{CE}=-\sum_{i=1}^Cy_ilog(p_i)</script><p>其中， $𝑦_𝑖$ 表示第𝑖�
 <h2 id="二元交叉熵损失（Binary-Cross-Entropy-Loss）"><a href="#二元交叉熵损失（Binary-Cross-Entropy-Loss）" class="headerlink" title="二元交叉熵损失（Binary Cross-Entropy Loss）"></a>二元交叉熵损失（Binary Cross-Entropy Loss）</h2><p>在二分类问题中，二元交叉熵损失被广泛应用，公式为：</p>
 <script type="math/tex; mode=display">
 L_{BCE}=-\sum_{i=1}^N[y_ilog(p_i)+(1-y_i)log(1-p_i)]</script><p>下图是对二分类的交叉熵损失函数的可视化，蓝线是目标值为 0 时输出不同输出的损失，黄线是目标值为 1 时的损失。可以看到约接近目标值损失越小，随着误差变差，损失呈指数增长。<br><img src="3.jpeg" alt></p>
-<h2 id="多元交叉熵损失（Multiclass-Cross-Entropy-Loss）"><a href="#多元交叉熵损失（Multiclass-Cross-Entropy-Loss）" class="headerlink" title="多元交叉熵损失（Multiclass Cross-Entropy Loss）"></a>多元交叉熵损失（Multiclass Cross-Entropy Loss）</h2><p>多元交叉熵损失（Multiclass Cross-Entropy Loss）是用于多分类问题的一种损失函数，特别适用于神经网络和其他机器学习模型的训练过程。公式如下：<br>L</p>
+<h2 id="多元交叉熵损失（Multiclass-Cross-Entropy-Loss）"><a href="#多元交叉熵损失（Multiclass-Cross-Entropy-Loss）" class="headerlink" title="多元交叉熵损失（Multiclass Cross-Entropy Loss）"></a>多元交叉熵损失（Multiclass Cross-Entropy Loss）</h2><p>多元交叉熵损失（Multiclass Cross-Entropy Loss）是用于多分类问题的一种损失函数，特别适用于神经网络和其他机器学习模型的训练过程。公式如下：</p>
 <script type="math/tex; mode=display">
 L_{MCE}(\hat{y},y)=-\sum y_{j}log(\hat{y}_j)</script><p>其中$\hat{y}$为预测值，${y}$为监督值。</p>
 <h2 id="三元组损失（Triplet-Loss）"><a href="#三元组损失（Triplet-Loss）" class="headerlink" title="三元组损失（Triplet Loss）"></a>三元组损失（Triplet Loss）</h2><p>主要是用于训练差异性小的样本，比如人脸等。公式如下：</p>
@@ -471,10 +471,11 @@ L_{T}=max(d_p-d_n+ \alpha, 0)</script><p>其中，$d_p$ $d_n$ 分别是正对（
 <p>其中样本可以分为三类：</p>
 <p>easy triplets： $L=0$，即 $d_p+ \alpha &lt;d_n$ 这种情况不需要优化，如下图:<br><img src="4.png" alt></p>
 <p>hard triplets： $L&gt;𝛼$，即 $d_p &lt; d_n$ ，这种情况损失最大，需要优化，如下图:<br><img src="5.png" alt></p>
-<p>semi-hard triplets： $L&lt;𝛼$,即 $d_p &lt; d_n &lt; d_p+ \alpha $ ，这种情况存在损失，但损失比hard triplets要小，也需要优化，如下图：<br><img src="6.png" alt></p>
-<h2 id="中心损失（Center-Loss）"><a href="#中心损失（Center-Loss）" class="headerlink" title="中心损失（Center Loss）"></a>中心损失（Center Loss）</h2><p>中心损失的基本思想是为每个类别学习一个中心（或称为类别原型），然后在训练过程中，除了传统的分类损失（如交叉熵损失）外，还加入一个额外的惩罚项，以减小每个样本特征向量与对应类别中心之间的距离。这样做可以提升模型的识别能力，特别是在面对类别间相似度高或类别内差异大的情况时。<br>中心损失它仅仅用来减少类内（比如说同一表情）的差异，而不能有效增大类间（比如说不同表情）的差异性，公式如下：</p>
+<p>semi-hard triplets： $L&lt;𝛼$，即 $d_p &lt; d_n &lt; d_p+ \alpha $ ，这种情况存在损失，但损失比hard triplets要小，也需要优化，如下图：<br><img src="6.png" alt></p>
+<h2 id="中心损失（Center-Loss）"><a href="#中心损失（Center-Loss）" class="headerlink" title="中心损失（Center Loss）"></a>中心损失（Center Loss）</h2><p>中心损失的基本思想是为每个类别学习一个中心（或称为类别原型），然后在训练过程中，除了传统的分类损失（如交叉熵损失）外，还加入一个额外的惩罚项，以减小每个样本特征向量与对应类别中心之间的距离。这样做可以提升模型的识别能力，特别是在面对类别间相似度高或类别内差异大的情况时。</p>
+<p>中心损失它仅仅用来减少类内（比如说同一表情）的差异，而不能有效增大类间（比如说不同表情）的差异性，公式如下：</p>
 <script type="math/tex; mode=display">
-L_{C}=\frac{1}{N}\sum_{i=1}^N ||f_i-C_{y_i}||^2</script><p>其中$N$是样本总数，$f_i$表示特征提取网络输出的特征向量, $C_{y_i}$表示对应的类别中心， $||·||$ 表示欧氏距离。</p>
+L_{C}=\frac{1}{N}\sum_{i=1}^N ||f_i-C_{y_i}||^2</script><p>其中$N$是样本总数，$f_i$ 表示特征提取网络输出的特征向量， $C_{y_i}$ 表示对应的类别中心， $||·||$ 表示欧氏距离。</p>
 
       </div>
       <div class="post-tags-categories">
