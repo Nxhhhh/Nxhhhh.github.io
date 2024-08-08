@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>小牛学习日记</title>
+  <title>BoostTrack：boosting the similarity measure and detection confidence for improved multiple object tracking 总结 | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -368,1510 +368,317 @@
 </header>
         <!-- 内容区域 -->
         
-  <!-- 首页轮播 -->
+ <!-- prismjs 代码高亮 -->
+ 
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
-
-  <link href="/js/vue-typed-js/index.css" rel="stylesheet">
-
-
-
-
-
-
-<div class="swiper-length" style="display: none;">0</div>
-<div id="appSwiper"
-  class="swiper-no-swiping"
-  @mouseenter="stopAutoPlay()" 
-  @mouseleave="startAutoPlay()"
->
-  <swiper v-cloak ref="mySwiper" :options="swiperOptions" @slideChangeTransitionEnd="slideChangeTransitionEnd">
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        BoostTrack：boosting the similarity measure and detection confidence for improved multiple object tracking 总结
+      </span>
+    </div>
     
-      <swiper-slide>
-        <div class="item swiper-lazy" data-background="https://pic1.zhimg.com/v2-af3ccef61cf58b1a70765747cc1bbeac_b.jpg" style="background-size: 300000px; 
-          background-position: left center;" style="position: relative;">
-          <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
-            <div class="flag">
-              
-              <div class="img-mask swiper-lazy swiper-default-bgImg" data-background="https://pic1.zhimg.com/v2-af3ccef61cf58b1a70765747cc1bbeac_b.jpg" style="height: 100%; background-size: cover; 
-                background-position: center center;">
-                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>   
-              </div>
-              <div class="flag-text">
-                <div class="flag-text-content">
-                  <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">小牛好好学习</div>
-                  
-                      <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"></div>
-                    
-                </div>
-                <div style="display: flex;" class="flag-text-btns">
-                  
-                  
-                    <div class="ani animated" style="margin-left: 10px;" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a target="_blank" rel="noopener" href="https://gitee.com/yuang01/hexo-theme-bamboo/repository/archive/dev.zip" class="read-more swiper-btn-color2" style="display: inline-block; z-index:1;border: 1px solid white;">下载主题</a></div>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-      </swiper-slide>
     
-  </swiper>
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> Published in：2024-08-07 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> category：
+          
+            <a href="/categories/R-D/" class="post-detail-header_category">
+              R&D
+            </a>
+          
+        </span>
+      
+
+      
+        <div class="post-detail-header_wordcount">
+          <span class="totalcount">
+            <i class="fas fa-file-text-o"></i> Words: 1.9k |
+          </span>
   
-    <div id="scroll-down" @click="toPostContent()">
-      <a href="javascript:;">
-        <i class="fas fa-angle-down scroll-down-effects"></i>
+          <span class="min2read">
+            <i class="fas fa-clock"></i> Reading time: 7min |
+          </span>
+  
+          
+            <span class="reading">
+              <i class="fas fa-eye"></i> reading：<span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+        </div>
+      
+    
+  </div>
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <p>文章收录于ISCV2023</p>
+<p>贴一个<a target="_blank" rel="noopener" href="https://link.springer.com/article/10.1007/s00138-024-01531-5">原文链接</a></p>
+<p><a href="https://github.com/vukasin-stanojevic/BoostTrack">代码链接</a></p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>理想情况下，MOT算法应该只使用真正阳性的检测，避免在实时工作中出现身份切换。为了接近所描述的理想状况，作者提出了BoostTrack，设计了几个轻量化即插即用的模块来提高MOT性能。</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>现有的大多数检测方法，为了减少误报（false positive），通常将低置信度的检测过滤，使用置信度较高的检测进行关联。然而并不是所有的低置信度检测都应被过滤。ByteTrack采用两阶段匹配，第一阶段使用高置信度检测，第二阶段使用剩余的检测和不相关的轨迹。</p>
+<p>但是使用两阶段甚至多阶段的检测，可能会导致身份转换（ID Switch）。在第一阶段，轨迹错误的与高置信度检测相关联，在第二阶段或者后续阶段也会强制低分检测进行错误的关联。但是如果在第一阶段就同时使用这两种检测，则可以正确匹配它们。</p>
+<p>为了同时保证不使用两级关联并利用低置信度检测，作者提出要增强两类检测框：①我们预测一个物体应该存在的边界框；②目前跟踪的物体不应该存在的边界框。</p>
+<p>听起来有点抽象，简单来说，就是：</p>
+<p>1、增强预测物体存在的边界框：当物体被部分遮挡时，其检测到的边界框置信度可能较低，但预测位置与边界框之间的IoU可能较高。作者建议增加此类检测的检测置信度。</p>
+<p>2、增强目前跟踪的物体不应存在的边界框：这听起来有些矛盾，但实际上是说，对于那些出现在不太可能有物体存在的位置上的低置信度检测结果，它们可能是误报（噪声），但也可能是新出现的物体，这些物体可能只有一部分进入了视野。为了识别这些特殊情况，作者采用了Mahalanobis距离度量来找出这些异常值。提高这些检测结果的置信度有助于改进系统的整体性能。</p>
+<p>总的来说，为了利用多阶段匹配的优点并规避他的缺点，作者提出了三个模块：</p>
+<p>1、利用检测-轨迹点置信度得分对IoU进行缩放，增加高置信度检测轨迹点对的相似度。高方差预测赋予高IoU (或其他任何相似性度量)且置信度相对较低的检测不应与低方差预测、高置信度检测有相同的权重重叠。</p>
+<p>2、马氏距离可以作为一种相似性度量来解释估计的轨迹方差。可接受的值取决于轨道的维数和所选择的置信区间，任何变化都需要不同的缩放参数。作者介绍了一种更稳健的使用马氏距离作为相似性度量的方法。</p>
+<p>3、为了降低拥挤场景中身份切换的可能性，引入了形状相似度，这是由于移动对象的IoU重叠度过高会导致不匹配的发生。尽管如此，物体(即宽度和高度)的形状应该在短时间内保持相对恒定。</p>
+<p><img src="2.png" alt="流程图" title="流程图"></p>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>作者提出的相似矩阵增强技术与现有方法都可以进行叠加，以提高分配性能。</p>
+<h3 id="Detection-tracklet-confidence-similarity-boost"><a href="#Detection-tracklet-confidence-similarity-boost" class="headerlink" title="Detection-tracklet confidence similarity boost"></a>Detection-tracklet confidence similarity boost</h3><p>为了避免多级匹配且在一级匹配中利用低分检测信息，作者设计该环节来提高低分检测的置信度，将其提高到阈值之上，与高分检测同时进行匹配。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> detection_confidence <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> track_confidence <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    conf = np.multiply(detection_confidence.reshape((-<span class="number">1</span>, <span class="number">1</span>)), track_confidence.reshape((<span class="number">1</span>, -<span class="number">1</span>)))</span><br><span class="line"></span><br><span class="line">    conf[iou_matrix &lt; iou_threshold] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    cost_matrix += lambda_iou * conf * iou_matrix</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    warnings.warn(<span class="string">&quot;Detections or tracklet confidence is None and detection-tracklet confidence cannot be computed!&quot;</span>)</span><br><span class="line">    conf = <span class="literal">None</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>增强后的代价函数为：</p>
+<script type="math/tex; mode=display">
+S_{boost} = S_{base}  + \lambda_{IoU}·C \odot IoU(D,T)</script><h3 id="Mahalanobis-distance-similarity-boost"><a href="#Mahalanobis-distance-similarity-boost" class="headerlink" title="Mahalanobis distance similarity boost"></a>Mahalanobis distance similarity boost</h3><p>这一部分基于检测与跟踪器之间的马氏距离，增强可能被误认为是噪声的检测框。</p>
+<p>伪代码如下：<br><img src="1.png" alt="伪代码" title="伪代码"></p>
+<p>增强后的代价函数为：</p>
+<script type="math/tex; mode=display">
+S_{boost} = S_{base}  + \lambda_{MhD}·S^{MhD}(D,T)</script><p>代码片段：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> mahalanobis_distance <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> mahalanobis_distance.size &gt; <span class="number">0</span>:</span><br><span class="line"> limit = <span class="number">13.2767</span>  <span class="comment"># 99% conf interval https://www.mathworks.com/help/stats/chi2inv.html</span></span><br><span class="line"></span><br><span class="line"> mask = mahalanobis_distance &gt; limit</span><br><span class="line"> mahalanobis_distance[mask] = limit</span><br><span class="line"> mahalanobis_distance = limit - mahalanobis_distance</span><br><span class="line"></span><br><span class="line"> mahalanobis_distance = np.exp(mahalanobis_distance) / np.exp(mahalanobis_distance).<span class="built_in">sum</span>(<span class="number">0</span>).reshape((<span class="number">1</span>, -<span class="number">1</span>))</span><br><span class="line"> mahalanobis_distance = np.where(mask, <span class="number">0</span>, mahalanobis_distance)</span><br><span class="line"> cost_matrix += lambda_mhd * mahalanobis_distance</span><br></pre></td></tr></table></figure>
+<h3 id="Shape-similarity-boost"><a href="#Shape-similarity-boost" class="headerlink" title="Shape similarity boost"></a>Shape similarity boost</h3><p>在物体高度重叠的情况下，IoU可能会出现歧义，但物体的长宽比在一定时间内保持恒定，可以减少歧义的产生。</p>
+<p>但是不应过度依赖于最近未更新的轨迹的形状，因为未更新的时间内目标的高度和宽度都可能发生了变化。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 计算形状相似度</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">shape_similarity</span>(<span class="params">detects: np.ndarray, tracks: np.ndarray</span>) -&gt; np.ndarray:</span><br><span class="line">    <span class="keyword">if</span> detects.size == <span class="number">0</span> <span class="keyword">or</span> tracks.size == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> np.zeros((<span class="number">0</span>, <span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">    dw = (detects[:, <span class="number">2</span>] - detects[:, <span class="number">0</span>]).reshape((-<span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">    dh = (detects[:, <span class="number">3</span>] - detects[:, <span class="number">1</span>]).reshape((-<span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">    tw = (tracks[:, <span class="number">2</span>] - tracks[:, <span class="number">0</span>]).reshape((<span class="number">1</span>, -<span class="number">1</span>))</span><br><span class="line">    th = (tracks[:, <span class="number">3</span>] - tracks[:, <span class="number">1</span>]).reshape((<span class="number">1</span>, -<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">return</span> np.exp(-(np.<span class="built_in">abs</span>(dw - tw)/np.maximum(dw, tw) + np.<span class="built_in">abs</span>(dh - th)/np.maximum(dw, tw)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 代价函数</span></span><br><span class="line">        <span class="keyword">if</span> conf <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            cost_matrix += lambda_shape * conf * shape_similarity(detections, trackers)</span><br></pre></td></tr></table></figure>
+<p>最后的代价矩阵为：</p>
+<script type="math/tex; mode=display">
+\begin{alignat*}{}
+S_{boost} = S_{base}  &+ \lambda_{IoU}·C \odot IoU(D,T) \nonumber \\
+                      &+ \lambda_{MhD}·S^{MhD}(D,T)\\
+                      &+ \lambda_{shape}·S^{shape}(D,T).
+\end{alignat*}</script><h2 id="Detection-confidence-boosting-techniques"><a href="#Detection-confidence-boosting-techniques" class="headerlink" title="Detection confidence boosting techniques"></a>Detection confidence boosting techniques</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Detecting likely objects</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">do_iou_confidence_boost</span>(<span class="params">self, detections: np.ndarray</span>) -&gt; np.ndarray:</span><br><span class="line">        iou_matrix = self.get_iou_matrix(detections) <span class="comment"># 得到现有检测器和跟踪器之间的IoU</span></span><br><span class="line">        ids = np.zeros(<span class="built_in">len</span>(detections), dtype=np.bool_)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> iou_matrix.size &gt; <span class="number">0</span> <span class="keyword">and</span> self.frame_count &gt; <span class="number">1</span>:</span><br><span class="line"></span><br><span class="line">            max_iou = iou_matrix.<span class="built_in">max</span>(<span class="number">1</span>)</span><br><span class="line">            coef = self.dlo_boost_coef <span class="comment"># 一个增强系数</span></span><br><span class="line">            ids[(detections[:, <span class="number">4</span>] &lt; self.det_thresh) &amp; (max_iou * coef &gt;= self.det_thresh)] = <span class="literal">True</span> </span><br><span class="line">            <span class="comment"># 如果该检测置信度低于阈值，但与某个跟踪器之间的IoU乘以增强系数又高于阈值，则该检测的置信度将被增强。</span></span><br><span class="line">            detections[:, <span class="number">4</span>] = np.maximum(detections[:, <span class="number">4</span>], max_iou * coef)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> detections</span><br><span class="line"></span><br><span class="line"><span class="comment"># Detecting “unlikely&quot; objects</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">do_mh_dist_confidence_boost</span>(<span class="params">self, detections: np.ndarray</span>) -&gt; np.ndarray:</span><br><span class="line">        n_dims = <span class="number">4</span></span><br><span class="line">        limit = <span class="number">13.2767</span>  </span><br><span class="line">        mahalanobis_distance = self.get_mh_dist_matrix(detections, n_dims)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> mahalanobis_distance.size &gt; <span class="number">0</span> <span class="keyword">and</span> self.frame_count &gt; <span class="number">1</span>:</span><br><span class="line">            min_mh_dists = mahalanobis_distance.<span class="built_in">min</span>(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            mask = (min_mh_dists &gt; limit) &amp; (detections[:, <span class="number">4</span>] &lt; self.det_thresh)</span><br><span class="line">            <span class="comment"># 用布尔索引标记马氏距离大于limit但置信度低于阈值的检测结果</span></span><br><span class="line">            boost_detections = detections[mask]</span><br><span class="line">            boost_detections_args = np.argwhere(mask).reshape((-<span class="number">1</span>,))</span><br><span class="line">            <span class="comment"># 得到需要增强的检测以及他的索引</span></span><br><span class="line">            iou_limit = <span class="number">0.3</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(boost_detections) &gt; <span class="number">0</span>:</span><br><span class="line">                bdiou = iou_batch(boost_detections, boost_detections) - np.eye(<span class="built_in">len</span>(boost_detections))</span><br><span class="line">                <span class="comment"># 计算所有需要增强的检测结果之间的IoU，并除去对角线元素（对角线上的IoU总为1）</span></span><br><span class="line">                bdiou_max = bdiou.<span class="built_in">max</span>(axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">                remaining_boxes = boost_detections_args[bdiou_max &lt;= iou_limit]</span><br><span class="line">                args = np.argwhere(bdiou_max &gt; iou_limit).reshape((-<span class="number">1</span>,))</span><br><span class="line">                <span class="comment"># 保存所有IoU值大于阈值的边框的索引</span></span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(args)):</span><br><span class="line">                    boxi = args[i]</span><br><span class="line">                    tmp = np.argwhere(bdiou[boxi] &gt; iou_limit).reshape((-<span class="number">1</span>,))</span><br><span class="line">                    args_tmp = np.append(np.intersect1d(boost_detections_args[args], boost_detections_args[tmp]), boost_detections_args[boxi])</span><br><span class="line">                    <span class="comment"># 遍历args中的每个边界框索引。对于每一个索引，找到与该边界框IoU大于iou_limit的其他边界框的索引，并将这些索引与当前边界框的索引合并。</span></span><br><span class="line"></span><br><span class="line">                    conf_max = np.<span class="built_in">max</span>(detections[args_tmp, <span class="number">4</span>])</span><br><span class="line">                    <span class="keyword">if</span> detections[boost_detections_args[boxi], <span class="number">4</span>] == conf_max:</span><br><span class="line">                        remaining_boxes = np.array(remaining_boxes.tolist() + [boost_detections_args[boxi]])</span><br><span class="line">                    <span class="comment"># 计算上述边界框集合中最大的置信度值，并检查当前边界框的置信度是否等于这个最大值。如果是，则将该边界框添加到remaining_boxes列表中。</span></span><br><span class="line"></span><br><span class="line">                mask = np.zeros_like(detections[:, <span class="number">4</span>], dtype=np.bool_)</span><br><span class="line">                mask[remaining_boxes] = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">            detections[:, <span class="number">4</span>] = np.where(mask, self.det_thresh + <span class="number">1e-4</span>, detections[:, <span class="number">4</span>])</span><br><span class="line">        <span class="keyword">return</span> detections</span><br></pre></td></tr></table></figure>
+<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><p><img src="3.png" alt="Similarity matrix boost techniques消融实验"><br><img src="4.png" alt="Detection confidence boosting techniques消融实验"></p>
+<hr>
+
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/MOT/" class="">
+              MOT
+            </a>
+          
+            <a href="/tags/python/" class="">
+              python
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>author:  </strong>Xinhang Niu</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>link:  </strong>
+    <a href="/2024/08/07/boosttrack/" target="_blank" title="BoostTrack：boosting the similarity measure and detection confidence for improved multiple object tracking 总结">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/08/07/boosttrack/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright notice:   </strong>
+      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      reprint policy. If reproduced, please indicate source!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+  
+  
+  
+  
+  
+    
+    <div class="post-nav-next post-nav-item">
+      <div class="post-nav-img" style="background-size: cover; background-position: center center;">
+        <img class="lazyload" src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" alt="">
+      </div>
+      <a href="/2024/06/17/%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%EF%BC%8C%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%8C%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/" class="post-nav-link">
+        <div class="title">
+          Prev: <i class="fas fa-angle-right"></i>
+          <div class="title-text">代价函数，损失函数，目标函数详解</div>
+        </div>
+        <!-- <div class="content">
+          总结一下机器学习中的代价函数、损失函数、目标函数的概念以及一些典型的函数。
+概念代价函数：代价函数是用来衡量模型预测输出
+        </div> -->
       </a>
     </div>
   
-  <canvas id="header_canvas"style="position:absolute;bottom:0;width:100%;pointer-events:none;"></canvas>
-  
-    <svg class="hans-container" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none"><defs><path id="hans-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="hans-parallax"><use xlink:href="#hans-wave" x="50" y="0" fill="rgba(224,233,239,.5)"></use><use xlink:href="#hans-wave" x="50" y="3" fill="rgba(224,233,239,.5)"></use><use xlink:href="#hans-wave" x="50" y="6" fill="rgba(224,233,239,.5)"></use></g></svg>
+  </div>
     
-</div>
+    
 
+    <!-- 打赏 -->
+    
 
-<style>.hans-parallax>use{animation:hans-wave-move 12s linear infinite}.hans-parallax>use:nth-child(1){animation-delay:-2s}.hans-parallax>use:nth-child(2){animation-delay:-2s;animation-duration:5s}.hans-parallax>use:nth-child(3){animation-delay:-4s;animation-duration:3s}@keyframes hans-wave-move{0%{transform:translate(-90px,0)}100%{transform:translate(85px,0)}}</style>
-<style>
-  .hans-container {
-    position: absolute!important;
-    bottom: 0;
-    width: 100%;
-    height: 120px;
-    z-index: 100;
-    pointer-events:none;
-  }
-</style>
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
 
-
-<script>
-  var autoplay = JSON.parse('false');
-  var delay = '5000';
-  var loop = JSON.parse('true') ? false : JSON.parse('true');
-  var effect = 'slide';
-  var swiperLength = parseInt(document.querySelector(".swiper-length").innerText);
-  var defaultDesc = '';
-  defaultDesc = defaultDesc.split(',');
-  var defaultDescTypedLoop = JSON.parse('true');
-  var vm = new Vue({
-    el: '#appSwiper',
-    data: {
-      defaultDesc: defaultDesc,
-      defaultDescTypedLoop,
-      swiperOptions: {
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true // 允许点击小圆点跳转
-        },
-        loop: loop ? true : false,
-        effect, // fade
-        autoplay: (autoplay && swiperLength > 1) ? {
-  　　　　delay,
-  　　　　disableOnInteraction: false // 手动切换之后继续自动轮播
-    　　} : false,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-        lazy: {
-          loadPrevNext: true,
-        },
-        on:{
-          init: function() {
-            swiperAnimateCache(this); //隐藏动画元素 
-            swiperAnimate(this); //初始化完成开始动画
-          }, 
-          slideChangeTransitionEnd: function(){ 
-            swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
-          } 
-        }
-        // Some Swiper option/callback...
-      }
-    },
-    computed: {
-      swiper() {
-        return this.$refs.mySwiper.$swiper
-      }
-    },
-    mounted() {
-      // console.log('Current Swiper instance object', this.swiper)
-      // this.swiper.slideTo(0, 1000, false)
-    },
-    methods: {
-      stopAutoPlay() {
-        (autoplay && swiperLength > 1) && this.swiper.autoplay.stop();
-      },
-      startAutoPlay() {
-        (autoplay && swiperLength > 1) && this.swiper.autoplay.start();
-      },
-      slideChangeTransitionEnd() {
-        console.log('1');
-      },
-      toPostContent() {
-        const fullHeight = $(window).height() - 60;
-        $('html,body').animate({scrollTop: fullHeight},500);
-      }
-    },
-    created() {}
-  })
+<script src="/js/shareJs/social-share.min.js"></script>
 </script>
 
-  <script src="/js/bubble/homeBubble.js"></script>
-
 <style>
-#appSwiper {
-  position: relative;
-  user-select: none;
-  overflow: hidden;
-  font-family: Titillium Web,'PingFang SC','Hiragino Sans GB','Microsoft JhengHei','Microsoft YaHei',sans-serif;
-}
-.default-excerpt {
-  font-size: 1.6em;
-  margin-top: 1em;
-  color: #eee;
-}
-.bottom-one-btn {
-  margin-top: 15px;
-}
-.swiper-container {
-  overflow: hidden;
-  z-index: 0;
-}
-.swiper-slide {
-  height: 350px;
-  position: relative;
-}
-.swiper-button-prev,
-.swiper-button-next {
-  padding: 10px 10px;
-  transition: background 0.2s;
-}
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
-  background: rgba(0, 0, 0, 0.2);
-}
-.swiper-slide .item {
-  width: 100%;
-  height: 100%;
-}
-.flag {
-  position: relative;
-  width: 70%;
-  margin: 0 auto;
-  color: #ffffff;
-  height: 100%;
-  background: #000;
-}
-.flag img {
-  min-height: 100%;
-}
-.flag-text {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-  width: 80%;
-  height: 280px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 9999;
-}
-.flag-text .title {
-  font-size: 1.8em;
-}
-.flag-text .title a {
-  color: #fff;
-  transition: color 0.3s;
-}
-.flag-text .title a:hover {
-  color: rgba(66, 185, 133, 0.8);
-}
-.flag-text .excerpt {
-  color: #eee;
-  width: 70%;
-  line-height: 30px;
-  height: 150px;
-  margin-top: 2%;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 5;
-  overflow: hidden;
-}
-.swiper-pagination-bullet-active {
-  opacity: 1;
-  background-color: #42b983;
-}
-.img-mask {
-  opacity:0.6; filter: alpha(opacity=60);
-}
-.flag-text .read-more {
-  margin-bottom: 30px;
-  padding: 5px 15px;
-  color: #ffffff;
-  border-radius: 20px;
-}
-#scroll-down {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 2.5em;
-  color: #fff;
-  cursor: pointer;
-  z-index: 2;
-}
-#scroll-down a {
-  color: #fff;
-}
-@-webkit-keyframes rightan
-  {
-  
-  0%
-  {
-    transform: translateY(0);
-    opacity: 0.5;
+  .social-share {
+    margin: 20px 0;
   }
-  50% {
-    transform: translateY(-30px);
-    opacity: 1;
-  }
-  100%
-  {
-    transform: translateY(0);
-    opacity: 0.5;
-  }
-}
-.scroll-down-effects {
-  animation: rightan 1.5s infinite;
-}
-/* 当头部导航设置为背景透明的时候 */
-.swiper-slide {
-  height: 400px;
-}
-.flag-text {
-  top: 80px;
-}
-
-@media (min-width: 992px) {
-  .swiper-button-prev {
-    margin-left: 15%;
-    transform: translateX(-180%);
-  }
-  .swiper-button-next {
-    margin-right: 15%;
-    transform: translateX(180%);
-  }
-  .flag-text .title {
-    width: 80%;
-    line-height: 35px;
-    max-height: 70px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-  }
-}
-@media screen and (max-width: 1200px) { 
-  .flag {
-    width: 80%;
-  }
-  .swiper-button-prev {
-    margin-left: 10%;
-    transform: translateX(-180%);
-  }
-  .swiper-button-next {
-    margin-right: 10%;
-    transform: translateX(180%);
-  }
-}
-@media (max-width: 992px) {
-  .flag {
-    width: 100%;
-  }
-  .flag-text .title {
-    font-size: 1.5em;
-    margin-top: 50px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-  }
-  .flag-text {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 80%;
-    height: 100%;
-    margin-left: 50%;
-    transform: translateX(-50%);
-  }
-  .flag-text .excerpt {
-    width: 100%;
-    line-height: 25px;
-    height: 125px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
-    overflow: hidden;
-  }
-  .flag-text .read-more {
-    margin-bottom: 80px;
-  }
-}
-@media (max-width: 992px) and (min-width: 551px) {
-  .flag-text .excerpt {
-    width: 70%;
-  }
-}
-@media (max-width: 551px) {
-  .swiper-slide {
-    height: 250px;
-  }
-  .flag-text .title {
-    line-height: 30px;
-    max-height: 60px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    margin-top: 20px;
-  }
-  .flag-text .excerpt {
-    font-size: 1em;
-    line-height: 20px;
-    height: 80px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
-  }
-  .flag-text .excerpt { 
-    margin-top: 10px;
-  }
-  .flag-text .read-more {
-    margin-top: 10px;
-    margin-bottom: 50px;
-  }
-  .swiper-button-prev,
-  .swiper-button-next {
-    transform: scale(0.5);
-  }
-  .swiper-button-prev {
-    left: 0;
-  }
-  .swiper-button-next {
-    right: 0;
-  }
-}
-/* 当头部导航设置为背景透明的时候 */
-  @media (max-width: 992px) {
-    .flag-text {
-      top: 60px;
-      height: 80%;
-    }
-  }
-  @media (max-width: 551px) {
-    .swiper-slide {
-      height: 310px;
-    }
-  }
-
-/* 文字或者按钮居中显示 */
-
-  .flag-text {
-    left: 10%;
-  }
-  .flag-text .flag-text-content {
-    width: 100%;
-    text-align: center;
-  }
-  .flag-text .title {
-    width: 100%;
-    text-align: center;
-  }
-  .flag-text .excerpt { 
-    width: 100%;
-    text-align: center;
-  }
-  .bottom-one-btn {
-    display: flex;
-    justify-content: center;
-  }
-  .default-excerpt {
-    display: flex;
-    justify-content: center;
-    font-size: 1.6em;
-  }
-  .flag-text-btns {
-    justify-content: center;
-  }
-  @media (min-width: 992px) {
-    .flag-text .excerpt {
-      line-height: 30px;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 5;
-      overflow: hidden;
-    }
-  }
-  @media (max-width: 992px) {
-    .flag-text {
-      margin-left: 0;
-      transform: translateX(0);
-    }
-  }
-
-
-
-
-/* 全屏显示 */
-
-  .flag {
-    width: 100%;
-  }
-  .swiper-slide {
-    height: 100vh;
-  }
-  .flag-text {
-    top: 50%;
-    left: 15%;
-    transform: translateY(-50%);
-    width: 70%;
-    height: auto;
-  }
-  .flag-text .title {
-    font-size: 2.8em;
-    line-height: 1.5em;
-    max-height: none;
-  }
-  .flag-text .excerpt {
-    font-size: 1.25em;
-    height: 150px;
-  }
-  .flag-text .read-more {
-    margin-top: 10px;
-  }
-  .swiper-button-prev,
-  .swiper-button-next {
-    margin-top: -60px!important;
-  }
-  .swiper-btn-color,
-  .swiper-btn-color2 {
-    background-color: transparent;
-    border: 1px solid #fff;
-  }
-  .swiper-btn-color:hover,
-  .swiper-btn-color2:hover {
-    background-color: rgba(66, 185, 133, 0.8);
-    border: 1px solid rgba(66, 185, 133, 0.8)!important;
-  }
-  .flag-text-btns {
-    justify-content: center;
-  }
-  .swiper-button-prev {
-    margin-left: 10px;
-    transform: translateX(0);
-    border-radius: 50%;
-    padding: 0;
-    width: 50px;
-    height: 50px;
-  }
-  .swiper-button-next {
-    margin-right: 10px;
-    transform: translateX(0);
-    border-radius: 50%;
-    padding: 0;
-    width: 50px;
-    height: 50px;
-  }
-  .swiper-button-next:after, .swiper-button-prev:after {
-    font-size: 1.2em;
-  }
-  @media (min-width: 992px) {
-    .flag-text .excerpt {
-      line-height: 35px;
-      height: 175px;
-    }
-    .default-excerpt {
-      min-height: 150px;
-    }
-    .typed-element {
-      align-items: unset;
-    }
-  }
-  @media (max-width: 992px) {
-    .flag-text {
-      margin-left: 0;
-      height: 60%;
-      top: 55%;
-    }
-    .flag-text .title {
-      font-size: 2.4em;
-      margin-top: 0;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-    }
-    .flag-text .excerpt {
-      line-height: 35px;
-      height: 185px;
-    }
-    .flag-text .read-more {
-      margin-top: 20px;
-    }
-  }
-  @media (max-width: 551px) {
-    .flag-text {
-      height: 60%;
-    }
-    .flag-text .title {
-      font-size: 2.2em;
-    }
-    .flag-text .excerpt {
-      line-height: 30px;
-    }
-    .flag-text .read-more {
-      margin-top: 50px;
-      padding: 10px 30px;
-    }
-    .swiper-button-prev {
-      margin-left: 0;
-    }
-    .swiper-button-next {
-      margin-right: 0;
-    }
-    .default-excerpt {
-      margin-top: 1em;
-    }
-  }
-
-
-/* video */
-.swiper-video {
-  width: 100%;
-  height: 100%;
-}
-.swiper-video video {
-  pointer-events: none;
-}
-.swiper-video-maskBox{
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #000;
-  opacity: 0.2;
-  z-index: 1;
-}
-@media (min-width: 992px) {
-  
-    .swiper-video {
-      display: none;
-    }
-    .swiper-default-bgImg {
-      display: block;  
-    }
-  
-}
-@media (max-width: 992px) {
-  .swiper-video {
-    display: none;
-  }
-  .swiper-default-bgImg {
-    display: block;  
-  }
-}
-/* video-end */
 </style>
 
 
-<div id="l_main">
-  <div class="l_content">
-    <!-- 自定义的内容 -->
     
-    <!-- 首页座右铭 -->
     
-    <!-- 首页公告 -->
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
     
-<style>
-  .index-notice-content {
-    margin-top: 10px;
-  }
-  .warp {
-    width: 100%;
-    margin: 0 auto;
-    overflow: hidden;
-  }
-  .index-notice-content__ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 auto;
-  }
-  .index-notice-content__ul li,
-  .index-notice-content__ul a {
-    display: block;
-    height: 30px;
-    line-height: 30px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 15px;
-  }
-  .index-notice-content__title {
-    flex: 1;
-    overflow: hidden;
-  }
-  .index-notice-content__title a,
-  .index-notice-content__title span {
-    overflow: hidden;
-    display: block;
-    text-overflow:ellipsis; 
-    white-space: nowrap;
-    height: 100%;
-    width: 100%;
-    color: #000;
-  }
-  .index-notice-content__title a:hover,
-  .index-notice-content__title span:hover {
-    text-decoration: underline;
-  }
-  .index-notice-content__date {
-    min-width: 80px;
-    margin-left: 5px;
-    color: #000;
-  }
-</style>
-<div class="index-notice" id="appIndexNotice">
-    <h3>
-      <i class="fas fa-bullhorn index-notice-icon"></i>公告
-    </h3>
-    <div class="index-notice-content">
       
-      <vue-seamless-scroll
-        :data="listData"
-        :class-option="classOption"
-        class="warp"
-        style="height: 90px"
-      >
-        <ul class="index-notice-content__ul">
-          
-          
-            <li>
-              
-                <div class="index-notice-content__title">
-                  
-                    <a href="/archives" title="#博客开始运行了" style="color:red">
-                      #博客开始运行了
-                    </a>
-                  
-                </div>
-                
-                  <div class="index-notice-content__date" style="color:red">
-                    2023-11-29
-                  </div>
-                
-              
-            </li>
-          
-            <li>
-              
-                <div class="index-notice-content__title">
-                  
-                    <span title="#图片带CSDN水印是因为使用了CSDN图床" style="color:red">
-                      #图片带CSDN水印是因为使用了CSDN图床
-                    </span>
-                  
-                </div>
-                
-                  <div class="index-notice-content__date" style="color:red">
-                    2024-01-18
-                  </div>
-                
-              
-            </li>
-          
-            <li>
-              
-                <div class="index-notice-content__title">
-                  
-                    <span title="#使用本地图片，水印消失了" style="color:red">
-                      #使用本地图片，水印消失了
-                    </span>
-                  
-                </div>
-                
-                  <div class="index-notice-content__date" style="color:red">
-                    2024-02-29
-                  </div>
-                
-              
-            </li>
-           
-        </ul>
-      </vue-seamless-scroll>
-    </div>
-</div>
-<script src="/js/vue-seamless-scroll/index.js"></script>
-
-<!-- 滚动插件采用 vue-seamless-scroll
-  https://chenxuan0000.github.io/vue-seamless-scroll/zh/guide/06-singleStop.html 
--->
-
-<script>
-  var seamless = JSON.parse('false');
-  seamless = seamless ? 0 : 30;
-  var listData = '[object Object],[object Object],[object Object]' || '';
-  listData = listData.split(',');
-  var vm = new Vue({
-    el: '#appIndexNotice',
-    data: {
-      listData: listData,
-      moveNum: 2,
-      classOption: {
-        singleHeight: seamless,
-        limitMoveNum: listData.length
-      },
-    },
-    computed: {
-    },
-    mounted() {
-    },
-    methods: {
-    },
-    created() {
-      this.moveNum = parseInt(this.listData.length);
-    }
-  })
-</script>
-
-
-
-    <!-- 首页文章置顶 -->
-    
-
-
-
-    <div class="bg-floor" id="home-bg-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
-    <!-- 每一篇文章卡片 -->
-    <!-- hash算法 -->
-
-<section class="posts">
-  
-    
-    <article class="post reveal" style="flex-direction: row-reverse;   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2024-08-07</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2024/08/07/boosttrack/">BoostTrack：boosting the similarity measure and detection confidence for improved multiple object tracking 总结</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MOT/" rel="tag">MOT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/R-D/">R&D</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2024/08/07/boosttrack/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            文章收录于ISCV2023
-贴一个原文链接
-代码链接
-Abstract理想情况下，MOT算法应该只使用真正阳性的检测，避免在实时工作中出现身份切换。为了接近所描述的理想状况，作者提出了BoostTrack，设计了几个轻量化即插即用的模块来提
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2024/08/07/boosttrack/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2024/08/07/boosttrack/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
-    
-    <article class="post reveal" style="   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2024-06-17</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2024/06/17/%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%EF%BC%8C%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%8C%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/">代价函数，损失函数，目标函数详解</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2024/06/17/%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%EF%BC%8C%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%8C%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload" src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            总结一下机器学习中的代价函数、损失函数、目标函数的概念以及一些典型的函数。
-概念代价函数：代价函数是用来衡量模型预测输出与实际标签之间差异的一个数学表达式。在机器学习中，它的目的是最小化模型的预测误差，以找到最佳的模型参数。
-损失函数：损失
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2024/06/17/%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%EF%BC%8C%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%8C%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2024/06/17/%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%EF%BC%8C%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%8C%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload" src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
-    
-    <article class="post reveal" style="flex-direction: row-reverse;   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2024-06-05</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2024/06/05/latex%E5%B8%B8%E7%94%A8%E5%BE%AE%E7%A7%AF%E5%88%86%E8%BF%90%E7%AE%97%E7%AC%A6/">latex常用微积分运算符</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Latex/" rel="tag">Latex</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">问题记录</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2024/06/05/latex%E5%B8%B8%E7%94%A8%E5%BE%AE%E7%A7%AF%E5%88%86%E8%BF%90%E7%AE%97%E7%AC%A6/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            
-
-
-
-latex
-显示效果
-
-
-
-
-\partial
-∂
-
-
-\nabla
-∇
-
-
-\infty
-∞
-
-
-\int
-∫
-
-
-\iint
-∬
-
-
-\iiint
-∭
-
-
-\iiiint
-∬∬
-
-
-\oint
-∮
-
-
-\triangle
-△
-
-
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2024/06/05/latex%E5%B8%B8%E7%94%A8%E5%BE%AE%E7%A7%AF%E5%88%86%E8%BF%90%E7%AE%97%E7%AC%A6/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2024/06/05/latex%E5%B8%B8%E7%94%A8%E5%BE%AE%E7%A7%AF%E5%88%86%E8%BF%90%E7%AE%97%E7%AC%A6/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
-    
-    <article class="post reveal" style="   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2024-06-05</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2024/06/05/latex%E5%B8%B8%E7%94%A8%E9%9B%86%E5%90%88%E8%BF%90%E7%AE%97%E7%AC%A6/">latex常用集合运算符</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Latex/" rel="tag">Latex</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">问题记录</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2024/06/05/latex%E5%B8%B8%E7%94%A8%E9%9B%86%E5%90%88%E8%BF%90%E7%AE%97%E7%AC%A6/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload" src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            
-
-
-
-latex
-显示效果
-
-
-
-
-\emptyset
-∅
-
-
-\in
-∈
-
-
-\notin
-∉
-
-
-\subset
-⊂
-
-
-\supset
-⊃
-
-
-\subseteq
-⊆
-
-
-\nsubseteq
-⊈
-
-
-\nsupseteq
-⊉
-
-
-
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2024/06/05/latex%E5%B8%B8%E7%94%A8%E9%9B%86%E5%90%88%E8%BF%90%E7%AE%97%E7%AC%A6/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2024/06/05/latex%E5%B8%B8%E7%94%A8%E9%9B%86%E5%90%88%E8%BF%90%E7%AE%97%E7%AC%A6/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload" src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
-    
-    <article class="post reveal" style="flex-direction: row-reverse;   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2024-06-05</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2024/06/05/%E5%B8%B8%E7%94%A8%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D/">latex常用希腊字母</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Latex/" rel="tag">Latex</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">问题记录</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2024/06/05/%E5%B8%B8%E7%94%A8%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            latex列展示的是小写，如果需要大写只需要将首字母大写即可。
-
-
-
-
-小写
-大写
-latex
-
-
-
-
-α
-A
-\alpha
-
-
-β
-B
-\beta
-
-
-γ
-Γ
-\gamma
-
-
-δ
-Δ
-\delta
-
-
-ϵ
-E
-\epsilon     
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2024/06/05/%E5%B8%B8%E7%94%A8%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2024/06/05/%E5%B8%B8%E7%94%A8%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
-    
-    <article class="post reveal" style="   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2024-05-22</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2024/05/22/latex%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE/">Hexo使用Mathjax时常用的字体设置</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Latex/" rel="tag">Latex</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">问题记录</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2024/05/22/latex%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            主要介绍 LATEX，MathJax 语法的字体美化，包括字体种类，字体大小，字体特效，字体颜色等。
-
-字体种类设置\字体种类{文本}
-
-
-
-
-字体种类
-表示方法
-预览
-
-
-
-
-默认字体
-ABCDEFGHIJKLMNOPQRSTUVWXYZ
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2024/05/22/latex%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2024/05/22/latex%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
-    
-    <article class="post reveal" style="flex-direction: row-reverse;   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2024-05-17</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2024/05/17/debug/">【转载】如何在终端进行debug调试</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MOT/" rel="tag">MOT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/R-D/">R&D</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2024/05/17/debug/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            
-参考这个方法
-
-进入Debug模式1python -m pdb xxx.py
-命令列表l —&gt; list 显示当前代码
-n —&gt; next 向下执行一行代码
-c —&gt; continue 继续执行代码
-b —&gt; br
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2024/05/17/debug/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2024/05/17/debug/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
-    
-    <article class="post reveal" style="   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2024-04-17</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2024/04/17/Long-tail/">Delving into the Trajectory Long-tail Distribution for Muti-object Tracking 总结</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MOT/" rel="tag">MOT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/R-D/">R&D</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2024/04/17/Long-tail/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload" src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            贴一个原文链接
-代码链接
-
-Abstract多目标跟踪一直以来都集中于跟踪算法的的发展和后处理技术的增强，没有对跟踪数据本身的性质进行探索，作者对跟踪数据的分布模式进行探索，发现现有的MOT数据集存在显著的长尾分布问题。作者根据这一发现引入
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2024/04/17/Long-tail/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2024/04/17/Long-tail/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload" src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
-    
-    <article class="post reveal" style="flex-direction: row-reverse;   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2024-04-15</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2024/04/15/UncertaintyTrack%E6%80%BB%E7%BB%93/">UncertaintyTrack Exploiting Detection and Localization Uncertainty in Multi-Object Tracking</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MOT/" rel="tag">MOT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/R-D/">R&D</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2024/04/15/UncertaintyTrack%E6%80%BB%E7%BB%93/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            贴一个原文链接这篇文章的代码依旧没有开源
-
-Abstract近年来，大多数多目标跟踪都遵循TbD范式，盲目的相信检测器的检测，而没有意识到可能存在的定位不确定性，会给下游的检测任务带来误差。作者引入了Uncertainty Track，以解
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2024/04/15/UncertaintyTrack%E6%80%BB%E7%BB%93/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2024/04/15/UncertaintyTrack%E6%80%BB%E7%BB%93/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" alt="">
-        </a>
-      </div>
-    </article>
-  
-    
-    <article class="post reveal" style="   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2024-04-08</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2024/04/08/DeconfuseTrack%E6%80%BB%E7%BB%93/">Deconfuse Track总结</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MOT/" rel="tag">MOT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/R-D/">R&D</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2024/04/08/DeconfuseTrack%E6%80%BB%E7%BB%93/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            贴一个原文链接
-很可惜这篇文章的代码没有开源
-
-Abstract在多目标跟踪中，准确的数据关联十分重要，但是现有的方法大多进行简单的全局数据关联，忽略了轨迹的多样性以及外观线索存在的冲突性，导师检测-轨迹对存在混淆。为了解决这一问题，作者提
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2024/04/08/DeconfuseTrack%E6%80%BB%E7%BB%93/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2024/04/08/DeconfuseTrack%E6%80%BB%E7%BB%93/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
+<section id="comments" style="padding: 1em;"
+	class="animated bounceInUp">
+	<div id="vcomment" class="comment"></div>
 </section>
-    <!-- 翻页 -->
+<style>
+	#comments {
+		background: rgba(255,255,255,0.9);
+	}
+	#veditor {
+		background-image: url('https://img.zcool.cn/community/01a253594c71cfa8012193a329a77f.gif');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: right;
+		background-color: rgba(255, 255, 255, 0);
+		resize: vertical;
+	}
+	#veditor:focus{
+		background-position-y: 200px;
+		transition: all 0.2s ease-in-out 0s;
+	}
+	#vcomment .vcards .vcard .vh .vhead .vtag.vvisitor {
+		background-color: #42b983;
+	}
+	.v[data-class=v] .vbtn:active, .v[data-class=v] .vbtn:hover {
+		color: #42b983;
+		border-color: #42b983;
+	}
+	#vcomment .vcards .vcard .vhead .vsys i {
+		display: none;
+	}
+	/* 底部valine链接 */
+	#vcomment .vpower {
+		display: none;
+	}
+	
+	/* 底下注释是修改 名称和邮箱和网址输入框的样式 */
+	/* #vcomment .vheader {
+		display: flex;
+		justify-content: space-around;
+	}
+	
+	#vcomment .vheader .vnick {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	}
+
+	#vcomment .vheader .vmail {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	}
+
+	#vcomment .vheader .vlink {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	} */
+
+	img.vimg {
+		transition: all 1s;
+		/* 头像旋转时间为 1s */
+	}
+
+	img.vimg:hover {
+		transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+	}
+
+	#vcomment .vcards .vcard {
+		padding: 15px 20px 0 20px;
+		border-radius: 10px;
+		margin-bottom: 15px;
+		box-shadow: 0 0 4px 1px rgba(0, 0, 0, .12);
+		transition: all .3s
+	}
+
+	#vcomment .vcards .vcard:hover {
+		box-shadow: 0 0 8px 3px rgba(0, 0, 0, .12)
+	}
+
+	#vcomment .vcards .vcard .vh .vcard {
+		border: none;
+		box-shadow: none;
+	}
+</style>
     
-  <!-- <nav class="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next</a>
-  </nav> -->
-  <div class="page-nav">
-    
-    <div class="page-info">
-        <div class="page-info-text">1 / 2</div>
-    </div>
-    
-      <a href="/page/2/"
-         class="page-nav-next">
-          <span class="mr-5">Next</span><i class="fas fa-angle-right"></i>
-      </a>
-      
   </div>
+
+<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
 
   </div>
 
+  <!-- 目录 -->
   <aside id='l_side'>
   
     
@@ -1948,68 +755,29 @@ Abstract在多目标跟踪中，准确的数据关联十分重要，但是现有
   <div class="layout_sticky">    
     
       
-        
-    <section class="widget side_category">
-      
+<section class="widget side_toc">
+  
   <header>
     
-      <a style="color: " href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
     
   </header>
 
 
-      <div class='content'>
-        <ul class="entry navigation">
-          
-            <li><a class="flat-box"
-              title="/categories/C/" href="/categories/C/"
-              id="categoriesC"
-              ><div class='name'>C++</div><div class='badge'>(1)</div></a></li>
-          
-            <li><a class="flat-box"
-              title="/categories/R-D/" href="/categories/R-D/"
-              id="categoriesR-D"
-              ><div class='name'>R&D</div><div class='badge'>(11)</div></a></li>
-          
-            <li><a class="flat-box"
-              title="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"
-              id="categoriesE69CBAE599A8E5ADA6E4B9A0"
-              ><div class='name'>机器学习</div><div class='badge'>(1)</div></a></li>
-          
-            <li><a class="flat-box"
-              title="/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" href="/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/"
-              id="categoriesE6AF8FE697A5E4B880E9A298"
-              ><div class='name'>每日一题</div><div class='badge'>(1)</div></a></li>
-          
-            <li><a class="flat-box"
-              title="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/"
-              id="categoriesE997AEE9A298E8AEB0E5BD95"
-              ><div class='name'>问题记录</div><div class='badge'>(6)</div></a></li>
-          
-        </ul>
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Detection-tracklet-confidence-similarity-boost"><span class="toc-text">Detection-tracklet confidence similarity boost</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mahalanobis-distance-similarity-boost"><span class="toc-text">Mahalanobis distance similarity boost</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shape-similarity-boost"><span class="toc-text">Shape similarity boost</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Detection-confidence-boosting-techniques"><span class="toc-text">Detection confidence boosting techniques</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Experiment"><span class="toc-text">Experiment</span></a></li></ol> -->
+        <div class="toc"></div>
       </div>
-    </section>
-  
-  
-      
-      
-        
-<section class="widget side_tagcloud">
-    
-  <header>
-    
-      <a style="color: " href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-    <a href="/tags/C/" style="font-size: 10.5px; color: #999">C++</a> <a href="/tags/DFS/" style="font-size: 10.5px; color: #999">DFS</a> <a href="/tags/Hexo/" style="font-size: 16.83px; color: #6c6c6c">Hexo</a> <a href="/tags/Latex/" style="font-size: 13.67px; color: #828282">Latex</a> <a href="/tags/MOT/" style="font-size: 20px; color: #555">MOT</a> <a href="/tags/c/" style="font-size: 10.5px; color: #999">c++</a> <a href="/tags/python/" style="font-size: 20px; color: #555">python</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 10.5px; color: #999">机器学习</a> <a href="/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" style="font-size: 10.5px; color: #999">每日一题</a>
     </div>
+  </div>
 </section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
+</div>
 
-  
-      
       
   <section class="widget side_recent_post">
     
@@ -2135,81 +903,216 @@ Abstract在多目标跟踪中，准确的数据关联十分重要，但是现有
     </div>
   </section>
 
-      
-  <section class="widget side_archives">
-    
-    <header><a style="color: red" href='/archives/'><i class="fas fa-archive fa-fw" aria-hidden="true"></i><span class='name'>归档</span></a></header><div class="content"><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">August 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">June 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">May 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">April 2024</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">March 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">February 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">January 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">November 2023</span><span class="card-archive-list-count">1</span></a></li></ul></div>
-  </section>
-
-      <section class="widget side_webinfo">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-chart-line fa-fw" aria-hidden="true"></i><span class='name' style="color: ">站点信息</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="webinfo">
-      
-        <div class="webinfo-item">
-          <div>文章数目：</div>
-          <div>20 篇</div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>已运行时间：</div>
-          <div id="webinfo-runtime-count" publish_date="03/24/2020 21:34:09"></div>
-        </div>
-        <script>
-          var BirthDay = new Date(new Date('2023/11/29'));
-          var today = new Date();
-          var timeold = (today.getTime() - BirthDay.getTime());
-          var daysold = Math.floor(timeold / (24 * 60 * 60 * 1000));
-          document.getElementById('webinfo-runtime-count').innerHTML = daysold + ' 天';
-        </script>
-      
-
-
-      
-        <div class="webinfo-item">
-          <div>本站总字数：</div>
-          <div>32.4k 字</div>
-        </div>
-      
-
-      
-
-      
-
-      
-    </div>
-  </div>
-</section>
-      
     
   </div>
 </aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script src="/js/wrapImage.js"></script>
 </div>
-<!-- 花瓣和雪花飘落 -->
-<!-- 雪花和花瓣特效 -->
 
-  
-    <script type="text/javascript">
-      //只在桌面版网页启用特效
-      var windowWidth = $(window).width();
-      if (windowWidth > 768) {
-        loadScript('/js/falling/snow.js');
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || '';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
       }
-    </script>
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
   
-
-
-
-<!-- 灯笼 -->
+</script>
 
 
       </main>
