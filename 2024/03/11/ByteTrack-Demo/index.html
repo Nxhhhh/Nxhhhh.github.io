@@ -448,35 +448,35 @@
 <p>记录一下重装系统后的第一个代码复现<br>贴一下源代码的<a href="https://github.com/ifzhang/ByteTrack">链接</a></p>
 <hr>
 <h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><h3 id="1-首先安装ByteTrack"><a href="#1-首先安装ByteTrack" class="headerlink" title="1. 首先安装ByteTrack"></a>1. 首先安装ByteTrack</h3><p>创建虚拟环境后执行下面语句：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ifzhang/ByteTrack.git</span><br><span class="line">cd ByteTrack</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git clone https://github.com/ifzhang/ByteTrack.git<br>cd ByteTrack<br></code></pre></td></tr></table></figure>
 <p>如果不使用国内的镜像源，在执行这一步的时候可能会有很多报错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pip install -r requirements.txt<br></code></pre></td></tr></table></figure>
 <p>因此我使用镜像源安装：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install whatever gdown -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pip install whatever gdown -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com<br></code></pre></td></tr></table></figure>
 <p>然后执行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py develop</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">python setup.py develop<br></code></pre></td></tr></table></figure>
 <p>如果在这一步报错，编辑setup.py，将：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">with open(&quot;README.md&quot;, &quot;r&quot;) as f:</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">with open(&quot;README.md&quot;, &quot;r&quot;) as f:<br></code></pre></td></tr></table></figure>
 <p>改为：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">with open(&quot;README.md&quot;, &quot;r&quot;, encoding=&#x27;utf_8&#x27;) as f:</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">with open(&quot;README.md&quot;, &quot;r&quot;, encoding=&#x27;utf_8&#x27;) as f:<br></code></pre></td></tr></table></figure>
 <h3 id="2-安装pycocotools"><a href="#2-安装pycocotools" class="headerlink" title="2.安装pycocotools."></a>2.安装pycocotools.</h3><p>如果直接执行这一步会报错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install cython; pip3 install &#x27;git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI&#x27;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pip3 install cython; pip3 install &#x27;git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI&#x27;<br></code></pre></td></tr></table></figure>
 <p>需要换一种安装方式</p>
 <p>这一部分参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/hhh590_hh/article/details/126916833">https://blog.csdn.net/hhh590_hh/article/details/126916833</a></p>
 <p>1）首先安装cython:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install cython gdown -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pip install cython gdown -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com<br></code></pre></td></tr></table></figure>
 <p>2）然后在<a href="https://github.com/pdollar/coco.git">https://github.com/pdollar/coco.git</a>下载源码压缩包，解压后放在虚拟环境的site-packages文件下，</p>
 <p>3）打开cocoapi-master\pythonAPI中的setup.py文件，删除下面的两个参数：<br><img src="1.png" alt><br><img src="2.png" alt></p>
 <p>4）在anaconda prompt中cd到刚才的cocoapi-master\pythonAPI文件夹下，输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python setup.py build_ext --inplace</span><br><span class="line">python setup.py build_ext install</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">python setup.py build_ext --inplace<br>python setup.py build_ext install<br></code></pre></td></tr></table></figure>
 <p>如果第一步显示“已完成代码的生成”，第二步显示“Finished processing dependencies for pycocotools==2.0”则表示安装成功。</p>
 <h3 id="3-安装cython-bbox"><a href="#3-安装cython-bbox" class="headerlink" title="3.安装cython_bbox"></a>3.安装cython_bbox</h3><p>依旧是用国内镜像源：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install cython_bbox gdown -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pip install cython_bbox gdown -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com<br></code></pre></td></tr></table></figure>
 <h2 id="运行Demo"><a href="#运行Demo" class="headerlink" title="运行Demo"></a>运行Demo</h2><h3 id="1-下载一个预训练模型，官网给出了很多个模型，在这里我使用的是："><a href="#1-下载一个预训练模型，官网给出了很多个模型，在这里我使用的是：" class="headerlink" title="1.下载一个预训练模型，官网给出了很多个模型，在这里我使用的是："></a>1.下载一个预训练模型，官网给出了很多个模型，在这里我使用的是：</h3><p><img src="3.png" alt><br>贴一下作者给的<a target="_blank" rel="noopener" href="https://pan.baidu.com/share/init?surl=OJKrcQa_JP9zofC6ZtGBpw">链接</a>，提取码图上有。</p>
 <p>将下载下来的文件放在pretrained文件夹下，如果没有这个文件夹就自己创建一个。</p>
 <h3 id="2-修改源码文件地址"><a href="#2-修改源码文件地址" class="headerlink" title="2.修改源码文件地址"></a>2.修改源码文件地址</h3><p>打开demo_track.py文件，修改第30行的输入文件地址，将其改为绝对地址：<br>如果想跑自己下载的视频也可以在这里改为自己的视频文件：<br><img src="4.png" alt></p>
 <h3 id="3-跑通Demo"><a href="#3-跑通Demo" class="headerlink" title="3.跑通Demo"></a>3.跑通Demo</h3><p>cd到项目文件夹，输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/demo_track.py video -f G:/pycharmprojects/pythonProject/ByteTrack-main/exps/example/mot/yolox_x_mix_det.py -c G:/pycharmprojects/pythonProject/ByteTrack-main/pretrained/bytetrack_x_mot17.pth.tar  --fuse --save_result</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">python tools/demo_track.py video -f G:/pycharmprojects/pythonProject/ByteTrack-main/exps/example/mot/yolox_x_mix_det.py -c G:/pycharmprojects/pythonProject/ByteTrack-main/pretrained/bytetrack_x_mot17.pth.tar  --fuse --save_result<br></code></pre></td></tr></table></figure>
 <p><strong>注意，我在这里输入的都是文件的绝对地址，并且对比作者给出的demo运行方法，我删除了fp16。</strong></p>
 <p>fp16虽然可以使运行速度加快，但是加上fp16可能会导致结果没有检测框，<del>并且检测速度也并没有加快</del> 。</p>
 <p>等待运行结束后结果会保存在G:\pycharmprojects\pythonProject\ByteTrack-main\YOLOX_outputs\yolox_x_mix_det\track_vis下。<br><img src="5.png" alt><br><img src="6.png" alt></p>
