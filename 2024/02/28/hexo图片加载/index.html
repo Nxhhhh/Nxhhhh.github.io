@@ -283,81 +283,6 @@
       </ul>
       
       
-        <div id="appSearch">
-  <div class="search"  @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
-  <transition name="fade">
-    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
-      <div class="message-box animated bounceInDown">
-        <h2>
-          <span>
-            <i class="fas fa-search" aria-hidden="true"></i>
-            <span class="title">Search</span>
-          </span>
-          <i class="fas fa-times close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
-        </h2>
-        <form class="site-search-form">
-          <input type="text"
-            placeholder="Please enter keywords"
-            id="local-search-input" 
-            @click="getSearchFile()"
-            class="st-search-input"
-            v-model="searchInput"
-          />
-        </form>
-        <div class="result-wrapper">
-          <div id="local-search-result" class="local-search-result-cls"></div>
-        </div>
-      </div>
-    </div>
-  </transition>
-</div>
-<script src="/js/local_search.js"></script>
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appSearch',
-    data: {
-      dialogVisible: false,
-      searchInput: '',
-      top: 0,
-    },
-    computed: {
-    },
-    mounted() {
-      window.addEventListener('pjax:complete', () => {
-        this.cancelDialogVisible();
-      })
-    },
-    methods: {
-      showDialog() {
-        this.dialogVisible = true;
-        // 防止页面滚动，只能让弹框滚动
-        this.top = $(document).scrollTop()
-        body.style.cssText = 'overflow: hidden;';
-      },
-      getSearchFile() {
-        if (!this.searchInput) {
-          getSearchFile("/search.xml");
-        }
-      },
-      cancelDialogVisible() {
-        this.dialogVisible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      },
-    },
-    created() {}
-  })
-</script>
-<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
-<!-- 下面是搜索基本写法 -->
-<!-- <script type="text/javascript" id="local.search.active">
-  var inputArea = document.querySelector("#local-search-input");
-  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
-  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
-</script> -->
-
-      
 
     </nav>
   </div>
@@ -447,10 +372,10 @@
         <p><strong>解决图片在Markdown编辑器中正常显示，但是部署后网页无法加载的问题</strong> </p>
 <hr>
 <h3 id="首先确认根目录-config-yml文件"><a href="#首先确认根目录-config-yml文件" class="headerlink" title="首先确认根目录_config.yml文件"></a>首先确认根目录_config.yml文件</h3><p>将文件中post_asset_folder这一行设置为true</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">post_asset_folder: true<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">post_asset_folder: true</span><br></pre></td></tr></table></figure>
 <h3 id="然后打开git-bash"><a href="#然后打开git-bash" class="headerlink" title="然后打开git bash"></a>然后打开git bash</h3><p>输入这行命令：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">npm install https://github.com/CodeFalling/hexo-asset-image --save<br></code></pre></td></tr></table></figure>
-<h3 id="最后一步，修改插件代码"><a href="#最后一步，修改插件代码" class="headerlink" title="最后一步，修改插件代码"></a>最后一步，修改插件代码</h3><p>打开博客根目录中node_modules —&gt; hexo-asset-image —&gt; index.js<br>修改第58行代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">$(this).attr(<span class="hljs-string">&#x27;src&#x27;</span>, config.root + link + src);<br></code></pre></td></tr></table></figure><br>将它改为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">$(this).attr(<span class="hljs-string">&#x27;src&#x27;</span>, src);<br></code></pre></td></tr></table></figure><br>确定自己本地图片的位置正确<br>然后就完美解决了图片加载问题<br><img src="1.png" alt></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https://github.com/CodeFalling/hexo-asset-image --save</span><br></pre></td></tr></table></figure>
+<h3 id="最后一步，修改插件代码"><a href="#最后一步，修改插件代码" class="headerlink" title="最后一步，修改插件代码"></a>最后一步，修改插件代码</h3><p>打开博客根目录中node_modules —&gt; hexo-asset-image —&gt; index.js<br>修改第58行代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(this).attr(<span class="string">&#x27;src&#x27;</span>, config.root + link + src);</span><br></pre></td></tr></table></figure><br>将它改为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(this).attr(<span class="string">&#x27;src&#x27;</span>, src);</span><br></pre></td></tr></table></figure><br>确定自己本地图片的位置正确<br>然后就完美解决了图片加载问题<br><img src="1.png" alt></p>
 
       </div>
       <div class="post-tags-categories">

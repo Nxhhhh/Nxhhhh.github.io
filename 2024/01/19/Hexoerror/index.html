@@ -283,81 +283,6 @@
       </ul>
       
       
-        <div id="appSearch">
-  <div class="search"  @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
-  <transition name="fade">
-    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
-      <div class="message-box animated bounceInDown">
-        <h2>
-          <span>
-            <i class="fas fa-search" aria-hidden="true"></i>
-            <span class="title">Search</span>
-          </span>
-          <i class="fas fa-times close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
-        </h2>
-        <form class="site-search-form">
-          <input type="text"
-            placeholder="Please enter keywords"
-            id="local-search-input" 
-            @click="getSearchFile()"
-            class="st-search-input"
-            v-model="searchInput"
-          />
-        </form>
-        <div class="result-wrapper">
-          <div id="local-search-result" class="local-search-result-cls"></div>
-        </div>
-      </div>
-    </div>
-  </transition>
-</div>
-<script src="/js/local_search.js"></script>
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appSearch',
-    data: {
-      dialogVisible: false,
-      searchInput: '',
-      top: 0,
-    },
-    computed: {
-    },
-    mounted() {
-      window.addEventListener('pjax:complete', () => {
-        this.cancelDialogVisible();
-      })
-    },
-    methods: {
-      showDialog() {
-        this.dialogVisible = true;
-        // 防止页面滚动，只能让弹框滚动
-        this.top = $(document).scrollTop()
-        body.style.cssText = 'overflow: hidden;';
-      },
-      getSearchFile() {
-        if (!this.searchInput) {
-          getSearchFile("/search.xml");
-        }
-      },
-      cancelDialogVisible() {
-        this.dialogVisible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      },
-    },
-    created() {}
-  })
-</script>
-<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
-<!-- 下面是搜索基本写法 -->
-<!-- <script type="text/javascript" id="local.search.active">
-  var inputArea = document.querySelector("#local-search-input");
-  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
-  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
-</script> -->
-
-      
 
     </nav>
   </div>
@@ -450,7 +375,7 @@
 <hr>
 <h2 id="1-重新配置URL"><a href="#1-重新配置URL" class="headerlink" title="1 重新配置URL"></a>1 重新配置URL</h2><p>在博客根目录中的config.yml文件中修改URL的配置：<br>url是你生成的page页网址，root是你的根目录</p>
 <p><img src="https://img-blog.csdnimg.cn/direct/34679d6d51534bcc97481124de2480c8.png#pic_center" alt="URL"></p>
-<h2 id="2-如果使用图床图片，则需要修改以下内容"><a href="#2-如果使用图床图片，则需要修改以下内容" class="headerlink" title="2 如果使用图床图片，则需要修改以下内容"></a>2 如果使用图床图片，则需要修改以下内容</h2><p>①找到index.ejs文件，路径为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">└──hexo-theme-yourtheme (当前使用的主题文件夹)<br>   └──layout<br>      └──index.ejs<br></code></pre></td></tr></table></figure><br>②在inddex.ejs的头部中加入：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">&lt;meta name=<span class="hljs-string">&quot;referrer&quot;</span> content=<span class="hljs-string">&quot;no-referrer&quot;</span> /&gt;<br>&lt;meta http-equiv=<span class="hljs-string">&quot;Content-Security-Policy&quot;</span> ontent=<span class="hljs-string">&quot;upgrade-insecure-requests&quot;</span>&gt;<br></code></pre></td></tr></table></figure></p>
+<h2 id="2-如果使用图床图片，则需要修改以下内容"><a href="#2-如果使用图床图片，则需要修改以下内容" class="headerlink" title="2 如果使用图床图片，则需要修改以下内容"></a>2 如果使用图床图片，则需要修改以下内容</h2><p>①找到index.ejs文件，路径为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">└──hexo-theme-yourtheme (当前使用的主题文件夹)</span><br><span class="line">   └──layout</span><br><span class="line">      └──index.ejs</span><br></pre></td></tr></table></figure><br>②在inddex.ejs的头部中加入：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=<span class="string">&quot;referrer&quot;</span> content=<span class="string">&quot;no-referrer&quot;</span> /&gt;</span><br><span class="line">&lt;meta http-equiv=<span class="string">&quot;Content-Security-Policy&quot;</span> ontent=<span class="string">&quot;upgrade-insecure-requests&quot;</span>&gt;</span><br></pre></td></tr></table></figure></p>
 <h2 id="3-更改部署的分支"><a href="#3-更改部署的分支" class="headerlink" title="3 更改部署的分支"></a>3 更改部署的分支</h2><p>在仓库中新建一个分支，不要在master分支上部署pages。<br>我没有尝试新建分支，只是把分支从main改为了master，不确定是否真的有用。</p>
 <h2 id="4-浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。"><a href="#4-浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。" class="headerlink" title="4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。"></a>4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。</h2><p><img src="https://img-blog.csdnimg.cn/direct/7a2d5a400ad544c1a718006e69e26879.png#pic_center" alt="完美解决"></p>
 <hr>
