@@ -389,11 +389,11 @@
 <p><strong>两种格式</strong></p>
 <ol>
 <li><strong>单行注释</strong>：<code>// 描述信息</code> <ul>
-<li>通常放在一行代码的上方，或者一条语句的末尾，==对该行代码说明==</li>
+<li>通常放在一行代码的上方，或者一条语句的末尾，<mark>对该行代码说明<mark></mark></mark></li>
 </ul>
 </li>
 <li><strong>多行注释</strong>： <code>/* 描述信息 */</code><ul>
-<li>通常放在一段代码的上方，==对该段代码做整体说明==</li>
+<li>通常放在一段代码的上方，<mark>对该段代码做整体说明<mark></mark></mark></li>
 </ul>
 </li>
 </ol>
@@ -411,13 +411,13 @@
 <p>C++定义常量两种方式</p>
 <ol>
 <li><strong>#define</strong> 宏常量： <code>#define 常量名 常量值</code><ul>
-<li>==通常在文件上方定义==，表示一个常量</li>
+<li><mark>通常在文件上方定义</mark>，表示一个常量</li>
 </ul>
 </li>
 </ol>
 <ol>
 <li><strong>const</strong>修饰的变量 <code>const 数据类型 常量名 = 常量值</code><ul>
-<li>==通常在变量定义前加关键字const==，修饰该变量为常量，不可修改</li>
+<li><mark>通常在变量定义前加关键字const</mark>，修饰该变量为常量，不可修改</li>
 </ul>
 </li>
 </ol>
@@ -538,7 +538,7 @@
 <p>建议：给标识符命名时，争取做到见名知意的效果，方便自己和他人的阅读</p>
 </blockquote>
 <h2 id="2-数据类型"><a href="#2-数据类型" class="headerlink" title="2 数据类型"></a>2 数据类型</h2><p>C++规定在创建一个变量或者常量时，必须要指定出相应的数据类型，否则无法给变量分配内存</p>
-<h3 id="2-1-整型"><a href="#2-1-整型" class="headerlink" title="2.1 整型"></a>2.1 整型</h3><p><strong>作用</strong>：整型变量表示的是==整数类型==的数据</p>
+<h3 id="2-1-整型"><a href="#2-1-整型" class="headerlink" title="2.1 整型"></a>2.1 整型</h3><p><strong>作用</strong>：整型变量表示的是<mark>整数类型</mark>的数据</p>
 <p>C++中能够表示整型的类型有以下几种方式，<strong>区别在于所占内存空间不同</strong>：</p>
 <div class="table-container">
 <table>
@@ -573,14 +573,14 @@
 </tbody>
 </table>
 </div>
-<h3 id="2-2-sizeof关键字"><a href="#2-2-sizeof关键字" class="headerlink" title="2.2 sizeof关键字"></a>2.2 sizeof关键字</h3><p><strong>作用：</strong>利用sizeof关键字可以==统计数据类型所占内存大小==</p>
+<h3 id="2-2-sizeof关键字"><a href="#2-2-sizeof关键字" class="headerlink" title="2.2 sizeof关键字"></a>2.2 sizeof关键字</h3><p><strong>作用：</strong>利用sizeof关键字可以<mark>统计数据类型所占内存大小<mark></mark></mark></p>
 <p><strong>语法：</strong> <code>sizeof( 数据类型 / 变量)</code></p>
 <p><strong>示例：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;short 类型所占内存空间为： &quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(<span class="type">short</span>) &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;int 类型所占内存空间为： &quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(<span class="type">int</span>) &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;long 类型所占内存空间为： &quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(<span class="type">long</span>) &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;long long 类型所占内存空间为： &quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(<span class="type">long</span> <span class="type">long</span>) &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p><strong>整型结论</strong>：==short &lt; int &lt;= long &lt;= long long==</p>
+<p><strong>整型结论</strong>：<mark>short &lt; int &lt;= long &lt;= long long<mark></mark></mark></p>
 </blockquote>
-<h3 id="2-3-实型（浮点型）"><a href="#2-3-实型（浮点型）" class="headerlink" title="2.3 实型（浮点型）"></a>2.3 实型（浮点型）</h3><p><strong>作用</strong>：用于==表示小数==</p>
+<h3 id="2-3-实型（浮点型）"><a href="#2-3-实型（浮点型）" class="headerlink" title="2.3 实型（浮点型）"></a>2.3 实型（浮点型）</h3><p><strong>作用</strong>：用于<mark>表示小数<mark></mark></mark></p>
 <p>浮点型变量分为两种：</p>
 <ol>
 <li>单精度float </li>
@@ -619,7 +619,7 @@
 <p>注意2：单引号内只能有一个字符，不可以是字符串</p>
 </blockquote>
 <ul>
-<li>C和C++中字符型变量只占用==1个字节==。</li>
+<li>C和C++中字符型变量只占用<mark>1个字节<mark>。</mark></mark></li>
 <li>字符型变量并不是把字符本身放到内存中存储，而是将对应的ASCII编码放入到存储单元</li>
 </ul>
 <p>示例：</p>
@@ -969,7 +969,7 @@
 <li>ASCII 非打印控制字符： ASCII 表上的数字 <strong>0-31</strong> 分配给了控制字符，用于控制像打印机等一些外围设备。</li>
 <li>ASCII 打印字符：数字 <strong>32-126</strong> 分配给了能在键盘上找到的字符，当查看或打印文档时就会出现。</li>
 </ul>
-<h3 id="2-5-转义字符"><a href="#2-5-转义字符" class="headerlink" title="2.5 转义字符"></a>2.5 转义字符</h3><p><strong>作用：</strong>用于表示一些==不能显示出来的ASCII字符==</p>
+<h3 id="2-5-转义字符"><a href="#2-5-转义字符" class="headerlink" title="2.5 转义字符"></a>2.5 转义字符</h3><p><strong>作用：</strong>用于表示一些<mark>不能显示出来的ASCII字符<mark></mark></mark></p>
 <p>现阶段我们常用的转义字符有：<code>\n  \\  \t</code></p>
 <div class="table-container">
 <table>
@@ -1075,7 +1075,7 @@
 </li>
 </ol>
 <blockquote>
-<p>注意：C++风格字符串，需要加入头文件==#include\<string>==</string></p>
+<p>注意：C++风格字符串，需要加入头文件<mark>#include\<string><mark></mark></string></mark></p>
 </blockquote>
 <h3 id="2-7-布尔类型-bool"><a href="#2-7-布尔类型-bool" class="headerlink" title="2.7 布尔类型 bool"></a>2.7 布尔类型 bool</h3><p><strong>作用：</strong>布尔数据类型代表真或假的值 </p>
 <p>bool类型只有两个值：</p>
@@ -1083,7 +1083,7 @@
 <li>true  —- 真（本质是1）</li>
 <li>false —- 假（本质是0）</li>
 </ul>
-<p><strong>bool类型占==1个字节==大小</strong></p>
+<p><strong>bool类型占<mark>1个字节<mark>大小</mark></mark></strong></p>
 <p>示例：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="type">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">	cout &lt;&lt; flag &lt;&lt; endl; <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">	flag = <span class="literal">false</span>;</span><br><span class="line">	cout &lt;&lt; flag &lt;&lt; endl; <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;size of bool = &quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(<span class="type">bool</span>) &lt;&lt; endl; <span class="comment">//1</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="2-8-数据的输入"><a href="#2-8-数据的输入" class="headerlink" title="2.8 数据的输入"></a>2.8 数据的输入</h3><p><strong>作用：用于从键盘获取数据</strong></p>
@@ -1327,7 +1327,7 @@
 <p>示例：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">	<span class="type">int</span> b = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; (a == b) &lt;&lt; endl; <span class="comment">// 0 </span></span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; (a != b) &lt;&lt; endl; <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; (a &gt; b) &lt;&lt; endl; <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; (a &lt; b) &lt;&lt; endl; <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; (a &gt;= b) &lt;&lt; endl; <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; (a &lt;= b) &lt;&lt; endl; <span class="comment">// 1</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>注意：C和C++ 语言的比较运算中， ==“真”用数字“1”来表示， “假”用数字“0”来表示。== </p>
+<p>注意：C和C++ 语言的比较运算中， <mark>“真”用数字“1”来表示， “假”用数字“0”来表示。<mark> </mark></mark></p>
 </blockquote>
 <h3 id="3-4-逻辑运算符"><a href="#3-4-逻辑运算符" class="headerlink" title="3.4 逻辑运算符"></a>3.4 逻辑运算符</h3><p><strong>作用：</strong>用于根据表达式的值返回真值或假值</p>
 <p>逻辑运算符有以下符号：</p>
@@ -1371,14 +1371,14 @@
 <p><strong>示例2：</strong>逻辑与</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//逻辑运算符  --- 与</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">	<span class="type">int</span> b = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; (a &amp;&amp; b) &lt;&lt; endl;<span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">	a = <span class="number">10</span>;</span><br><span class="line">	b = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; (a &amp;&amp; b) &lt;&lt; endl;<span class="comment">// 0 </span></span><br><span class="line"></span><br><span class="line">	a = <span class="number">0</span>;</span><br><span class="line">	b = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; (a &amp;&amp; b) &lt;&lt; endl;<span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>总结：逻辑==与==运算符总结： ==同真为真，其余为假==</p>
+<p>总结：逻辑<mark>与</mark>运算符总结： <mark>同真为真，其余为假<mark></mark></mark></p>
 </blockquote>
 <p><strong>示例3：</strong>逻辑或</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//逻辑运算符  --- 或</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">	<span class="type">int</span> b = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; (a || b) &lt;&lt; endl;<span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">	a = <span class="number">10</span>;</span><br><span class="line">	b = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; (a || b) &lt;&lt; endl;<span class="comment">// 1 </span></span><br><span class="line"></span><br><span class="line">	a = <span class="number">0</span>;</span><br><span class="line">	b = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; (a || b) &lt;&lt; endl;<span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>逻辑==或==运算符总结： ==同假为假，其余为真==</p>
+<p>逻辑<mark>或</mark>运算符总结： <mark>同假为假，其余为真<mark></mark></mark></p>
 </blockquote>
-<h2 id="4-程序流程结构"><a href="#4-程序流程结构" class="headerlink" title="4 程序流程结构"></a>4 程序流程结构</h2><p>C/C++支持最基本的三种程序运行结构：==顺序结构、选择结构、循环结构==</p>
+<h2 id="4-程序流程结构"><a href="#4-程序流程结构" class="headerlink" title="4 程序流程结构"></a>4 程序流程结构</h2><p>C/C++支持最基本的三种程序运行结构：<mark>顺序结构、选择结构、循环结构<mark></mark></mark></p>
 <ul>
 <li>顺序结构：程序按顺序执行，不发生跳转</li>
 <li>选择结构：依据条件是否满足，有选择的执行相应功能</li>
@@ -1456,19 +1456,19 @@
 </blockquote>
 <h3 id="4-2-循环结构"><a href="#4-2-循环结构" class="headerlink" title="4.2 循环结构"></a>4.2 循环结构</h3><h4 id="4-2-1-while循环语句"><a href="#4-2-1-while循环语句" class="headerlink" title="4.2.1 while循环语句"></a>4.2.1 while循环语句</h4><p><strong>作用：</strong>满足循环条件，执行循环语句</p>
 <p><strong>语法：</strong><code>while(循环条件)&#123; 循环语句 &#125;</code></p>
-<p><strong>解释：</strong>==只要循环条件的结果为真，就执行循环语句==</p>
+<p><strong>解释：</strong><mark>只要循环条件的结果为真，就执行循环语句==</mark></p>
 <p><img src="clip_image002-1541668640382.png" alt="img"></p>
 <p><strong>示例：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (num &lt; <span class="number">10</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;num = &quot;</span> &lt;&lt; num &lt;&lt; endl;</span><br><span class="line">		num++;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>注意：在执行循环语句时候，程序必须提供跳出循环的出口，否则出现死循环</p>
 </blockquote>
-<p><strong>while循环练习案例：</strong>==猜数字==</p>
+<p><strong>while循环练习案例：</strong><mark>猜数字<mark></mark></mark></p>
 <p><strong>案例描述：</strong>系统随机生成一个1到100之间的数字，玩家进行猜测，如果猜错，提示玩家数字过大或过小，如果猜对恭喜玩家胜利，并且退出游戏。</p>
 <p><img src="猜数字.jpg" alt="猜数字"></p>
 <h4 id="4-2-2-do…while循环语句"><a href="#4-2-2-do…while循环语句" class="headerlink" title="4.2.2 do…while循环语句"></a>4.2.2 do…while循环语句</h4><p><strong>作用：</strong> 满足循环条件，执行循环语句</p>
 <p><strong>语法：</strong> <code>do&#123; 循环语句 &#125; while(循环条件);</code></p>
-<p><strong>注意：</strong>与while的区别在于==do…while会先执行一次循环语句==，再判断循环条件</p>
+<p><strong>注意：</strong>与while的区别在于<mark>do…while会先执行一次循环语句</mark>，再判断循环条件</p>
 <p><img src="clip_image002-1541671163478.png" alt="img"></p>
 <p><strong>示例：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">do</span></span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; num &lt;&lt; endl;</span><br><span class="line">		num++;</span><br><span class="line"></span><br><span class="line">	&#125; <span class="keyword">while</span> (num &lt; <span class="number">10</span>);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1500,7 +1500,7 @@
 <p><strong>练习案例：</strong>乘法口诀表</p>
 <p>案例描述：利用嵌套循环，实现九九乘法表</p>
 <p><img src="0006018857256120_b.jpg" alt="0006018857256120_b"></p>
-<h3 id="4-3-跳转语句"><a href="#4-3-跳转语句" class="headerlink" title="4.3 跳转语句"></a>4.3 跳转语句</h3><h4 id="4-3-1-break语句"><a href="#4-3-1-break语句" class="headerlink" title="4.3.1 break语句"></a>4.3.1 break语句</h4><p><strong>作用:</strong> 用于跳出==选择结构==或者==循环结构==</p>
+<h3 id="4-3-跳转语句"><a href="#4-3-跳转语句" class="headerlink" title="4.3 跳转语句"></a>4.3 跳转语句</h3><h4 id="4-3-1-break语句"><a href="#4-3-1-break语句" class="headerlink" title="4.3.1 break语句"></a>4.3.1 break语句</h4><p><strong>作用:</strong> 用于跳出<mark>选择结构</mark>或者<mark>循环结构<mark></mark></mark></p>
 <p>break使用的时机：</p>
 <ul>
 <li>出现在switch条件语句中，作用是终止case并跳出switch</li>
@@ -1513,7 +1513,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//2、在循环语句中用break</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (i == <span class="number">5</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">break</span>; <span class="comment">//跳出循环语句</span></span><br><span class="line">		&#125;</span><br><span class="line">		cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>示例3：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//在嵌套循环语句中使用break，退出内层循环</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (j == <span class="number">5</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;*&quot;</span> &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="4-3-2-continue语句"><a href="#4-3-2-continue语句" class="headerlink" title="4.3.2 continue语句"></a>4.3.2 continue语句</h4><p><strong>作用：</strong>在==循环语句==中，跳过本次循环中余下尚未执行的语句，继续执行下一次循环</p>
+<h4 id="4-3-2-continue语句"><a href="#4-3-2-continue语句" class="headerlink" title="4.3.2 continue语句"></a>4.3.2 continue语句</h4><p><strong>作用：</strong>在<mark>循环语句</mark>中，跳过本次循环中余下尚未执行的语句，继续执行下一次循环</p>
 <p><strong>示例：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (i % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -1528,8 +1528,8 @@
 <p>注意：在程序中不建议使用goto语句，以免造成程序流程混乱</p>
 </blockquote>
 <h2 id="5-数组"><a href="#5-数组" class="headerlink" title="5 数组"></a>5 数组</h2><h3 id="5-1-概述"><a href="#5-1-概述" class="headerlink" title="5.1 概述"></a>5.1 概述</h3><p>所谓数组，就是一个集合，里面存放了相同类型的数据元素</p>
-<p><strong>特点1：</strong>数组中的每个==数据元素都是相同的数据类型==</p>
-<p><strong>特点2：</strong>数组是由==连续的内存==位置组成的</p>
+<p><strong>特点1：</strong>数组中的每个<mark>数据元素都是相同的数据类型<mark></mark></mark></p>
+<p><strong>特点2：</strong>数组是由<mark>连续的内存<mark>位置组成的</mark></mark></p>
 <p><img src="1541748375356.png" alt="1541748375356"></p>
 <h3 id="5-2-一维数组"><a href="#5-2-一维数组" class="headerlink" title="5.2 一维数组"></a>5.2 一维数组</h3><h4 id="5-2-1-一维数组定义方式"><a href="#5-2-1-一维数组定义方式" class="headerlink" title="5.2.1 一维数组定义方式"></a>5.2.1 一维数组定义方式</h4><p>一维数组定义的三种方式：</p>
 <ol>
@@ -1581,7 +1581,7 @@
 <li><code>数据类型  数组名[  ][ 列数 ] = &#123; 数据1，数据2，数据3，数据4&#125;;</code></li>
 </ol>
 <blockquote>
-<p>建议：以上4种定义方式，利用==第二种更加直观，提高代码的可读性==</p>
+<p>建议：以上4种定义方式，利用<mark>第二种更加直观，提高代码的可读性<mark></mark></mark></p>
 </blockquote>
 <p>示例：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//方式1  </span></span><br><span class="line">	<span class="comment">//数组类型 数组名 [行数][列数]</span></span><br><span class="line">	<span class="type">int</span> arr[<span class="number">2</span>][<span class="number">3</span>];</span><br><span class="line">	arr[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	arr[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">2</span>;</span><br><span class="line">	arr[<span class="number">0</span>][<span class="number">2</span>] = <span class="number">3</span>;</span><br><span class="line">	arr[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">4</span>;</span><br><span class="line">	arr[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">5</span>;</span><br><span class="line">	arr[<span class="number">1</span>][<span class="number">2</span>] = <span class="number">6</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			cout &lt;&lt; arr[i][j] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//方式2 </span></span><br><span class="line">	<span class="comment">//数据类型 数组名[行数][列数] = &#123; &#123;数据1，数据2 &#125; ，&#123;数据3，数据4 &#125; &#125;;</span></span><br><span class="line">	<span class="type">int</span> arr2[<span class="number">2</span>][<span class="number">3</span>] =</span><br><span class="line">	&#123;</span><br><span class="line">		&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,</span><br><span class="line">		&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//方式3</span></span><br><span class="line">	<span class="comment">//数据类型 数组名[行数][列数] = &#123; 数据1，数据2 ,数据3，数据4  &#125;;</span></span><br><span class="line">	<span class="type">int</span> arr3[<span class="number">2</span>][<span class="number">3</span>] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span> &#125;; </span><br><span class="line"></span><br><span class="line">	<span class="comment">//方式4 </span></span><br><span class="line">	<span class="comment">//数据类型 数组名[][列数] = &#123; 数据1，数据2 ,数据3，数据4  &#125;;</span></span><br><span class="line">	<span class="type">int</span> arr4[][<span class="number">3</span>] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span> &#125;;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1662,7 +1662,7 @@
 </blockquote>
 <h3 id="6-4-值传递"><a href="#6-4-值传递" class="headerlink" title="6.4 值传递"></a>6.4 值传递</h3><ul>
 <li>所谓值传递，就是函数调用时实参将数值传入给形参</li>
-<li>值传递时，==如果形参发生，并不会影响实参==</li>
+<li>值传递时，<mark>如果形参发生，并不会影响实参<mark></mark></mark></li>
 </ul>
 <p><strong>示例：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap</span><span class="params">(<span class="type">int</span> num1, <span class="type">int</span> num2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;交换前：&quot;</span> &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;num1 = &quot;</span> &lt;&lt; num1 &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;num2 = &quot;</span> &lt;&lt; num2 &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> temp = num1;</span><br><span class="line">	num1 = num2;</span><br><span class="line">	num2 = temp;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;交换后：&quot;</span> &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;num1 = &quot;</span> &lt;&lt; num1 &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;num2 = &quot;</span> &lt;&lt; num2 &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//return ; 当函数声明时候，不需要返回值，可以不写return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">	<span class="type">int</span> b = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">swap</span>(a, b);</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;mian中的 a = &quot;</span> &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;mian中的 b = &quot;</span> &lt;&lt; b &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1760,7 +1760,7 @@
 <blockquote>
 <p>总结：当数组名传入到函数作为参数时，被退化为指向首元素的指针</p>
 </blockquote>
-<h2 id="8-结构体"><a href="#8-结构体" class="headerlink" title="8 结构体"></a>8 结构体</h2><h3 id="8-1-结构体基本概念"><a href="#8-1-结构体基本概念" class="headerlink" title="8.1 结构体基本概念"></a>8.1 结构体基本概念</h3><p>结构体属于用户==自定义的数据类型==，允许用户存储不同的数据类型</p>
+<h2 id="8-结构体"><a href="#8-结构体" class="headerlink" title="8 结构体"></a>8 结构体</h2><h3 id="8-1-结构体基本概念"><a href="#8-1-结构体基本概念" class="headerlink" title="8.1 结构体基本概念"></a>8.1 结构体基本概念</h3><p>结构体属于用户<mark>自定义的数据类型</mark>，允许用户存储不同的数据类型</p>
 <h3 id="8-2-结构体定义和使用"><a href="#8-2-结构体定义和使用" class="headerlink" title="8.2 结构体定义和使用"></a>8.2 结构体定义和使用</h3><p><strong>语法：</strong><code>struct 结构体名 &#123; 结构体成员列表 &#125;；</code></p>
 <p>通过结构体创建变量的方式有三种：</p>
 <ul>
