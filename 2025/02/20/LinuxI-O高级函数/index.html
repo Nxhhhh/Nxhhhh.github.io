@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>C++静态库和动态库的区别 | 小牛学习日记</title>
+  <title>LinuxI/O高级函数 | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -304,14 +304,14 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        C++静态库和动态库的区别
+        LinuxI/O高级函数
       </span>
     </div>
     
@@ -326,8 +326,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> category：
           
-            <a href="/categories/C/" class="post-detail-header_category">
-              C++
+            <a href="/categories/Linux/" class="post-detail-header_category">
+              Linux
             </a>
           
         </span>
@@ -336,11 +336,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 738 |
+            <i class="fas fa-file-text-o"></i> Words: 2.4k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> Reading time: 2min |
+            <i class="fas fa-clock"></i> Reading time: 8min |
           </span>
   
           
@@ -367,31 +367,50 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h2 id="什么是库"><a href="#什么是库" class="headerlink" title="什么是库"></a>什么是库</h2><p>库是写好的，现有的，成熟的，可以复用的代码。本质上来说，库是一种可执行代码的二进制形式，可以被操作系统载入内存执行。库有两种：静态库（.a、.lib）和动态库（.so、.dll）。所谓静态、动态是指链接。</p>
-<p>库文件是事先编译好的方法的合集。</p>
-<h2 id="静态库与动态库的区别"><a href="#静态库与动态库的区别" class="headerlink" title="静态库与动态库的区别"></a>静态库与动态库的区别</h2><p>1、静态库的扩展名一般为“.a”或“.lib”（C/C++）；动态库的扩展名一般为“.so”或“.dll”（C/C++）。</p>
-<p>2、静态库在编译时会直接整合到目标程序中，编译成功的可执行文件可独立运行；动态库在编译时不会放到连接的目标程序中，即可执行文件无法单独运行。</p>
-<p><strong>静态库和动态库最本质的区别就是：该库是否被编译进目标（程序）内部。</strong></p>
-<p>静态（函数）库<br>一般扩展名为（.a或.lib）,这类的函数库通常扩展名为libxxx.a或xxx.lib 。</p>
-<p>这类库在编译的时候会直接整合到目标程序中，所以利用静态函数库编译成的文件会比较大，这类函数库最大的优点就是编译成功的可执行文件可以独立运行，而不再需要向外部要求读取函数库的内容；但是从升级难易度来看明显没有优势，如果函数库更新，需要重新编译。</p>
-<p>动态（函数）库<br>动态函数库的扩展名一般为（.so或.dll），这类函数库通常名为libxxx.so或xxx.dll 。</p>
-<p>与静态函数库被整个捕捉到程序中不同，动态函数库在编译的时候，在程序里只有一个“指向”的位置而已，也就是说当可执行文件需要使用到函数库的机制时，程序才会去读取函数库来使用；也就是说可执行文件无法单独运行。这样从产品功能升级角度方便升级，只要替换对应动态库即可，不必重新编译整个可执行文件。</p>
-<h2 id="静态库与动态库优缺点"><a href="#静态库与动态库优缺点" class="headerlink" title="静态库与动态库优缺点"></a>静态库与动态库优缺点</h2><h3 id="静态库"><a href="#静态库" class="headerlink" title="静态库"></a>静态库</h3><p>优点：</p>
-<p>①静态库被打包到应用程序中加载速度快<br>②发布程序无需提供静态库，移植方便</p>
-<p>缺点：</p>
-<p>①相同的库文件数据可能在内存中被加载多份，消耗系统资源，浪费内存<br>②库文件更新需要重新编译项目文件，生成新的可执行程序，浪费时间。</p>
-<h3 id="动态库"><a href="#动态库" class="headerlink" title="动态库"></a>动态库</h3><p>优点：</p>
-<p>①可实现不同进程间的资源共享<br>②动态库升级简单，只需要替换库文件，无需重新编译应用程序<br>③可以控制何时加载动态库，不调用库函数动态库不会被加载                                                       </p>
-<p>缺点：</p>
-<p>①加载速度比静态库慢<br>②发布程序需要提供依赖的动态库</p>
+        <h1 id="linux-高级I-O函数"><a href="#linux-高级I-O函数" class="headerlink" title="linux 高级I/O函数"></a>linux 高级I/O函数</h1><h2 id="1、open"><a href="#1、open" class="headerlink" title="1、open"></a>1、open</h2><p>用于打开或创建文件、设备文件等。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 用于打开已存在的文件</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">open</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname, <span class="type">int</span> flags)</span>;</span><br><span class="line"><span class="comment">// 用于打开或创建文件，当需要创建文件时使用</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">open</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname, <span class="type">int</span> flags, <span class="type">mode_t</span> mode)</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>pathname</strong>：这是一个字符串指针，指向要打开或创建的文件的路径名。可以是绝对路径（如 /home/user/test.txt），也可以是相对路径（如 test.txt）。<br><strong>flags</strong>：这是一个整数，用于指定打开文件的方式和一些额外的选项。常用的标志位如下：<br><strong>O_RDONLY</strong>：以只读模式打开文件。<br><strong>O_WRONLY</strong>：以只写模式打开文件。<br><strong>O_RDWR</strong>：以读写模式打开文件。<br><strong>O_CREAT</strong>：如果文件不存在，则创建该文件。使用此标志时，需要同时提供第三个参数 mode 来指定文件的权限。<br><strong>O_EXCL</strong>：与 O_CREAT 一起使用时，如果文件已经存在，则 open 函数会失败并返回 -1，可用于确保创建一个新文件。<br><strong>O_TRUNC</strong>：如果文件存在且以写模式打开，则将文件截断为长度为 0。<br><strong>O_APPEND</strong>：以追加模式打开文件，每次写操作都会将数据追加到文件末尾。<br><strong>mode</strong>：当使用 O_CREAT 标志时，需要提供此参数来指定新创建文件的权限。mode 是一个八进制数，通常使用 umask 来屏蔽一些权限位。例如，0644 表示文件所有者具有读写权限，而组用户和其他用户具有只读权限。</p>
+<h1 id="2、read-write"><a href="#2、read-write" class="headerlink" title="2、read/write"></a>2、read/write</h1><p>用于执行文件 I/O（输入 / 输出）操作的基础函数，它们可以对文件、设备等进行数据的读取和写入。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">ssize_t</span> <span class="title function_">read</span><span class="params">(<span class="type">int</span> fd, <span class="type">void</span> *buf, <span class="type">size_t</span> count)</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>fd</strong>：这是一个文件描述符，代表要读取数据的文件、设备等。文件描述符通常是通过 open、socket 等函数返回得到的。<br><strong>buf</strong>：这是一个指向缓冲区的指针，用于存储从文件中读取的数据。读取的数据会被存储到这个缓冲区中。<br><strong>count</strong>：这是一个 size_t 类型的整数，表示要读取的最大字节数。</p>
+<p><strong>返回值</strong><br><strong>正数</strong>：表示实际成功读取的字节数。<br><strong>0</strong>：表示已经到达文件末尾，没有更多数据可供读取。<br><strong>-1</strong>：表示读取操作失败，此时 errno 会被设置为具体的错误码，可以通过 perror 或 strerror 函数来获取错误信息。</p>
+<h1 id="3、lseek"><a href="#3、lseek" class="headerlink" title="3、lseek"></a>3、lseek</h1><p>用于移动文件读写指针的位置。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">off_t</span> <span class="title function_">lseek</span><span class="params">(<span class="type">int</span> fd, <span class="type">off_t</span> offset, <span class="type">int</span> whence)</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>fd</strong>：文件描述符，代表要操作的文件。这个文件描述符通常是通过 open 函数打开文件后返回得到的。<br><strong>offset</strong>：偏移量，它是一个 off_t 类型的整数，用于指定从 whence 参数所指定的位置开始移动的字节数。可以是正数（表示向文件末尾方向移动）、负数（表示向文件开头方向移动）或 0。<br><strong>whence</strong>：指定偏移量的起始位置，它有以下三种取值：<br><strong>SEEK_SET</strong>：从文件的开头开始计算偏移量，即 offset 是相对于文件开头的字节数。<br><strong>SEEK_CUR</strong>：从文件的当前读写位置开始计算偏移量，offset 是相对于当前位置的字节数。<br><strong>SEEK_END</strong>：从文件的末尾开始计算偏移量，offset 是相对于文件末尾的字节数，通常 offset 取负数表示向文件开头方向移动。</p>
+<p><strong>返回值</strong><br><strong>成功</strong>：返回从文件开头到新的文件读写指针位置的字节数，类型为 off_t。<br><strong>失败</strong>：返回 -1，并设置 errno 变量来指示具体的错误原因。常见的错误包括无效的文件描述符、不支持随机访问的设备等。</p>
+<h1 id="4、stat-lstat"><a href="#4、stat-lstat" class="headerlink" title="4、stat/lstat"></a>4、stat/lstat</h1><p>用于获取文件或文件系统对象的状态信息，例如文件的权限、大小、创建时间、修改时间等。不过，它们在处理符号链接时有一些差异。</p>
+<h2 id="stat"><a href="#stat" class="headerlink" title="stat"></a>stat</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">stat</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname, <span class="keyword">struct</span> stat *buf)</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>pathname</strong>：一个指向字符串的指针，代表要获取状态信息的文件或目录的路径名。可以是绝对路径（如 /home/user/test.txt），也可以是相对路径（如 test.txt）。<br><strong>buf</strong>：一个指向 struct stat 结构体的指针，用于存储获取到的文件状态信息。</p>
+<p>struct stat 结构体定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stat</span> &#123;</span></span><br><span class="line">    <span class="type">dev_t</span>     st_dev;         <span class="comment">/* 文件所在设备的 ID */</span></span><br><span class="line">    <span class="type">ino_t</span>     st_ino;         <span class="comment">/* 文件的 inode 编号 */</span></span><br><span class="line">    <span class="type">mode_t</span>    st_mode;        <span class="comment">/* 文件的类型和权限 */</span></span><br><span class="line">    <span class="type">nlink_t</span>   st_nlink;       <span class="comment">/* 硬链接的数量 */</span></span><br><span class="line">    <span class="type">uid_t</span>     st_uid;         <span class="comment">/* 文件所有者的用户 ID */</span></span><br><span class="line">    <span class="type">gid_t</span>     st_gid;         <span class="comment">/* 文件所有者的组 ID */</span></span><br><span class="line">    <span class="type">dev_t</span>     st_rdev;        <span class="comment">/* 设备文件的设备 ID */</span></span><br><span class="line">    <span class="type">off_t</span>     st_size;        <span class="comment">/* 文件的大小（字节） */</span></span><br><span class="line">    <span class="type">blksize_t</span> st_blksize;     <span class="comment">/* 文件系统的块大小 */</span></span><br><span class="line">    <span class="type">blkcnt_t</span>  st_blocks;      <span class="comment">/* 文件占用的块数 */</span></span><br><span class="line">    <span class="type">time_t</span>    st_atime;       <span class="comment">/* 最后访问时间 */</span></span><br><span class="line">    <span class="type">time_t</span>    st_mtime;       <span class="comment">/* 最后修改时间 */</span></span><br><span class="line">    <span class="type">time_t</span>    st_ctime;       <span class="comment">/* 最后状态改变时间 */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>返回值</strong><br><strong>成功</strong>：返回 0。<br><strong>失败</strong>：返回 -1，并设置 errno 变量来指示具体的错误原因，例如文件不存在、权限不足等。</p>
+<h2 id="lstat"><a href="#lstat" class="headerlink" title="lstat"></a>lstat</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">lstat</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname, <span class="keyword">struct</span> stat *buf)</span>;</span><br></pre></td></tr></table></figure>
+<p>与 stat 函数的参数相同，pathname 是要获取状态信息的文件或目录的路径名，buf 是用于存储文件状态信息的 struct stat 结构体指针。</p>
+<p><strong>区别</strong><br>当 pathname 是一个符号链接时，lstat 函数不会跟随符号链接，而是返回符号链接本身的状态信息。这意味着 lstat 函数可以用来判断一个文件是否为符号链接，因为符号链接的 st_mode 字段会有特定的标志位。</p>
+<p>如果你需要获取符号链接所指向的目标文件的状态信息，应该使用 stat 函数。<br>如果你需要获取符号链接本身的状态信息，或者判断一个文件是否为符号链接，应该使用 lstat 函数。</p>
+<h1 id="5、pipe"><a href="#5、pipe" class="headerlink" title="5、pipe"></a>5、pipe</h1><p>主要用于在进程间进行通信，创建的管道是一种半双工的通信机制，即数据只能在一个方向上流动</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">pipe</span><span class="params">(<span class="type">int</span> fd[<span class="number">2</span>])</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>pipefd</strong>是一个包含两个整数的数组，用于存储管道的文件描述符。具体如下：<br><strong>pipefd[0]</strong>：表示管道的读端文件描述符，进程可以通过这个文件描述符从管道中读取数据。<br><strong>pipefd[1]</strong>：表示管道的写端文件描述符，进程可以通过这个文件描述符向管道中写入数据。</p>
+<p><strong>返回值</strong><br><strong>成功：</strong>返回 0，并且 pipefd 数组会被正确填充为管道的读端和写端文件描述符。<br><strong>失败</strong>：返回 -1，并设置 errno 变量来指示具体的错误原因，常见的错误包括 EMFILE（当前进程已经打开了太多的文件描述符）、ENFILE（系统范围内的文件描述符已经用尽）等。</p>
+<h1 id="6、dup-dup2"><a href="#6、dup-dup2" class="headerlink" title="6、dup/dup2"></a>6、dup/dup2</h1><h2 id="dup"><a href="#dup" class="headerlink" title="dup"></a>dup</h2><p>用于复制现有的文件描述符。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">dup</span><span class="params">(<span class="type">int</span> oldfd)</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>oldfd</strong>：需要被复制的现有文件描述符。<br>返回值<br><strong>成功</strong>：返回一个新的文件描述符，这个新的文件描述符与 oldfd 指向同一个文件表项。<br><strong>失败</strong>：返回 -1，并设置 errno 变量来指示具体的错误原因，例如 EBADF 表示 oldfd 不是一个有效的文件描述符。</p>
+<h2 id="dup2"><a href="#dup2" class="headerlink" title="dup2"></a>dup2</h2><p>dup2 函数同样用于复制文件描述符，但它允许用户指定新的文件描述符的值。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">dup2</span><span class="params">(<span class="type">int</span> oldfd, <span class="type">int</span> newfd)</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>oldfd</strong>：需要被复制的现有文件描述符。<br><strong>newfd</strong>：指定的新文件描述符的值。</p>
+<p><strong>返回值</strong><br><strong>成功</strong>：返回新的文件描述符（即 newfd）。<br><strong>失败</strong>：返回 -1，并设置 errno 变量来指示具体的错误原因，例如 EBADF 表示 oldfd 或 newfd 不是有效的文件描述符。</p>
+<h1 id="7、fcntl"><a href="#7、fcntl" class="headerlink" title="7、fcntl"></a>7、fcntl</h1><p>用于对已打开的文件描述符进行各种控制操作，比如改变文件的访问模式、获取或设置文件状态标志等。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fcntl</span><span class="params">(<span class="type">int</span> fd, <span class="type">int</span> cmd, ... <span class="comment">/* arg */</span> )</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>fd</strong>：需要进行操作的文件描述符，通常是通过 open、pipe、socket 等函数返回得到的。<br><strong>cmd</strong>：指定要执行的操作命令，不同的命令会有不同的功能，并且可能需要额外的参数。常见的命令有以下几类：<br><strong>复制文件描述符</strong>：F_DUPFD、F_DUPFD_CLOEXEC。<br><strong>获取 / 设置文件状态标志</strong>：F_GETFL、F_SETFL。<br><strong>获取 / 设置文件锁</strong>：F_GETLK、F_SETLK、F_SETLKW。<br><strong>获取 / 设置文件描述符标志</strong>：F_GETFD、F_SETFD。<br><strong>…</strong>：这是一个可变参数，根据 cmd 的不同，可能需要提供额外的参数。例如，当 cmd 为 F_DUPFD 时，需要提供一个整数作为新文件描述符的最小值；当 cmd 为 F_SETFL 时，需要提供一个整数表示要设置的文件状态标志。</p>
+<p><strong>返回值</strong><br><strong>成功</strong>：返回值取决于具体的 cmd。例如，当 cmd 为 F_DUPFD 时，返回一个新的文件描述符；当 cmd 为 F_GETFL 时，返回文件的状态标志。<br><strong>失败</strong>：返回 -1，并设置 errno 变量来指示具体的错误原因，常见的错误包括 EBADF（无效的文件描述符）、EINVAL（无效的 cmd 命令）等。</p>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/C/" class="">
-              C++
+            <a href="/tags/Linux/" class="">
+              Linux
             </a>
           
         </div>
@@ -405,7 +424,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
-    <a href="/2025/02/20/C-静态库和动态库的区别/" target="_blank" title="C++静态库和动态库的区别">https://github.com/Nxhhhh/Nxhhhh.github.io/2025/02/20/C-静态库和动态库的区别/</a>
+    <a href="/2025/02/20/LinuxI-O高级函数/" target="_blank" title="LinuxI/O高级函数">https://github.com/Nxhhhh/Nxhhhh.github.io/2025/02/20/LinuxI-O高级函数/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright notice:   </strong>
@@ -423,40 +442,20 @@
   
   
   
-    
-    <div class="post-nav-prev post-nav-item">
-      <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-      </div>
-      <a href="/2025/02/20/LinuxI-O%E9%AB%98%E7%BA%A7%E5%87%BD%E6%95%B0/" class="post-nav-link">
-        <div class="title">
-          <i class="fas fa-angle-left"></i> Next:
-          <div class="title-text">LinuxI/O高级函数</div>
-        </div>
-        <!-- <div class="content">
-          linux 高级I/O函数1、open用于打开或创建文件、设备文件等。
-123456#include &lt;fcntl
-        </div> -->
-      </a>
-    </div>
-  
   
   
     
     <div class="post-nav-next post-nav-item">
       <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" alt="">
+        <img class="lazyload" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
       </div>
-      <a href="/2024/08/27/C3/" class="post-nav-link">
+      <a href="/2025/02/20/C-%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-nav-link">
         <div class="title">
           Prev: <i class="fas fa-angle-right"></i>
-          <div class="title-text">【转载】C++讲义[提高]</div>
+          <div class="title-text">C++静态库和动态库的区别</div>
         </div>
         <!-- <div class="content">
-          C++提高编程
-本阶段主要针对C++泛型编程和STL技术做详细讲解，探讨C++更深层的使用
-
-1 模板1.1 模板的概念
+          什么是库库是写好的，现有的，成熟的，可以复用的代码。本质上来说，库是一种可执行代码的二进制形式，可以被操作系统载入内存执
         </div> -->
       </a>
     </div>
@@ -587,7 +586,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%BA%93"><span class="toc-text">什么是库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">静态库与动态库的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">静态库与动态库优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%BA%93"><span class="toc-text">静态库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%BA%93"><span class="toc-text">动态库</span></a></li></ol></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#linux-%E9%AB%98%E7%BA%A7I-O%E5%87%BD%E6%95%B0"><span class="toc-text">linux 高级I&#x2F;O函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81open"><span class="toc-text">1、open</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81read-write"><span class="toc-text">2、read&#x2F;write</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81lseek"><span class="toc-text">3、lseek</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81stat-lstat"><span class="toc-text">4、stat&#x2F;lstat</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#stat"><span class="toc-text">stat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lstat"><span class="toc-text">lstat</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%E3%80%81pipe"><span class="toc-text">5、pipe</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6%E3%80%81dup-dup2"><span class="toc-text">6、dup&#x2F;dup2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#dup"><span class="toc-text">dup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dup2"><span class="toc-text">dup2</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7%E3%80%81fcntl"><span class="toc-text">7、fcntl</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
