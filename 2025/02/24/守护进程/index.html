@@ -323,15 +323,24 @@
       
 
       
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> category：
+          
+            <a href="/categories/C/" class="post-detail-header_category">
+              C++
+            </a>
+          
+        </span>
+      
 
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 0 |
+            <i class="fas fa-file-text-o"></i> Words: 570 |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> Reading time: 1min |
+            <i class="fas fa-clock"></i> Reading time: 2min |
           </span>
   
           
@@ -358,9 +367,38 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        
+        <h1 id="守护进程"><a href="#守护进程" class="headerlink" title="守护进程"></a>守护进程</h1><p>是一种在后台运行的特殊进程，通常用于执行系统任务或服务，不需要和用户交互。它在操作系统系董事运行，并在整个系统运行期间持续工作。</p>
+<h2 id="守护进程特点"><a href="#守护进程特点" class="headerlink" title="守护进程特点"></a>守护进程特点</h2><p>①后台运行：守护进程在后台运行，不与任何终端关联，因此用户无法通过终端直接与其交互。<br>②独立于用户会话：守护进程通常与用户登录回话无关，即使所有用户注销，守护进程仍然继续运行。<br>③生命周期长：在系统启动时启动，在系统关闭时终止，生命周期与系统运行时间一致。<br>④无控制终端：守护进程没有控制终端，因此不会接受来自终端的信号（如SIGHUP）。<br>⑤通常以root权限运行：许多守护进程需要访问系统资源或执行特权操作，因此以root用户权限运行。</p>
+<h2 id="守护进程的用途"><a href="#守护进程的用途" class="headerlink" title="守护进程的用途"></a>守护进程的用途</h2><p>守护进程通常用于提供系统服务或执行后台任务，如系统服务、日志记录、任务调度、消息队列等</p>
+<h2 id="守护进程的创建步骤"><a href="#守护进程的创建步骤" class="headerlink" title="守护进程的创建步骤"></a>守护进程的创建步骤</h2><h3 id="创建子进程并退出父进程"><a href="#创建子进程并退出父进程" class="headerlink" title="创建子进程并退出父进程"></a>创建子进程并退出父进程</h3><p>使用fork()创建子进程，然后退出父进程，使其变成一个孤儿进程，并被init进程接管。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">pid_t</span> pid=fork();</span><br><span class="line"><span class="keyword">if</span>(pid&gt;<span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>); <span class="comment">//退出父进程</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="创建新会话"><a href="#创建新会话" class="headerlink" title="创建新会话"></a>创建新会话</h3><p>使用setid()闯进新会话，是子进程成为会话组长，并脱离控制终端。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setid();</span><br></pre></td></tr></table></figure>
+<h3 id="改变工作目录"><a href="#改变工作目录" class="headerlink" title="改变工作目录"></a>改变工作目录</h3><p>将工作目录改为根目录，以避免占用可卸载文件系统。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chdir(<span class="string">&#x27;/&#x27;</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="重设文件权限掩码"><a href="#重设文件权限掩码" class="headerlink" title="重设文件权限掩码"></a>重设文件权限掩码</h3><p>使用umask(0)重设文件权限掩码，以确保守护进程创建的文件具有预期的权限。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umask(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="关闭文件描述符"><a href="#关闭文件描述符" class="headerlink" title="关闭文件描述符"></a>关闭文件描述符</h3><p>关闭从父进程集成的文件描述符，以释放资源。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i=sysconf(_SC_OPEN_MAX);i&gt;=<span class="number">0</span>;i++)</span><br><span class="line">&#123;</span><br><span class="line">    close(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="重定向标准输入-输出-错误"><a href="#重定向标准输入-输出-错误" class="headerlink" title="重定向标准输入/输出/错误"></a>重定向标准输入/输出/错误</h3><p>将标准输入、输出、错误重定向到/dev/null，以避免守护进程与终端交互。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">freopen(<span class="string">&quot;/dev/null&quot;</span>, <span class="string">&quot;r&quot;</span>, <span class="built_in">stdin</span>);</span><br><span class="line">freopen(<span class="string">&quot;/dev/null&quot;</span>, <span class="string">&quot;w&quot;</span>, <span class="built_in">stdout</span>);</span><br><span class="line">freopen(<span class="string">&quot;/dev/null&quot;</span>, <span class="string">&quot;w&quot;</span>, <span class="built_in">stderr</span>);</span><br></pre></td></tr></table></figure>
+
       </div>
       <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/C/" class="">
+              C++
+            </a>
+          
+            <a href="/tags/Linux/" class="">
+              Linux
+            </a>
+          
+            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="">
+              操作系统
+            </a>
+          
+        </div>
         
       </div>
       
@@ -533,7 +571,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!--  -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B"><span class="toc-text">守护进程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E7%89%B9%E7%82%B9"><span class="toc-text">守护进程特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%94%A8%E9%80%94"><span class="toc-text">守护进程的用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E6%AD%A5%E9%AA%A4"><span class="toc-text">守护进程的创建步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%AD%90%E8%BF%9B%E7%A8%8B%E5%B9%B6%E9%80%80%E5%87%BA%E7%88%B6%E8%BF%9B%E7%A8%8B"><span class="toc-text">创建子进程并退出父进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%96%B0%E4%BC%9A%E8%AF%9D"><span class="toc-text">创建新会话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E5%8F%98%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95"><span class="toc-text">改变工作目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%AE%BE%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E6%8E%A9%E7%A0%81"><span class="toc-text">重设文件权限掩码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%97%AD%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="toc-text">关闭文件描述符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5-%E8%BE%93%E5%87%BA-%E9%94%99%E8%AF%AF"><span class="toc-text">重定向标准输入&#x2F;输出&#x2F;错误</span></a></li></ol></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -796,6 +834,59 @@
 		height: 100%;
 	}
 </style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
 
 
