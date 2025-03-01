@@ -1215,7 +1215,12 @@
 
 
   </body>
-</html>r (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].reverseVertical()
+</html>< 0 || h >= this.points.length || this.points[h].interfere(i, e)
+      }
+    },
+    reverseVertical: function () {
+      this.reverse = !this.reverse;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].reverseVertical()
     },
     controlStatus: function () {
       for (var t = 0, i = this.points.length; t < i; t++) this.points[t].updateSelf();
