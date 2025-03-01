@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Hexo本地预览与部署不同的解决方法 | 小牛学习日记</title>
+  <title>套接字函数 | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -304,21 +304,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        Hexo本地预览与部署不同的解决方法
+        套接字函数
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> Published in：2024-01-19 |
+          <i class="fas fa-calendar"></i> Published in：2025-03-01 |
         </span>
       
 
@@ -326,8 +326,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> category：
           
-            <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="post-detail-header_category">
-              问题记录
+            <a href="/categories/C/" class="post-detail-header_category">
+              C++
             </a>
           
         </span>
@@ -336,11 +336,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 322 |
+            <i class="fas fa-file-text-o"></i> Words: 962 |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> Reading time: 1min |
+            <i class="fas fa-clock"></i> Reading time: 3min |
           </span>
   
           
@@ -367,25 +367,139 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <meta name="referrer" content="no-referrer">
-
-<p>最近一直在忙考试的事情，终于有时间打开博客了，但出现了一个问题：我的样式全乱了，尝试了重新发布，本地查看的时候还是正常的，部署之后依旧是乱的。<br><img src="https://img-blog.csdnimg.cn/direct/c503a46585be408a8f26b6ea148a1f4a.png#pic_center" alt="如图"> 于是在这里贴一下我尝试过的解决方法。</p>
-<hr>
-<h2 id="1-重新配置URL"><a href="#1-重新配置URL" class="headerlink" title="1 重新配置URL"></a>1 重新配置URL</h2><p>在博客根目录中的config.yml文件中修改URL的配置：<br>url是你生成的page页网址，root是你的根目录</p>
-<p><img src="https://img-blog.csdnimg.cn/direct/34679d6d51534bcc97481124de2480c8.png#pic_center" alt="URL"></p>
-<h2 id="2-如果使用图床图片，则需要修改以下内容"><a href="#2-如果使用图床图片，则需要修改以下内容" class="headerlink" title="2 如果使用图床图片，则需要修改以下内容"></a>2 如果使用图床图片，则需要修改以下内容</h2><p>①找到index.ejs文件，路径为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">└──hexo-theme-yourtheme (当前使用的主题文件夹)</span><br><span class="line">   └──layout</span><br><span class="line">      └──index.ejs</span><br></pre></td></tr></table></figure><br>②在inddex.ejs的头部中加入：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=<span class="string">&quot;referrer&quot;</span> content=<span class="string">&quot;no-referrer&quot;</span> /&gt;</span><br><span class="line">&lt;meta http-equiv=<span class="string">&quot;Content-Security-Policy&quot;</span> ontent=<span class="string">&quot;upgrade-insecure-requests&quot;</span>&gt;</span><br></pre></td></tr></table></figure></p>
-<h2 id="3-更改部署的分支"><a href="#3-更改部署的分支" class="headerlink" title="3 更改部署的分支"></a>3 更改部署的分支</h2><p>在仓库中新建一个分支，不要在master分支上部署pages。<br>我没有尝试新建分支，只是把分支从main改为了master，不确定是否真的有用。</p>
-<h2 id="4-浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。"><a href="#4-浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。" class="headerlink" title="4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。"></a>4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。</h2><p><img src="https://img-blog.csdnimg.cn/direct/7a2d5a400ad544c1a718006e69e26879.png#pic_center" alt="完美解决"></p>
-<hr>
-<p>这些方法我都按顺序尝试过，不是很确定是哪个解决了问题，大家可以都尝试一下。</p>
+        <h1 id="套接字函数"><a href="#套接字函数" class="headerlink" title="套接字函数"></a>套接字函数</h1><h2 id="socket"><a href="#socket" class="headerlink" title="socket()"></a>socket()</h2><p>创建套接字描述符，指定协议族、套接字类型和协议类型。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/socker.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;arpa/inet.h&gt;</span><span class="comment">//包含这个头文件就不需要包含上面两个</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">socket</span><span class="params">(<span class="type">int</span> domain, <span class="type">int</span> type, <span class="type">int</span> protocol)</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>参数：</strong><ul>
+<li><code>domain</code>：协议族，如<code>AF_INET</code>（IPv4）、<code>AF_INET6</code>（IPv6）、<code>AF_UNIX</code>（本地通信）。</li>
+<li><code>type</code>：套接字类型，如<code>SOCK_STREAM</code>（TCP流）、<code>SOCK_DGRAM</code>（UDP数据报）、<code>SOCK_RAW</code>（原始套接字）。</li>
+<li><code>protocol</code>：协议类型，通常设为<code>0</code>，由系统根据前两个参数自动选择。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：成功返回套接字描述符（非负整数），失败返回<code>-1</code>，错误码存入<code>errno</code>。</li>
+</ul>
+<h2 id="bind"><a href="#bind" class="headerlink" title="bind()"></a>bind()</h2><p>将套接字与本地IP地址和端口绑定（服务端常用）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">bind</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">const</span> <span class="keyword">struct</span> sockaddr *addr, <span class="type">socklen_t</span> addrlen)</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>参数：</strong><ul>
+<li><code>sockfd</code>：由<code>socket()</code>创建的套接字描述符。</li>
+<li><code>addr</code>：指向<code>sockaddr</code>结构体的指针（需转换为特定地址结构体，如IPv4用<code>sockaddr_in</code>）。</li>
+<li><code>addrlen</code>：地址结构体的长度（如<code>sizeof(struct sockaddr_in)</code>）。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：成功返回<code>0</code>，失败返回<code>-1</code>，错误码存入<code>errno</code>。</li>
+</ul>
+<h2 id="listen"><a href="#listen" class="headerlink" title="listen()"></a>listen()</h2><p>将套接字设为监听状态。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">listen</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">int</span> backlog)</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>参数</strong>：<ul>
+<li><code>sockfd</code>：已绑定的套接字描述符。</li>
+<li><code>backlog</code>：等待连接队列的最大长度（通常不超过<code>128</code>）。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：成功返回<code>0</code>，失败返回<code>-1</code>，错误码存入<code>errno</code>。</li>
+</ul>
+<h2 id="accept"><a href="#accept" class="headerlink" title="accept()"></a>accept()</h2><p>服务端接受客户端连接请求，返回新套接字用于数据传输。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">accept</span><span class="params">(<span class="type">int</span> sockfd, <span class="keyword">struct</span> sockaddr *addr, <span class="type">socklen_t</span> *addrlen)</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>参数：</strong></p>
+<ul>
+<li><code>sockfd</code>：监听套接字描述符。</li>
+<li><code>addr</code>：存储客户端地址的结构体指针（传出参数）。</li>
+<li><code>addrlen</code>：地址结构体长度的指针（传入时指定缓冲区大小，传出时返回实际大小）。</li>
+</ul>
+</li>
+<li><p><strong>返回值</strong>：成功返回新套接字描述符，失败返回<code>-1</code>，错误码存入<code>errno</code>。</p>
+</li>
+</ul>
+<h2 id="connect"><a href="#connect" class="headerlink" title="connect()"></a>connect()</h2><p>客户端主动发起TCP连接请求。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">connect</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">const</span> <span class="keyword">struct</span> sockaddr *addr, <span class="type">socklen_t</span> addrlen)</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>参数：</strong><ul>
+<li><code>sockfd</code>：客户端套接字描述符。</li>
+<li><code>addr</code>：指向服务端地址结构体的指针（如<code>sockaddr_in</code>）。</li>
+<li><code>addrlen</code>：地址结构体长度。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：成功返回<code>0</code>，失败返回<code>-1</code>，错误码存入<code>errno</code>。</li>
+</ul>
+<h2 id="send"><a href="#send" class="headerlink" title="send()"></a>send()</h2><p>在已连接的TCP套接字上发送数据。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ssize_t</span> <span class="title function_">send</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">const</span> <span class="type">void</span> *buf, <span class="type">size_t</span> len, <span class="type">int</span> flags)</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>参数</strong>：<ul>
+<li><code>sockfd</code>：连接成功的套接字描述符。</li>
+<li><code>buf</code>：数据缓冲区指针。</li>
+<li><code>len</code>：数据长度。</li>
+<li><code>flags</code>：控制标志（如<code>MSG_WAITALL</code>阻塞直到数据接收完整）。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：成功返回实际发送的字节数，失败返回<code>-1</code>，错误码存入<code>errno</code>。</li>
+</ul>
+<h2 id="recv"><a href="#recv" class="headerlink" title="recv()"></a>recv()</h2><p>在已连接的TCP套接字上接收数据。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ssize_t</span> <span class="title function_">recv</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">void</span> *buf, <span class="type">size_t</span> len, <span class="type">int</span> flags)</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>参数</strong>：<ul>
+<li><code>sockfd</code>：连接成功的套接字描述符。</li>
+<li><code>buf</code>：数据缓冲区指针。</li>
+<li><code>len</code>：数据长度。</li>
+<li><code>flags</code>：控制标志（如<code>MSG_WAITALL</code>阻塞直到数据接收完整）。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：成功返回实际接收的字节数，失败返回<code>-1</code>，错误码存入<code>errno</code>。</li>
+</ul>
+<h2 id="sendto"><a href="#sendto" class="headerlink" title="sendto()"></a>sendto()</h2><p>用于无连接的UDP套接字发送数据。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ssize_t</span> <span class="title function_">sendto</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">const</span> <span class="type">void</span> *buf, <span class="type">size_t</span> len, <span class="type">int</span> flags, <span class="type">const</span> <span class="keyword">struct</span> sockaddr *dest_addr, <span class="type">socklen_t</span> addrlen)</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>参数：</strong><ul>
+<li><code>dest_addr</code>：目标地址结构体指针。</li>
+<li><code>addrlen</code>：地址结构体长度。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：成功返回实际发送的字节数，失败返回<code>-1</code>，错误码存入<code>errno</code>。</li>
+</ul>
+<h2 id="recvfrom"><a href="#recvfrom" class="headerlink" title="recvfrom()"></a>recvfrom()</h2><p>用于无连接的UDP套接字接收数据。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ssize_t</span> <span class="title function_">recvfrom</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">void</span> *buf, <span class="type">size_t</span> len, <span class="type">int</span> flags, <span class="keyword">struct</span> sockaddr *src_addr, <span class="type">socklen_t</span> *addrlen)</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>参数</strong>：<ul>
+<li><code>src_addr</code>：来源地址结构体指针（传出参数）。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：成功返回实际接收的字节数，失败返回<code>-1</code>，错误码存入<code>errno</code>。</li>
+</ul>
+<h2 id="close"><a href="#close" class="headerlink" title="close()"></a>close()</h2><p>关闭套接字并释放资源。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">close</span><span class="params">(<span class="type">int</span> sockfd)</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>参数</strong>：<ul>
+<li><code>sockfd</code>：套接字描述符。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：成功返回<code>0</code>，失败返回<code>-1</code>，错误码存入<code>errno</code></li>
+</ul>
+<h2 id="shutdown"><a href="#shutdown" class="headerlink" title="shutdown()"></a>shutdown()</h2><p>半关闭连接。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">shutdown</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">int</span> how)</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>参数：</strong><ul>
+<li><code>how</code>：关闭方式，如<code>SHUT_RD</code>（关闭读）、<code>SHUT_WR</code>（关闭写）、<code>SHUT_RDWR</code>（关闭读写）。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：成功返回<code>0</code>，失败返回<code>-1</code>，错误码存入<code>errno</code>。</li>
+</ul>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/Hexo/" class="">
-              Hexo
+            <a href="/tags/C/" class="">
+              C++
+            </a>
+          
+            <a href="/tags/Linux/" class="">
+              Linux
+            </a>
+          
+            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="">
+              操作系统
             </a>
           
         </div>
@@ -399,7 +513,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
-    <a href="/2024/01/19/Hexoerror/" target="_blank" title="Hexo本地预览与部署不同的解决方法">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/01/19/Hexoerror/</a>
+    <a href="/2025/03/01/套接字函数/" target="_blank" title="套接字函数">https://github.com/Nxhhhh/Nxhhhh.github.io/2025/03/01/套接字函数/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright notice:   </strong>
@@ -417,38 +531,20 @@
   
   
   
-    
-    <div class="post-nav-prev post-nav-item">
-      <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" alt="">
-      </div>
-      <a href="/2024/02/23/GHOST-reading/" class="post-nav-link">
-        <div class="title">
-          <i class="fas fa-angle-left"></i> Next:
-          <div class="title-text">文献《Simple Cues Lead to a Strong Multi-Object Tracker》总结</div>
-        </div>
-        <!-- <div class="content">
-          这篇文章收录于CVPR2023贴一下原文链接
-一、Introduction作者提出在MOT工作中，TbD（Trackin
-        </div> -->
-      </a>
-    </div>
-  
   
   
     
     <div class="post-nav-next post-nav-item">
       <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
+        <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
       </div>
-      <a href="/2023/11/29/fairmot/" class="post-nav-link">
+      <a href="/2025/02/24/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B/" class="post-nav-link">
         <div class="title">
           Prev: <i class="fas fa-angle-right"></i>
-          <div class="title-text">Fairmot代码复现问题记录（已解决）</div>
+          <div class="title-text">守护进程</div>
         </div>
         <!-- <div class="content">
-          最近在学习多目标跟踪的经典文章，顺便记录一下自己复现Fairmot代码时的问题以及解决方案。贴一下原作的代码
-前期准备创
+          守护进程是一种在后台运行的特殊进程，通常用于执行系统任务或服务，不需要和用户交互。它在操作系统系董事运行，并在整个系统运
         </div> -->
       </a>
     </div>
@@ -579,7 +675,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%87%8D%E6%96%B0%E9%85%8D%E7%BD%AEURL"><span class="toc-text">1 重新配置URL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%A6%82%E6%9E%9C%E4%BD%BF%E7%94%A8%E5%9B%BE%E5%BA%8A%E5%9B%BE%E7%89%87%EF%BC%8C%E5%88%99%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9%E4%BB%A5%E4%B8%8B%E5%86%85%E5%AE%B9"><span class="toc-text">2 如果使用图床图片，则需要修改以下内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9B%B4%E6%94%B9%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%86%E6%94%AF"><span class="toc-text">3 更改部署的分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BF%9D%E5%AD%98%E4%BA%86%E4%B9%8B%E5%89%8D%E9%83%A8%E7%BD%B2%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%B8%85%E9%99%A4%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E5%90%8E%E9%87%8D%E5%90%AF%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%8C%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%82"><span class="toc-text">4 浏览器保存了之前部署的数据，清除浏览器缓存后重启浏览器，问题解决。</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A5%97%E6%8E%A5%E5%AD%97%E5%87%BD%E6%95%B0"><span class="toc-text">套接字函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#socket"><span class="toc-text">socket()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bind"><span class="toc-text">bind()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#listen"><span class="toc-text">listen()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#accept"><span class="toc-text">accept()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#connect"><span class="toc-text">connect()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#send"><span class="toc-text">send()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#recv"><span class="toc-text">recv()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sendto"><span class="toc-text">sendto()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#recvfrom"><span class="toc-text">recvfrom()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#close"><span class="toc-text">close()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shutdown"><span class="toc-text">shutdown()</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -842,6 +938,59 @@
 		height: 100%;
 	}
 </style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
 
 
