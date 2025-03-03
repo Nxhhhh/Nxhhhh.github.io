@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>category: C++ | 小牛学习日记</title>
+  <title>I/O多路复用的三种机制（select、poll、epoll） | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -291,254 +291,811 @@
 </header>
         <!-- 内容区域 -->
         
-
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
-<div class="bg-light-floor-categoryDetail" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
-
-<div class="category-header"  style="background-image:url('https://pic3.zhimg.com/80/v2-98dcd81cb0d1fee52a807c13cedb8338_1440w.jpg?source=1940ef5c')">
-  <div class="category-header-title">
-    category
-  </div>
-  <div class="category-header-desc">
-    
-      <span class="title" id="category-header-desc"></span>
-      <script>
-  function typedFn() {
-    const el = '#category-header-desc';
-    const type = 'categoryDetail';
-    let desc = '越努力越幸运'
-    var typed = new Typed(el, {
-      strings: [desc],
-      startDelay: 100,
-      typeSpeed: 100,
-      loop: true,
-      backSpeed: 50,
-      showCursor: true
-    });
-  }
-  typedFn();
-</script>
-      
-  </div>
-  <div class="mask-box"></div>
-</div>
+ <!-- prismjs 代码高亮 -->
+ 
 
 
-<div class="category">
-  <div class="category-name">
-    <div class="name" style="background-color: #85C1E9;">C++ category</div>
-  </div>
-  <!-- 每一篇文章卡片 -->
-  <!-- hash算法 -->
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
 
-<section class="posts">
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
-    
-    <article class="post reveal" style="flex-direction: row-reverse;   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2024-08-27</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2024/08/27/C3/">【转载】C++讲义[提高]</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/C/">C++</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2024/08/27/C3/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            C++提高编程
-本阶段主要针对C++泛型编程和STL技术做详细讲解，探讨C++更深层的使用
-
-1 模板1.1 模板的概念模板就是建立通用的模具，大大提高复用性
-例如生活中的模板
-一寸照片模板：
-
-PPT模板：
-
-
-模板的特点：
-
-模板不可以
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2024/08/27/C3/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2024/08/27/C3/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
-    
-    <article class="post reveal" style="   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2024-08-27</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2024/08/27/C-2/">【转载】C++讲义[核心]</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/C/">C++</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2024/08/27/C-2/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload" src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            C++核心编程本阶段主要针对C++面向对象编程技术做详细讲解，探讨C++中的核心和精髓。
-1 内存分区模型C++程序在执行时，将内存大方向划分为4个区域
-
-代码区：存放函数体的二进制代码，由操作系统进行管理的
-全局区：存放全局变量和静态变量
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2024/08/27/C-2/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2024/08/27/C-2/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload" src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
-    
-    <article class="post reveal" style="flex-direction: row-reverse;   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2024-03-05</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2024/03/05/C++/">【转载】C++讲义[基础]</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/C/">C++</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2024/03/05/C++/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            C++基础入门1 C++初识1.1  第一个C++程序编写一个C++程序总共分为4个步骤
-
-创建项目
-创建文件
-编写代码
-运行程序
-
-1.1.1 创建项目​    Visual Studio是我们用来编写C++程序的主要工具，我们先将它打开
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2024/03/05/C++/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2024/03/05/C++/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
-</section>
-</div>
-<div class="w-70">
-  
-  <!-- <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/categories/C/">Prev</a><a class="page-number" href="/categories/C/">1</a><span class="page-number current">2</span>
-  </nav> -->
-  <div class="page-nav">
-    
-      <a href="/categories/C/"
-         class="page-nav-pre">
-         <i class="fas fa-angle-left"></i><span class="ml-5">Prev</span>
-      </a>
-    
-    <div class="page-info">
-        <div class="page-info-text">2 / 2</div>
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        I/O多路复用的三种机制（select、poll、epoll）
+      </span>
     </div>
     
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> Published in：2025-03-03 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> category：
+          
+            <a href="/categories/C/" class="post-detail-header_category">
+              C++
+            </a>
+          
+        </span>
+      
+
+      
+        <div class="post-detail-header_wordcount">
+          <span class="totalcount">
+            <i class="fas fa-file-text-o"></i> Words: 1.7k |
+          </span>
+  
+          <span class="min2read">
+            <i class="fas fa-clock"></i> Reading time: 6min |
+          </span>
+  
+          
+            <span class="reading">
+              <i class="fas fa-eye"></i> reading：<span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+        </div>
+      
+    
+  </div>
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <h1 id="I-O多路复用的三种机制（select、poll、epoll）"><a href="#I-O多路复用的三种机制（select、poll、epoll）" class="headerlink" title="I/O多路复用的三种机制（select、poll、epoll）"></a>I/O多路复用的三种机制（select、poll、epoll）</h1><p>select、poll、epoll是用于I/O所路服用的三种机制，常见于Linux系统中，用于高效处理多个文件描述符的I/O事件。</p>
+<h2 id="select"><a href="#select" class="headerlink" title="select"></a>select</h2><p><code>select</code>是最早的I/O多路复用机制，允许程序监听多个文件描述符，等待其中一个或多个变为可读、可写或出现异常。</p>
+<ul>
+<li><p>特点：</p>
+<ul>
+<li>通过<code>fd_set</code>数据结构管理文件描述符。</li>
+<li>支持的文件描述符数量有限（通常为1024）。</li>
+<li>每次调用都需要将<code>fd_set</code>从用户空间拷贝到内核空间。</li>
+<li>每次调用都需要遍历所有文件描述符，时间复杂度为O(n)。</li>
+</ul>
+</li>
+<li><p>优点：</p>
+<ul>
+<li>跨平台支持，几乎所有操作系统都支持了<code>select</code>。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>文件描述符数量受限。</li>
+<li>每次调用都需要拷贝<code>fd_set</code>，效率低。</li>
+<li>需要遍历所有文件描述符，性能随文件描述符数量增加而下降。</li>
+</ul>
+</li>
+</ul>
+<h4 id="常用API："><a href="#常用API：" class="headerlink" title="常用API："></a>常用API：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">select</span><span class="params">(<span class="type">int</span> nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, <span class="keyword">struct</span> timeval *timeout)</span>;</span><br><span class="line"></span><br><span class="line">FD_ZERO(fd_set *<span class="built_in">set</span>);          <span class="comment">// 清空文件描述符集合</span></span><br><span class="line">FD_SET(<span class="type">int</span> fd, fd_set *<span class="built_in">set</span>);   <span class="comment">// 将文件描述符添加到集合</span></span><br><span class="line">FD_CLR(<span class="type">int</span> fd, fd_set *<span class="built_in">set</span>);   <span class="comment">// 从集合中移除文件描述符</span></span><br><span class="line">FD_ISSET(<span class="type">int</span> fd, fd_set *<span class="built_in">set</span>); <span class="comment">// 检查文件描述符是否在集合中</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">使用步骤：</span></span><br><span class="line"><span class="comment">1、定义并初始化 fd_set 集合。</span></span><br><span class="line"><span class="comment">2、使用 FD_SET 将需要监视的文件描述符添加到集合。</span></span><br><span class="line"><span class="comment">3、调用 select 等待文件描述符就绪。</span></span><br><span class="line"><span class="comment">4、使用 FD_ISSET 检查哪些文件描述符就绪。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h2><p> <code>poll</code>是对<code>`select</code>的改进，使用<code>pollfd</code>结构体管理文件描述符</p>
+<ul>
+<li><p>特点：</p>
+<ul>
+<li>使用<code>pollfd</code>结构体管理文件描述符，没有数量上的限制，但是收到系统资源的限制。</li>
+<li>每次调用仍然需要将<code>pollfd</code>数组从用户空间拷贝到内核空间。</li>
+<li>每次调用都需要遍历所有文件描述符，时间复杂度为O(n)。</li>
+</ul>
+</li>
+<li><p>优点：</p>
+<ul>
+<li>支持的文件描述符数量没有硬性限制。</li>
+<li>相比于select更加灵活。</li>
+</ul>
+</li>
+<li><p>缺点：</p>
+<ul>
+<li><p>每次调用都需要拷贝<code>pollfd</code>，效率低。</p>
+</li>
+<li><p>需要遍历所有文件描述符，性能随文件描述符数量增加而下降。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="常用API：-1"><a href="#常用API：-1" class="headerlink" title="常用API："></a>常用API：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">poll</span><span class="params">(<span class="keyword">struct</span> pollfd *fds, <span class="type">nfds_t</span> nfds, <span class="type">int</span> timeout)</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pollfd</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> fd;         <span class="comment">// 文件描述符</span></span><br><span class="line">    <span class="type">short</span> events;   <span class="comment">// 监视的事件（如 POLLIN、POLLOUT）</span></span><br><span class="line">    <span class="type">short</span> revents;  <span class="comment">// 实际发生的事件</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">使用步骤：</span></span><br><span class="line"><span class="comment">1、定义 pollfd 数组，设置需要监视的文件描述符和事件。</span></span><br><span class="line"><span class="comment">2、调用 poll 等待文件描述符就绪。</span></span><br><span class="line"><span class="comment">3、检查 pollfd 中的 revents 字段，判断哪些文件描述符就绪。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h2><p><code>epoll</code>是Linux特有的高校I/O多路复用机制，解决了<code>select</code>和<code>poll</code>的性能问题。</p>
+<ul>
+<li><p>特点：</p>
+<ul>
+<li>使用红黑树和双链表管理文件描述符，支持高校的事件注册和通知。</li>
+<li>支持边沿（ET）触发和水平（LT）触发模式。</li>
+<li>每次调用不需要拷贝所有文件描述符，只需要返回就绪的事件。</li>
+<li>时间复杂度为O(1)，性能不受文件描述符数量影响。</li>
+</ul>
+</li>
+<li><p>优点：</p>
+<ul>
+<li>高效处理大量文件描述符，适合高并发场景。</li>
+<li>事件驱动，只返回就绪的事件，无需便利所有的文件描述符。</li>
+<li>支持边沿触发模式，减少事件通知次数。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>仅支持Linux系统，无法跨平台。</li>
+</ul>
+</li>
+</ul>
+<h4 id="常用API：-2"><a href="#常用API：-2" class="headerlink" title="常用API："></a>常用API：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">epoll_create</span><span class="params">(<span class="type">int</span> size)</span>; <span class="comment">// 创建 epoll 实例 </span></span><br><span class="line"><span class="type">int</span> <span class="title function_">epoll_ctl</span><span class="params">(<span class="type">int</span> epfd, <span class="type">int</span> op, <span class="type">int</span> fd, <span class="keyword">struct</span> epoll_event *event)</span>; <span class="comment">// 管理文件描述符 </span></span><br><span class="line"><span class="type">int</span> <span class="title function_">epoll_wait</span><span class="params">(<span class="type">int</span> epfd, <span class="keyword">struct</span> epoll_event *events, <span class="type">int</span> maxevents, <span class="type">int</span> timeout)</span>; <span class="comment">// 等待事件</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span> &#123;</span>    </span><br><span class="line">    <span class="type">uint32_t</span> events; <span class="comment">// 事件类型（如 EPOLLIN、EPOLLOUT）    </span></span><br><span class="line">    <span class="type">epoll_data_t</span> data; <span class="comment">// 用户数据 </span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">使用步骤：</span></span><br><span class="line"><span class="comment">1. 调用 epoll_create 创建 epoll 实例。</span></span><br><span class="line"><span class="comment">2. 使用 epoll_ctl 添加、修改或删除需要监视的文件描述符。</span></span><br><span class="line"><span class="comment">3. 调用 epoll_wait 等待文件描述符就绪。</span></span><br><span class="line"><span class="comment">4. 处理就绪的事件。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="事件通知模式-触发机制（LT，ET）"><a href="#事件通知模式-触发机制（LT，ET）" class="headerlink" title="事件通知模式/触发机制（LT，ET）"></a>事件通知模式/触发机制（LT，ET）</h2><p>水平触发（Level-Triggerred）和边沿触发（Eage_Triggerred）是I/O多路复用机制中的两种时间通知模式，他们决定了何时通知应用程序文件描述符的状态变化。</p>
+<h3 id="水平触发（LT）"><a href="#水平触发（LT）" class="headerlink" title="水平触发（LT）"></a>水平触发（LT）</h3><p>默认的事件通知模式，当文件描述符处于就绪状态时，会持续通知应用程序。</p>
+<p>当被监控的Socket上有可读事件发生时，服务器端不断地从<code>epoll_wait</code>中苏醒，直到内核缓冲区被<code>read</code>函数读完才结束，没必要一次执行尽可能多的读写操作。</p>
+<ul>
+<li><h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><ul>
+<li><p>只要文件描述符处于就绪状态（例如可读或可写），就会重复通知应用程序。</p>
+</li>
+<li><p>应用程序可以在一次通知后不完全处理所有数据，下次调用时仍会收到通知。</p>
+</li>
+<li><p>适用于对事件处理逻辑要求不高的场景。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="边沿触发（ET）"><a href="#边沿触发（ET）" class="headerlink" title="边沿触发（ET）"></a>边沿触发（ET）</h3><p>高效的事件通知模式，只有当文件描述符的状态发生变化时（例如从不可读变为可读），才会通知应用程序。</p>
+<p>当被监控的Socket上有可读事件发生时，服务器端只会从<code>epoll_wait</code>中苏醒一次，因此程序需要保证一次将内核缓冲区的数据读取完，因此需要循环的从文件描述符中读取数据，如果文件描述符是阻塞的，没有数据可读写时，进程会阻塞在读写函数那里，因此，<strong>边沿触发模式一般搭配非阻塞I/O使用</strong>，程序会一直执行I/O操作。</p>
+<ul>
+<li><h4 id="特点：-1"><a href="#特点：-1" class="headerlink" title="特点："></a>特点：</h4><ul>
+<li><p>只有当文件描述符的状态发生变化时（例如从不可读变为可读），才会通知应用程序。</p>
+</li>
+<li><p>应用程序需要一次性处理完所有数据，否则可能会丢失后续事件。</p>
+</li>
+<li>适用于高性能场景，但需要更复杂的逻辑。</li>
+</ul>
+</li>
+</ul>
+<h3 id="LT和ET对比"><a href="#LT和ET对比" class="headerlink" title="LT和ET对比"></a>LT和ET对比</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>水平触发（LT）</th>
+<th>边缘触发（ET）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>通知时机</td>
+<td>只要文件描述符就绪，就持续通知</td>
+<td>只有当文件描述符状态变化时通知</td>
+</tr>
+<tr>
+<td>事件处理</td>
+<td>可以分多次处理数据</td>
+<td>需要一次性处理完所有数据，否则会丢失事件</td>
+</tr>
+<tr>
+<td>效率</td>
+<td>可能频繁通知，效率较低</td>
+<td>减少不必要的通知，效率较高</td>
+</tr>
+<tr>
+<td>实现复杂度</td>
+<td>简单易用</td>
+<td>复杂，需要更精细的逻辑</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>低并发、对性能要求不高的场景</td>
+<td>高并发、对性能要求高的场景</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="三者对比"><a href="#三者对比" class="headerlink" title="三者对比"></a>三者对比</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>特性</strong></th>
+<th style="text-align:left"><strong><code>select</code></strong></th>
+<th style="text-align:left"><strong><code>poll</code></strong></th>
+<th style="text-align:left"><strong><code>epoll</code></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">文件描述符数量限制</td>
+<td style="text-align:left">有限，通常为1024</td>
+<td style="text-align:left">无硬性限制</td>
+<td style="text-align:left">无硬性限制</td>
+</tr>
+<tr>
+<td style="text-align:left">事件通知机制</td>
+<td style="text-align:left">遍历所有文件描述符</td>
+<td style="text-align:left">遍历所有文件描述符</td>
+<td style="text-align:left">只返回就绪的事件</td>
+</tr>
+<tr>
+<td style="text-align:left">时间复杂度</td>
+<td style="text-align:left">O(n)</td>
+<td style="text-align:left">O(n)</td>
+<td style="text-align:left">O(1)</td>
+</tr>
+<tr>
+<td style="text-align:left">内存拷贝</td>
+<td style="text-align:left">每次调用拷贝<code>fd_set</code></td>
+<td style="text-align:left">每次调用拷贝<code>pollfd</code></td>
+<td style="text-align:left">不需要拷贝所有文件描述符</td>
+</tr>
+<tr>
+<td style="text-align:left">触发模式</td>
+<td style="text-align:left">LT</td>
+<td style="text-align:left">LT</td>
+<td style="text-align:left">LT和ET都支持</td>
+</tr>
+<tr>
+<td style="text-align:left">跨平台性</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">仅支持Linux</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/C/" class="">
+              C++
+            </a>
+          
+            <a href="/tags/Linux/" class="">
+              Linux
+            </a>
+          
+            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="">
+              操作系统
+            </a>
+          
+            <a href="/tags/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">
+              Linux网络编程
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>author:  </strong>Xinhang Niu</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>link:  </strong>
+    <a href="/2025/03/03/I-O多路复用的三种机制（select、poll、epoll）/" target="_blank" title="I/O多路复用的三种机制（select、poll、epoll）">https://github.com/Nxhhhh/Nxhhhh.github.io/2025/03/03/I-O多路复用的三种机制（select、poll、epoll）/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright notice:   </strong>
+      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      reprint policy. If reproduced, please indicate source!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+  
+  
+  
+  
+  
+    
+    <div class="post-nav-next post-nav-item">
+      <div class="post-nav-img" style="background-size: cover; background-position: center center;">
+        <img class="lazyload" src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" alt="">
+      </div>
+      <a href="/2025/03/01/%E5%A5%97%E6%8E%A5%E5%AD%97%E5%87%BD%E6%95%B0/" class="post-nav-link">
+        <div class="title">
+          Prev: <i class="fas fa-angle-right"></i>
+          <div class="title-text">套接字函数</div>
+        </div>
+        <!-- <div class="content">
+          套接字函数socket()创建套接字描述符，指定协议族、套接字类型和协议类型。
+12345#include&lt;sys
+        </div> -->
+      </a>
+    </div>
+  
+  </div>
+    
+    
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
   </div>
 
+<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  <aside id='l_side'>
+  
+    
+      <section class="widget side_blogger">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img src='https://pic2.zhimg.com/80/v2-42b72d5ebee4b8d8aa70d9687effe87b_1440w.webp'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>小牛的学习日记</h2>
+        
+        
+          <p>好好学习 天天向上</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="https://github.com/Nxhhhh/Nxhhhh.github.io"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="/1224317198@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/Nxhhhh/Nxhhhh.github.io"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=1224317198"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+    
+  
+  
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#I-O%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E6%9C%BA%E5%88%B6%EF%BC%88select%E3%80%81poll%E3%80%81epoll%EF%BC%89"><span class="toc-text">I&#x2F;O多路复用的三种机制（select、poll、epoll）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#select"><span class="toc-text">select</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8API%EF%BC%9A"><span class="toc-text">常用API：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#poll"><span class="toc-text">poll</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8API%EF%BC%9A-1"><span class="toc-text">常用API：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#epoll"><span class="toc-text">epoll</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8API%EF%BC%9A-2"><span class="toc-text">常用API：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E9%80%9A%E7%9F%A5%E6%A8%A1%E5%BC%8F-%E8%A7%A6%E5%8F%91%E6%9C%BA%E5%88%B6%EF%BC%88LT%EF%BC%8CET%EF%BC%89"><span class="toc-text">事件通知模式&#x2F;触发机制（LT，ET）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B0%B4%E5%B9%B3%E8%A7%A6%E5%8F%91%EF%BC%88LT%EF%BC%89"><span class="toc-text">水平触发（LT）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-text">特点：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%B9%E6%B2%BF%E8%A7%A6%E5%8F%91%EF%BC%88ET%EF%BC%89"><span class="toc-text">边沿触发（ET）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A-1"><span class="toc-text">特点：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LT%E5%92%8CET%E5%AF%B9%E6%AF%94"><span class="toc-text">LT和ET对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E8%80%85%E5%AF%B9%E6%AF%94"><span class="toc-text">三者对比</span></a></li></ol></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
 </div>
+
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2025/03/03/I-O%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E6%9C%BA%E5%88%B6%EF%BC%88select%E3%80%81poll%E3%80%81epoll%EF%BC%89/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-03</span>
+                
+              </div>
+              <a class="post-title" href="/2025/03/03/I-O%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E6%9C%BA%E5%88%B6%EF%BC%88select%E3%80%81poll%E3%80%81epoll%EF%BC%89/">I/O多路复用的三种机制（select、poll、epoll）</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2025/03/01/%E5%A5%97%E6%8E%A5%E5%AD%97%E5%87%BD%E6%95%B0/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-01</span>
+                
+              </div>
+              <a class="post-title" href="/2025/03/01/%E5%A5%97%E6%8E%A5%E5%AD%97%E5%87%BD%E6%95%B0/">套接字函数</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2025/02/25/%E4%BA%92%E6%96%A5%E9%94%81%E4%B8%8E%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">02-25</span>
+                
+              </div>
+              <a class="post-title" href="/2025/02/25/%E4%BA%92%E6%96%A5%E9%94%81%E4%B8%8E%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0/">互斥锁与相关函数</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2025/02/24/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">02-24</span>
+                
+              </div>
+              <a class="post-title" href="/2025/02/24/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B/">守护进程</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2025/02/23/%E4%BF%A1%E5%8F%B7%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">02-23</span>
+                
+              </div>
+              <a class="post-title" href="/2025/02/23/%E4%BF%A1%E5%8F%B7%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0/">信号相关函数</a>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+    
+  </div>
+</aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script src="/js/wrapImage.js"></script>
+</div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || '';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
 
       </main>
     </div>
