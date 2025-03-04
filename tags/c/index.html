@@ -1215,7 +1215,12 @@
 
 
   </body>
-</html>ight: this.height
+</html>ical = this.reverseVertical.bind(this), this.render = this.render.bind(this)
+    },
+    setup: function () {
+      this.points.length = 0, this.fishes.length = 0, this.watchIds.length = 0, this.intervalCount = this.MAX_INTERVAL_COUNT, this.width = this.$container.width(), this.height = this.$container.height(), this.fishCount = this.FISH_COUNT * this.width / 500 * this.height / 500, this.$canvas.attr({
+        width: this.width,
+        height: this.height
       }), this.reverse = !1, this.fishes.push(new FISH(this)), this.createSurfacePoints()
     },
     watchWindowSize: function () {

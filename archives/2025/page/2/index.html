@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Deconfuse Track总结 | 小牛学习日记</title>
+  <title>archives: 2025 | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -290,715 +290,139 @@
   
 </header>
         <!-- 内容区域 -->
-        
- <!-- prismjs 代码高亮 -->
- 
-
-
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-
-
-  <!-- 文章详情页顶部图片和标题 -->
-
-
-
-
-<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp')">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
-  
-  <div class="post-detail-header_info-box">
-    <div class="title-box">
-      <span class="title">
-        Deconfuse Track总结
-      </span>
-    </div>
-    
-    
-      
-        <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> Published in：2024-04-08 |
-        </span>
-      
-
-      
-        <span class="post-detail-header_categories">
-          <i class="iconfont iconbookmark1"></i> category：
-          
-            <a href="/categories/R-D/" class="post-detail-header_category">
-              R&D
-            </a>
-          
-        </span>
-      
-
-      
-        <div class="post-detail-header_wordcount">
-          <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 2.1k |
-          </span>
-  
-          <span class="min2read">
-            <i class="fas fa-clock"></i> Reading time: 9min |
-          </span>
-  
-          
-            <span class="reading">
-              <i class="fas fa-eye"></i> reading：<span id="busuanzi_value_page_pv"></span>
-            </span>
-          
-        </div>
-      
-    
+        <div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
+<div class="bg-light-floor-archive" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
+<div class="archive-header" style="background-image:url('https://pic1.zhimg.com/80/v2-1414b3a4b205e19060db18a20d08723a_1440w.jpg?source=1940ef5c')">
+  <div class="archive-header-title">
+    archive
   </div>
+  <div class="archive-header-desc">
   
-  
-    <script src="/js/bubble/bubble.js"></script>
-  
-</div>
-
-
-
-
-
-<div class="post-detail-content post-row" 
-  style="padding-top: 0px;">
-  <div class="main-content">
-    <article class="post post-detail">
-      <div class="post-content">
-        <p>贴一个<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2403.02767">原文链接</a></p>
-<p>很可惜这篇文章的代码没有开源</p>
-<hr>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>在多目标跟踪中，准确的数据关联十分重要，但是现有的方法大多进行简单的全局数据关联，忽略了轨迹的多样性以及外观线索存在的冲突性，导师检测-轨迹对存在混淆。为了解决这一问题，作者提出了一个简单、即插即用的数据关联方法，称为分解数据关联（DDA），此外还引入了遮挡感知的非极大值抑制（ONMS）来保留更多遮挡检测。基于这两种方法提出了<strong>DeconfuseTrack</strong>。</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>近年来大多数MOT方法都遵循TbD范式。在该范式中，数据关联建立轨迹与跟踪之间的的对应关系实现匹配。为了实现数据关联的准确性，许多方法引入额外的线索作为运动线索的补充。包括外观线索、深度信息、置信度分数、运动方向、自然语言信息等等，这些额外的线索可以一定程度上缓解运动线索的模糊，但是传统的数据关联具有一定的局限性。</p>
-<p><img src="1.png" alt="图1"></p>
-<p>图1(a)展示了全局关联导致的混乱，针对这些问题，文章提出了DecofuseTrack。将全局问题分解为多个子问题，包括单个轨迹与多个检测之间的关联、多个轨迹与单个检测之间的关联以及多个轨迹与多个检测之间的关联，并且将外观线索的使用限制在一定范围，仅在子问题中运动线索的判别力不足时补充外观线索，尽量减少对运动线索的干扰。</p>
-<p> 如图1(b)所示，通过检测消歧模块(DDM)，我们识别出虽然不可靠，但更适合轨迹1的检测1，从而释放出检测2。利用轨迹消歧模块(TDM)，我们在轨迹3和轨迹4之间做出正确的选择，用于检测3。</p>
-<p>通过关联消歧模块(ADM)，我们避免了轨迹5和轨迹6之间的关联混淆。其次，为了提高检测性能并减轻因遗漏检测而引起的混淆，我们设计了遮挡感知非最大抑制(ONMS)来保留更多的遮挡检测进行关联。</p>
-<p>完整的模型结构如图所示：<br><img src="2.png" alt="图2"></p>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="Notation"><a href="#Notation" class="headerlink" title="Notation"></a>Notation</h3><p>类似于ByteTrack，将检测分为两类 $D_{first}^{t}$ 和 $D_{second}^{t}$ 用于第一轮和第二轮的数据关联。</p>
-<h3 id="Decomposed-Data-Association-DDA"><a href="#Decomposed-Data-Association-DDA" class="headerlink" title="Decomposed Data Association (DDA)"></a>Decomposed Data Association (DDA)</h3><p>利用卡尔曼滤波预测每个轨迹T的位置：$L$ = {$ l $ $_j$ = $(x,y,w,h)$ | $j$ $\in$ $\Bbb T$ }。$d_i$ 和 $T_j$ 的位置相似性用检测和轨迹之间的IoU来表示：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-LocSim ( d_i , \cal{T}_j ) = \mathit{IoU} ( d_i , T_j ) .
-\end{aligned}</script><p>代价公式如下：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-C_{ij} =1- LocSim ( d_i , \cal{T}_j ) , d_i \in \mathit{D}_{first}^t, \cal{T}_i \in \Bbb T.
-\end{aligned}</script><p>最后利用匈牙利算法求解 $C$，得到分配结果</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
- P = \lbrace{(d, \cal{T}) | d \in \mathit{D}_{matched}^t, \cal{T} \in \Bbb T_{matched}}\rbrace. 
-\end{aligned}</script><p>以往的方法会直接输出匹配的结果，但是这种全局的关联过于模糊粗糙，因此需要细化 $P$ ，实现更加细粒度的分配。</p>
-<h4 id="Detection-Disambiguation-Module-DDM"><a href="#Detection-Disambiguation-Module-DDM" class="headerlink" title="Detection Disambiguation Module (DDM)"></a>Detection Disambiguation Module (DDM)</h4><p>DDM旨在解决多个检测与单一轨迹之间的混淆问题。</p>
-<p>将低置信度中与 $\cal{T}_j$ 匹配度更高的 $d_i$ 定义为 $D_{blur}$ ，表示可能该轨迹存在更适合的低置信度检测。</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-D_{blur}^j = \lbrace d_i | LocSim ( d_i , \cal{T}_j ) - \mathit{LocSim} ( d_j , \cal{T}_j ) > \kappa , \\ d_i \in D_{second}^t, d_j \in D_{matched}^t, \cal{T} \in \Bbb T_{matched} \rbrace.
-\end{aligned}</script><p>接下来定义 $P_{new}$ :</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-P_{new} =  \lbrace (d_i, \cal{T}_j) | d = \mathop{argmax}\limits_{d_i \in D_{blur}^t}LocSim(d_i, \cal{T}_j) \\  if  D_{blur}^t \neq \emptyset , d_j \in D_{matched}^t, \cal{T} \in \Bbb T_{matched} \rbrace .
-\end{aligned}</script><p>将与轨迹匹配的低置信度检测移到 $D_{first}$ 里面，并在 $D_{second}$ 里将其删除。</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-D^{t}_{first}{'} =  D_{first}^{t}  \cup \lbrace (d, \cal{T}) \in \mathit{P_{new}}  \rbrace 
-\\ D^{t}_{second}{'} =  D_{second}^{t} - \lbrace (d, \cal{T}) \in \mathit{P_{new}} \rbrace .
-\end{aligned}</script><p>获得 $P_{new}$ 后，释放 $P$ 中的一些可靠检测，因为它们虽然被更合适的不可靠检测所取代，但这些不匹配的可靠检测仍然有可能与不匹配的轨迹相关联。因此，在最后一步，在保证 $P_{new}$ 中赋值关系有效性的前提下，首先对 $T$ 和 $D_t$ 进行重新赋值，得到检测消歧后新的分配关系 $P_{ddm}$ 。</p>
-<h4 id="Trajectory-Disambiguation-Module-TDM"><a href="#Trajectory-Disambiguation-Module-TDM" class="headerlink" title="Trajectory Disambiguation Module (TDM)"></a>Trajectory Disambiguation Module (TDM)</h4><p>这个模块将多个轨迹与单一检测进行匹配。</p>
-<p>首先 $\Bbb T_{lost}$ = $\Bbb T - \Bbb T_{matched} $</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-T_{blur}^j = \lbrace \cal{T}_i | \mathit{LocSim} ( d_j , \cal{T}_j ) - \mathit{LocSim} ( d_j , \cal{T}_i ) < \kappa , \\ \cal T_i \in  \Bbb T_{lost} , d_j \in D_{matched}^t, \cal{T}_j \in \Bbb T_{matched} \rbrace \cup \cal{T}_j.
-\end{aligned}</script><p>接下来采用外观模型实现更加精确的分配：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-T_{best}^j = \mathop{argmin}\limits_{\cal{T} \in \Bbb{T}_{blur}^j} CostDist(f_d, f_{\cal{T}}).
-\end{aligned}</script><p>其中 $CostDist(\cdot{})$ 表示余弦距离，最后得到轨迹消歧后的新分配关系:</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-P_{tdm} = \lbrace (d_j , \cal{T}_{best}^j) | d_j \in \mathit{D}_{matched}^t \rbrace. 
-\end{aligned}</script><h4 id="Association-Disambiguation-Module-ADM"><a href="#Association-Disambiguation-Module-ADM" class="headerlink" title="Association Disambiguation Module (ADM)"></a>Association Disambiguation Module (ADM)</h4><p>在这个模块处理多个轨迹和多个检测关联的混淆问题。<br>可以分为多个二对二的问题解决。<br>对于配对中任意两个不同的任务，使用变异系数来量化他们之间的混淆：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-Cv(i,j) =  \frac{Std(\lbrace LocSim(d_{k_1}, \cal{T}_{k_2}|k_1,k_2 \in \lbrace i,j \rbrace \rbrace) )}{Mean(\lbrace LocSim(d_{k_1}, \cal{T}_{k_2}|k_1,k_2 \in \lbrace i,j \rbrace \rbrace) )}, \\ d_i,d_j \in D_{matched}^t, \cal{T}_i,\cal{T}_j \in \Bbb T_{matched} ,i \neq j .
-\end{aligned}</script><p>变异系数较小时，说明分配对之间的位置线索差异不大。接下来，我们识别所有表现出强烈混淆的配对:</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-P_{blur} = \lbrace (d_i , \cal{T}_i), (d_j , \cal{T}_j) | Cv(i,j) < \kappa. \rbrace
-\end{aligned}</script><p>接下来，类似于TDM，我们利用外观线索来解决Pblur中的位置混淆，并找到更合适的分配关系:</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-P_{new} = &\lbrace (d_i , \cal{T}_j), (d_j , \cal{T}_i) | \mathit{CostDist}(f_{d_i}, f_{\cal{T}_j})\\+&\mathit{CostDist}(f_{d_j}, f_{\cal{T}_i}) < \mathit{CostDist}(f_{d_i}, f_{\cal{T}_i})\\+&\mathit{CostDist}(f_{d_j}, f_{\cal{T}_j}), (d_i,\cal T_i), (d_j,\cal T_j)\in \mathit{P}_{blur}. \rbrace
-\end{aligned}</script><p>在涉及多个检测和轨迹交叉关联的复杂匹配过程中，可能会产生冲突。为了解决这些冲突，我们再次使用外观线索执行匈牙利匹配算法来消除 $P_{new}$ 中的冲突。最后，将修正后的赋值关系 $P_{new}$ 与原集合 $P$ 结合，得到关联消歧后的新匹配关系 $P_{adm}$ 。</p>
-<h4 id="Module-Combination"><a href="#Module-Combination" class="headerlink" title="Module Combination"></a>Module Combination</h4><p> 三个模型可以串行组合，得到完整的DDA。所有三个模块共用参数 $\kappa$ ,当 $\kappa$ 增加时，我们在TDM和ADM中考虑更多的混淆，而在DDM中考虑更少的不可靠检测。因此， $\kappa$ 值越大表明对位置线索的依赖程度越低，而 $\kappa$ 值越小表明对运动线索的依赖程度越高。 $\kappa$ 的值可以根据数据集中摄像机和被跟踪对象的运动特征灵活调整。</p>
-<h3 id="Occlusion-aware-NMS-ONMS"><a href="#Occlusion-aware-NMS-ONMS" class="headerlink" title="Occlusion-aware NMS (ONMS)"></a>Occlusion-aware NMS (ONMS)</h3><p>该模块用于提高检测的质量。<br>$u^t$ 表示置信度大于 $d_i$ 的检测中IoU最大的检测:</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-u_i^t =   \mathop{max}\limits_{d_j^t \in \lbrace d^t | c^t > c_i^t, d^tb \in D^t \rbrace } IoU(d_i^t,d_j^t).
-\end{aligned}</script><p>如图3显示，传统的跟踪器设置了置信阈值 $\eta_{conf}$ 和NMS阈值  $\eta_{nms}$ ，仅仅保留置信值在这两个之间的检测，然而这种方法放弃了许多正确的检测。ByteTrack通过设置两个置信阈值 $\eta_{conf}^{first}$ 、$\eta_{conf}^{second}$ 将检测分为两组，并执行两段关联。但是作者认为仍有改进的余地，设置了两个NMS阈值 $\eta_{NMS}^{first}$ 、$\eta_{NMS}^{second}$，以便为数据关联保留更多的检测：<br><img src="3.png" alt="图3"></p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-D_{first}^t = \lbrace d^t | d^t \in D^t, c^t \ge \eta_{conf}^{first},u^t \le \eta_{nms}^{first} \rbrace\\D_{second}^t = \lbrace d^t | d^t \in D^t, \eta_{conf}^{first} \gt c^t \ge \eta_{conf}^{second},u^t \le \eta_{nms}^{first} \rbrace \\ \cup \lbrace d^t | d^t \in D^t, c^t \ge \eta_{conf}^{first}, \eta_{nms}^{first} \lt u^t \le \eta_{nms}^{second} \rbrace 
-\end{aligned}</script><h3 id="DeconfuseTrack"><a href="#DeconfuseTrack" class="headerlink" title="DeconfuseTrack"></a>DeconfuseTrack</h3><p>通过结合ONMS和DDA，提出了Deconfuse Track，专门解决数据混淆的问题。</p>
-<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p><img src="4.png" alt="MOT17"><br><img src="5.png" alt="MOT20"><br><img src="6.png" alt="消融实验"><br><img src="7.png" alt="消融实验"><br><img src="8.png" alt></p>
-<hr>
-
-      </div>
-      <div class="post-tags-categories">
-        
-        <div class="tags">
-          
-            <a href="/tags/MOT/" class="">
-              MOT
-            </a>
-          
-            <a href="/tags/python/" class="">
-              python
-            </a>
-          
-        </div>
-        
-      </div>
-      
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>author:  </strong>Xinhang Niu</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>link:  </strong>
-    <a href="/2024/04/08/DeconfuseTrack总结/" target="_blank" title="Deconfuse Track总结">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/04/08/DeconfuseTrack总结/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>Copyright notice:   </strong>
-      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      reprint policy. If reproduced, please indicate source!
-    </li>
-  </ul>
-<div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
-    
-      <!-- 文章详情页的上一页和下一页 -->
-<div class="post-nav">
-  
-  
-  
-    
-    <div class="post-nav-prev post-nav-item">
-      <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" alt="">
-      </div>
-      <a href="/2024/04/15/UncertaintyTrack%E6%80%BB%E7%BB%93/" class="post-nav-link">
-        <div class="title">
-          <i class="fas fa-angle-left"></i> Next:
-          <div class="title-text">UncertaintyTrack Exploiting Detection and Localization Uncertainty in Multi-Object Tracking</div>
-        </div>
-        <!-- <div class="content">
-          贴一个原文链接这篇文章的代码依旧没有开源
-
-Abstract近年来，大多数多目标跟踪都遵循TbD范式，盲目的相信检测器的
-        </div> -->
-      </a>
-    </div>
-  
-  
-  
-    
-    <div class="post-nav-next post-nav-item">
-      <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" alt="">
-      </div>
-      <a href="/2024/03/25/Hybridsort%E6%80%BB%E7%BB%93/" class="post-nav-link">
-        <div class="title">
-          Prev: <i class="fas fa-angle-right"></i>
-          <div class="title-text">Hybridsort总结</div>
-        </div>
-        <!-- <div class="content">
-          惯例贴一下原文链接
-阅读这篇文章建议先去读一读他的baseline，OC-SORT
-
-AbstractMOT的目标是在帧
-        </div> -->
-      </a>
-    </div>
-  
-  </div>
-    
-    
-
-    <!-- 打赏 -->
-    
-
-    <!-- 分享 -->
-    
-      <!-- https://github.com/overtrue/share.js -->
-<!-- 文章详情页的分享 -->
-<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-
-<script src="/js/shareJs/social-share.min.js"></script>
-</script>
-
-<style>
-  .social-share {
-    margin: 20px 0;
+  <span class="title" id="archive-header-desc"></span>
+  <script>
+  function typedFn() {
+    const el = '#archive-header-desc';
+    const type = 'archive';
+    let desc = '越努力越幸运'
+    var typed = new Typed(el, {
+      strings: [desc],
+      startDelay: 100,
+      typeSpeed: 100,
+      loop: true,
+      backSpeed: 50,
+      showCursor: true
+    });
   }
-</style>
-
-
-    
-    
-    <!-- 评论 -->
-    <!-- 评论 -->
-
-  <div id="myComment">
-    
+  typedFn();
+</script>
+  
   </div>
-
-<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
-
-
-  </div>
-
-  <!-- 目录 -->
-  <aside id='l_side'>
-  
-    
-      <section class="widget side_blogger">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img src='https://pic2.zhimg.com/80/v2-42b72d5ebee4b8d8aa70d9687effe87b_1440w.webp'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>小牛的学习日记</h2>
-        
-        
-          <p>好好学习 天天向上</p>
-
-        
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="https://github.com/Nxhhhh/Nxhhhh.github.io"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/1224317198@qq.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/Nxhhhh/Nxhhhh.github.io"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=1224317198"
-              class="social fab fa-qq flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-    
-  
-  
-  
-
-  <div class="layout_sticky">    
-    
-      
-<section class="widget side_toc">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="toc-main">
-      <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Notation"><span class="toc-text">Notation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Decomposed-Data-Association-DDA"><span class="toc-text">Decomposed Data Association (DDA)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Detection-Disambiguation-Module-DDM"><span class="toc-text">Detection Disambiguation Module (DDM)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Trajectory-Disambiguation-Module-TDM"><span class="toc-text">Trajectory Disambiguation Module (TDM)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Association-Disambiguation-Module-ADM"><span class="toc-text">Association Disambiguation Module (ADM)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Module-Combination"><span class="toc-text">Module Combination</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Occlusion-aware-NMS-ONMS"><span class="toc-text">Occlusion-aware NMS (ONMS)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DeconfuseTrack"><span class="toc-text">DeconfuseTrack</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Experiments"><span class="toc-text">Experiments</span></a></li></ol> -->
-        <div class="toc"></div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- 手机端目录按钮 -->
-<div id="toc-mobile-btn">
-  <i class="fas fa-list-ul" aria-hidden="true"></i>
+  <div class="mask-box"></div>
 </div>
 
+<div class="archive-video">
+  <video class="full-video" autoplay loop muted>
+      <source style="width: 100%;height: 100vh;" src="/">
+  </video>
+  <div class="video-header-title">
+    archive
+  </div>
+  <div class="video-header-desc">
+  
+      <span class="title" id="archive-video-header-desc"></span>
+      <script>
+  function typedFn() {
+    const el = '#archive-video-header-desc';
+    const type = 'archive';
+    let desc = '越努力越幸运'
+    var typed = new Typed(el, {
+      strings: [desc],
+      startDelay: 100,
+      typeSpeed: 100,
+      loop: true,
+      backSpeed: 50,
+      showCursor: true
+    });
+  }
+  typedFn();
+</script>
       
-  <section class="widget side_recent_post">
-    
-  <header>
-    
-      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
-    
-  </header>
+  </div>
+  <div class="mask-box"></div>
+</div>
+
+<!-- hash算法 -->
 
 
-    <div class='content'>
-      
-      <!-- hash算法 -->
-      
-      <div class="aside-list">
+<div class="archive-main">
+  <section class="archive">
+    <div class="archive-content">
+      <ul class="post-archive">
         
-          <div class="aside-list-item">
+        
+          
             
+            <div class="year" data-aos="zoom-in-up">
+                <div class="bullet"></div>
+                <a href="/archives/2025">2025</a>
+            </div>
+          
+          <li class="post-item" data-aos="fade-left">
             
-            
-
             <div class="post-img-box">
-              <a href="/2025/03/04/%E5%B8%B8%E7%94%A8STL%E5%AE%B9%E5%99%A8%E7%89%B9%E6%80%A7/" class="post-img " style="background-size: cover; 
+              <a href="/2025/02/20/LinuxI-O%E9%AB%98%E7%BA%A7%E5%87%BD%E6%95%B0/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
+                <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
               <div>
-                
-                  <span class="post-date">03-04</span>
-                
+                <span class="post-date">02-20</span>
               </div>
-              <a class="post-title" href="/2025/03/04/%E5%B8%B8%E7%94%A8STL%E5%AE%B9%E5%99%A8%E7%89%B9%E6%80%A7/">常用STL容器特性</a>
+              <a class="post-title" href="/2025/02/20/LinuxI-O%E9%AB%98%E7%BA%A7%E5%87%BD%E6%95%B0/">LinuxI/O高级函数</a>
             </div>
-          </div>
+          </li>
         
-          <div class="aside-list-item">
+          
+          <li class="post-item" data-aos="fade-left">
             
-            
-            
-
             <div class="post-img-box">
-              <a href="/2025/03/04/%E9%98%BB%E5%A1%9E%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E%EF%BC%8C%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5I-O/" class="post-img " style="background-size: cover; 
+              <a href="/2025/02/20/C-%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" alt="">
+                <img class="lazyload" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
               <div>
-                
-                  <span class="post-date">03-04</span>
-                
+                <span class="post-date">02-20</span>
               </div>
-              <a class="post-title" href="/2025/03/04/%E9%98%BB%E5%A1%9E%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E%EF%BC%8C%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5I-O/">阻塞和非阻塞，同步、异步I/O</a>
+              <a class="post-title" href="/2025/02/20/C-%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93%E7%9A%84%E5%8C%BA%E5%88%AB/">C++静态库和动态库的区别</a>
             </div>
-          </div>
+          </li>
         
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2025/03/03/I-O%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E6%9C%BA%E5%88%B6%EF%BC%88select%E3%80%81poll%E3%80%81epoll%EF%BC%89/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">03-03</span>
-                
-              </div>
-              <a class="post-title" href="/2025/03/03/I-O%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E6%9C%BA%E5%88%B6%EF%BC%88select%E3%80%81poll%E3%80%81epoll%EF%BC%89/">I/O多路复用的三种机制（select、poll、epoll）</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2025/03/01/%E5%A5%97%E6%8E%A5%E5%AD%97%E5%87%BD%E6%95%B0/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">03-01</span>
-                
-              </div>
-              <a class="post-title" href="/2025/03/01/%E5%A5%97%E6%8E%A5%E5%AD%97%E5%87%BD%E6%95%B0/">套接字函数</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2025/02/25/%E4%BA%92%E6%96%A5%E9%94%81%E4%B8%8E%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">02-25</span>
-                
-              </div>
-              <a class="post-title" href="/2025/02/25/%E4%BA%92%E6%96%A5%E9%94%81%E4%B8%8E%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0/">互斥锁与相关函数</a>
-            </div>
-          </div>
-        
-      </div>
+      </ul>
     </div>
   </section>
-
+  <div class="w-70">
+    
+  <!-- <nav class="page-nav">
+    <a class="extend prev" rel="prev" href="/archives/2025/">Prev</a><a class="page-number" href="/archives/2025/">1</a><span class="page-number current">2</span>
+  </nav> -->
+  <div class="page-nav">
+    
+      <a href="/archives/2025/"
+         class="page-nav-pre">
+         <i class="fas fa-angle-left"></i><span class="ml-5">Prev</span>
+      </a>
+    
+    <div class="page-info">
+        <div class="page-info-text">2 / 2</div>
+    </div>
     
   </div>
-</aside>
 
-  <!-- 图片放大 Wrap images with fancybox support -->
-  <script src="/js/wrapImage.js"></script>
+  </div>
 </div>
-
-<!-- 文章详情页背景图 -->
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
-	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
-	<transition-group tag="ul" :name="names">
-		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-			<img :src="image" class="bg-swiper-img no-lazy">
-		</li>
-	</transition-group>
-</div>
-<script>
-	var vm = new Vue({
-		el: '#appBgSwiper',
-		data: {
-			names: '' || 'fade' || 'fade', // translate-fade fade
-			mark: 0,
-			img: [],
-			bgColor: '',
-			time: null
-		},
-		methods: {   //添加方法
-			change(i, m) {
-				if (i > m) {
-					// this.names = 'fade';
-				} else if (i < m) {
-					// this.names = 'fade';
-				} else {
-					return;
-				}
-				this.mark = i;
-			},
-			prev() {
-				// this.names = 'fade';
-				this.mark--;
-				if (this.mark === -1) {
-					this.mark = 3;
-					return
-				}
-			},
-			next() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			autoPlay() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			play() {
-				let bgImgDelay = '' || '180000'
-				let delay = parseInt(bgImgDelay) || 180000;
-				this.time = setInterval(this.autoPlay, delay);
-			},
-			enter() {
-				clearInterval(this.time);
-			},
-			leave() {
-				this.play();
-			}
-		},
-		created() {
-			this.play()
-		},
-		beforeDestroy() {
-			clearInterval(this.time);
-		},
-		mounted() {
-			let prop = '' || '';
-			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
-			if (isImg) {
-				let img = prop.split(',');
-				let configRoot = '/'
-				let arrImg = [];
-				img.forEach(el => {
-					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-					var objExp = new RegExp(Expression);
-
-					if (objExp.test(el)) {
-						// http or https
-						arrImg.push(el);
-					} else {
-						// 非http or https开头
-						// 本地文件
-						let firstStr = el.charAt(0);
-						if (firstStr == '/') {
-							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-						}
-						el = configRoot + el;
-						arrImg.push(el);
-					}
-				})
-				this.img = arrImg;
-			} else {
-				this.bgColor = prop;
-			}
-		}
-	})
-</script>
-
-<style>
-	.bg-swiper-box {
-		position: absolute;
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-
-	.bg-swiper-img {
-		object-fit: cover;
-		width: 100%;
-		height: 100%;
-	}
-</style>
-
-
-  <script>
-  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    // 文章章节标题不能为 “MathJax” ，否则会报错。
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-
-
-
-  <script>
-  function loadMermaid() {
-    if (document.getElementsByClassName('mermaid').length) {
-      if (window.mermaidJsLoad) mermaid.init()
-      else {
-        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
-          window.mermaidJsLoad = true
-          mermaid.initialize({
-            theme: 'default',
-          })
-          if ('true') {
-            mermaid.init();
-          }
-        })
-      }
-    }
-  };
-  document.addEventListener("DOMContentLoaded", function () {
-    loadMermaid();
-  })
-
-  document.addEventListener('pjax:complete', function () {
-    loadMermaid();
-  })
-  
-</script>
-
 
       </main>
     </div>

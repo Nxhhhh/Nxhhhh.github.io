@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Deconfuse Track总结 | 小牛学习日记</title>
+  <title>常用STL容器特性 | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -304,21 +304,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        Deconfuse Track总结
+        常用STL容器特性
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> Published in：2024-04-08 |
+          <i class="fas fa-calendar"></i> Published in：2025-03-04 |
         </span>
       
 
@@ -326,8 +326,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> category：
           
-            <a href="/categories/R-D/" class="post-detail-header_category">
-              R&D
+            <a href="/categories/C/" class="post-detail-header_category">
+              C++
             </a>
           
         </span>
@@ -336,11 +336,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 2.1k |
+            <i class="fas fa-file-text-o"></i> Words: 598 |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> Reading time: 9min |
+            <i class="fas fa-clock"></i> Reading time: 2min |
           </span>
   
           
@@ -367,95 +367,103 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>贴一个<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2403.02767">原文链接</a></p>
-<p>很可惜这篇文章的代码没有开源</p>
-<hr>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>在多目标跟踪中，准确的数据关联十分重要，但是现有的方法大多进行简单的全局数据关联，忽略了轨迹的多样性以及外观线索存在的冲突性，导师检测-轨迹对存在混淆。为了解决这一问题，作者提出了一个简单、即插即用的数据关联方法，称为分解数据关联（DDA），此外还引入了遮挡感知的非极大值抑制（ONMS）来保留更多遮挡检测。基于这两种方法提出了<strong>DeconfuseTrack</strong>。</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>近年来大多数MOT方法都遵循TbD范式。在该范式中，数据关联建立轨迹与跟踪之间的的对应关系实现匹配。为了实现数据关联的准确性，许多方法引入额外的线索作为运动线索的补充。包括外观线索、深度信息、置信度分数、运动方向、自然语言信息等等，这些额外的线索可以一定程度上缓解运动线索的模糊，但是传统的数据关联具有一定的局限性。</p>
-<p><img src="1.png" alt="图1"></p>
-<p>图1(a)展示了全局关联导致的混乱，针对这些问题，文章提出了DecofuseTrack。将全局问题分解为多个子问题，包括单个轨迹与多个检测之间的关联、多个轨迹与单个检测之间的关联以及多个轨迹与多个检测之间的关联，并且将外观线索的使用限制在一定范围，仅在子问题中运动线索的判别力不足时补充外观线索，尽量减少对运动线索的干扰。</p>
-<p> 如图1(b)所示，通过检测消歧模块(DDM)，我们识别出虽然不可靠，但更适合轨迹1的检测1，从而释放出检测2。利用轨迹消歧模块(TDM)，我们在轨迹3和轨迹4之间做出正确的选择，用于检测3。</p>
-<p>通过关联消歧模块(ADM)，我们避免了轨迹5和轨迹6之间的关联混淆。其次，为了提高检测性能并减轻因遗漏检测而引起的混淆，我们设计了遮挡感知非最大抑制(ONMS)来保留更多的遮挡检测进行关联。</p>
-<p>完整的模型结构如图所示：<br><img src="2.png" alt="图2"></p>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="Notation"><a href="#Notation" class="headerlink" title="Notation"></a>Notation</h3><p>类似于ByteTrack，将检测分为两类 $D_{first}^{t}$ 和 $D_{second}^{t}$ 用于第一轮和第二轮的数据关联。</p>
-<h3 id="Decomposed-Data-Association-DDA"><a href="#Decomposed-Data-Association-DDA" class="headerlink" title="Decomposed Data Association (DDA)"></a>Decomposed Data Association (DDA)</h3><p>利用卡尔曼滤波预测每个轨迹T的位置：$L$ = {$ l $ $_j$ = $(x,y,w,h)$ | $j$ $\in$ $\Bbb T$ }。$d_i$ 和 $T_j$ 的位置相似性用检测和轨迹之间的IoU来表示：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-LocSim ( d_i , \cal{T}_j ) = \mathit{IoU} ( d_i , T_j ) .
-\end{aligned}</script><p>代价公式如下：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-C_{ij} =1- LocSim ( d_i , \cal{T}_j ) , d_i \in \mathit{D}_{first}^t, \cal{T}_i \in \Bbb T.
-\end{aligned}</script><p>最后利用匈牙利算法求解 $C$，得到分配结果</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
- P = \lbrace{(d, \cal{T}) | d \in \mathit{D}_{matched}^t, \cal{T} \in \Bbb T_{matched}}\rbrace. 
-\end{aligned}</script><p>以往的方法会直接输出匹配的结果，但是这种全局的关联过于模糊粗糙，因此需要细化 $P$ ，实现更加细粒度的分配。</p>
-<h4 id="Detection-Disambiguation-Module-DDM"><a href="#Detection-Disambiguation-Module-DDM" class="headerlink" title="Detection Disambiguation Module (DDM)"></a>Detection Disambiguation Module (DDM)</h4><p>DDM旨在解决多个检测与单一轨迹之间的混淆问题。</p>
-<p>将低置信度中与 $\cal{T}_j$ 匹配度更高的 $d_i$ 定义为 $D_{blur}$ ，表示可能该轨迹存在更适合的低置信度检测。</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-D_{blur}^j = \lbrace d_i | LocSim ( d_i , \cal{T}_j ) - \mathit{LocSim} ( d_j , \cal{T}_j ) > \kappa , \\ d_i \in D_{second}^t, d_j \in D_{matched}^t, \cal{T} \in \Bbb T_{matched} \rbrace.
-\end{aligned}</script><p>接下来定义 $P_{new}$ :</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-P_{new} =  \lbrace (d_i, \cal{T}_j) | d = \mathop{argmax}\limits_{d_i \in D_{blur}^t}LocSim(d_i, \cal{T}_j) \\  if  D_{blur}^t \neq \emptyset , d_j \in D_{matched}^t, \cal{T} \in \Bbb T_{matched} \rbrace .
-\end{aligned}</script><p>将与轨迹匹配的低置信度检测移到 $D_{first}$ 里面，并在 $D_{second}$ 里将其删除。</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-D^{t}_{first}{'} =  D_{first}^{t}  \cup \lbrace (d, \cal{T}) \in \mathit{P_{new}}  \rbrace 
-\\ D^{t}_{second}{'} =  D_{second}^{t} - \lbrace (d, \cal{T}) \in \mathit{P_{new}} \rbrace .
-\end{aligned}</script><p>获得 $P_{new}$ 后，释放 $P$ 中的一些可靠检测，因为它们虽然被更合适的不可靠检测所取代，但这些不匹配的可靠检测仍然有可能与不匹配的轨迹相关联。因此，在最后一步，在保证 $P_{new}$ 中赋值关系有效性的前提下，首先对 $T$ 和 $D_t$ 进行重新赋值，得到检测消歧后新的分配关系 $P_{ddm}$ 。</p>
-<h4 id="Trajectory-Disambiguation-Module-TDM"><a href="#Trajectory-Disambiguation-Module-TDM" class="headerlink" title="Trajectory Disambiguation Module (TDM)"></a>Trajectory Disambiguation Module (TDM)</h4><p>这个模块将多个轨迹与单一检测进行匹配。</p>
-<p>首先 $\Bbb T_{lost}$ = $\Bbb T - \Bbb T_{matched} $</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-T_{blur}^j = \lbrace \cal{T}_i | \mathit{LocSim} ( d_j , \cal{T}_j ) - \mathit{LocSim} ( d_j , \cal{T}_i ) < \kappa , \\ \cal T_i \in  \Bbb T_{lost} , d_j \in D_{matched}^t, \cal{T}_j \in \Bbb T_{matched} \rbrace \cup \cal{T}_j.
-\end{aligned}</script><p>接下来采用外观模型实现更加精确的分配：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-T_{best}^j = \mathop{argmin}\limits_{\cal{T} \in \Bbb{T}_{blur}^j} CostDist(f_d, f_{\cal{T}}).
-\end{aligned}</script><p>其中 $CostDist(\cdot{})$ 表示余弦距离，最后得到轨迹消歧后的新分配关系:</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-P_{tdm} = \lbrace (d_j , \cal{T}_{best}^j) | d_j \in \mathit{D}_{matched}^t \rbrace. 
-\end{aligned}</script><h4 id="Association-Disambiguation-Module-ADM"><a href="#Association-Disambiguation-Module-ADM" class="headerlink" title="Association Disambiguation Module (ADM)"></a>Association Disambiguation Module (ADM)</h4><p>在这个模块处理多个轨迹和多个检测关联的混淆问题。<br>可以分为多个二对二的问题解决。<br>对于配对中任意两个不同的任务，使用变异系数来量化他们之间的混淆：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-Cv(i,j) =  \frac{Std(\lbrace LocSim(d_{k_1}, \cal{T}_{k_2}|k_1,k_2 \in \lbrace i,j \rbrace \rbrace) )}{Mean(\lbrace LocSim(d_{k_1}, \cal{T}_{k_2}|k_1,k_2 \in \lbrace i,j \rbrace \rbrace) )}, \\ d_i,d_j \in D_{matched}^t, \cal{T}_i,\cal{T}_j \in \Bbb T_{matched} ,i \neq j .
-\end{aligned}</script><p>变异系数较小时，说明分配对之间的位置线索差异不大。接下来，我们识别所有表现出强烈混淆的配对:</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-P_{blur} = \lbrace (d_i , \cal{T}_i), (d_j , \cal{T}_j) | Cv(i,j) < \kappa. \rbrace
-\end{aligned}</script><p>接下来，类似于TDM，我们利用外观线索来解决Pblur中的位置混淆，并找到更合适的分配关系:</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-P_{new} = &\lbrace (d_i , \cal{T}_j), (d_j , \cal{T}_i) | \mathit{CostDist}(f_{d_i}, f_{\cal{T}_j})\\+&\mathit{CostDist}(f_{d_j}, f_{\cal{T}_i}) < \mathit{CostDist}(f_{d_i}, f_{\cal{T}_i})\\+&\mathit{CostDist}(f_{d_j}, f_{\cal{T}_j}), (d_i,\cal T_i), (d_j,\cal T_j)\in \mathit{P}_{blur}. \rbrace
-\end{aligned}</script><p>在涉及多个检测和轨迹交叉关联的复杂匹配过程中，可能会产生冲突。为了解决这些冲突，我们再次使用外观线索执行匈牙利匹配算法来消除 $P_{new}$ 中的冲突。最后，将修正后的赋值关系 $P_{new}$ 与原集合 $P$ 结合，得到关联消歧后的新匹配关系 $P_{adm}$ 。</p>
-<h4 id="Module-Combination"><a href="#Module-Combination" class="headerlink" title="Module Combination"></a>Module Combination</h4><p> 三个模型可以串行组合，得到完整的DDA。所有三个模块共用参数 $\kappa$ ,当 $\kappa$ 增加时，我们在TDM和ADM中考虑更多的混淆，而在DDM中考虑更少的不可靠检测。因此， $\kappa$ 值越大表明对位置线索的依赖程度越低，而 $\kappa$ 值越小表明对运动线索的依赖程度越高。 $\kappa$ 的值可以根据数据集中摄像机和被跟踪对象的运动特征灵活调整。</p>
-<h3 id="Occlusion-aware-NMS-ONMS"><a href="#Occlusion-aware-NMS-ONMS" class="headerlink" title="Occlusion-aware NMS (ONMS)"></a>Occlusion-aware NMS (ONMS)</h3><p>该模块用于提高检测的质量。<br>$u^t$ 表示置信度大于 $d_i$ 的检测中IoU最大的检测:</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-u_i^t =   \mathop{max}\limits_{d_j^t \in \lbrace d^t | c^t > c_i^t, d^tb \in D^t \rbrace } IoU(d_i^t,d_j^t).
-\end{aligned}</script><p>如图3显示，传统的跟踪器设置了置信阈值 $\eta_{conf}$ 和NMS阈值  $\eta_{nms}$ ，仅仅保留置信值在这两个之间的检测，然而这种方法放弃了许多正确的检测。ByteTrack通过设置两个置信阈值 $\eta_{conf}^{first}$ 、$\eta_{conf}^{second}$ 将检测分为两组，并执行两段关联。但是作者认为仍有改进的余地，设置了两个NMS阈值 $\eta_{NMS}^{first}$ 、$\eta_{NMS}^{second}$，以便为数据关联保留更多的检测：<br><img src="3.png" alt="图3"></p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-D_{first}^t = \lbrace d^t | d^t \in D^t, c^t \ge \eta_{conf}^{first},u^t \le \eta_{nms}^{first} \rbrace\\D_{second}^t = \lbrace d^t | d^t \in D^t, \eta_{conf}^{first} \gt c^t \ge \eta_{conf}^{second},u^t \le \eta_{nms}^{first} \rbrace \\ \cup \lbrace d^t | d^t \in D^t, c^t \ge \eta_{conf}^{first}, \eta_{nms}^{first} \lt u^t \le \eta_{nms}^{second} \rbrace 
-\end{aligned}</script><h3 id="DeconfuseTrack"><a href="#DeconfuseTrack" class="headerlink" title="DeconfuseTrack"></a>DeconfuseTrack</h3><p>通过结合ONMS和DDA，提出了Deconfuse Track，专门解决数据混淆的问题。</p>
-<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p><img src="4.png" alt="MOT17"><br><img src="5.png" alt="MOT20"><br><img src="6.png" alt="消融实验"><br><img src="7.png" alt="消融实验"><br><img src="8.png" alt></p>
-<hr>
+        <h1 id="常用STL容器特性"><a href="#常用STL容器特性" class="headerlink" title="常用STL容器特性"></a>常用STL容器特性</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>容器</strong></th>
+<th><strong>操作</strong></th>
+<th><strong>底层实现</strong></th>
+<th>特点</th>
+<th><strong>是否自动排序</strong></th>
+<th><strong>能否使用迭代器</strong></th>
+<th><strong>元素能否重复</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Vector</strong></td>
+<td><strong>构造</strong>: <code>vector&lt;T&gt; v;</code> <br><strong>插入</strong>: <code>v.push_back(val);</code>, <code>v.insert(pos, val);</code> <br><strong>删除</strong>: <code>v.pop_back();</code>, <code>v.erase(pos);</code> <br><strong>访问头尾</strong>: <code>v.front()</code>, <code>v.back()</code> <br><strong>其他</strong>: <code>v.size()</code>, <code>v.empty()</code>, <code>v.clear()</code></td>
+<td>动态数组</td>
+<td>动态数组，支持快速随机访问，尾部插入/删除高效，中间插入/删除较慢。</td>
+<td>否</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td><strong>String</strong></td>
+<td><strong>构造</strong>: <code>string s;</code> <br><strong>插入</strong>: <code>s.push_back(c);</code>, <code>s.insert(pos, str);</code><br> <strong>删除</strong>: <code>s.pop_back();</code>, <code>s.erase(pos, len);</code><br> <strong>访问头尾</strong>: <code>s.front()</code>, <code>s.back()</code> <br><strong>其他</strong>: <code>s.size()</code>, <code>s.empty()</code>, <code>s.clear()</code>, <code>s.substr(pos, len)</code></td>
+<td>动态数组</td>
+<td>专门用于存储字符序列，支持字符串操作（如子串、查找、替换等）。</td>
+<td>否</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td><strong>Deque</strong></td>
+<td><strong>构造</strong>: <code>deque&lt;T&gt; dq;</code> <br><strong>插入</strong>: <code>dq.push_back(val);</code>, <code>dq.push_front(val);</code> <br><strong>删除</strong>: <code>dq.pop_back();</code>, <code>dq.pop_front();</code> <br><strong>访问头尾</strong>: <code>dq.front()</code>, <code>dq.back()</code> <br><strong>其他</strong>: <code>dq.size()</code>, <code>dq.empty()</code>, <code>dq.clear()</code></td>
+<td>分段连续空间（双端队列）</td>
+<td>双端队列，支持头部和尾部高效插入/删除，随机访问性能略低于 <code>vector</code>。</td>
+<td>否</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td><strong>Queue</strong></td>
+<td><strong>构造</strong>: <code>queue&lt;T&gt; q;</code> <br><strong>插入</strong>: <code>q.push(val);</code> <br><strong>删除</strong>: <code>q.pop();</code> <br><strong>访问头尾</strong>: <code>q.front()</code>, <code>q.back()</code> <br><strong>其他</strong>: <code>q.size()</code>, <code>q.empty()</code></td>
+<td>基于 <code>deque</code> 或 <code>list</code></td>
+<td>先进先出（FIFO）容器，只允许在尾部插入，头部删除。</td>
+<td>否</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td><strong>Stack</strong></td>
+<td><strong>构造</strong>: <code>stack&lt;T&gt; st;</code> <br><strong>插入</strong>: <code>st.push(val);</code> <br><strong>删除</strong>: <code>st.pop();</code> <br><strong>访问头尾</strong>: <code>st.top()</code> <br><strong>其他</strong>: <code>st.size()</code>, <code>st.empty()</code></td>
+<td>基于 <code>deque</code> 或 <code>vector</code></td>
+<td>后进先出（LIFO）容器，只允许在顶部插入/删除。</td>
+<td>否</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td><strong>List</strong></td>
+<td><strong>构造</strong>: <code>list&lt;T&gt; lst;</code> <br><strong>插入</strong>: <code>lst.push_back(val);</code>, <code>lst.push_front(val);</code> <br><strong>删除</strong>: <code>lst.pop_back();</code>, <code>lst.pop_front();</code> <br><strong>访问头尾</strong>: <code>lst.front()</code>, <code>lst.back()</code> <br><strong>其他</strong>: <code>lst.size()</code>, <code>lst.empty()</code>, <code>lst.clear()</code>, <code>lst.remove(val)</code></td>
+<td>双向链表</td>
+<td>双向链表，支持高效插入/删除，不支持随机访问，内存占用较高。</td>
+<td>否</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td><strong>Set</strong></td>
+<td><strong>构造</strong>: <code>set&lt;T&gt; s;</code> <br><strong>插入</strong>: <code>s.insert(val);</code><br> <strong>删除</strong>: <code>s.erase(val);</code> <br><strong>访问头尾</strong>: <code>*s.begin()</code>, <code>*s.rbegin()</code> <br><strong>其他</strong>: <code>s.size()</code>, <code>s.empty()</code>, <code>s.clear()</code>, <code>s.find(val)</code></td>
+<td>红黑树</td>
+<td>基于红黑树实现，元素唯一且自动排序，查找效率高。</td>
+<td>是</td>
+<td>是</td>
+<td>否（<code>multiset</code>可以重复）</td>
+</tr>
+<tr>
+<td><strong>Map</strong></td>
+<td><strong>构造</strong>: <code>map&lt;K, V&gt; m;</code> <br><strong>插入</strong>: <code>m.insert(&#123;key, val&#125;);</code><br> <strong>删除</strong>: <code>m.erase(key);</code> <br><strong>访问头尾</strong>: <code>m.begin()-&gt;second</code>, <code>m.rbegin()-&gt;second</code> <br><strong>其他</strong>: <code>m.size()</code>, <code>m.empty()</code>, <code>m.clear()</code>, <code>m.find(key)</code></td>
+<td>红黑树</td>
+<td>基于红黑树实现，键值对存储，键唯一且自动排序，查找效率高。</td>
+<td>是</td>
+<td>是</td>
+<td>否（<code>multimap</code>可以重复）</td>
+</tr>
+</tbody>
+</table>
+</div>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/MOT/" class="">
-              MOT
-            </a>
-          
-            <a href="/tags/python/" class="">
-              python
+            <a href="/tags/C/" class="">
+              C++
             </a>
           
         </div>
@@ -469,7 +477,7 @@ D_{first}^t = \lbrace d^t | d^t \in D^t, c^t \ge \eta_{conf}^{first},u^t \le \et
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
-    <a href="/2024/04/08/DeconfuseTrack总结/" target="_blank" title="Deconfuse Track总结">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/04/08/DeconfuseTrack总结/</a>
+    <a href="/2025/03/04/常用STL容器特性/" target="_blank" title="常用STL容器特性">https://github.com/Nxhhhh/Nxhhhh.github.io/2025/03/04/常用STL容器特性/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright notice:   </strong>
@@ -487,41 +495,20 @@ D_{first}^t = \lbrace d^t | d^t \in D^t, c^t \ge \eta_{conf}^{first},u^t \le \et
   
   
   
-    
-    <div class="post-nav-prev post-nav-item">
-      <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" alt="">
-      </div>
-      <a href="/2024/04/15/UncertaintyTrack%E6%80%BB%E7%BB%93/" class="post-nav-link">
-        <div class="title">
-          <i class="fas fa-angle-left"></i> Next:
-          <div class="title-text">UncertaintyTrack Exploiting Detection and Localization Uncertainty in Multi-Object Tracking</div>
-        </div>
-        <!-- <div class="content">
-          贴一个原文链接这篇文章的代码依旧没有开源
-
-Abstract近年来，大多数多目标跟踪都遵循TbD范式，盲目的相信检测器的
-        </div> -->
-      </a>
-    </div>
-  
   
   
     
     <div class="post-nav-next post-nav-item">
       <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" alt="">
+        <img class="lazyload" src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" alt="">
       </div>
-      <a href="/2024/03/25/Hybridsort%E6%80%BB%E7%BB%93/" class="post-nav-link">
+      <a href="/2025/03/04/%E9%98%BB%E5%A1%9E%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E%EF%BC%8C%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5I-O/" class="post-nav-link">
         <div class="title">
           Prev: <i class="fas fa-angle-right"></i>
-          <div class="title-text">Hybridsort总结</div>
+          <div class="title-text">阻塞和非阻塞，同步、异步I/O</div>
         </div>
         <!-- <div class="content">
-          惯例贴一下原文链接
-阅读这篇文章建议先去读一读他的baseline，OC-SORT
-
-AbstractMOT的目标是在帧
+          阻塞和非阻塞，同步、异步I/O阻塞和非阻塞，同步和异步是描述I/O操作行为的两组概念，从不同的角度买哦输了程序如何处理任
         </div> -->
       </a>
     </div>
@@ -652,7 +639,7 @@ AbstractMOT的目标是在帧
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Notation"><span class="toc-text">Notation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Decomposed-Data-Association-DDA"><span class="toc-text">Decomposed Data Association (DDA)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Detection-Disambiguation-Module-DDM"><span class="toc-text">Detection Disambiguation Module (DDM)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Trajectory-Disambiguation-Module-TDM"><span class="toc-text">Trajectory Disambiguation Module (TDM)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Association-Disambiguation-Module-ADM"><span class="toc-text">Association Disambiguation Module (ADM)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Module-Combination"><span class="toc-text">Module Combination</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Occlusion-aware-NMS-ONMS"><span class="toc-text">Occlusion-aware NMS (ONMS)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DeconfuseTrack"><span class="toc-text">DeconfuseTrack</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Experiments"><span class="toc-text">Experiments</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8STL%E5%AE%B9%E5%99%A8%E7%89%B9%E6%80%A7"><span class="toc-text">常用STL容器特性</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
