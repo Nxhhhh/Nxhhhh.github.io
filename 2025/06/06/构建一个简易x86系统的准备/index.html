@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Hybridsort总结 | 小牛学习日记</title>
+  <title>构建一个简易x86系统的准备 | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -304,21 +304,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg')">
+  background-position: center center;position: relative;background-image:url('https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        Hybridsort总结
+        构建一个简易x86系统的准备
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> Published in：2024-03-25 |
+          <i class="fas fa-calendar"></i> Published in：2025-06-06 |
         </span>
       
 
@@ -326,8 +326,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> category：
           
-            <a href="/categories/R-D/" class="post-detail-header_category">
-              R&D
+            <a href="/categories/C/" class="post-detail-header_category">
+              C++
             </a>
           
         </span>
@@ -336,11 +336,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 1.3k |
+            <i class="fas fa-file-text-o"></i> Words: 1k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> Reading time: 4min |
+            <i class="fas fa-clock"></i> Reading time: 3min |
           </span>
   
           
@@ -367,52 +367,64 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>惯例贴一下<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2308.00783">原文链接</a></p>
-<p>阅读这篇文章建议先去读一读他的baseline，OC-SORT</p>
-<hr>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>MOT的目标是在帧之间检测和关联所有目标。大多数的方法都是使用强线索（空间信息或者外观信息）完成任务，这些强线索在没有发生遮挡和聚类的时候是十分有用的，一旦发生遮挡和聚类，由于物体高度重叠，空间和外观信息会变得模糊。文章提出了可以用弱线索（高度、检测框置信度、速度方向）作为强线索的补充。</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>MOT中流行的范例习惯将问题分为两个子任务。首先检测每个帧中的对象，其次将他们在不同的框架中联系起来。关联的任务主要通过强线索完成。但是常用的强线索在遇到遮挡和聚类的问题时就会出现退化。如图一所示：</p>
-<p><img src="1.png" alt="图一"></p>
-<p>图中展示了强弱线索的辨别能力。绿色实线箭头表示对一对对象的可靠判别，红色虚线表示不可靠的判别，箭头的值越高，表示鉴别越可靠。</p>
-<p>可以看出大部分情况下强线索可以分辨出检测框之间的区别，但是红色和橙色框出现了大面积重叠，仅靠交并比和外观线索的判别并不可靠，在这种情况下依靠检测框置信度可以得到更好的区分效果。</p>
-<p>作者为了保持SORT简单、在线和实时的特点，使用以下策略利用上述的弱线索：<strong>Tracklet置信度建模(TCM)和高度调制IoU (HMIoU)。</strong></p>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="Weak-Cues-Modeling"><a href="#Weak-Cues-Modeling" class="headerlink" title="Weak Cues Modeling"></a>Weak Cues Modeling</h3><h4 id="Tracklet-Confidence-Modeling"><a href="#Tracklet-Confidence-Modeling" class="headerlink" title="Tracklet Confidence Modeling"></a>Tracklet Confidence Modeling</h4><p>作者改进了传统SORT广泛使用的标准卡尔曼滤波器，增加了两个额外的状态：轨迹置信度c以及其速度分量 $\dot{c}$ :</p>
-<p><img src="2.png" alt></p>
-<p>对于轨迹置信度，作者使用线性预测进行估计。在遮挡发生时，物体的置信度会迅速降低，但是卡尔曼滤波的预测具有滞后性，如图三所示：</p>
-<p><img src="3.png" alt="图三"></p>
-<p>因此，作者使用简单的线性预测来估计轨迹的置信状态。线性建模公式如下：</p>
-<p><img src="4.png" alt="线性建模"></p>
-<p>其中c<sub>trk</sub>表示保存在Tracklet Memory中的Tracklet置信度。</p>
-<p>置信度的代价计算公式如下：</p>
-<p><img src="5.png" alt></p>
-<h4 id="Height-Modulated-IoU"><a href="#Height-Modulated-IoU" class="headerlink" title="Height Modulated IoU"></a>Height Modulated IoU</h4><p>高度状态在两个方面增强了关联。首先，物体的高度在一定程度上反映了深度信息。对于DanceTrack这样的数据集，检测框的高度主要取决于物体与相机之间的距离。这使得高度状态成为区分高度重叠对象的有效线索。其次，高度状态对不同姿态具有较强的鲁棒性，是一种准确估计的状态，是物体的高质量表征。</p>
-<p>两个方框分别定义为（x<sup>1</sup><sub>1</sub>, y<sup>1</sup><sub>1</sub>, x<sup>1</sup><sub>2</sub>, y<sup>1</sup><sub>2</sub>）,（x<sup>2</sup><sub>1</sub>, y<sup>2</sup><sub>1</sub>, x<sup>2</sup><sub>2</sub>, y<sup>2</sup><sub>2</sub>）</p>
-<p>则可以通过基于高度度量计算IoU来生成高度IoU (HIoU)，如下图所示：</p>
-<p><img src="6.png" alt></p>
-<p><img src="7.png" alt></p>
-<h3 id="Hybrid-SORT"><a href="#Hybrid-SORT" class="headerlink" title="Hybrid-SORT"></a>Hybrid-SORT</h3><h4 id="Robust-Observation-Centric-Momentum"><a href="#Robust-Observation-Centric-Momentum" class="headerlink" title="Robust Observation-Centric Momentum"></a>Robust Observation-Centric Momentum</h4><p>在OC-SORT中，OCM考虑目标中心的速度方向。使用的成本度量是轨迹速度方向θ<sub>t</sub>与轨迹到探测速度方向θ<sub>d</sub>之间的绝对差值，以弧度形式表示为∆θ = |θ<sub>t</sub> - θ<sub>d</sub>|。轨迹波速度方向由轨迹波中两个时间间隔∆t的盒中心获得，轨迹波到检测的速度方向由轨迹波历史盒和新检测盒的中心获得。给定两个点(u1, v1)和(u2, v2)，速度方向按下图所示公式计算。然而，原始OCM的建模容易受到固定时间间隔和稀疏点(即只有目标中心)引起的噪声的影响。</p>
-<p><img src="8.png" alt></p>
-<p>作者通过引入更加鲁棒的速度方向来改进OCM，称之为ROCM，修改包括两个方面。首先，将3帧的固定时间间隔扩展为1 ~ 3的多个时间间隔的叠加；其次，我们用物体的四个角代替它的中心点来计算速度方向。对于多个时间区间和点，ROCM的计算公式如下式所示。</p>
-<p><img src="9.png" alt></p>
-<p>从Figure4可以看出，对于运动复杂的物体，拐角的速度方向保持高度相似，而中心的速度方向几乎相反。</p>
-<p><img src="10.png" alt="Figure4"></p>
-<h4 id="Appearance-Modeling"><a href="#Appearance-Modeling" class="headerlink" title="Appearance Modeling"></a>Appearance Modeling</h4><p>ReID模型遵循BoT-SORT，首先检测对象，然后将结果裁剪的补丁提供给ReID模型。我们使用指数移动平均(EMA)对轨迹图外观信息建模，并利用余弦距离作为度量来计算轨迹图和检测外观特征之间的成本C<sub>Appr</sub>。</p>
-<h4 id="Algorithm-Framework"><a href="#Algorithm-Framework" class="headerlink" title="Algorithm Framework"></a>Algorithm Framework</h4><p>关联阶段主要包括三个阶段:第一阶段是高置信度对象的关联阶段，第二阶段是低置信度对象的关联阶段(ByteTrack中的BYTE)，第三阶段是用最后一次检测恢复丢失的轨迹(OC-SORT中的OCR)。</p>
-<p>考虑到所有的强弱线索，最终的成本矩阵为：</p>
-<p><img src="11.png" alt></p>
-<hr>
+        <h1 id="构建一个简易x86系统的准备"><a href="#构建一个简易x86系统的准备" class="headerlink" title="构建一个简易x86系统的准备"></a>构建一个简易x86系统的准备</h1><p>环境配置：win10+cmake-3.23.1-windows-i386+x86_64-elf-tools-windows</p>
+<p>（<strong>强烈建议使用网课提供的工具链版本，否则会有很多问题</strong>）</p>
+<h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><h3 id="计算机的启动流程"><a href="#计算机的启动流程" class="headerlink" title="计算机的启动流程"></a>计算机的启动流程</h3><p><img src="构建一个简易x86系统的准备\1.png" alt="1"></p>
+<ol>
+<li><p>上电启动后，CPU处于16位运行的实模式，分页机制禁止，此时只有1MB内存可用，没有特权级</p>
+</li>
+<li><p>CPU跳转到BIOS的入口 (地址为0XFFFF0，也就是说，BIOS程序的第一条指令就设计在这个位置！) 开始执行</p>
+</li>
+<li>BIOS进行硬件自检(POST)，主板、硬盘、显卡、内存等自检，并保存一些配置数据到特定内存地址处(如硬盘的数量)</li>
+<li>根据配置的启动顺序(光驱、U盘、硬盘等)，加载引导代码运行。例，从硬盘启动时，将硬盘的第1扇区(主引导纪录)读取到0x7c00处并且跳转到该地址处运行</li>
+<li>引导代码对操作系统的运行初始环境进行配置，并加载操作系统到内存中</li>
+<li>跳转到操作系统运行。</li>
+</ol>
+<h3 id="实模式"><a href="#实模式" class="headerlink" title="实模式"></a>实模式</h3><p>实模式是计算机处理器（例如x86架构处理器）的一种工作模式，也是x86处理器最基础的操作模式，主要用于兼容早期的操作系统和软件，其目的是直接访问物理内存并提供简单的硬件控制机制。实模式在现代计算机中主要作为启动过渡模式存在，其核心功能已被保护模式和长模式（Long Mode，x86-64 架构的 64 位模式）取代。</p>
+<h4 id="实模式的主要特点"><a href="#实模式的主要特点" class="headerlink" title="实模式的主要特点"></a>实模式的主要特点</h4><ol>
+<li><p><strong>内存寻址方式</strong></p>
+<ul>
+<li>采用<strong>分段寻址</strong>（Segmented Addressing），通过 “段寄存器（如 CS、DS、ES、SS）+ 偏移地址” 的组合来生成 20 位物理地址（早期 8086 处理器），最大可访问内存空间为 <strong>1MB</strong>（地址范围：<code>0x00000</code>~<code>0xFFFFF</code>）。</li>
+<li>物理地址计算方式：<br><strong>物理地址 = 段寄存器值 × 16（左移 4 位） + 偏移地址</strong><br>例如：段寄存器值为<code>0x1000</code>，偏移地址为<code>0x2000</code>，则物理地址为 <code>0x1000×16 + 0x2000 = 0x12000</code>。</li>
+</ul>
+</li>
+<li><p><strong>处理器权限</strong></p>
+<ul>
+<li>实模式下，处理器处于<strong>特权级 0</strong>（最高权限），程序可以直接访问硬件资源（如 I/O 端口、内存等），缺乏内存保护机制。这意味着应用程序可能因错误操作导致系统崩溃（例如覆盖操作系统代码）。</li>
+</ul>
+</li>
+<li><p><strong>兼容性</strong></p>
+<ul>
+<li>实模式是 x86 处理器加电启动后的默认模式，用于加载和初始化操作系统，随后切换到保护模式（Protected Mode）以支持更大的内存空间和更安全的内存管理。</li>
+<li>现代操作系统（如 Windows、Linux）在启动初期会短暂运行在实模式，完成硬件检测、初始化寄存器等操作后，再切换到保护模式。</li>
+</ul>
+</li>
+</ol>
+<h3 id="保护模式"><a href="#保护模式" class="headerlink" title="保护模式"></a>保护模式</h3><p>保护模式是现代计算机处理器的一种工作模式，与早期的实模式宪兵队，他是为了解决实模式的局限性（内存寻址空间小，缺乏内存保护机制等）设计的，是现代操作系统的运行基础。</p>
+<h3 id="整体的操作流程"><a href="#整体的操作流程" class="headerlink" title="整体的操作流程"></a>整体的操作流程</h3><ol>
+<li><p>在VSCode中编写C源文件、汇编文件、链接脚本；</p>
+</li>
+<li><p>CMake根据配置脚本，调用GCC对源文件进行编译和汇编，调用LD进行链接生成可执行的ELF文件；</p>
+</li>
+<li>CMake还会调用OBJCOPY将ELF文件进行缩小，或者转换成BIN文件；</li>
+<li>调试前，Visual Studio Code调用一些小工具将ELF、BIN文件写入磁盘映像；</li>
+<li>调试时，QEMU加载磁盘映像文件，然后等待GDB连接，这里主要是在tasks.json和launch.json中进行编写；</li>
+<li>GDB连接上QEMU，开始正式的调试过程。</li>
+</ol>
+<p>我们要实现的是自己的引导代码和操作系统，引导程序的作用如下：采用二级加载模式，boot只完成loader加载工作，再有loader完成具体的初始化工作和内核的加载。也就是Boot-&gt;loader-&gt;kernel的流程。</p>
+<p><img src="构建一个简易x86系统的准备\2.png" alt="2"></p>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/MOT/" class="">
-              MOT
+            <a href="/tags/Linux/" class="">
+              Linux
             </a>
           
-            <a href="/tags/python/" class="">
-              python
+            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="">
+              操作系统
             </a>
           
         </div>
@@ -426,7 +438,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
-    <a href="/2024/03/25/Hybridsort总结/" target="_blank" title="Hybridsort总结">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/03/25/Hybridsort总结/</a>
+    <a href="/2025/06/06/构建一个简易x86系统的准备/" target="_blank" title="构建一个简易x86系统的准备">https://github.com/Nxhhhh/Nxhhhh.github.io/2025/06/06/构建一个简易x86系统的准备/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright notice:   </strong>
@@ -447,18 +459,15 @@
     
     <div class="post-nav-prev post-nav-item">
       <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
+        <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
       </div>
-      <a href="/2024/04/08/DeconfuseTrack%E6%80%BB%E7%BB%93/" class="post-nav-link">
+      <a href="/2025/06/06/boot%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="post-nav-link">
         <div class="title">
           <i class="fas fa-angle-left"></i> Next:
-          <div class="title-text">Deconfuse Track总结</div>
+          <div class="title-text">boot引导程序的实现</div>
         </div>
         <!-- <div class="content">
-          贴一个原文链接
-很可惜这篇文章的代码没有开源
-
-Abstract在多目标跟踪中，准确的数据关联十分重要，但是现有的方法大
+          boot引导程序的实现上一篇博客有提到过采用二级加载模式，因为boot的容量限制，所以boot引导程序只负责loader
         </div> -->
       </a>
     </div>
@@ -468,15 +477,31 @@ Abstract在多目标跟踪中，准确的数据关联十分重要，但是现有
     
     <div class="post-nav-next post-nav-item">
       <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" alt="">
+        <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
       </div>
-      <a href="/2024/03/15/OC-SORT%E6%80%BB%E7%BB%93/" class="post-nav-link">
+      <a href="/2025/03/04/%E5%B8%B8%E7%94%A8STL%E5%AE%B9%E5%99%A8%E7%89%B9%E6%80%A7/" class="post-nav-link">
         <div class="title">
           Prev: <i class="fas fa-angle-right"></i>
-          <div class="title-text">OC-SORT总结</div>
+          <div class="title-text">常用STL容器特性</div>
         </div>
         <!-- <div class="content">
-          贴一下原文链接参考：https://blog.csdn.net/wjpwjpwjp0831/article/detail
+          常用STL容器特性
+
+
+
+容器
+操作
+底层实现
+特点
+是否自动排序
+能否使用迭代器
+元素能否重复
+
+
+
+
+Vector
+
         </div> -->
       </a>
     </div>
@@ -607,7 +632,7 @@ Abstract在多目标跟踪中，准确的数据关联十分重要，但是现有
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Weak-Cues-Modeling"><span class="toc-text">Weak Cues Modeling</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Tracklet-Confidence-Modeling"><span class="toc-text">Tracklet Confidence Modeling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Height-Modulated-IoU"><span class="toc-text">Height Modulated IoU</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hybrid-SORT"><span class="toc-text">Hybrid-SORT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Robust-Observation-Centric-Momentum"><span class="toc-text">Robust Observation-Centric Momentum</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Appearance-Modeling"><span class="toc-text">Appearance Modeling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Algorithm-Framework"><span class="toc-text">Algorithm Framework</span></a></li></ol></li></ol></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E6%98%93x86%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%87%86%E5%A4%87"><span class="toc-text">构建一个简易x86系统的准备</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="toc-text">前置知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B"><span class="toc-text">计算机的启动流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%A8%A1%E5%BC%8F"><span class="toc-text">实模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%B8%BB%E8%A6%81%E7%89%B9%E7%82%B9"><span class="toc-text">实模式的主要特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F"><span class="toc-text">保护模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E4%BD%93%E7%9A%84%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-text">整体的操作流程</span></a></li></ol></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>

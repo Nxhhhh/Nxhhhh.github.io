@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Hybridsort总结 | 小牛学习日记</title>
+  <title>boot引导程序的实现 | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -304,21 +304,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg')">
+  background-position: center center;position: relative;background-image:url('https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        Hybridsort总结
+        boot引导程序的实现
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> Published in：2024-03-25 |
+          <i class="fas fa-calendar"></i> Published in：2025-06-06 |
         </span>
       
 
@@ -326,8 +326,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> category：
           
-            <a href="/categories/R-D/" class="post-detail-header_category">
-              R&D
+            <a href="/categories/C/" class="post-detail-header_category">
+              C++
             </a>
           
         </span>
@@ -336,11 +336,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 1.3k |
+            <i class="fas fa-file-text-o"></i> Words: 825 |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> Reading time: 4min |
+            <i class="fas fa-clock"></i> Reading time: 3min |
           </span>
   
           
@@ -367,52 +367,33 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>惯例贴一下<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2308.00783">原文链接</a></p>
-<p>阅读这篇文章建议先去读一读他的baseline，OC-SORT</p>
-<hr>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>MOT的目标是在帧之间检测和关联所有目标。大多数的方法都是使用强线索（空间信息或者外观信息）完成任务，这些强线索在没有发生遮挡和聚类的时候是十分有用的，一旦发生遮挡和聚类，由于物体高度重叠，空间和外观信息会变得模糊。文章提出了可以用弱线索（高度、检测框置信度、速度方向）作为强线索的补充。</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>MOT中流行的范例习惯将问题分为两个子任务。首先检测每个帧中的对象，其次将他们在不同的框架中联系起来。关联的任务主要通过强线索完成。但是常用的强线索在遇到遮挡和聚类的问题时就会出现退化。如图一所示：</p>
-<p><img src="1.png" alt="图一"></p>
-<p>图中展示了强弱线索的辨别能力。绿色实线箭头表示对一对对象的可靠判别，红色虚线表示不可靠的判别，箭头的值越高，表示鉴别越可靠。</p>
-<p>可以看出大部分情况下强线索可以分辨出检测框之间的区别，但是红色和橙色框出现了大面积重叠，仅靠交并比和外观线索的判别并不可靠，在这种情况下依靠检测框置信度可以得到更好的区分效果。</p>
-<p>作者为了保持SORT简单、在线和实时的特点，使用以下策略利用上述的弱线索：<strong>Tracklet置信度建模(TCM)和高度调制IoU (HMIoU)。</strong></p>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="Weak-Cues-Modeling"><a href="#Weak-Cues-Modeling" class="headerlink" title="Weak Cues Modeling"></a>Weak Cues Modeling</h3><h4 id="Tracklet-Confidence-Modeling"><a href="#Tracklet-Confidence-Modeling" class="headerlink" title="Tracklet Confidence Modeling"></a>Tracklet Confidence Modeling</h4><p>作者改进了传统SORT广泛使用的标准卡尔曼滤波器，增加了两个额外的状态：轨迹置信度c以及其速度分量 $\dot{c}$ :</p>
-<p><img src="2.png" alt></p>
-<p>对于轨迹置信度，作者使用线性预测进行估计。在遮挡发生时，物体的置信度会迅速降低，但是卡尔曼滤波的预测具有滞后性，如图三所示：</p>
-<p><img src="3.png" alt="图三"></p>
-<p>因此，作者使用简单的线性预测来估计轨迹的置信状态。线性建模公式如下：</p>
-<p><img src="4.png" alt="线性建模"></p>
-<p>其中c<sub>trk</sub>表示保存在Tracklet Memory中的Tracklet置信度。</p>
-<p>置信度的代价计算公式如下：</p>
-<p><img src="5.png" alt></p>
-<h4 id="Height-Modulated-IoU"><a href="#Height-Modulated-IoU" class="headerlink" title="Height Modulated IoU"></a>Height Modulated IoU</h4><p>高度状态在两个方面增强了关联。首先，物体的高度在一定程度上反映了深度信息。对于DanceTrack这样的数据集，检测框的高度主要取决于物体与相机之间的距离。这使得高度状态成为区分高度重叠对象的有效线索。其次，高度状态对不同姿态具有较强的鲁棒性，是一种准确估计的状态，是物体的高质量表征。</p>
-<p>两个方框分别定义为（x<sup>1</sup><sub>1</sub>, y<sup>1</sup><sub>1</sub>, x<sup>1</sup><sub>2</sub>, y<sup>1</sup><sub>2</sub>）,（x<sup>2</sup><sub>1</sub>, y<sup>2</sup><sub>1</sub>, x<sup>2</sup><sub>2</sub>, y<sup>2</sup><sub>2</sub>）</p>
-<p>则可以通过基于高度度量计算IoU来生成高度IoU (HIoU)，如下图所示：</p>
-<p><img src="6.png" alt></p>
-<p><img src="7.png" alt></p>
-<h3 id="Hybrid-SORT"><a href="#Hybrid-SORT" class="headerlink" title="Hybrid-SORT"></a>Hybrid-SORT</h3><h4 id="Robust-Observation-Centric-Momentum"><a href="#Robust-Observation-Centric-Momentum" class="headerlink" title="Robust Observation-Centric Momentum"></a>Robust Observation-Centric Momentum</h4><p>在OC-SORT中，OCM考虑目标中心的速度方向。使用的成本度量是轨迹速度方向θ<sub>t</sub>与轨迹到探测速度方向θ<sub>d</sub>之间的绝对差值，以弧度形式表示为∆θ = |θ<sub>t</sub> - θ<sub>d</sub>|。轨迹波速度方向由轨迹波中两个时间间隔∆t的盒中心获得，轨迹波到检测的速度方向由轨迹波历史盒和新检测盒的中心获得。给定两个点(u1, v1)和(u2, v2)，速度方向按下图所示公式计算。然而，原始OCM的建模容易受到固定时间间隔和稀疏点(即只有目标中心)引起的噪声的影响。</p>
-<p><img src="8.png" alt></p>
-<p>作者通过引入更加鲁棒的速度方向来改进OCM，称之为ROCM，修改包括两个方面。首先，将3帧的固定时间间隔扩展为1 ~ 3的多个时间间隔的叠加；其次，我们用物体的四个角代替它的中心点来计算速度方向。对于多个时间区间和点，ROCM的计算公式如下式所示。</p>
-<p><img src="9.png" alt></p>
-<p>从Figure4可以看出，对于运动复杂的物体，拐角的速度方向保持高度相似，而中心的速度方向几乎相反。</p>
-<p><img src="10.png" alt="Figure4"></p>
-<h4 id="Appearance-Modeling"><a href="#Appearance-Modeling" class="headerlink" title="Appearance Modeling"></a>Appearance Modeling</h4><p>ReID模型遵循BoT-SORT，首先检测对象，然后将结果裁剪的补丁提供给ReID模型。我们使用指数移动平均(EMA)对轨迹图外观信息建模，并利用余弦距离作为度量来计算轨迹图和检测外观特征之间的成本C<sub>Appr</sub>。</p>
-<h4 id="Algorithm-Framework"><a href="#Algorithm-Framework" class="headerlink" title="Algorithm Framework"></a>Algorithm Framework</h4><p>关联阶段主要包括三个阶段:第一阶段是高置信度对象的关联阶段，第二阶段是低置信度对象的关联阶段(ByteTrack中的BYTE)，第三阶段是用最后一次检测恢复丢失的轨迹(OC-SORT中的OCR)。</p>
-<p>考虑到所有的强弱线索，最终的成本矩阵为：</p>
-<p><img src="11.png" alt></p>
-<hr>
+        <h1 id="boot引导程序的实现"><a href="#boot引导程序的实现" class="headerlink" title="boot引导程序的实现"></a>boot引导程序的实现</h1><p>上一篇博客有提到过采用二级加载模式，因为boot的容量限制，所以boot引导程序只负责loader的加载，由loader来实现具体的初始化工作和内核的加载。</p>
+<p>采用平坦模式，首先将所有的段寄存器指向0，直接用便宜地址进行寻址，根据x86实模式的存储映射情况，将0x7c00之前的空间用作栈空间。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">_start:</span><br><span class="line">    mov $0, %ax</span><br><span class="line">	mov %ax, %ds</span><br><span class="line">	mov %ax, %ss</span><br><span class="line">	mov %ax, %es</span><br><span class="line">	mov %ax, %fs</span><br><span class="line">	mov %ax, %gs</span><br><span class="line">	// 使用0x7c00之前的空间作栈，大约有30KB的RAM，足够boot 和loader使用</span><br><span class="line"></span><br><span class="line">	mov $_start, %esp</span><br></pre></td></tr></table></figure>
+<p>BIOS通过软中断，自动从中断向量表中取相应的地址进行执行，通过寄存器来传递参数，这样可以避免和硬件直接交互。这里用<code>INT 10, AH=0xE</code>也就是显示字符功能来测试引导程序是否正常运行，正常运行后显示的是字符 ‘L’。</p>
+<p><code>int $0x10</code>这个中断函数作用是显示字符，同时光标前移，其中AL = 想要显示的字符、BL = 前景色，BH＝页码，这里考虑字符即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 显示字符&#x27;W&#x27;来进行测试</span><br><span class="line">mov $0xe, %ah</span><br><span class="line">mov $&#x27;L&#x27;, %al</span><br><span class="line">int $0x10</span><br></pre></td></tr></table></figure>
+<p>qemu显示如下：</p>
+<p><img src="boot引导程序的实现\1.png" alt="1"></p>
+<p>接下来用BIOS提供的软中断服务从磁盘中读取loader，没有考虑磁盘、磁头等。之前boot程序和栈的指针esp是被加载到了0x7c00位置处，本来0x7c00之后的位置是boot的程序，虽然boot程序占用的内存小，但是为了简单起见，还是直接将loader程序放到0x8000位置处，目前只在boot程序中写一段代码，从磁盘的第一个扇区读取指定位置的几个扇区，然后加载到内存中。</p>
+<p><img src="boot引导程序的实现\2.png" alt="2"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">read_loader:</span><br><span class="line">    mov $0x8000, %bx      //ES:BX = 0x0000:0x8000 = 物理地址0x8000</span><br><span class="line">    mov $0x2, %ah         //功能号：读扇区</span><br><span class="line">    mov $0x2, %cx         //柱面号=0，扇区号=2（注意：扇区从1开始编号）</span><br><span class="line">    mov $64, %al          //读取扇区数量</span><br><span class="line">    mov $0x0080, %dx      //驱动器号=0x80（硬盘），磁头号=0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    int $0x13             //调用BIOS磁盘服务</span><br><span class="line">    </span><br><span class="line">    jc read_error         //如果进位标志置位，表示读取失败</span><br><span class="line">    jmp read_success      //读取成功，继续执行</span><br><span class="line"></span><br><span class="line">read_error:</span><br><span class="line">    mov $0xe, %ah         //显示字符功能</span><br><span class="line">    mov $&#x27;E&#x27;, %al         //显示字符&#x27;E&#x27;表示错误</span><br><span class="line">    int $0x10             //调用BIOS显示服务</span><br><span class="line">    jmp read_loader       //重试读取</span><br><span class="line"></span><br><span class="line">read_success:</span><br><span class="line">    mov $0xe, %ah         //显示字符功能</span><br><span class="line">    mov $&#x27;R&#x27;, %al         //显示字符&#x27;R&#x27;表示读取成功</span><br><span class="line">    int $0x10             //调用BIOS显示服务</span><br><span class="line">    jmp boot_entry        //跳转到内核入口点</span><br></pre></td></tr></table></figure>
+<p>用<code>-exec x /20xb 0x8000</code>查看20字节的数据，磁盘文件初始的内容在<code>0x8000</code>处为全0，为了便于观察是否正确读取，可以提前将<code>disk1.vhd</code>中一些值进行修改</p>
+<p><img src="boot引导程序的实现\3.png" alt="3"></p>
+<p>后面将先实现loader程序，写入刚才分配的磁盘的位置，然后在boot中跳到0x8000的位置进行运行，那么就实现了boot到loader的跳转。<br>现在先实现进入C环境：直接用jmp就可以进入，其中<code>boot_entry</code>是在另一个.c程序中定义的</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span>	LOADER_START_ADDR	0x8000		<span class="comment">// loader加载的地址</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">boot_entry</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">	((<span class="type">void</span> (*)(<span class="type">void</span>))LOADER_START_ADDR)();</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">//只完成一项功能，即从磁盘找到loader文件然后加载到内容中，并跳转过去</span></span><br></pre></td></tr></table></figure>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/MOT/" class="">
-              MOT
+            <a href="/tags/Linux/" class="">
+              Linux
             </a>
           
-            <a href="/tags/python/" class="">
-              python
+            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="">
+              操作系统
             </a>
           
         </div>
@@ -426,7 +407,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
-    <a href="/2024/03/25/Hybridsort总结/" target="_blank" title="Hybridsort总结">https://github.com/Nxhhhh/Nxhhhh.github.io/2024/03/25/Hybridsort总结/</a>
+    <a href="/2025/06/06/boot引导程序的实现/" target="_blank" title="boot引导程序的实现">https://github.com/Nxhhhh/Nxhhhh.github.io/2025/06/06/boot引导程序的实现/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright notice:   </strong>
@@ -444,39 +425,20 @@
   
   
   
-    
-    <div class="post-nav-prev post-nav-item">
-      <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
-      </div>
-      <a href="/2024/04/08/DeconfuseTrack%E6%80%BB%E7%BB%93/" class="post-nav-link">
-        <div class="title">
-          <i class="fas fa-angle-left"></i> Next:
-          <div class="title-text">Deconfuse Track总结</div>
-        </div>
-        <!-- <div class="content">
-          贴一个原文链接
-很可惜这篇文章的代码没有开源
-
-Abstract在多目标跟踪中，准确的数据关联十分重要，但是现有的方法大
-        </div> -->
-      </a>
-    </div>
-  
   
   
     
     <div class="post-nav-next post-nav-item">
       <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" alt="">
+        <img class="lazyload" src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" alt="">
       </div>
-      <a href="/2024/03/15/OC-SORT%E6%80%BB%E7%BB%93/" class="post-nav-link">
+      <a href="/2025/06/06/%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E6%98%93x86%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%87%86%E5%A4%87/" class="post-nav-link">
         <div class="title">
           Prev: <i class="fas fa-angle-right"></i>
-          <div class="title-text">OC-SORT总结</div>
+          <div class="title-text">构建一个简易x86系统的准备</div>
         </div>
         <!-- <div class="content">
-          贴一下原文链接参考：https://blog.csdn.net/wjpwjpwjp0831/article/detail
+          构建一个简易x86系统的准备环境配置：win10+cmake-3.23.1-windows-i386+x86_64-el
         </div> -->
       </a>
     </div>
@@ -607,7 +569,7 @@ Abstract在多目标跟踪中，准确的数据关联十分重要，但是现有
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Weak-Cues-Modeling"><span class="toc-text">Weak Cues Modeling</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Tracklet-Confidence-Modeling"><span class="toc-text">Tracklet Confidence Modeling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Height-Modulated-IoU"><span class="toc-text">Height Modulated IoU</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hybrid-SORT"><span class="toc-text">Hybrid-SORT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Robust-Observation-Centric-Momentum"><span class="toc-text">Robust Observation-Centric Momentum</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Appearance-Modeling"><span class="toc-text">Appearance Modeling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Algorithm-Framework"><span class="toc-text">Algorithm Framework</span></a></li></ol></li></ol></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#boot%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">boot引导程序的实现</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
