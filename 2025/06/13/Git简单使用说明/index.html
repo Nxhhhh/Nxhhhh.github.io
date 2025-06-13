@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>I/O多路复用的三种机制（select、poll、epoll） | 小牛学习日记</title>
+  <title>Git简单使用说明 | 小牛学习日记</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -304,21 +304,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        I/O多路复用的三种机制（select、poll、epoll）
+        Git简单使用说明
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> Published in：2025-03-03 |
+          <i class="fas fa-calendar"></i> Published in：2025-06-13 |
         </span>
       
 
@@ -326,8 +326,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> category：
           
-            <a href="/categories/C/" class="post-detail-header_category">
-              C++
+            <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="post-detail-header_category">
+              问题记录
             </a>
           
         </span>
@@ -336,11 +336,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 1.7k |
+            <i class="fas fa-file-text-o"></i> Words: 1.2k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> Reading time: 6min |
+            <i class="fas fa-clock"></i> Reading time: 4min |
           </span>
   
           
@@ -367,205 +367,58 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h1 id="I-O多路复用的三种机制（select、poll、epoll）"><a href="#I-O多路复用的三种机制（select、poll、epoll）" class="headerlink" title="I/O多路复用的三种机制（select、poll、epoll）"></a>I/O多路复用的三种机制（select、poll、epoll）</h1><p>select、poll、epoll是用于I/O所路服用的三种机制，常见于Linux系统中，用于高效处理多个文件描述符的I/O事件。</p>
-<h2 id="select"><a href="#select" class="headerlink" title="select"></a>select</h2><p><code>select</code>是最早的I/O多路复用机制，允许程序监听多个文件描述符，等待其中一个或多个变为可读、可写或出现异常。</p>
+        <h1 id="Git简单使用说明"><a href="#Git简单使用说明" class="headerlink" title="Git简单使用说明"></a>Git简单使用说明</h1><p>参考了<a target="_blank" rel="noopener" href="https://liaoxuefeng.com/books/git/introduction/index.html">这个博客</a>，下文内容都是本地仓库使用的说明，远程仓库的使用后续补充</p>
+<p>该博客由浅入深，十分推荐参考学习</p>
+<h2 id="什么是Git"><a href="#什么是Git" class="headerlink" title="什么是Git"></a><strong>什么是Git</strong></h2><p>Git是目前世界上最先进的分布式版本控制系统，主要用于跟踪文件变化，管理软件开发中分写作和版本迭代，有Linus于2005年为Linux内核开发（这段历史蛮有意思的，感兴趣可以去找找看），使用C语言编写，是目前全球最主流的代码管理工具之一。</p>
+<h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a><strong>核心概念</strong></h2><ul>
+<li><strong>工作区</strong>：本地磁盘中实际编辑的文件目录。</li>
+<li><strong>暂存区（Index/Stage）</strong>：临时存放待提交修改的区域，可选择性提交部分文件。</li>
+<li><strong>本地仓库</strong>：存储所有历史版本和分支数据的本地数据库。</li>
+<li><strong>远程仓库</strong>：托管在服务器上的共享版本库（如 GitHub），用于团队协作和代码共享。</li>
+</ul>
+<h2 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h2><h3 id="Linux系统"><a href="#Linux系统" class="headerlink" title="Linux系统"></a>Linux系统</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install git</span><br></pre></td></tr></table></figure>
+<h3 id="macOS系统"><a href="#macOS系统" class="headerlink" title="macOS系统"></a>macOS系统</h3><p>先安装包管理器HomeBrew，然后通过Homebrew安装Git：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install git</span><br></pre></td></tr></table></figure>
+<h3 id="Windows系统"><a href="#Windows系统" class="headerlink" title="Windows系统"></a>Windows系统</h3><p>直接从Git官网下载安装程序，按照默认选项安装即可。安装完成后，可以在开始菜单找到Git -&gt; Git Bash，就说明安装成功了。</p>
+<h2 id="配置Git"><a href="#配置Git" class="headerlink" title="配置Git"></a>配置Git</h2><p>安装好后需要一步设置，在命令行输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Your Name&quot;</span><br><span class="line">git config --global user.email &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h2><p>前期工作准备完成后就可以愉快的开始进入使用阶段，首先就是创建仓库（Repository），经常浏览Github，对这个应该都不陌生，简单理解就是一个目录，目录中的所有文件都可以被Git管理。</p>
+<p>创建仓库非常简单，首先选择一个合适的地方创建空目录(或者可以直接在本地已有的项目文件夹创建仓库)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir your/path</span><br><span class="line">cd your/path</span><br></pre></td></tr></table></figure>
+<p>第二步：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<p>这样一个仓库就创建好了，当前目录下就会多一个<code>.git</code>目录，这个目录是Git来跟踪管理版本库的。</p>
+<h2 id="添加文件到版本库"><a href="#添加文件到版本库" class="headerlink" title="添加文件到版本库"></a>添加文件到版本库</h2><p>这里要注意，所有的版本控制系统，其实只能跟踪文本文件的改动，比如TXT文件，网页，所有的程序代码等等，Git也不例外。但是图片、视频这种二进制文件就无法追踪文件变化了。</p>
+<p>言归正传，对文件进行改动或者添加新文件后，需要把文件添加到暂存区，使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;youfile&gt;</span><br></pre></td></tr></table></figure>
+<p>也可以直接一键添加所有有改动的文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -A</span><br></pre></td></tr></table></figure>
+<p>然后把文件提交到仓库，这里可以添加本次提交的说明，这样可以更方便的找到改动记录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;your message&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><h3 id="查看修改"><a href="#查看修改" class="headerlink" title="查看修改"></a>查看修改</h3><p>提交了文件后，可能会对文件进行再次修改，这时可以运行<code>git stattus</code>命令，会显示哪些文件被改动了。<code>git diff</code>命令可以查看某个文件具体修改了什么内容。</p>
+<h3 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h3><p>多次修改文件后，如果想回退回某个历史版本就需要用到以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git log  //显示从最近到最远的提交日志</span><br><span class="line">git reset --hard HEAD^  //有几个^ 就表示回退几个版本</span><br><span class="line">这里的hard表示回退到上个版本的已提交状态，soft表示回退到上个版本的未提交状态，mixed表示四回退到上个版本已添加但未提交的状态</span><br><span class="line">git reset --hard &lt;commit id&gt;  //回退到指定版本</span><br><span class="line">git reflog  //记录每一次命令</span><br></pre></td></tr></table></figure>
+<h3 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a>撤销修改</h3><p>场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令<code>git checkout -- &lt;file&gt;</code>。<code>git checkout</code>其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。</p>
+<p>场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令<code>git reset HEAD &lt;file&gt;</code>，就回到了场景1，第二步按场景1操作。</p>
+<p>场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退，不过前提是没有推送到远程库。</p>
+<h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><p>可以先手动删除文件，然后选择下一步操作：</p>
 <ul>
-<li><p>特点：</p>
+<li>确实要删除文件</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git rm &lt;file&gt;</span><br><span class="line">git commit -m &quot;remove &lt;file&gt;&quot;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>通过<code>fd_set</code>数据结构管理文件描述符。</li>
-<li>支持的文件描述符数量有限（通常为1024）。</li>
-<li>每次调用都需要将<code>fd_set</code>从用户空间拷贝到内核空间。</li>
-<li>每次调用都需要遍历所有文件描述符，时间复杂度为O(n)。</li>
+<li>误删文件</li>
 </ul>
-</li>
-<li><p>优点：</p>
-<ul>
-<li>跨平台支持，几乎所有操作系统都支持了<code>select</code>。</li>
-</ul>
-</li>
-<li>缺点：<ul>
-<li>文件描述符数量受限。</li>
-<li>每次调用都需要拷贝<code>fd_set</code>，效率低。</li>
-<li>需要遍历所有文件描述符，性能随文件描述符数量增加而下降。</li>
-</ul>
-</li>
-</ul>
-<h4 id="常用API："><a href="#常用API：" class="headerlink" title="常用API："></a>常用API：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">select</span><span class="params">(<span class="type">int</span> nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, <span class="keyword">struct</span> timeval *timeout)</span>;</span><br><span class="line"></span><br><span class="line">FD_ZERO(fd_set *<span class="built_in">set</span>);          <span class="comment">// 清空文件描述符集合</span></span><br><span class="line">FD_SET(<span class="type">int</span> fd, fd_set *<span class="built_in">set</span>);   <span class="comment">// 将文件描述符添加到集合</span></span><br><span class="line">FD_CLR(<span class="type">int</span> fd, fd_set *<span class="built_in">set</span>);   <span class="comment">// 从集合中移除文件描述符</span></span><br><span class="line">FD_ISSET(<span class="type">int</span> fd, fd_set *<span class="built_in">set</span>); <span class="comment">// 检查文件描述符是否在集合中</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">使用步骤：</span></span><br><span class="line"><span class="comment">1、定义并初始化 fd_set 集合。</span></span><br><span class="line"><span class="comment">2、使用 FD_SET 将需要监视的文件描述符添加到集合。</span></span><br><span class="line"><span class="comment">3、调用 select 等待文件描述符就绪。</span></span><br><span class="line"><span class="comment">4、使用 FD_ISSET 检查哪些文件描述符就绪。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<h2 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h2><p> <code>poll</code>是对<code>`select</code>的改进，使用<code>pollfd</code>结构体管理文件描述符</p>
-<ul>
-<li><p>特点：</p>
-<ul>
-<li>使用<code>pollfd</code>结构体管理文件描述符，没有数量上的限制，但是收到系统资源的限制。</li>
-<li>每次调用仍然需要将<code>pollfd</code>数组从用户空间拷贝到内核空间。</li>
-<li>每次调用都需要遍历所有文件描述符，时间复杂度为O(n)。</li>
-</ul>
-</li>
-<li><p>优点：</p>
-<ul>
-<li>支持的文件描述符数量没有硬性限制。</li>
-<li>相比于select更加灵活。</li>
-</ul>
-</li>
-<li><p>缺点：</p>
-<ul>
-<li>每次调用都需要拷贝<code>pollfd</code>，效率低。</li>
-<li>需要遍历所有文件描述符，性能随文件描述符数量增加而下降。</li>
-</ul>
-</li>
-</ul>
-<h4 id="常用API：-1"><a href="#常用API：-1" class="headerlink" title="常用API："></a>常用API：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">poll</span><span class="params">(<span class="keyword">struct</span> pollfd *fds, <span class="type">nfds_t</span> nfds, <span class="type">int</span> timeout)</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pollfd</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> fd;         <span class="comment">// 文件描述符</span></span><br><span class="line">    <span class="type">short</span> events;   <span class="comment">// 监视的事件（如 POLLIN、POLLOUT）</span></span><br><span class="line">    <span class="type">short</span> revents;  <span class="comment">// 实际发生的事件</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">使用步骤：</span></span><br><span class="line"><span class="comment">1、定义 pollfd 数组，设置需要监视的文件描述符和事件。</span></span><br><span class="line"><span class="comment">2、调用 poll 等待文件描述符就绪。</span></span><br><span class="line"><span class="comment">3、检查 pollfd 中的 revents 字段，判断哪些文件描述符就绪。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<h2 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h2><p><code>epoll</code>是Linux特有的高校I/O多路复用机制，解决了<code>select</code>和<code>poll</code>的性能问题。</p>
-<ul>
-<li><p>特点：</p>
-<ul>
-<li>使用红黑树和双链表管理文件描述符，支持高校的事件注册和通知。</li>
-<li>支持边沿（ET）触发和水平（LT）触发模式。</li>
-<li>每次调用不需要拷贝所有文件描述符，只需要返回就绪的事件。</li>
-<li>时间复杂度为O(1)，性能不受文件描述符数量影响。</li>
-</ul>
-</li>
-<li><p>优点：</p>
-<ul>
-<li>高效处理大量文件描述符，适合高并发场景。</li>
-<li>事件驱动，只返回就绪的事件，无需便利所有的文件描述符。</li>
-<li>支持边沿触发模式，减少事件通知次数。</li>
-</ul>
-</li>
-<li>缺点：<ul>
-<li>仅支持Linux系统，无法跨平台。</li>
-</ul>
-</li>
-</ul>
-<h4 id="常用API：-2"><a href="#常用API：-2" class="headerlink" title="常用API："></a>常用API：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">epoll_create</span><span class="params">(<span class="type">int</span> size)</span>; <span class="comment">// 创建 epoll 实例 </span></span><br><span class="line"><span class="type">int</span> <span class="title function_">epoll_ctl</span><span class="params">(<span class="type">int</span> epfd, <span class="type">int</span> op, <span class="type">int</span> fd, <span class="keyword">struct</span> epoll_event *event)</span>; <span class="comment">// 管理文件描述符 </span></span><br><span class="line"><span class="type">int</span> <span class="title function_">epoll_wait</span><span class="params">(<span class="type">int</span> epfd, <span class="keyword">struct</span> epoll_event *events, <span class="type">int</span> maxevents, <span class="type">int</span> timeout)</span>; <span class="comment">// 等待事件</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span> &#123;</span>    </span><br><span class="line">    <span class="type">uint32_t</span> events; <span class="comment">// 事件类型（如 EPOLLIN、EPOLLOUT）    </span></span><br><span class="line">    <span class="type">epoll_data_t</span> data; <span class="comment">// 用户数据 </span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">使用步骤：</span></span><br><span class="line"><span class="comment">1. 调用 epoll_create 创建 epoll 实例。</span></span><br><span class="line"><span class="comment">2. 使用 epoll_ctl 添加、修改或删除需要监视的文件描述符。</span></span><br><span class="line"><span class="comment">3. 调用 epoll_wait 等待文件描述符就绪。</span></span><br><span class="line"><span class="comment">4. 处理就绪的事件。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<h2 id="事件通知模式-触发机制（LT，ET）"><a href="#事件通知模式-触发机制（LT，ET）" class="headerlink" title="事件通知模式/触发机制（LT，ET）"></a>事件通知模式/触发机制（LT，ET）</h2><p>水平触发（Level-Triggerred）和边沿触发（Eage_Triggerred）是I/O多路复用机制中的两种时间通知模式，他们决定了何时通知应用程序文件描述符的状态变化。</p>
-<h3 id="水平触发（LT）"><a href="#水平触发（LT）" class="headerlink" title="水平触发（LT）"></a>水平触发（LT）</h3><p>默认的事件通知模式，当文件描述符处于就绪状态时，会持续通知应用程序。</p>
-<p>当被监控的Socket上有可读事件发生时，服务器端不断地从<code>epoll_wait</code>中苏醒，直到内核缓冲区被<code>read</code>函数读完才结束，没必要一次执行尽可能多的读写操作。</p>
-<ul>
-<li><h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><ul>
-<li>只要文件描述符处于就绪状态（例如可读或可写），就会重复通知应用程序。</li>
-<li>应用程序可以在一次通知后不完全处理所有数据，下次调用时仍会收到通知。</li>
-<li>适用于对事件处理逻辑要求不高的场景。</li>
-</ul>
-</li>
-</ul>
-<h3 id="边沿触发（ET）"><a href="#边沿触发（ET）" class="headerlink" title="边沿触发（ET）"></a>边沿触发（ET）</h3><p>高效的事件通知模式，只有当文件描述符的状态发生变化时（例如从不可读变为可读），才会通知应用程序。</p>
-<p>当被监控的Socket上有可读事件发生时，服务器端只会从<code>epoll_wait</code>中苏醒一次，因此程序需要保证一次将内核缓冲区的数据读取完，因此需要循环的从文件描述符中读取数据，如果文件描述符是阻塞的，没有数据可读写时，进程会阻塞在读写函数那里，因此，<strong>边沿触发模式一般搭配非阻塞I/O使用</strong>，程序会一直执行I/O操作。</p>
-<ul>
-<li><h4 id="特点：-1"><a href="#特点：-1" class="headerlink" title="特点："></a>特点：</h4><ul>
-<li>只有当文件描述符的状态发生变化时（例如从不可读变为可读），才会通知应用程序。</li>
-<li>应用程序需要一次性处理完所有数据，否则可能会丢失后续事件。</li>
-<li>适用于高性能场景，但需要更复杂的逻辑。</li>
-</ul>
-</li>
-</ul>
-<h3 id="LT和ET对比"><a href="#LT和ET对比" class="headerlink" title="LT和ET对比"></a>LT和ET对比</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>特性</th>
-<th>水平触发（LT）</th>
-<th>边缘触发（ET）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>通知时机</td>
-<td>只要文件描述符就绪，就持续通知</td>
-<td>只有当文件描述符状态变化时通知</td>
-</tr>
-<tr>
-<td>事件处理</td>
-<td>可以分多次处理数据</td>
-<td>需要一次性处理完所有数据，否则会丢失事件</td>
-</tr>
-<tr>
-<td>效率</td>
-<td>可能频繁通知，效率较低</td>
-<td>减少不必要的通知，效率较高</td>
-</tr>
-<tr>
-<td>实现复杂度</td>
-<td>简单易用</td>
-<td>复杂，需要更精细的逻辑</td>
-</tr>
-<tr>
-<td>适用场景</td>
-<td>低并发、对性能要求不高的场景</td>
-<td>高并发、对性能要求高的场景</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="三者对比"><a href="#三者对比" class="headerlink" title="三者对比"></a>三者对比</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left"><strong>特性</strong></th>
-<th style="text-align:left"><strong><code>select</code></strong></th>
-<th style="text-align:left"><strong><code>poll</code></strong></th>
-<th style="text-align:left"><strong><code>epoll</code></strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">文件描述符数量限制</td>
-<td style="text-align:left">有限，通常为1024</td>
-<td style="text-align:left">无硬性限制</td>
-<td style="text-align:left">无硬性限制</td>
-</tr>
-<tr>
-<td style="text-align:left">事件通知机制</td>
-<td style="text-align:left">遍历所有文件描述符</td>
-<td style="text-align:left">遍历所有文件描述符</td>
-<td style="text-align:left">只返回就绪的事件</td>
-</tr>
-<tr>
-<td style="text-align:left">时间复杂度</td>
-<td style="text-align:left">O(n)</td>
-<td style="text-align:left">O(n)</td>
-<td style="text-align:left">O(1)</td>
-</tr>
-<tr>
-<td style="text-align:left">内存拷贝</td>
-<td style="text-align:left">每次调用拷贝<code>fd_set</code></td>
-<td style="text-align:left">每次调用拷贝<code>pollfd</code></td>
-<td style="text-align:left">不需要拷贝所有文件描述符</td>
-</tr>
-<tr>
-<td style="text-align:left">触发模式</td>
-<td style="text-align:left">LT</td>
-<td style="text-align:left">LT</td>
-<td style="text-align:left">LT和ET都支持</td>
-</tr>
-<tr>
-<td style="text-align:left">跨平台性</td>
-<td style="text-align:left">是</td>
-<td style="text-align:left">是</td>
-<td style="text-align:left">仅支持Linux</td>
-</tr>
-</tbody>
-</table>
-</div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -- &lt;file&gt;</span><br></pre></td></tr></table></figure>
+<p>==这里要注意，没有被提交到版本库的文件，删除是无法恢复的==</p>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/C/" class="">
-              C++
-            </a>
-          
-            <a href="/tags/Linux/" class="">
-              Linux
-            </a>
-          
-            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="">
-              操作系统
-            </a>
-          
-            <a href="/tags/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">
-              Linux网络编程
+            <a href="/tags/Git/" class="">
+              Git
             </a>
           
         </div>
@@ -579,7 +432,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
-    <a href="/2025/03/03/I-O多路复用的三种机制（select、poll、epoll）/" target="_blank" title="I/O多路复用的三种机制（select、poll、epoll）">https://github.com/Nxhhhh/Nxhhhh.github.io/2025/03/03/I-O多路复用的三种机制（select、poll、epoll）/</a>
+    <a href="/2025/06/13/Git简单使用说明/" target="_blank" title="Git简单使用说明">https://github.com/Nxhhhh/Nxhhhh.github.io/2025/06/13/Git简单使用说明/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright notice:   </strong>
@@ -597,37 +450,20 @@
   
   
   
-    
-    <div class="post-nav-prev post-nav-item">
-      <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" alt="">
-      </div>
-      <a href="/2025/03/04/%E9%98%BB%E5%A1%9E%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E%EF%BC%8C%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5I-O/" class="post-nav-link">
-        <div class="title">
-          <i class="fas fa-angle-left"></i> Next:
-          <div class="title-text">阻塞和非阻塞，同步、异步I/O</div>
-        </div>
-        <!-- <div class="content">
-          阻塞和非阻塞，同步、异步I/O阻塞和非阻塞，同步和异步是描述I/O操作行为的两组概念，从不同的角度买哦输了程序如何处理任
-        </div> -->
-      </a>
-    </div>
-  
   
   
     
     <div class="post-nav-next post-nav-item">
       <div class="post-nav-img" style="background-size: cover; background-position: center center;">
-        <img class="lazyload" src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" alt="">
+        <img class="lazyload" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" alt="">
       </div>
-      <a href="/2025/03/01/%E5%A5%97%E6%8E%A5%E5%AD%97%E5%87%BD%E6%95%B0/" class="post-nav-link">
+      <a href="/2025/06/06/boot%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="post-nav-link">
         <div class="title">
           Prev: <i class="fas fa-angle-right"></i>
-          <div class="title-text">套接字函数</div>
+          <div class="title-text">boot引导程序的实现</div>
         </div>
         <!-- <div class="content">
-          套接字函数socket()创建套接字描述符，指定协议族、套接字类型和协议类型。
-12345#include&lt;sys
+          boot引导程序的实现上一篇博客有提到过采用二级加载模式，因为boot的容量限制，所以boot引导程序只负责loader
         </div> -->
       </a>
     </div>
@@ -758,7 +594,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#I-O%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E6%9C%BA%E5%88%B6%EF%BC%88select%E3%80%81poll%E3%80%81epoll%EF%BC%89"><span class="toc-text">I&#x2F;O多路复用的三种机制（select、poll、epoll）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#select"><span class="toc-text">select</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8API%EF%BC%9A"><span class="toc-text">常用API：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#poll"><span class="toc-text">poll</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8API%EF%BC%9A-1"><span class="toc-text">常用API：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#epoll"><span class="toc-text">epoll</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8API%EF%BC%9A-2"><span class="toc-text">常用API：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E9%80%9A%E7%9F%A5%E6%A8%A1%E5%BC%8F-%E8%A7%A6%E5%8F%91%E6%9C%BA%E5%88%B6%EF%BC%88LT%EF%BC%8CET%EF%BC%89"><span class="toc-text">事件通知模式&#x2F;触发机制（LT，ET）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B0%B4%E5%B9%B3%E8%A7%A6%E5%8F%91%EF%BC%88LT%EF%BC%89"><span class="toc-text">水平触发（LT）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-text">特点：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%B9%E6%B2%BF%E8%A7%A6%E5%8F%91%EF%BC%88ET%EF%BC%89"><span class="toc-text">边沿触发（ET）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A-1"><span class="toc-text">特点：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LT%E5%92%8CET%E5%AF%B9%E6%AF%94"><span class="toc-text">LT和ET对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E8%80%85%E5%AF%B9%E6%AF%94"><span class="toc-text">三者对比</span></a></li></ol></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="toc-text">Git简单使用说明</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFGit"><span class="toc-text">什么是Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-text">核心概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Git"><span class="toc-text">安装Git</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux%E7%B3%BB%E7%BB%9F"><span class="toc-text">Linux系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#macOS%E7%B3%BB%E7%BB%9F"><span class="toc-text">macOS系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows%E7%B3%BB%E7%BB%9F"><span class="toc-text">Windows系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEGit"><span class="toc-text">配置Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93"><span class="toc-text">创建仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%88%B0%E7%89%88%E6%9C%AC%E5%BA%93"><span class="toc-text">添加文件到版本库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="toc-text">文件管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E4%BF%AE%E6%94%B9"><span class="toc-text">查看修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80"><span class="toc-text">版本回退</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9"><span class="toc-text">撤销修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="toc-text">删除文件</span></a></li></ol></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1021,59 +857,6 @@
 		height: 100%;
 	}
 </style>
-
-
-  <script>
-  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    // 文章章节标题不能为 “MathJax” ，否则会报错。
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
 
 
 
