@@ -370,7 +370,7 @@
         <hr>
 <p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43125439/article/details/83451204">这个方法</a></p>
 <hr>
-<h3 id="进入Debug模式"><a href="#进入Debug模式" class="headerlink" title="进入Debug模式"></a>进入Debug模式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pdb xxx.py</span><br></pre></td></tr></table></figure>
+<h3 id="进入Debug模式"><a href="#进入Debug模式" class="headerlink" title="进入Debug模式"></a>进入Debug模式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">python -m pdb xxx.py<br></code></pre></td></tr></table></figure>
 <h3 id="命令列表"><a href="#命令列表" class="headerlink" title="命令列表"></a>命令列表</h3><p>l —&gt; list 显示当前代码</p>
 <p>n —&gt; next 向下执行一行代码</p>
 <p>c —&gt; continue 继续执行代码</p>
@@ -381,7 +381,7 @@
 <p>a —&gt; args 打印所有的形参语句</p>
 <p>q —&gt; quit 退出调试</p>
 <p>r —&gt; return 快速执行到函数的最后一行</p>
-<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">a, b</span>):</span><br><span class="line">    rest = a + b</span><br><span class="line">    <span class="keyword">return</span> rest</span><br><span class="line"></span><br><span class="line">a = <span class="number">10</span></span><br><span class="line">b = <span class="number">20</span></span><br><span class="line">rest = func(a, b)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;rest=&quot;</span>,rest)</span><br></pre></td></tr></table></figure>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">func</span>(<span class="hljs-params">a, b</span>):<br>    rest = a + b<br>    <span class="hljs-keyword">return</span> rest<br><br>a = <span class="hljs-number">10</span><br>b = <span class="hljs-number">20</span><br>rest = func(a, b)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;rest=&quot;</span>,rest)<br></code></pre></td></tr></table></figure>
 <h4 id="实例效果"><a href="#实例效果" class="headerlink" title="实例效果"></a>实例效果</h4><p><img src="1.jpg" alt="实例效果"></p>
 <hr>
 <p>以后终端调试可能会用上</p>
