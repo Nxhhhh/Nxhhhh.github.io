@@ -376,28 +376,28 @@
 <li><strong>本地仓库</strong>：存储所有历史版本和分支数据的本地数据库。</li>
 <li><strong>远程仓库</strong>：托管在服务器上的共享版本库（如 GitHub），用于团队协作和代码共享。</li>
 </ul>
-<h2 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h2><h3 id="Linux系统"><a href="#Linux系统" class="headerlink" title="Linux系统"></a>Linux系统</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">sudo apt install git<br></code></pre></td></tr></table></figure>
+<h2 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h2><h3 id="Linux系统"><a href="#Linux系统" class="headerlink" title="Linux系统"></a>Linux系统</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install git</span><br></pre></td></tr></table></figure>
 <h3 id="macOS系统"><a href="#macOS系统" class="headerlink" title="macOS系统"></a>macOS系统</h3><p>先安装包管理器HomeBrew，然后通过Homebrew安装Git：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">brew install git<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install git</span><br></pre></td></tr></table></figure>
 <h3 id="Windows系统"><a href="#Windows系统" class="headerlink" title="Windows系统"></a>Windows系统</h3><p>直接从Git官网下载安装程序，按照默认选项安装即可。安装完成后，可以在开始菜单找到Git -&gt; Git Bash，就说明安装成功了。</p>
 <h2 id="配置Git"><a href="#配置Git" class="headerlink" title="配置Git"></a>配置Git</h2><p>安装好后需要一步设置，在命令行输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git config --global user.name &quot;Your Name&quot;<br>git config --global user.email &quot;email@example.com&quot;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Your Name&quot;</span><br><span class="line">git config --global user.email &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure>
 <h2 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h2><p>前期工作准备完成后就可以愉快的开始进入使用阶段，首先就是创建仓库（Repository），经常浏览Github，对这个应该都不陌生，简单理解就是一个目录，目录中的所有文件都可以被Git管理。</p>
 <p>创建仓库非常简单，首先选择一个合适的地方创建空目录(或者可以直接在本地已有的项目文件夹创建仓库)：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">mkdir your/path<br>cd your/path<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir your/path</span><br><span class="line">cd your/path</span><br></pre></td></tr></table></figure>
 <p>第二步：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git init<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
 <p>这样一个仓库就创建好了，当前目录下就会多一个<code>.git</code>目录，这个目录是Git来跟踪管理版本库的。</p>
 <h2 id="添加文件到版本库"><a href="#添加文件到版本库" class="headerlink" title="添加文件到版本库"></a>添加文件到版本库</h2><p>这里要注意，所有的版本控制系统，其实只能跟踪文本文件的改动，比如TXT文件，网页，所有的程序代码等等，Git也不例外。但是图片、视频这种二进制文件就无法追踪文件变化了。</p>
 <p>言归正传，对文件进行改动或者添加新文件后，需要把文件添加到暂存区，使用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git add &lt;youfile&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;youfile&gt;</span><br></pre></td></tr></table></figure>
 <p>也可以直接一键添加所有有改动的文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git add -A<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -A</span><br></pre></td></tr></table></figure>
 <p>然后把文件提交到仓库，这里可以添加本次提交的说明，这样可以更方便的找到改动记录：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git commit -m &quot;your message&quot;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;your message&quot;</span><br></pre></td></tr></table></figure>
 <h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><h3 id="查看修改"><a href="#查看修改" class="headerlink" title="查看修改"></a>查看修改</h3><p>提交了文件后，可能会对文件进行再次修改，这时可以运行<code>git status</code>命令，会显示哪些文件被改动了。<code>git diff</code>命令可以查看某个文件具体修改了什么内容。</p>
 <h3 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h3><p>多次修改文件后，如果想回退回某个历史版本就需要用到以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git log  //显示从最近到最远的提交日志<br>git reset --hard HEAD^  //有几个^ 就表示回退几个版本<br>这里的hard表示回退到上个版本的已提交状态，soft表示回退到上个版本的未提交状态，mixed表示四回退到上个版本已添加但未提交的状态<br>git reset --hard &lt;commit id&gt;  //回退到指定版本<br>git reflog  //记录每一次命令<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git log  //显示从最近到最远的提交日志</span><br><span class="line">git reset --hard HEAD^  //有几个^ 就表示回退几个版本</span><br><span class="line">这里的hard表示回退到上个版本的已提交状态，soft表示回退到上个版本的未提交状态，mixed表示四回退到上个版本已添加但未提交的状态</span><br><span class="line">git reset --hard &lt;commit id&gt;  //回退到指定版本</span><br><span class="line">git reflog  //记录每一次命令</span><br></pre></td></tr></table></figure>
 <h3 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a>撤销修改</h3><p>场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令<code>git checkout -- &lt;file&gt;</code>。<code>git checkout</code>其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。</p>
 <p>场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令<code>git reset HEAD &lt;file&gt;</code>，就回到了场景1，第二步按场景1操作。</p>
 <p>场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退，不过前提是没有推送到远程库。</p>
@@ -405,11 +405,11 @@
 <ul>
 <li>确实要删除文件</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git rm &lt;file&gt;<br>git commit -m &quot;remove &lt;file&gt;&quot;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git rm &lt;file&gt;</span><br><span class="line">git commit -m &quot;remove &lt;file&gt;&quot;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>误删文件</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">$ git checkout -- &lt;file&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -- &lt;file&gt;</span><br></pre></td></tr></table></figure>
 <p><mark>这里要注意，没有被提交到版本库的文件，删除是无法恢复的</mark></p>
 
       </div>
