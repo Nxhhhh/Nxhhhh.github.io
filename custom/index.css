@@ -1,7 +1,0 @@
-.post-detail-content {
-    width: 75%; /* 宽度默认75%， */
-}
-.post-detail-content p { 
-    font-size: 14px;
-}
-/* 其他元素字体大小，自己可以通过增加css来设置，这里只改了p文本元素的字体大小 */
